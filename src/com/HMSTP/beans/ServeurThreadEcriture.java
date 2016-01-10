@@ -1,3 +1,5 @@
+package com.HMSTP.beans;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;

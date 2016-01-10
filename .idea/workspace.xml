@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e97fb4ad-e5e1-4107-b0a9-01eedc320b04" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/HMSTP/forms/test.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/HMSTP/beans/Client.java" afterPath="$PROJECT_DIR$/src/com/HMSTP/beans/Client.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/HMSTP/beans/Message.java" afterPath="$PROJECT_DIR$/src/com/HMSTP/beans/Message.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/HMSTP/beans/MessageCompte.java" afterPath="$PROJECT_DIR$/src/com/HMSTP/beans/MessageCompte.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/HMSTP/beans/MessageJoueur.java" afterPath="$PROJECT_DIR$/src/com/HMSTP/beans/MessageJoueur.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/HMSTP/beans/MessageNombre.java" afterPath="$PROJECT_DIR$/src/com/HMSTP/beans/MessageNombre.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/HMSTP/beans/MessagePartie.java" afterPath="$PROJECT_DIR$/src/com/HMSTP/beans/MessagePartie.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadConnexion.java" afterPath="$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadConnexion.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadEcoute.java" afterPath="$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadEcoute.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadEcriture.java" afterPath="$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadEcriture.java" />
     </list>
     <ignored path="HackMoiSiTuPeux.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,7 +32,100 @@
     <favorites_list name="HackMoiSiTuPeux" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/Client.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Message.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/Message.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageCompte.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/MessageCompte.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageJoueur.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/MessageJoueur.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageNombre.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/MessageNombre.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessagePartie.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/MessagePartie.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServeurThreadConnexion.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadConnexion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServeurThreadEcoute.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadEcoute.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServeurThreadEcriture.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadEcriture.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -54,6 +154,15 @@
         <option value="$PROJECT_DIR$/src/MessageJoueur.java" />
         <option value="$PROJECT_DIR$/src/MessageCompte.java" />
         <option value="$PROJECT_DIR$/src/Client.java" />
+        <option value="$PROJECT_DIR$/src/com/HMSTP/beans/Client.java" />
+        <option value="$PROJECT_DIR$/src/com/HMSTP/beans/Message.java" />
+        <option value="$PROJECT_DIR$/src/com/HMSTP/beans/MessageCompte.java" />
+        <option value="$PROJECT_DIR$/src/com/HMSTP/beans/MessageJoueur.java" />
+        <option value="$PROJECT_DIR$/src/com/HMSTP/beans/MessageNombre.java" />
+        <option value="$PROJECT_DIR$/src/com/HMSTP/beans/MessagePartie.java" />
+        <option value="$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadConnexion.java" />
+        <option value="$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadEcoute.java" />
+        <option value="$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadEcriture.java" />
       </list>
     </option>
   </component>
@@ -548,7 +657,7 @@
     </configuration>
     <configuration default="false" name="HMSTP" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Client" />
+      <option name="MAIN_CLASS_NAME" value="com.HMSTP.beans.Client" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -581,16 +690,16 @@
       <option name="number" value="Default" />
       <updated>1452412547898</updated>
       <workItem from="1452412552175" duration="1766000" />
-      <workItem from="1452415565653" duration="37000" />
+      <workItem from="1452415565653" duration="214000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1803000" />
+    <option name="totallyTimeSpent" value="1980000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -600,7 +709,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -629,5 +738,81 @@
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/MessageCompte.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/MessageJoueur.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/MessageNombre.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/MessagePartie.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadConnexion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadEcoute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/HMSTP/beans/ServeurThreadEcriture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
