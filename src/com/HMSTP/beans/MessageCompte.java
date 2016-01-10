@@ -1,4 +1,4 @@
-package com.HMSTP.beans;
+package com.hmstp.beans;
 
 public class MessageCompte extends Message{
 
