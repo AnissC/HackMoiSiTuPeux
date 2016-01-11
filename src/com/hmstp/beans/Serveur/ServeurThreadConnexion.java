@@ -6,8 +6,12 @@ import java.io.NotSerializableException;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ServeurThreadConnexion {
+    private static ArrayList<Message> listMessagesRecu;
+    private static ArrayList<Message> listMessagesEnvoyer;
+
     private final static String CREER_COMPTE="CREER_COMPTE";
     //Client -> serveur : identifiant + mot de passe
     public final static String CONNEXION = "CONNEXION";
@@ -43,20 +47,22 @@ public class ServeurThreadConnexion {
     //Client -> Serveur : le client désir trouver une partie avec NB Joueurs
 
 
-    public static void main (String[] args) throws Exception {
-
-        ServerSocket s= new ServerSocket(8080);
-        Socket c= s.accept();
+    public void EnvoiMessage(Socket c, Message m) throws Exception{
         ObjectOutputStream out = new ObjectOutputStream(c.getOutputStream());
         out.flush();
-        Message m = new Message();
-        try{
-            out.writeObject(m);
-        }
-        catch (NotSerializableException e){
-            System.out.println("marche pas");
-        }
+        out.writeObject(m);
         out.flush();
+    }
+
+
+    public static void main (String[] args) throws Exception {
+        ServerSocket s= new ServerSocket(8080);
+        Socket c= s.accept();
+        ServeurThreadEcriture serveurEcriture = new ServeurThreadEcriture(listMessagesEnvoyer);
+        serveurEcriture.run();
+        ServeurThreadEcoute serveurEcoute = new ServeurThreadEcoute(listMessagesRecu);
+        serveurEcoute.run();
+
 
 
     }
