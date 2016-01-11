@@ -6,9 +6,9 @@ public class Entreprise extends Role {
 	public boolean protection;
 	
 	public Entreprise(int valeur, String nom){
-		this.valeur = valeur;
-		this.nom = nom;
-		this.protection = false;
+		this.valeur=valeur;
+		this.nom=nom;
+		this.protection=false;
 	}
 	
 	public int getValeur(){
@@ -31,6 +31,7 @@ public class Entreprise extends Role {
 	public void setProtection(boolean b){
 		this.protection=b;
 	}
+
 	public void économiser(){
 		setProtection(false);
 	}//le joueur décide d'économiser et n'est donc plus protégé, équivalent dormir
@@ -39,8 +40,9 @@ public class Entreprise extends Role {
 		setProtection(true);
 	}// le joueur investi pour la protection et se protège, équivalent mettre un piège
 
-	@Override
-	public void choixAction() {
+	public void choixAction(){
+		// appel choix action graphique
+		System.out.println("J'ai choisi mon action");
 	}
 
 }

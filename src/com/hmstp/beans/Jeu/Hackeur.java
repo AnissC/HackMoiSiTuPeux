@@ -21,7 +21,9 @@ public class Hackeur extends Role{
 		this.victime=j;
 	}
 
-	@Override
-	public void choixAction() {
+	public void choixAction(){
+		//appel graphique d l'action'
+		System.out.println("J'ai choisi mon action !");
 	}
+
 }
