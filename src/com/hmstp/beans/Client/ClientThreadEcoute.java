@@ -32,7 +32,7 @@ public class ClientThreadEcoute extends Thread{
         try {
             this.reception();
         }catch (Exception e){
-            System.out.println("Erreur client thread client ecriture");
+            System.err.println("Erreur Client : Client Thread Ecoute");
         }
     }
 }

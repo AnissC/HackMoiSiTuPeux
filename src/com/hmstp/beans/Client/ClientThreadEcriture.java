@@ -34,7 +34,7 @@ public class ClientThreadEcriture extends Thread{
         try {
             this.message();
         }catch (Exception e){
-            System.out.println("Erreur client thread client ecriture");
+            System.err.println("Erreur Client : Client Thread Ecriture");
         }
     }
 }

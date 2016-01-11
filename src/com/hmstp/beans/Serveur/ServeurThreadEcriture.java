@@ -3,33 +3,43 @@ package com.hmstp.beans.Serveur;
 
 import com.hmstp.beans.Message.*;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class ServeurThreadEcriture {
-    public ArrayList<Message> listMessage;
+public class ServeurThreadEcriture extends Thread {
+    public ArrayList<Message> listMessagesEnvoyer;
 
-    public ServeurThreadEcriture(Socket s, ArrayList <Message> list){
-        listMessage = list;
+    public ServeurThreadEcriture(ArrayList <Message> list){
+        listMessagesEnvoyer = list;
     }
 
     public void message () throws IOException{
-        Writer w;
-        Message m;
+        ObjectOutputStream ob = null;
+        Message m = null;
 
-        while(true){
-            synchronized (listMessage) {
-                if (!listMessage.isEmpty()) {
-                    m = listMessage.remove(0);
-                    w = new OutputStreamWriter(m.getSocket().getOutputStream());
-                    w.write(m.getMessage());
+        while(this.isInterrupted()){
+            synchronized (this.listMessagesEnvoyer) {
+                if (!listMessagesEnvoyer.isEmpty()) {
+                    m = listMessagesEnvoyer.remove(0);
+                    ob = new ObjectOutputStream(m.getSocket().getOutputStream());
+                    ob.writeObject(m);
                 }
             }
 
         }
 
+    }
+
+    @Override
+    public void run(){
+        try {
+            this.message();
+        }catch (Exception e){
+            System.err.println("Erreur Serveur : Serveur Thread Ecriture");
+        }
     }
 
 
