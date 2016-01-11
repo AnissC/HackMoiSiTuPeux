@@ -6,6 +6,5 @@ public abstract class Role {
 	public void choixAction(boolean b) {
 	}
 	public void choixAction(Joueur j) {
-		
 	}
 }
