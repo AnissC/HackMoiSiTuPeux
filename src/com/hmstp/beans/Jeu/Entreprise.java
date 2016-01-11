@@ -13,7 +13,6 @@ public class Entreprise extends Role {
 	
 	public int getValeur(){
 		return this.valeur;
-		
 	}
 	
 	public void setValeur(int x){
@@ -32,6 +31,7 @@ public class Entreprise extends Role {
 	public void setProtection(boolean b){
 		this.protection=b;
 	}
+
 	public void économiser(){
 		setProtection(false);
 	}//le joueur décide d'économiser et n'est donc plus protégé, équivalent dormir
@@ -40,14 +40,9 @@ public class Entreprise extends Role {
 		setProtection(true);
 	}// le joueur investi pour la protection et se protège, équivalent mettre un piège
 
-	public void choixAction(boolean b){
-		if(b)this.setProtection(b);
-		else this.setProtection(b);
+	public void choixAction(){
+		// appel choix action graphique
+		System.out.println("J'ai choisi mon action");
 	}
 
-
-	public void choixAction() {
-		// TODO Auto-generated method stub
-		
-	}
 }
