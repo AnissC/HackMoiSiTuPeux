@@ -1,40 +1,37 @@
 package com.hmstp.beans.Jeu;
 
-public class Partie {
+import java.util.ArrayList;
+
+public class Partie extends Thread{
     private static final int NB4 = 4;
     private static final int NB5 = 5;
     private static final int NB6 = 6;
 
     private int nbParticipants;
-    private Joueur[] tab;
+    private ArrayList<Joueur> listJoueur;
 
-    private Partie(int x){
-        this.nbParticipants=x;
-        tab=new Joueur[nbParticipants];
-        for(int i=0;i<nbParticipants;i++){
-            tab[i]=new Joueur(0);
-        }
+    private Partie(ArrayList<Joueur> lj, int n){
+        this.listJoueur = lj;
+        this.nbParticipants = this.listJoueur.size();
     }
 
-    private void distributionRoleManche1(){
-        this.tab[0].setRole(Hackeur.getInstance());
-        this.tab[1].setRole( new Entreprise(2,"Moyenne Entreprise"));
-        this.tab[2].setRole(new Entreprise(1,"Petite Entreprise"));
+    public void distributionRoleManche1(){
+        this.listJoueur.get(0).setRole(Hackeur.getInstance());
+        this.listJoueur.get(1).setRole( new Entreprise(2,"Moyenne entreprise"));
+        this.listJoueur.get(2).setRole(new Entreprise(1,"Petite entreprise"));
 
-        if(this.nbParticipants >= 4){
-            this.tab[3].setRole( new Entreprise(3, "Entrepise internationalle"));
-            if (this.nbParticipants >= 5){
-                this.tab[4].setRole( new Entreprise(1, "Petite Entreprise"));
-                if (this.nbParticipants == 6) {
-                    this.tab[5].setRole( new Entreprise(1, "Petite Entreprise"));
+        if(this.nbParticipants >= NB4){
+            this.listJoueur.get(3).setRole( new Entreprise(3, "Grande entrepise"));
+            if (this.nbParticipants >= NB5){
+                this.listJoueur.get(4).setRole( new Entreprise(1, "Petite entreprise"));
+                if (this.nbParticipants == NB6) {
+                    this.listJoueur.get(5).setRole( new Entreprise(1, "Petite entreprise"));
                 }
             }
         }
     }
 
-    private void assigneRole(Joueur j, Role r){
-        for(int i=0;i<nbParticipants;i++){
-            tab[i].setRole(r);
-        }
+    public void run(){
+        this.distributionRoleManche1();
     }
 }

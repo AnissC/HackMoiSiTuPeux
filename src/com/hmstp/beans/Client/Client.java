@@ -13,7 +13,8 @@ public class Client{
 
     private static ArrayList<Message> listMessagesRecu;
     private static ArrayList<Message> listMessagesEnvoyer;
-    private static ArrayList<Joueur> listJoueur;
+    private static ArrayList<Participant> listParticipant;
+    private static int nbjoueur = 0;
     private static String s = "132.227.125.85";
     private static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
@@ -89,23 +90,45 @@ public class Client{
                         break;
                     case Client.PAS_EN_PARTIE:
                         // Affiche le menu
+                        // Choix interface graphique
+                        nbjoueur = 5;
                         break;
                     case Client.PARTIE_TROUVE:
                         MessagePartie mP = (MessagePartie) m;
-                        while(! ((MessagePartie) m).getListJoueur().isEmpty()){
-                            listJoueur.add(new Joueur(mP.getListJoueur().remove(0)));
+                        MessageJoueur mJ;
+                        int k = 0;
+                        synchronized (Client.listParticipant) {
+                            while (!(mP.getListJoueur().isEmpty())) {
+                                mJ = mP.getListJoueur().remove(0);
+                                listParticipant.add(new Joueur(mJ.getJoueur(), mJ.getNom()));
+                                k++;
+                            }
+                            while(k < nbjoueur){
+                                listParticipant.add(new Ramplacant("Vide"));
+                                k++;
+                            }
                         }
                         // Contacter les autres
                         break;
                     case Client.CREER_PARTIE:
-                        //listJoueur.add(new Joueur())
+                        MessageJoueur mj = (MessageJoueur) m;
+                        synchronized (Client.listParticipant) {
+                            listParticipant.add(new Joueur(mj.getJoueur(), mj.getNom()));
+                            int j = 1;
+                            while (j < nbjoueur) {
+                                listParticipant.add(new Ramplacant("Vide"));
+                                j++;
+                            }
+                        }
                         break;
                     case Client.COMMENCER_PARTIE:
-                        // Lancer game
+                        // lance la partie
                         break;
                     case Client.NOUVEAU_JOUEUR:
-                        MessageJoueur mJ = (MessageJoueur) m;
-                        listJoueur.add(new Joueur(mJ.getJoueur()));
+                        MessageJoueur mej = (MessageJoueur) m;
+                        synchronized (Client.listParticipant) {
+                            listParticipant.add(new Joueur(mej.getJoueur(), mej.getNom()));
+                        }
                         break;
                 }
             }
