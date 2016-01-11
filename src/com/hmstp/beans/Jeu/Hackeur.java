@@ -2,24 +2,23 @@ package com.hmstp.beans.Jeu;
 
 public final class Hackeur extends Role{
 	private Joueur victime;
-	private static Hackeur instance =null;
+	private static Hackeur instance = null;
 	
 	private Hackeur(){
-		this.victime=null;
+		this.victime = null;
 	}
-	public final static Hackeur getInstance(){
-		if(Hackeur.instance == null){
-			synchronized(Hackeur.class){
-				if(Hackeur.class == null){
-					Hackeur.instance = new Hackeur();
-				}
+
+	public static Hackeur getInstance(){
+		synchronized(instance){
+			if(instance == null){
+				instance = new Hackeur();
 			}
 		}
-		return Hackeur.instance;
+		return instance;
 	}
 	
-	public void getVictime(Joueur jj){
-		this.victime=jj;
+	public void getVictime(Joueur j){
+		this.victime=j;
 	}
 	
 	@Override
