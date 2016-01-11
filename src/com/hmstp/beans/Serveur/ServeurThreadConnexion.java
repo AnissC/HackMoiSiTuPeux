@@ -56,7 +56,6 @@ public class ServeurThreadConnexion {
         catch (NotSerializableException e){
             System.out.println("marche pas");
         }
-
         out.flush();
 
 

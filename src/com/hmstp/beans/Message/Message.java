@@ -11,6 +11,7 @@ public class Message implements java.io.Serializable {
         this.message = "test";
     }
 
+
     public Socket getSocket() {
         return socket;
     }
