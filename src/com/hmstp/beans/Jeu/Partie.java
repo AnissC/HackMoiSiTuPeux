@@ -19,14 +19,14 @@ public class Partie {
     private void distributionRoleManche1(){
         this.tab[0].setRole(Hackeur.getInstance());
         this.tab[1].setRole( new Entreprise(2,"Moyenne Entreprise"));
-        this.tab[2].setRole(new Entreprise(1,"PME"));
+        this.tab[2].setRole(new Entreprise(1,"Petite Entreprise"));
 
         if(this.nbParticipants >= 4){
             this.tab[3].setRole( new Entreprise(3, "Entrepise internationalle"));
             if (this.nbParticipants >= 5){
-                this.tab[4].setRole( new Entreprise(1, "PME"));
+                this.tab[4].setRole( new Entreprise(1, "Petite Entreprise"));
                 if (this.nbParticipants == 6) {
-                    this.tab[5].setRole( new Entreprise(1, "PME"));
+                    this.tab[5].setRole( new Entreprise(1, "Petite Entreprise"));
                 }
             }
         }
