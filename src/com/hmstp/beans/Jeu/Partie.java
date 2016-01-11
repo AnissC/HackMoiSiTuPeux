@@ -21,7 +21,7 @@ public class Partie extends Thread{
 
     public void distributionRoleManche1(){
         this.listJoueur.get(0).setRole(Hackeur.getInstance());
-        this.listJoueur.get(1).setRole( new Entreprise(2, "Moyenne entreprise"));
+        this.listJoueur.get(1).setRole(new Entreprise(2, "Moyenne entreprise"));
         this.listJoueur.get(2).setRole(new Entreprise(1, "Petite entreprise"));
 
         if(this.nbParticipants >= NB4){
