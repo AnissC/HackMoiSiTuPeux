@@ -1,6 +1,6 @@
 package com.hmstp.beans.Jeu;
 
-public final class Hackeur extends Role{
+public class Hackeur extends Role{
 	private Joueur victime;
 	private static Hackeur instance = null;
 	

@@ -1,13 +1,18 @@
 package com.hmstp.beans.Client;
 
+import com.hmstp.beans.Message.*;
+
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.lang.ClassNotFoundException;
+
 
 
 public class Client{
 
-    private static String s = "192.168.1.95";
+    private static String s = "132.227.125.85";
     private static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
     public final static String CONNEXION = "CONNEXION";
@@ -37,7 +42,7 @@ public class Client{
     private static final String NB_JOUEURS = "NB_JOUEURS";
     // Client -> Serveur envoie le nombre de joueurs souhaité pour la partie
 
-    private static Socket tempo42() {
+    private static Socket connexion() {
         Socket c = null;
 
         while (c == null){
@@ -60,8 +65,19 @@ public class Client{
         return c;
     }
 
-    public static void main(String[] args) throws UnknownHostException, IOException{
-        Socket c = Client.tempo42();
-        System.out.println("test connexion ok");
+    public static Message reception(Socket so)throws Exception{
+        ObjectInputStream ob = new ObjectInputStream(so.getInputStream());
+
+        Message m = (Message)ob.readObject();
+
+        ob.close();
+
+        return m;
+    }
+
+    public static void main(String[] args) throws Exception{
+        Socket c = Client.connexion();
+        Message me = Client.reception(c);
+        System.out.println("test connexion ok" + me);
     }
 }
