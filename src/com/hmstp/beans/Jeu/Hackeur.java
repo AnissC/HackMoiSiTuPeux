@@ -9,7 +9,7 @@ public final class Hackeur extends Role{
 	}
 
 	public static Hackeur getInstance(){
-		synchronized(Hackeur.instance){
+		synchronized(instance){
 			if(instance == null){
 				instance = new Hackeur();
 			}
