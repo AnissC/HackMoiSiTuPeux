@@ -1,5 +1,7 @@
-package com.hmstp.beans;
+package com.hmstp.beans.Serveur;
 
+
+import com.hmstp.beans.Message.*;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -7,7 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class ServeurThreadEcriture {
-    public ArrayList <Message> listMessage;
+    public ArrayList<Message> listMessage;
 
     public ServeurThreadEcriture(Socket s, ArrayList <Message> list){
         listMessage = list;

@@ -1,4 +1,4 @@
-package com.hmstp.beans;
+package com.hmstp.beans.Message;
 
 import java.net.Socket;
 

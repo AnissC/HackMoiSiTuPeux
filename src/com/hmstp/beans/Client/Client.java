@@ -1,4 +1,4 @@
-package com.hmstp.beans;
+package com.hmstp.beans.Client;
 
 import java.io.IOException;
 import java.net.Socket;
