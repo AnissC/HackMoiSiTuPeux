@@ -15,7 +15,6 @@ public final class Hackeur extends Role{
 			}
 		}
 		return instance;
-
 	}
 	
 	public void getVictime(Joueur j){
