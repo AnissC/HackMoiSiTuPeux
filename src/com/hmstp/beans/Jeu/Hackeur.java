@@ -24,6 +24,7 @@ public class Hackeur extends Role{
 	public void choixAction(){
 		//appel graphique d l'action'
 		System.out.println("J'ai choisi mon action !");
+		this.setChoixFait(true);
 	}
 
 }

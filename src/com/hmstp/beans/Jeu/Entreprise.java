@@ -43,6 +43,7 @@ public class Entreprise extends Role {
 	public void choixAction(){
 		// appel choix action graphique
 		System.out.println("J'ai choisi mon action");
+		this.setChoixFait(true);
 	}
 
 }
