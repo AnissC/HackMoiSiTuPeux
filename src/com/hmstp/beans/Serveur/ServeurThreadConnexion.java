@@ -1,6 +1,9 @@
 package com.hmstp.beans.Serveur;
 
+import com.hmstp.beans.Message.Message;
 import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -9,8 +12,6 @@ public class ServeurThreadConnexion {
     //Client -> serveur : identifiant + mot de passe
     public final static String CONNEXION = "CONNEXION";
     //Sinon connexion client ->serveur : identifiant + mot de passe
-
-
 
     private final static String CONNEXION_OK="CONNEXION_OK";
     //Serveur->Client
@@ -42,9 +43,22 @@ public class ServeurThreadConnexion {
     //Client -> Serveur : le client désir trouver une partie avec NB Joueurs
 
 
-    public static void main (String[] args) throws IOException {
+    public static void main (String[] args) throws Exception {
 
         ServerSocket s= new ServerSocket(8080);
         Socket c= s.accept();
+        ObjectOutputStream out = new ObjectOutputStream(c.getOutputStream());
+        out.flush();
+        Message m = new Message();
+        try{
+            out.writeObject(m);
+        }
+        catch (NotSerializableException e){
+            System.out.println("marche pas");
+        }
+
+        out.flush();
+
+
     }
 }
