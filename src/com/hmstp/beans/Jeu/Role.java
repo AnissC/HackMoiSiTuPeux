@@ -1,4 +1,4 @@
-package Jeu;
+package com.hmstp.beans.Jeu;
 
 public abstract class Role {
 	
@@ -6,7 +6,6 @@ public abstract class Role {
 	public void choixAction(boolean b) {
 	}
 	public void choixAction(Joueur j) {
-		// TODO Auto-generated method stub
 		
 	}
 }

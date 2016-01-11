@@ -1,4 +1,4 @@
-package Jeu;
+package com.hmstp.beans.Jeu;
 
 public final class Hackeur extends Role{
 	private Joueur victime;
@@ -28,7 +28,6 @@ public final class Hackeur extends Role{
 	}
 	@Override
 	public void choixAction() {
-		// TODO Auto-generated method stub
 		
 	}
 }

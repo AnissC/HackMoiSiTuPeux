@@ -1,6 +1,6 @@
-package Jeu;
+package com.hmstp.beans.Jeu;
 
-public class Entreprise extends Role{
+public class Entreprise extends Role {
 	public int valeur;
 	public String nom;
 	public boolean protection;

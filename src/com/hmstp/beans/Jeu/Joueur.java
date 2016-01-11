@@ -1,4 +1,4 @@
-package Jeu;
+package com.hmstp.beans.Jeu;
 
 public class Joueur {
 	private Role role;
