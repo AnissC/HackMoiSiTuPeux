@@ -23,6 +23,5 @@ public final class Hackeur extends Role{
 
 	@Override
 	public void choixAction() {
-		
 	}
 }

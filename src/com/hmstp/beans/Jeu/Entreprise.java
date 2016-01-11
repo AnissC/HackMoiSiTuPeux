@@ -42,4 +42,5 @@ public class Entreprise extends Role {
 	@Override
 	public void choixAction() {
 	}
+
 }

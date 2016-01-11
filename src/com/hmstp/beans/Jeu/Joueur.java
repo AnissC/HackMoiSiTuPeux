@@ -12,4 +12,5 @@ public class Joueur {
 	public void choixAction(){
 		role.choixAction();
 	}
+
 }
