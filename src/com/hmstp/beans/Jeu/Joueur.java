@@ -14,4 +14,7 @@ public class Joueur {
 		role.choixAction();
 	}
 
+	public void setRole(Role r){
+		this.role = r;
+	}
 }

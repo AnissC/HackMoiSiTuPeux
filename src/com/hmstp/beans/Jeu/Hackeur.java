@@ -4,7 +4,7 @@ public class Hackeur extends Role{
 	private Joueur victime;
 	private static Hackeur instance = null;
 	
-	public Hackeur(){
+	private Hackeur(){
 		this.victime = null;
 	}
 
