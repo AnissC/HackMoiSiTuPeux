@@ -20,11 +20,7 @@ public final class Hackeur extends Role{
 	public void getVictime(Joueur j){
 		this.victime=j;
 	}
-	
-	@Override
-	public void choixAction(Joueur j){
-		getVictime(j);
-	}
+
 	@Override
 	public void choixAction() {
 		
