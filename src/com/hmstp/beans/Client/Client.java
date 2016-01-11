@@ -4,6 +4,7 @@ import com.hmstp.beans.Jeu.*;
 import com.hmstp.beans.Message.*;
 
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Client{
     private static ArrayList<Message> listMessagesEnvoyer;
     private static ArrayList<Participant> listParticipant;
     private static int nbjoueur = 0;
-    private static String s = "132.227.125.85";
+    private static String adresseIP = "132.227.125.85";
     private static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
     public final static String CONNEXION = "CONNEXION";
@@ -45,12 +46,12 @@ public class Client{
     private static final String NB_JOUEURS = "NB_JOUEURS";
     // Client -> Serveur envoie le nombre de joueurs souhaité pour la partie
 
-    private static Socket connexion() {
+    private static Socket connexion(String ad) {
         Socket c = null;
 
         while (c == null){
             try {
-                c =  new Socket(s, 8080);
+                c =  new Socket(ad, 8080);
             } catch (UnknownHostException e) {
                 System.err.println("Nom d'hôte non trouvé");
                 e.printStackTrace();
@@ -68,7 +69,7 @@ public class Client{
         return c;
     }
 
-    private static void gestionMessage(){
+    private static void gestionMessage() throws Exception{
         Message m = null;
         //Condition = bouton quitter
         while(true){
@@ -100,7 +101,7 @@ public class Client{
                         synchronized (Client.listParticipant) {
                             while (!(mP.getListJoueur().isEmpty())) {
                                 mJ = mP.getListJoueur().remove(0);
-                                listParticipant.add(new Joueur(mJ.getJoueur(), mJ.getNom()));
+                                listParticipant.add(new Joueur(Client.connexion(mJ.getJoueur()), mJ.getNom()));
                                 k++;
                             }
                             while(k < nbjoueur){
@@ -109,11 +110,12 @@ public class Client{
                             }
                         }
                         // Contacter les autres
+
                         break;
                     case Client.CREER_PARTIE:
                         MessageJoueur mj = (MessageJoueur) m;
                         synchronized (Client.listParticipant) {
-                            listParticipant.add(new Joueur(mj.getJoueur(), mj.getNom()));
+                            listParticipant.add(new Joueur(null, mj.getNom()));
                             int j = 1;
                             while (j < nbjoueur) {
                                 listParticipant.add(new Ramplacant("Vide"));
@@ -122,12 +124,14 @@ public class Client{
                         }
                         break;
                     case Client.COMMENCER_PARTIE:
-                        // lance la partie
+                        // Lance la partie
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
                         synchronized (Client.listParticipant) {
-                            listParticipant.add(new Joueur(mej.getJoueur(), mej.getNom()));
+                            ServerSocket ss = new ServerSocket(8080);
+                            Socket sc = ss.accept();
+                            listParticipant.add(new Joueur(sc, mej.getNom()));
                         }
                         break;
                 }
@@ -136,7 +140,7 @@ public class Client{
     }
 
     public static void main(String[] args) throws Exception{
-        Socket c = Client.connexion();
+        Socket c = Client.connexion(adresseIP);
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu);
         clientEcoute.run();
         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer);

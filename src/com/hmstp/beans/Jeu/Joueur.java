@@ -1,14 +1,15 @@
 package com.hmstp.beans.Jeu;
 
+
 import java.net.Socket;
 
 public class Joueur extends Participant{
 		private Socket sock;
 
 
-	public Joueur(Socket s, String n){
+	public Joueur(Socket so, String n){
 		super(n);
-		this.sock = s;
+		this.sock = so;
 	}
 
 	public void choixAction() {
