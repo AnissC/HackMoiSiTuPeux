@@ -1,5 +1,6 @@
 package com.hmstp.beans.Client;
 
+import com.hmstp.beans.Jeu.*;
 import com.hmstp.beans.Message.*;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ public class Client{
 
     private static ArrayList<Message> listMessagesRecu;
     private static ArrayList<Message> listMessagesEnvoyer;
+    private static ArrayList<Joueur> listJoueur;
     private static String s = "132.227.125.85";
     private static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
@@ -66,7 +68,48 @@ public class Client{
     }
 
     private static void gestionMessage(){
-
+        Message m = null;
+        //Condition = bouton quitter
+        while(true){
+            synchronized (Client.listMessagesRecu) {
+                if (!Client.listMessagesRecu.isEmpty()) {
+                    m = Client.listMessagesRecu.remove(0);
+                }
+            }
+            if(m != null){
+                switch (m.getMessage()) {
+                    case Client.CONNEXION_OK:
+                        // Affiche un message de bienvenue
+                        break;
+                    case Client.CONNEXION_KO:
+                        // Affiche un message d'erreur
+                        break;
+                    case Client.EN_PARTIE:
+                        // Affiche le bouton reconnexion
+                        break;
+                    case Client.PAS_EN_PARTIE:
+                        // Affiche le menu
+                        break;
+                    case Client.PARTIE_TROUVE:
+                        MessagePartie mP = (MessagePartie) m;
+                        while(! ((MessagePartie) m).getListJoueur().isEmpty()){
+                            listJoueur.add(new Joueur(mP.getListJoueur().remove(0)));
+                        }
+                        // Contacter les autres
+                        break;
+                    case Client.CREER_PARTIE:
+                        //listJoueur.add(new Joueur())
+                        break;
+                    case Client.COMMENCER_PARTIE:
+                        // Lancer game
+                        break;
+                    case Client.NOUVEAU_JOUEUR:
+                        MessageJoueur mJ = (MessageJoueur) m;
+                        listJoueur.add(new Joueur(mJ.getJoueur()));
+                        break;
+                }
+            }
+        }
     }
 
     public static void main(String[] args) throws Exception{

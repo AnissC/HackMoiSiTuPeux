@@ -6,4 +6,7 @@ public class MessageJoueur extends Message {
 
     private Socket joueur;
 
+    public Socket getJoueur(){
+        return joueur;
+    }
 }

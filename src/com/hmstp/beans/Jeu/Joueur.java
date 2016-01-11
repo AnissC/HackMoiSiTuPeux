@@ -1,13 +1,15 @@
 package com.hmstp.beans.Jeu;
 
+import java.net.Socket;
+
 public class Joueur {
 	private Role role;
 	private int score;
-	private boolean perdant;
+	private Socket sock;
 	
-	public Joueur(int s){
-		this.score = s;
-		this.perdant=false;
+	public Joueur(Socket s){
+		this.score = 0;
+		this.sock = s;
 	}
 
 	public void choixAction(){

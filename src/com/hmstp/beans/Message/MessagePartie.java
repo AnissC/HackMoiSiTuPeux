@@ -5,5 +5,9 @@ import java.util.ArrayList;
 
 public class MessagePartie extends Message{
 
-    private ArrayList <Socket> listJoueur;
+    private ArrayList<Socket> listJoueur;
+
+    public ArrayList<Socket> getListJoueur(){
+        return listJoueur;
+    }
 }
