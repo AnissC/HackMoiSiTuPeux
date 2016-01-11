@@ -3,15 +3,15 @@ package com.hmstp.beans.Client;
 import com.hmstp.beans.Message.*;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.lang.ClassNotFoundException;
-
+import java.util.ArrayList;
 
 
 public class Client{
 
+    private static ArrayList<Message> listMessagesRecu;
+    private static ArrayList<Message> listMessagesEnvoyer;
     private static String s = "132.227.125.85";
     private static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
@@ -65,19 +65,16 @@ public class Client{
         return c;
     }
 
-    public static Message reception(Socket so)throws Exception{
-        ObjectInputStream ob = new ObjectInputStream(so.getInputStream());
+    private static void gestionMessage(){
 
-        Message m = (Message)ob.readObject();
-
-        ob.close();
-
-        return m;
     }
 
     public static void main(String[] args) throws Exception{
         Socket c = Client.connexion();
-        Message me = Client.reception(c);
-        System.out.println("test connexion ok" + me);
+        ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu);
+        clientEcoute.run();
+        ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer);
+        clientEcriture.run();
+        Client.gestionMessage();
     }
 }
