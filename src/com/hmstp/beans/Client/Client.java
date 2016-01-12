@@ -19,6 +19,7 @@ public class Client{
     private static String nom;
     private static Partie partie;
     private static String adresseIP = "132.227.125.85";
+
     public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
     public final static String CONNEXION = "CONNEXION";
@@ -47,6 +48,9 @@ public class Client{
     // Serveur -> Client informe de l'arrivé d'un nouveau joueur ou d'un joueur se reconnectant
     public static final String NB_JOUEURS = "NB_JOUEURS";
     // Client -> Serveur envoie le nombre de joueurs souhaité pour la partie
+
+    public static final String CHOIX_DU_TOUR = "CHOIX_DU_TOUR";
+    // Client -> Client envoie choix avec un MessageNombre
 
     private static Socket connexion(String ad) {
         Socket c = null;
@@ -145,6 +149,10 @@ public class Client{
                             }
                             listParticipant.set(h, new Joueur(sc, mej.getNom()));
                         }
+                        break;
+                    case Client.CHOIX_DU_TOUR:
+                        // Gère le choix des autres joueurs
+
                         break;
                 }
             }

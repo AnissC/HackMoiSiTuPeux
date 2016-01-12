@@ -1,5 +1,6 @@
 package com.hmstp.beans.Jeu;
 
+import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.Message.*;
 
 import java.util.ArrayList;
@@ -55,9 +56,20 @@ public class Partie extends Thread{
         return false;
     }
 
+    public void envoyerChoix(int choix){
+        MessageNombre mn = null;
+        int i = 0;
+        while(listParticipant.get(i) != null){
+            if(listParticipant.get(i).isRemplacant()) {
+                mn = new MessageNombre(choix, ((Joueur)listParticipant.get(i)).getSock(), Client.CHOIX_DU_TOUR);
+                this.listMessagesEnvoyer.add(mn);
+                i++;
+            }
+        }
+    }
+
     public void tour(){
-        listParticipant.get(this.moi).getRole().choixAction();
-        while()
+        this.envoyerChoix(listParticipant.get(this.moi).getRole().choixAction());
         while(tousOntChoisit()){
             //wait la réponse des autres
         }

@@ -12,6 +12,10 @@ public class Joueur extends Participant{
 		this.sock = so;
 	}
 
+	public Socket getSock() {
+		return sock;
+	}
+
 	public void choixAction() {
 		this.getRole().choixAction();
 	}

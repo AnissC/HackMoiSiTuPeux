@@ -40,10 +40,11 @@ public class Entreprise extends Role {
 		setProtection(true);
 	}// le joueur investi pour la protection et se protège, équivalent mettre un piège
 
-	public void choixAction(){
+	public int choixAction(){
 		// appel choix action graphique
 		System.out.println("J'ai choisi mon action");
 		this.setChoixFait(true);
+		return -1;
 	}
 
 }
