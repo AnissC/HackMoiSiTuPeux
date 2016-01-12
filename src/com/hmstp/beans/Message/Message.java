@@ -7,8 +7,9 @@ public class Message implements java.io.Serializable {
     private Socket socket;
     private String message;
 
-    public Message(){
-        this.message = "test";
+    public Message(Socket s, String m){
+        this.socket = s;
+        this.message = m;
     }
 
 

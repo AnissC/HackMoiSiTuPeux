@@ -11,5 +11,6 @@ public abstract class Role {
 		this.choixFait = choixFait;
 	}
 
-	public abstract void choixAction();
+	public abstract int choixAction();
+	public abstract void choixAction(int i);
 }

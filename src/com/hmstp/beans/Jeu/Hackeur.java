@@ -1,11 +1,11 @@
 package com.hmstp.beans.Jeu;
 
 public class Hackeur extends Role{
-	private Joueur victime;
+	private int victime;
 	private static Hackeur instance = null;
 	
 	private Hackeur(){
-		this.victime = null;
+		this.victime = -1;
 	}
 
 	public static Hackeur getInstance(){
@@ -17,14 +17,19 @@ public class Hackeur extends Role{
 		return instance;
 	}
 	
-	public void getVictime(Joueur j){
+	public void getVictime(int j){
 		this.victime=j;
 	}
 
-	public void choixAction(){
+	public int choixAction(){
 		//appel graphique d l'action'
 		System.out.println("J'ai choisi mon action !");
 		this.setChoixFait(true);
+		return this.victime;
+	}
+
+	public void choixAction(int i){
+
 	}
 
 }
