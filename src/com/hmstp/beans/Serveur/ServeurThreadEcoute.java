@@ -2,6 +2,7 @@ package com.hmstp.beans.Serveur;
 
 import com.hmstp.beans.Message.Message;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -19,12 +20,13 @@ public class ServeurThreadEcoute extends Thread{
 
 
     public void reception()throws IOException, ClassNotFoundException {
-        ObjectInputStream ob = new ObjectInputStream(socket.getInputStream());
+        ObjectInputStream ob = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
 
         while (!this.isInterrupted()){
             synchronized (this.listMessagesRecu) {
                 Message m = (Message) ob.readObject();
                 this.listMessagesRecu.add(m);
+                System.out.println(m.getMessage());
             }
         }
         ob.close();

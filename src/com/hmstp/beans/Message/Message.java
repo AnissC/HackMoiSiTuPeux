@@ -4,7 +4,7 @@ import java.net.Socket;
 
 public class Message implements java.io.Serializable {
 
-    private Socket socket;
+    private transient Socket socket;
     private String message;
 
     public Message(Socket s, String m){

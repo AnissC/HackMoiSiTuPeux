@@ -3,6 +3,7 @@ package com.hmstp.beans.Client;
 
 import com.hmstp.beans.Message.*;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -18,21 +19,23 @@ public class ClientThreadEcriture extends Thread{
     }
 
     public void message()throws IOException {
-        ObjectOutputStream ob = new ObjectOutputStream(socket.getOutputStream());
+        ObjectOutputStream ob = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
         ob.flush();
         Message m = null;
         int i;
-
         while (!this.isInterrupted()){
             synchronized (this.listMessagesEnvoyer) {
                 if (!listMessagesEnvoyer.isEmpty()){
                     i = 0;
-                    while(listMessagesEnvoyer.get(i) != null) {
+                    while(i < listMessagesEnvoyer.size()) {
                         if(listMessagesEnvoyer.get(i).getSocket() == this.socket) {
                             m = listMessagesEnvoyer.remove(i);
+                            System.out.println(m.getMessage());
                             ob.writeObject(m);
+                            System.out.println(m.getMessage());
+                        }else {
+                            i++;
                         }
-                        i++;
                     }
                 }
             }
