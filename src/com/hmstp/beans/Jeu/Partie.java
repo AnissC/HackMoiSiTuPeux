@@ -33,9 +33,9 @@ public class Partie extends Thread{
     }
 
     public void distributionRoleManche1(){
-        this.listParticipant.get(0).setRole(Hackeur.getInstance());
-        this.listParticipant.get(1).setRole(new Entreprise(2, "Moyenne entreprise"));
-        this.listParticipant.get(2).setRole(new Entreprise(1, "Petite entreprise"));
+        this.listParticipant.get(2).setRole(Hackeur.getInstance());
+        this.listParticipant.get(0).setRole(new Entreprise(2, "Moyenne entreprise"));
+        this.listParticipant.get(1).setRole(new Entreprise(1, "Petite entreprise"));
 
         if(this.nbParticipants >= NB4){
             this.listParticipant.get(3).setRole( new Entreprise(3, "Grande entrepise"));
@@ -45,6 +45,19 @@ public class Partie extends Thread{
                     this.listParticipant.get(5).setRole( new Entreprise(1, "Petite entreprise"));
                 }
             }
+        }
+    }
+
+    public void distributionRoleMancheN(){
+        if (moi == listParticipant.get(0)){
+            //interface + envoyer aux autres le role chacun (seul les 4 premier nécéssaire)
+        }
+        else if (listParticipant.get(0).isRemplacant()){
+            distributionRoleManche1();
+            //Yep je cheat ;p
+        }
+        else{
+            //afficher un message d'attente
         }
     }
 
@@ -61,11 +74,11 @@ public class Partie extends Thread{
         MessageChoix mn = null;
         int i = 0;
         while(listParticipant.get(i) != null){
-            if(listParticipant.get(i).isRemplacant()) {
+            if(! (listParticipant.get(i).isRemplacant())) {
                 mn = new MessageChoix(moi.getNom(), choix, ((Joueur)listParticipant.get(i)).getSock(), Client.CHOIX_DU_TOUR);
                 this.listMessagesEnvoyer.add(mn);
-                i++;
             }
+            i++;
         }
     }
 
@@ -93,16 +106,35 @@ public class Partie extends Thread{
 
         while(listParticipant.get(0) != null){
             if (this.active) {
-                //score
+                if (!(((Entreprise)listParticipant.get(0).getRole()).getProtection())){
+                    listParticipant.get(0).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
+                }
             }
             listTemp.add(listParticipant.remove(0));
         }
-        "test"
+
         listParticipant = listTemp;
+    }
+
+    public int algoIA(int i){
+
+        return i;
     }
 
     public void tour(){
         this.envoyerChoix(this.moi.getRole().choixAction());
+        int i = 0;
+        while(listParticipant.get(i) != null){
+            if(listParticipant.get(i).isRemplacant()) {
+                if(listParticipant.get(i).getRole() instanceof Entreprise){
+                    listParticipant.get(i).getRole().choixAction(i%2);
+                }
+                else{
+                    listParticipant.get(i).getRole().choixAction(algoIA(i));
+                }
+            }
+            i++;
+        }
         while(tousOntChoisit()){
             //wait la réponse des autres
         }
@@ -115,6 +147,7 @@ public class Partie extends Thread{
         this.distributionRoleManche1();
         while(! this.active){
             this.tour();
+            this.distributionRoleMancheN();
         }
 
     }
