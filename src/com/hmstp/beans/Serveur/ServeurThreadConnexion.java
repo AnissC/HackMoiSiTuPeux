@@ -16,10 +16,13 @@ public class ServeurThreadConnexion extends Thread{
         out.writeObject(m);
         out.flush();
     }
-
-
-    public static void main (String[] args) throws Exception {
-        ServerSocket s= new ServerSocket(8080);
-        Socket c= s.accept();
+    @Override
+    public void run(){
+        try {
+            ServerSocket s= new ServerSocket(8080);
+            Socket c= s.accept();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

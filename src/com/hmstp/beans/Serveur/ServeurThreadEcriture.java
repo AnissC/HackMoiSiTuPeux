@@ -32,7 +32,6 @@ public class ServeurThreadEcriture extends Thread {
         }
 
     }
-
     @Override
     public void run(){
         try {

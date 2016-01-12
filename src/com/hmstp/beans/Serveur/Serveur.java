@@ -21,6 +21,7 @@ public class Serveur {
     public void requetePreparerInsert(MessageCompte mc){
         try{
             PreparedStatement statement = msql.initialisationRequetePreparee(msql.conn,SQL_CREER_COMPTE,true,mc.getIdentifiant(),mc.getMotdepasse());
+            System.out.println(mc.getIdentifiant() + mc.getMotdepasse());
             statement.executeUpdate();
 
         }catch(Exception s){
@@ -31,6 +32,7 @@ public class Serveur {
         try {
             PreparedStatement statement = msql.initialisationRequetePreparee(msql.conn,SQL_SELECT_IDENTIFIANT,true,mc.getIdentifiant());
             statement.executeUpdate();
+            return statement.toString();
         }catch (Exception s){
             System.err.println("erreur dans la requete");
         }
@@ -41,6 +43,7 @@ public class Serveur {
         try {
             PreparedStatement statement = msql.initialisationRequetePreparee(msql.conn,SQL_SELECT_IDENTIFIANT,true,mc.getMotdepasse());
             statement.executeUpdate();
+            return statement.toString();
         }catch (Exception s){
             System.err.println("erreur dans la requete");
         }
@@ -122,14 +125,13 @@ public class Serveur {
 
     public static void main(String[] args) throws Exception{
 
-        ServerSocket s= new ServerSocket(8080);
-        Socket c= s.accept();
-
         ServeurThreadEcriture serveurEcriture = new ServeurThreadEcriture(listMessagesEnvoyer);
         serveurEcriture.run();
         ServeurThreadEcoute serveurEcoute = new ServeurThreadEcoute(listMessagesRecu);
         serveurEcoute.run();
         ServeurThreadConnexion serveurConnexion = new ServeurThreadConnexion();
         serveurConnexion.run();
+
+        System.out.println("TOTOTOT");
     }
 }

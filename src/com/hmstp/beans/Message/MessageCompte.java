@@ -7,8 +7,10 @@ public class MessageCompte extends Message{
     private String identifiant;
     private String motdepasse;
 
-    public MessageCompte(Socket s, String m){
+    public MessageCompte(String id, String mdp, Socket s, String m){
         super(s, m);
+        this.identifiant = id;
+        this.motdepasse = mdp;
     }
 
     public String getIdentifiant() {

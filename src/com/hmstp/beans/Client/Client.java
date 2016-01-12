@@ -1,8 +1,10 @@
 package com.hmstp.beans.Client;
 
+import com.hmstp.beans.InterfaceGraphique.IHMClient;
 import com.hmstp.beans.Jeu.*;
 import com.hmstp.beans.Message.*;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -18,7 +20,7 @@ public class Client{
     private static int nbjoueur = 0;
     private static String nom;
     private static Partie partie;
-    private static String adresseIP = "132.227.125.85";
+    private static String adresseIP = "localhost";
 
     public static Socket serveur;
 
@@ -169,12 +171,27 @@ public class Client{
         }
     }
 
+    public static void message(Message msg){
+        synchronized (listMessagesEnvoyer){
+            listMessagesEnvoyer.add(msg);
+        }
+    }
     public static void main(String[] args) throws Exception{
         Client.serveur = Client.connexion(adresseIP);
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu);
         clientEcoute.run();
         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer);
         clientEcriture.run();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                IHMClient ihmClient = new IHMClient();
+                ihmClient.go();
+            }
+        });
+
         Client.gestionMessage();
+
     }
 }
