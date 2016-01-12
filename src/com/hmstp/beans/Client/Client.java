@@ -180,9 +180,9 @@ public class Client{
         Client.serveur = Client.connexion(adresseIP);
 
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, serveur);
-        clientEcoute.run();
+        clientEcoute.start();
         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, serveur);
-        clientEcriture.run();
+        clientEcriture.start();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

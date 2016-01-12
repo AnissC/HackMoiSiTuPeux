@@ -24,9 +24,9 @@ public class ServeurThreadConnexion extends Thread{
             while (true){
                 Socket c= s.accept();
                 ServeurThreadEcriture serveurEcriture = new ServeurThreadEcriture(listMessagesEnvoyer, c);
-                serveurEcriture.run();
+                serveurEcriture.start();
                 ServeurThreadEcoute serveurEcoute = new ServeurThreadEcoute(listMessagesRecu, c);
-                serveurEcoute.run();
+                serveurEcoute.start();
             }
         } catch (Exception e) {
             e.printStackTrace();
