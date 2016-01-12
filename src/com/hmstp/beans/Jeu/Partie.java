@@ -54,7 +54,6 @@ public class Partie extends Thread{
         }
         else if (listParticipant.get(0).isRemplacant()){
             distributionRoleManche1();
-            //Yep je cheat ;p
         }
         else{
             //afficher un message d'attente
