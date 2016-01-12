@@ -1,5 +1,7 @@
 package com.hmstp.beans.Jeu;
 
+import com.hmstp.beans.Message.*;
+
 import java.util.ArrayList;
 
 public class Partie extends Thread{
@@ -8,28 +10,37 @@ public class Partie extends Thread{
     private static final int NB6 = 6;
 
     private int nbParticipants;
-    private ArrayList<Joueur> listJoueur;
+    private ArrayList<Participant> listParticipant;
+    private ArrayList<Message> listMessagesEnvoyer;
     private boolean active;
     private int moi;
 
-    private Partie(ArrayList<Joueur> lj, int numero){
-        this.listJoueur = lj;
-        this.nbParticipants = this.listJoueur.size();
+    public Partie(ArrayList<Participant> lp, int numero){
+        this.listParticipant = lp;
+        this.nbParticipants = this.listParticipant.size();
         this.active = false;
         this.moi = numero;
     }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setMoi(int moi) {
+        this.moi = moi;
+    }
+
     public void distributionRoleManche1(){
-        this.listJoueur.get(0).setRole(Hackeur.getInstance());
-        this.listJoueur.get(1).setRole(new Entreprise(2, "Moyenne entreprise"));
-        this.listJoueur.get(2).setRole(new Entreprise(1, "Petite entreprise"));
+        this.listParticipant.get(0).setRole(Hackeur.getInstance());
+        this.listParticipant.get(1).setRole(new Entreprise(2, "Moyenne entreprise"));
+        this.listParticipant.get(2).setRole(new Entreprise(1, "Petite entreprise"));
 
         if(this.nbParticipants >= NB4){
-            this.listJoueur.get(3).setRole( new Entreprise(3, "Grande entrepise"));
+            this.listParticipant.get(3).setRole( new Entreprise(3, "Grande entrepise"));
             if (this.nbParticipants >= NB5){
-                this.listJoueur.get(4).setRole( new Entreprise(1, "Petite entreprise"));
+                this.listParticipant.get(4).setRole( new Entreprise(1, "Petite entreprise"));
                 if (this.nbParticipants == NB6) {
-                    this.listJoueur.get(5).setRole( new Entreprise(1, "Petite entreprise"));
+                    this.listParticipant.get(5).setRole( new Entreprise(1, "Petite entreprise"));
                 }
             }
         }
@@ -37,7 +48,7 @@ public class Partie extends Thread{
 
     public boolean tousOntChoisit(){
         for (int i = 0; i < nbParticipants; i++) {
-            if (listJoueur.get(i).getRole().isChoixFait()) {
+            if (listParticipant.get(i).getRole().isChoixFait()) {
                 return true;
             }
         }
@@ -45,7 +56,8 @@ public class Partie extends Thread{
     }
 
     public void tour(){
-        listJoueur.get(this.moi).choixAction();
+        listParticipant.get(this.moi).getRole().choixAction();
+        while()
         while(tousOntChoisit()){
             //wait la réponse des autres
         }
@@ -57,5 +69,6 @@ public class Partie extends Thread{
         while(! this.active){
             this.tour();
         }
+
     }
 }

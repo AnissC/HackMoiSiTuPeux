@@ -16,34 +16,36 @@ public class Client{
     private static ArrayList<Message> listMessagesEnvoyer;
     private static ArrayList<Participant> listParticipant;
     private static int nbjoueur = 0;
+    private static String nom;
+    private static Partie partie;
     private static String adresseIP = "132.227.125.85";
-    private static final String CREER_COMPTE = "CREER_COMPTE";
+    public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
     public final static String CONNEXION = "CONNEXION";
     // Sinon connexion : Client -> Serveur, identifiant, mot de passe.
-    private static final String CONNEXION_OK = "CONNEXION_OK";
+    public static final String CONNEXION_OK = "CONNEXION_OK";
     // Serveur -> Client connexion réussie
-    private static final String CONNEXION_KO = "CONNEXION_KO";
+    public static final String CONNEXION_KO = "CONNEXION_KO";
     // Serveur -> Client connexion échouée
-    private static final String RECONNEXION = "RECONNEXION";
+    public static final String RECONNEXION = "RECONNEXION";
     // Client -> Serveur acceptation de reprise de partie
-    private static final String EN_PARTIE = "EN_PARTIE";
+    public static final String EN_PARTIE = "EN_PARTIE";
     // Serveur -> Client propose le bouton reconnexion (après connexion réussie)
-    private static final String PAS_EN_PARTIE = "PAS_EN_PARTIE";
+    public static final String PAS_EN_PARTIE = "PAS_EN_PARTIE";
     // Serveur -> Client le joueur n'est pas en partie (après connexion réussie)
-    private static final String PARTIE_TROUVE = "PARTIE_TROUVE";
+    public static final String PARTIE_TROUVE = "PARTIE_TROUVE";
     // Serveur -> Client le client reçoit ensuite le nombre de joueurs présent puis liste des joueurs de la partie
-    private static final String CREER_PARTIE= "CREER_PARTIE";
+    public static final String CREER_PARTIE= "CREER_PARTIE";
     // Serveur -> Client le client est le seul sur sa partie et dois la mettre en place
-    private static final String COMMENCER_PARTIE= "COMMENCER_PARTIE";
+    public static final String COMMENCER_PARTIE= "COMMENCER_PARTIE";
     // Serveur -> Client envoie un message à tout les participants pour qu'ils commencent la partie
-    private static final String PARTIE_FINIE = "PARTIE_FINIE";
+    public static final String PARTIE_FINIE = "PARTIE_FINIE";
     // Client -> Serveur envoie quand la partie est finit et envoie ensuite le gagnant
-    private static final String JOUEUR_PERDU = "JOUEUR_PERDU";
+    public static final String JOUEUR_PERDU = "JOUEUR_PERDU";
     // Client -> Serveur informe de la perte d'un joueur et envoie le disparu
-    private static final String NOUVEAU_JOUEUR = "NOUVEAU_JOUEUR";
+    public static final String NOUVEAU_JOUEUR = "NOUVEAU_JOUEUR";
     // Serveur -> Client informe de l'arrivé d'un nouveau joueur ou d'un joueur se reconnectant
-    private static final String NB_JOUEURS = "NB_JOUEURS";
+    public static final String NB_JOUEURS = "NB_JOUEURS";
     // Client -> Serveur envoie le nombre de joueurs souhaité pour la partie
 
     private static Socket connexion(String ad) {
@@ -101,11 +103,17 @@ public class Client{
                         synchronized (Client.listParticipant) {
                             while (!(mP.getListJoueur().isEmpty())) {
                                 mJ = mP.getListJoueur().remove(0);
-                                listParticipant.add(new Joueur(Client.connexion(mJ.getJoueur()), mJ.getNom()));
+                                if (mJ.getJoueur().equals(Client.nom)){
+                                    listParticipant.add(new Joueur(null, mJ.getNom()));
+                                    Client.partie.setMoi(k);
+                                }
+                                else {
+                                    listParticipant.add(new Joueur(Client.connexion(mJ.getJoueur()), mJ.getNom()));
+                                }
                                 k++;
                             }
                             while(k < nbjoueur){
-                                listParticipant.add(new Ramplacant("Vide"));
+                                listParticipant.add(new Ramplacant("Ordinateur"));
                                 k++;
                             }
                         }
@@ -116,13 +124,15 @@ public class Client{
                             listParticipant.add(new Joueur(null, mj.getNom()));
                             int j = 1;
                             while (j < nbjoueur) {
-                                listParticipant.add(new Ramplacant("Vide"));
+                                listParticipant.add(new Ramplacant("Ordinateur"));
                                 j++;
                             }
+                            Client.partie = new Partie(listParticipant, 0);
+                            Client.partie.run();
                         }
                         break;
                     case Client.COMMENCER_PARTIE:
-                        // Lance la partie
+                        partie.setActive(true);
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
