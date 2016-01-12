@@ -33,9 +33,9 @@ public class Partie extends Thread{
     }
 
     public void distributionRoleManche1(){
-        this.listParticipant.get(0).setRole(Hackeur.getInstance());
-        this.listParticipant.get(1).setRole(new Entreprise(2, "Moyenne entreprise"));
-        this.listParticipant.get(2).setRole(new Entreprise(1, "Petite entreprise"));
+        this.listParticipant.get(2).setRole(Hackeur.getInstance());
+        this.listParticipant.get(0).setRole(new Entreprise(2, "Moyenne entreprise"));
+        this.listParticipant.get(1).setRole(new Entreprise(1, "Petite entreprise"));
 
         if(this.nbParticipants >= NB4){
             this.listParticipant.get(3).setRole( new Entreprise(3, "Grande entrepise"));
@@ -45,6 +45,18 @@ public class Partie extends Thread{
                     this.listParticipant.get(5).setRole( new Entreprise(1, "Petite entreprise"));
                 }
             }
+        }
+    }
+
+    public void distributionRoleMancheN(){
+        if (moi == listParticipant.get(0)){
+            //interface + envoyer aux autres le role chacun (seul les 4 premier nécéssaire)
+        }
+        else if (listParticipant.get(0).isRemplacant()){
+            distributionRoleManche1();
+        }
+        else{
+            //afficher un message d'attente
         }
     }
 
@@ -60,12 +72,14 @@ public class Partie extends Thread{
     public void envoyerChoix(int choix){
         MessageChoix mn = null;
         int i = 0;
-        while(listParticipant.get(i) != null){
-            if(listParticipant.get(i).isRemplacant()) {
-                mn = new MessageChoix(moi.getNom(), choix, ((Joueur)listParticipant.get(i)).getSock(), Client.CHOIX_DU_TOUR);
-                this.listMessagesEnvoyer.add(mn);
-                i++;
+        while (listParticipant.get(i) != null) {
+            if (!(listParticipant.get(i).isRemplacant())) {
+                mn = new MessageChoix(moi.getNom(), choix, ((Joueur) listParticipant.get(i)).getSock(), Client.CHOIX_DU_TOUR);
+                synchronized (listMessagesEnvoyer) {
+                    this.listMessagesEnvoyer.add(mn);
+                }
             }
+            i++;
         }
     }
 
@@ -93,7 +107,9 @@ public class Partie extends Thread{
 
         while(listParticipant.get(0) != null){
             if (this.active) {
-                //score
+                if (!(((Entreprise)listParticipant.get(0).getRole()).getProtection())){
+                    listParticipant.get(0).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
+                }
             }
             listTemp.add(listParticipant.remove(0));
         }
@@ -101,21 +117,85 @@ public class Partie extends Thread{
         listParticipant = listTemp;
     }
 
+    public int algoIA(int i){
+        int n = nbParticipants;
+        n = n-(i+1);
+        return n;
+    }
+
     public void tour(){
         this.envoyerChoix(this.moi.getRole().choixAction());
-        while(tousOntChoisit()){
+        int i = 0;
+        while (listParticipant.get(i) != null) {
+            if (listParticipant.get(i).isRemplacant()) {
+                if (listParticipant.get(i).getRole() instanceof Entreprise) {
+                    listParticipant.get(i).getRole().choixAction((i + 1) % 2);
+                } else {
+                    listParticipant.get(i).getRole().choixAction(algoIA(i));
+                }
+            }
+            i++;
+        }
+        while (tousOntChoisit()) {
             //wait la réponse des autres
         }
+        this.resoudreTour();
+    }
+
+    public boolean pasDeGagnant(){
+        int i = 0;
         synchronized (listParticipant) {
-            this.resoudreTour();
+            while (listParticipant.get(i) != null) {
+                if (listParticipant.get(i).getScore() >= 10) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+    }
+
+    public String leGagnant(){
+        int i = 0;
+        int max= 0;
+        synchronized (listParticipant) {
+            while (listParticipant.get(i) != null) {
+                max = Math.max(listParticipant.get(i).getScore(), max);
+                i++;
+            }
+            i = 0;
+            while (listParticipant.get(i).getScore() != max) {
+                i++;
+            }
+            return listParticipant.get(i).getNom();
         }
     }
 
     public void run(){
-        this.distributionRoleManche1();
-        while(! this.active){
+        synchronized (listParticipant) {
+            this.distributionRoleManche1();
             this.tour();
         }
 
+        while(! this.active){
+            synchronized (listParticipant) {
+                this.distributionRoleMancheN();
+                this.tour();
+            }
+        }
+
+        synchronized (listParticipant) {
+            this.distributionRoleManche1();
+            this.tour();
+        }
+
+        while(pasDeGagnant()){
+            synchronized (listParticipant) {
+                this.distributionRoleMancheN();
+                this.tour();
+            }
+        }
+
+        MessageJoueur mj = new MessageJoueur(null, leGagnant(), Client.serveur, Client.PARTIE_FINIE);
     }
 }

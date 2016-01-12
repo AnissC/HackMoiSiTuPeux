@@ -17,6 +17,9 @@ public abstract class Participant {
     }
     public void changeScore(int score) {
         this.score += score;
+        if(this.score < 0){
+            this.score = 0;
+        }
     }
 
     public Role getRole() {

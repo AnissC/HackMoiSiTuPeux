@@ -32,7 +32,7 @@ public class Hackeur extends Role{
 	}
 
 	public void choixAction(int i){
-
+		this.victime = i;
 	}
 
 }
