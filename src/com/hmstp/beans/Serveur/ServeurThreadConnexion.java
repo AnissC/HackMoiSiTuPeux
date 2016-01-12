@@ -9,13 +9,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class ServeurThreadConnexion extends Thread{
-
-    public void EnvoiMessage(Socket c, Message m) throws Exception{
-        ObjectOutputStream out = new ObjectOutputStream(c.getOutputStream());
-        out.flush();
-        out.writeObject(m);
-        out.flush();
-    }
     @Override
     public void run(){
         try {

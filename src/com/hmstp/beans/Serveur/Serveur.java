@@ -131,7 +131,5 @@ public class Serveur {
         serveurEcoute.run();
         ServeurThreadConnexion serveurConnexion = new ServeurThreadConnexion();
         serveurConnexion.run();
-
-        System.out.println("TOTOTOT");
     }
 }
