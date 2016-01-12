@@ -14,20 +14,21 @@ public class Partie extends Thread{
     private ArrayList<Participant> listParticipant;
     private ArrayList<Message> listMessagesEnvoyer;
     private boolean active;
-    private int moi;
+    private Joueur moi;
 
-    public Partie(ArrayList<Participant> lp, int numero){
+    public Partie(ArrayList<Participant> lp, ArrayList<Message> lme, Joueur j){
         this.listParticipant = lp;
+        this.listMessagesEnvoyer = lme;
         this.nbParticipants = this.listParticipant.size();
         this.active = false;
-        this.moi = numero;
+        this.moi = j;
     }
 
     public void setActive(boolean active) {
         this.active = active;
     }
 
-    public void setMoi(int moi) {
+    public void setMoi(Joueur moi) {
         this.moi = moi;
     }
 
@@ -57,11 +58,11 @@ public class Partie extends Thread{
     }
 
     public void envoyerChoix(int choix){
-        MessageNombre mn = null;
+        MessageChoix mn = null;
         int i = 0;
         while(listParticipant.get(i) != null){
             if(listParticipant.get(i).isRemplacant()) {
-                mn = new MessageNombre(choix, ((Joueur)listParticipant.get(i)).getSock(), Client.CHOIX_DU_TOUR);
+                mn = new MessageChoix(moi.getNom(), choix, ((Joueur)listParticipant.get(i)).getSock(), Client.CHOIX_DU_TOUR);
                 this.listMessagesEnvoyer.add(mn);
                 i++;
             }
@@ -69,7 +70,7 @@ public class Partie extends Thread{
     }
 
     public void tour(){
-        this.envoyerChoix(listParticipant.get(this.moi).getRole().choixAction());
+        this.envoyerChoix(this.moi.getRole().choixAction());
         while(tousOntChoisit()){
             //wait la réponse des autres
         }

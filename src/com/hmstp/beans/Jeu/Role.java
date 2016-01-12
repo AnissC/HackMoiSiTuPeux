@@ -12,4 +12,5 @@ public abstract class Role {
 	}
 
 	public abstract int choixAction();
+	public abstract void choixAction(int i);
 }

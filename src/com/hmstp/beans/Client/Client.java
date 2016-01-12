@@ -108,8 +108,9 @@ public class Client{
                             while (!(mP.getListJoueur().isEmpty())) {
                                 mJ = mP.getListJoueur().remove(0);
                                 if (mJ.getJoueur().equals(Client.nom)){
-                                    listParticipant.add(new Joueur(null, mJ.getNom()));
-                                    Client.partie.setMoi(k);
+                                    Joueur jm = new Joueur(null, mJ.getNom());
+                                    listParticipant.add(jm);
+                                    Client.partie.setMoi(jm);
                                 }
                                 else {
                                     listParticipant.add(new Joueur(Client.connexion(mJ.getJoueur()), mJ.getNom()));
@@ -125,13 +126,14 @@ public class Client{
                     case Client.CREER_PARTIE:
                         MessageJoueur mj = (MessageJoueur) m;
                         synchronized (Client.listParticipant) {
-                            listParticipant.add(new Joueur(null, mj.getNom()));
+                            Joueur jM = new Joueur(null, mj.getNom());
+                            listParticipant.add(jM);
                             int j = 1;
                             while (j < nbjoueur) {
                                 listParticipant.add(new Ramplacant("Ordinateur"));
                                 j++;
                             }
-                            Client.partie = new Partie(listParticipant, 0);
+                            Client.partie = new Partie(listParticipant, listMessagesEnvoyer, jM);
                             Client.partie.run();
                         }
                         break;
@@ -151,8 +153,12 @@ public class Client{
                         }
                         break;
                     case Client.CHOIX_DU_TOUR:
-                        // Gère le choix des autres joueurs
-
+                        MessageChoix mC = (MessageChoix) m;
+                        int o = 0;
+                        while((o < nbjoueur) &&  (listParticipant.get(o).getNom().equals(mC.getJoueur()))) {
+                            o++;
+                        }
+                        listParticipant.get(o).getRole().choixAction(mC.getNombre());
                         break;
                 }
             }

@@ -28,4 +28,8 @@ public class Hackeur extends Role{
 		return this.victime;
 	}
 
+	public void choixAction(int i){
+
+	}
+
 }
