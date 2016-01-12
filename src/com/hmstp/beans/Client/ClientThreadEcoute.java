@@ -6,17 +6,20 @@ import com.hmstp.beans.Message.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class ClientThreadEcoute extends Thread{
     private ArrayList<Message> listMessagesRecu;
+    private Socket socket;
 
-    public ClientThreadEcoute(ArrayList<Message> l){
+    public ClientThreadEcoute(ArrayList<Message> l, Socket s){
         this.listMessagesRecu = l;
+        this.socket = s;
     }
 
     public void reception()throws IOException, ClassNotFoundException{
-        ObjectInputStream ob = null;
+        ObjectInputStream ob = new ObjectInputStream(socket.getInputStream());
 
         while (!this.isInterrupted()){
             synchronized (this.listMessagesRecu) {
