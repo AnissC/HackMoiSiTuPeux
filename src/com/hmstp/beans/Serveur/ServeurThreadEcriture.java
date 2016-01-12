@@ -19,7 +19,8 @@ public class ServeurThreadEcriture extends Thread {
     }
 
     public void message () throws IOException{
-        ObjectOutputStream ob = null;
+        ObjectOutputStream ob = new ObjectOutputStream(socket.getOutputStream());
+        ob.flush();
         Message m = null;
         int i;
 
@@ -30,8 +31,6 @@ public class ServeurThreadEcriture extends Thread {
                     while(listMessagesEnvoyer.get(i) != null){
                         if(listMessagesEnvoyer.get(i).getSocket() == socket) {
                             m = listMessagesEnvoyer.remove(i);
-                            ob = new ObjectOutputStream(m.getSocket().getOutputStream());
-                            ob.flush();
                             ob.writeObject(m);
                         }
                         i++;
