@@ -158,17 +158,16 @@ public class Partie extends Thread{
     public String leGagnant(){
         int i = 0;
         int max= 0;
+        String gagnant = null;
         synchronized (listParticipant) {
             while (listParticipant.get(i) != null) {
-                max = Math.max(listParticipant.get(i).getScore(), max);
-                i++;
+                if (listParticipant.get(i).getScore() > max) {
+                    max = listParticipant.get(i).getScore();
+                    gagnant = listParticipant.get(i).getNom();
+                }
             }
-            i = 0;
-            while (listParticipant.get(i).getScore() != max) {
-                i++;
-            }
-            return listParticipant.get(i).getNom();
         }
+        return gagnant;
     }
 
     public void run(){
