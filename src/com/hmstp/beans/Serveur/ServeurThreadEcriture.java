@@ -10,23 +10,32 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class ServeurThreadEcriture extends Thread {
-    public ArrayList<Message> listMessagesEnvoyer;
+    private ArrayList<Message> listMessagesEnvoyer;
+    private Socket socket;
 
-    public ServeurThreadEcriture(ArrayList <Message> list){
-        listMessagesEnvoyer = list;
+    public ServeurThreadEcriture(ArrayList <Message> list, Socket s){
+        this.listMessagesEnvoyer = list;
+        this.socket = s;
     }
 
     public void message () throws IOException{
         ObjectOutputStream ob = null;
         Message m = null;
+        int i;
 
         while(!this.isInterrupted()){
             synchronized (this.listMessagesEnvoyer) {
                 if (!listMessagesEnvoyer.isEmpty()) {
-                    m = listMessagesEnvoyer.remove(0);
-                    ob = new ObjectOutputStream(m.getSocket().getOutputStream());
-                    ob.flush();
-                    ob.writeObject(m);
+                    i = 0;
+                    while(listMessagesEnvoyer.get(i) != null){
+                        if(listMessagesEnvoyer.get(i).getSocket() == socket) {
+                            m = listMessagesEnvoyer.remove(i);
+                            ob = new ObjectOutputStream(m.getSocket().getOutputStream());
+                            ob.flush();
+                            ob.writeObject(m);
+                        }
+                        i++;
+                    }
                 }
             }
 

@@ -181,8 +181,8 @@ public class Client{
 
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, serveur);
         clientEcoute.run();
-        //ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer);
-        //clientEcriture.run();
+        ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, serveur);
+        clientEcriture.run();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
