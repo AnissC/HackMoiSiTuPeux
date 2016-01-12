@@ -97,7 +97,7 @@ public class Partie extends Thread{
             }
             listTemp.add(listParticipant.remove(0));
         }
-
+        "test"
         listParticipant = listTemp;
     }
 
