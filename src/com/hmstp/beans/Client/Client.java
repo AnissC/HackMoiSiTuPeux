@@ -20,6 +20,8 @@ public class Client{
     private static Partie partie;
     private static String adresseIP = "132.227.125.85";
 
+    public static Socket serveur;
+
     public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
     public final static String CONNEXION = "CONNEXION";
@@ -168,7 +170,7 @@ public class Client{
     }
 
     public static void main(String[] args) throws Exception{
-        Socket c = Client.connexion(adresseIP);
+        Client.serveur = Client.connexion(adresseIP);
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu);
         clientEcoute.run();
         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer);

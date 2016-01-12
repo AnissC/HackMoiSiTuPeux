@@ -145,12 +145,31 @@ public class Partie extends Thread{
 
     public boolean pasDeGagnant(){
         int i = 0;
-        while (listParticipant.get(i) != null) {
-            if(listParticipant.get(i).getScore() >= 10){
-                return false;
+        synchronized (listParticipant) {
+            while (listParticipant.get(i) != null) {
+                if (listParticipant.get(i).getScore() >= 10) {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
+
+    }
+
+    public String leGagnant(){
+        int i = 0;
+        int max= 0;
+        synchronized (listParticipant) {
+            while (listParticipant.get(i) != null) {
+                max = Math.max(listParticipant.get(i).getScore(), max);
+                i++;
+            }
+            i = 0;
+            while (listParticipant.get(i).getScore() != max) {
+                i++;
+            }
+            return listParticipant.get(i).getNom();
+        }
     }
 
     public void run(){
@@ -158,21 +177,26 @@ public class Partie extends Thread{
             this.distributionRoleManche1();
             this.tour();
         }
+
         while(! this.active){
             synchronized (listParticipant) {
                 this.distributionRoleMancheN();
                 this.tour();
             }
         }
+
         synchronized (listParticipant) {
             this.distributionRoleManche1();
             this.tour();
         }
+
         while(pasDeGagnant()){
             synchronized (listParticipant) {
                 this.distributionRoleMancheN();
                 this.tour();
             }
         }
+
+        MessageJoueur mj = new MessageJoueur(null, leGagnant(), Client.serveur, Client.PARTIE_FINIE);
     }
 }
