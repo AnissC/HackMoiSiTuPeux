@@ -109,8 +109,6 @@ public class Client{
                                 k++;
                             }
                         }
-                        // Contacter les autres
-
                         break;
                     case Client.CREER_PARTIE:
                         MessageJoueur mj = (MessageJoueur) m;
@@ -131,7 +129,8 @@ public class Client{
                         synchronized (Client.listParticipant) {
                             ServerSocket ss = new ServerSocket(8080);
                             Socket sc = ss.accept();
-                            listParticipant.add(new Joueur(sc, mej.getNom()));
+                            while()
+                            listParticipant.get() = new Joueur(sc, mej.getNom());
                         }
                         break;
                 }

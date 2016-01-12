@@ -35,7 +35,7 @@ public class Partie extends Thread{
         }
     }
 
-    public boolean manqueUnJoueur(){
+    public boolean tousOntChoisit(){
         for (int i = 0; i < nbParticipants; i++) {
             if (listJoueur.get(i).getRole().isChoixFait()) {
                 return true;
@@ -46,7 +46,7 @@ public class Partie extends Thread{
 
     public void tour(){
         listJoueur.get(this.moi).choixAction();
-        while(manqueUnJoueur()){
+        while(tousOntChoisit()){
             //wait la réponse des autres
         }
 
