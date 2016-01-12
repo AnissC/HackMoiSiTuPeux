@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class Client{
 
-    private static ArrayList<Message> listMessagesRecu;
-    private static ArrayList<Message> listMessagesEnvoyer;
-    private static ArrayList<Participant> listParticipant;
+    private static ArrayList<Message> listMessagesRecu = new ArrayList<>();
+    private static ArrayList<Message> listMessagesEnvoyer = new ArrayList<>();
+    private static ArrayList<Participant> listParticipant = new ArrayList<>();
     private static int nbjoueur = 0;
     private static String nom;
     private static Partie partie;

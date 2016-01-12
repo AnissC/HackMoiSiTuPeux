@@ -16,8 +16,11 @@ public class Hackeur extends Role{
 		}
 		return instance;
 	}
-	
-	public void getVictime(int j){
+
+	public int getVictime() {
+		return victime;
+	}
+	public void setVictime(int j){
 		this.victime=j;
 	}
 

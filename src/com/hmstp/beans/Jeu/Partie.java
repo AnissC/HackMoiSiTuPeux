@@ -69,12 +69,46 @@ public class Partie extends Thread{
         }
     }
 
+    public void resoudreTour(){
+        ArrayList<Participant> listTemp = new ArrayList<>();
+        int i = 0;
+        while (!(listParticipant.get(i).getRole() instanceof Hackeur)) {
+            i++;
+        }
+
+        Participant victime = listParticipant.remove(((Hackeur) listParticipant.get(i).getRole()).getVictime());
+        if (((Entreprise)victime.getRole()).getProtection()){
+            listTemp.add(listParticipant.remove(i));
+            listTemp.add(victime);
+        }
+        else {
+            listTemp.add(victime);
+            listTemp.add(listParticipant.remove(i));
+        }
+
+        if (this.active){
+            listTemp.get(0).changeScore(0 - ((Entreprise)victime.getRole()).getValeur());
+            listTemp.get(1).changeScore(((Entreprise)victime.getRole()).getValeur());
+        }
+
+        while(listParticipant.get(0) != null){
+            if (this.active) {
+                //score
+            }
+            listTemp.add(listParticipant.remove(0));
+        }
+
+        listParticipant = listTemp;
+    }
+
     public void tour(){
         this.envoyerChoix(this.moi.getRole().choixAction());
         while(tousOntChoisit()){
             //wait la réponse des autres
         }
-
+        synchronized (listParticipant) {
+            this.resoudreTour();
+        }
     }
 
     public void run(){
