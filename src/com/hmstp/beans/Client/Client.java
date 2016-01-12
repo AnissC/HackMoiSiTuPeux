@@ -178,6 +178,7 @@ public class Client{
     }
     public static void main(String[] args) throws Exception{
         Client.serveur = Client.connexion(adresseIP);
+        System.out.println("here1");
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu);
         clientEcoute.run();
         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer);

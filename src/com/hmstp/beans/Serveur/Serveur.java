@@ -12,8 +12,8 @@ public class Serveur {
 
     MysqlConnect msql = MysqlConnect.getDbCon();
 
-    private static ArrayList<Message> listMessagesRecu;
-    private static ArrayList<Message> listMessagesEnvoyer;
+    private static ArrayList<Message> listMessagesRecu = new ArrayList<>();
+    private static ArrayList<Message> listMessagesEnvoyer = new ArrayList<>();
 
     private static final String SQL_CREER_COMPTE = "INSERT INTO user (pseudo, motdepasse) VALUES (?, ?)";
     private static final String SQL_SELECT_IDENTIFIANT = "SELECT pseudo FROM user WHERE pseudo = ?";
@@ -125,11 +125,14 @@ public class Serveur {
 
     public static void main(String[] args) throws Exception{
 
+        ServeurThreadConnexion serveurConnexion = new ServeurThreadConnexion();
+        serveurConnexion.run();
         ServeurThreadEcriture serveurEcriture = new ServeurThreadEcriture(listMessagesEnvoyer);
         serveurEcriture.run();
         ServeurThreadEcoute serveurEcoute = new ServeurThreadEcoute(listMessagesRecu);
         serveurEcoute.run();
-        ServeurThreadConnexion serveurConnexion = new ServeurThreadConnexion();
-        serveurConnexion.run();
+
+        Serveur serveur = new Serveur();
+        serveur.gestionMessage();
     }
 }

@@ -20,7 +20,7 @@ public class ServeurThreadEcriture extends Thread {
         ObjectOutputStream ob = null;
         Message m = null;
 
-        while(this.isInterrupted()){
+        while(!this.isInterrupted()){
             synchronized (this.listMessagesEnvoyer) {
                 if (!listMessagesEnvoyer.isEmpty()) {
                     m = listMessagesEnvoyer.remove(0);
@@ -36,7 +36,7 @@ public class ServeurThreadEcriture extends Thread {
     public void run(){
         try {
             this.message();
-        }catch (Exception e){
+        }catch (IOException e){
             System.err.println("Erreur Serveur : Serveur Thread Ecriture");
         }
     }
