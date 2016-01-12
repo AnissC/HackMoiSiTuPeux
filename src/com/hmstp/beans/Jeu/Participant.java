@@ -1,7 +1,7 @@
 package com.hmstp.beans.Jeu;
 
 
-public class Participant {
+public abstract class Participant {
     private Role role;
     private int score;
     private String nom;
@@ -26,4 +26,6 @@ public class Participant {
     public String getNom() {
         return nom;
     }
+
+    public abstract boolean isRemplacant();
 }

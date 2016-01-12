@@ -129,8 +129,11 @@ public class Client{
                         synchronized (Client.listParticipant) {
                             ServerSocket ss = new ServerSocket(8080);
                             Socket sc = ss.accept();
-                            while(true)
-                            listParticipant.get() = new Joueur(sc, mej.getNom());
+                            int h = 0;
+                            while((h < nbjoueur) && (! listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getJoueur())))) {
+                                h++;
+                            }
+                            listParticipant.set(h, new Joueur(sc, mej.getNom()));
                         }
                         break;
                 }
