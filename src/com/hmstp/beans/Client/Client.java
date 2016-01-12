@@ -129,7 +129,7 @@ public class Client{
                         synchronized (Client.listParticipant) {
                             ServerSocket ss = new ServerSocket(8080);
                             Socket sc = ss.accept();
-                            while()
+                            while(true)
                             listParticipant.get() = new Joueur(sc, mej.getNom());
                         }
                         break;
