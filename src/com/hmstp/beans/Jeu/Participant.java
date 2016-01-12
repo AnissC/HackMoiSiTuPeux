@@ -15,6 +15,9 @@ public abstract class Participant {
     public int getScore() {
         return score;
     }
+    public void changeScore(int score) {
+        this.score += score;
+    }
 
     public Role getRole() {
         return role;
