@@ -178,11 +178,11 @@ public class Client{
     }
     public static void main(String[] args) throws Exception{
         Client.serveur = Client.connexion(adresseIP);
-        System.out.println("here1");
+
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, serveur);
         clientEcoute.run();
-        ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer);
-        clientEcriture.run();
+        //ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer);
+        //clientEcriture.run();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

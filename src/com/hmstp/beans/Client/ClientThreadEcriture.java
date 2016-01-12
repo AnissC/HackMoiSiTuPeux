@@ -22,6 +22,7 @@ public class ClientThreadEcriture extends Thread{
                 if (!listMessagesEnvoyer.isEmpty()){
                     m = listMessagesEnvoyer.remove(0);
                     ob = new ObjectOutputStream(m.getSocket().getOutputStream());
+                    ob.flush();
                     ob.writeObject(m);
                 }
             }

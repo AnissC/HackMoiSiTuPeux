@@ -9,18 +9,21 @@ import java.util.ArrayList;
 
 public class ServeurThreadEcoute extends Thread{
 
-    private Socket s;
+    private Socket socket;
     private ArrayList<Message> listMessagesRecu;
 
-    public ServeurThreadEcoute(ArrayList<Message> l){
+    public ServeurThreadEcoute(ArrayList<Message> l, Socket s){
         this.listMessagesRecu = l;
+        this.socket = s;
     }
+
 
     public void reception()throws IOException, ClassNotFoundException {
         ObjectInputStream ob = null;
 
         while (!this.isInterrupted()){
             synchronized (this.listMessagesRecu) {
+                ob = new ObjectInputStream(socket.getInputStream());
                 Message m = (Message) ob.readObject();
                 this.listMessagesRecu.add(m);
             }

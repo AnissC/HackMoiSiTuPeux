@@ -125,12 +125,8 @@ public class Serveur {
 
     public static void main(String[] args) throws Exception{
 
-        ServeurThreadConnexion serveurConnexion = new ServeurThreadConnexion();
+        ServeurThreadConnexion serveurConnexion = new ServeurThreadConnexion(listMessagesRecu, listMessagesEnvoyer);
         serveurConnexion.run();
-        ServeurThreadEcriture serveurEcriture = new ServeurThreadEcriture(listMessagesEnvoyer);
-        serveurEcriture.run();
-        ServeurThreadEcoute serveurEcoute = new ServeurThreadEcoute(listMessagesRecu);
-        serveurEcoute.run();
 
         Serveur serveur = new Serveur();
         serveur.gestionMessage();
