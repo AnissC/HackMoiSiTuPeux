@@ -126,7 +126,7 @@ public class Serveur {
     public static void main(String[] args) throws Exception{
 
         ServeurThreadConnexion serveurConnexion = new ServeurThreadConnexion(listMessagesRecu, listMessagesEnvoyer);
-        serveurConnexion.run();
+        serveurConnexion.start();
 
         Serveur serveur = new Serveur();
         serveur.gestionMessage();
