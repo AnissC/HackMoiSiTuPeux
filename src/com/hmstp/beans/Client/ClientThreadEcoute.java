@@ -23,7 +23,6 @@ public class ClientThreadEcoute extends Thread{
                 this.listMessagesRecu.add(m);
             }
         }
-
         ob.close();
     }
 

@@ -79,7 +79,7 @@ public class Client{
         Message m = null;
         //Condition = bouton quitter
         while(true){
-            synchronized (Client.listMessagesRecu) {
+            synchronized (listMessagesRecu) {
                 if (!Client.listMessagesRecu.isEmpty()) {
                     m = Client.listMessagesRecu.remove(0);
                 }
@@ -104,7 +104,7 @@ public class Client{
                         MessagePartie mP = (MessagePartie) m;
                         MessageJoueur mJ;
                         int k = 0;
-                        synchronized (Client.listParticipant) {
+                        synchronized (listParticipant) {
                             while (!(mP.getListJoueur().isEmpty())) {
                                 mJ = mP.getListJoueur().remove(0);
                                 if (mJ.getJoueur().equals(Client.nom)){
@@ -125,7 +125,7 @@ public class Client{
                         break;
                     case Client.CREER_PARTIE:
                         MessageJoueur mj = (MessageJoueur) m;
-                        synchronized (Client.listParticipant) {
+                        synchronized (listParticipant) {
                             Joueur jM = new Joueur(null, mj.getNom());
                             listParticipant.add(jM);
                             int j = 1;
@@ -142,7 +142,7 @@ public class Client{
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
-                        synchronized (Client.listParticipant) {
+                        synchronized (listParticipant) {
                             ServerSocket ss = new ServerSocket(8080);
                             Socket sc = ss.accept();
                             int h = 0;
@@ -155,10 +155,12 @@ public class Client{
                     case Client.CHOIX_DU_TOUR:
                         MessageChoix mC = (MessageChoix) m;
                         int o = 0;
-                        while((o < nbjoueur) &&  (listParticipant.get(o).getNom().equals(mC.getJoueur()))) {
-                            o++;
+                        synchronized (listParticipant) {
+                            while ((o < nbjoueur) && (listParticipant.get(o).getNom().equals(mC.getJoueur()))) {
+                                o++;
+                            }
+                            listParticipant.get(o).getRole().choixAction(mC.getNombre());
                         }
-                        listParticipant.get(o).getRole().choixAction(mC.getNombre());
                         break;
                 }
             }

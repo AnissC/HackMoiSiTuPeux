@@ -73,10 +73,12 @@ public class Partie extends Thread{
     public void envoyerChoix(int choix){
         MessageChoix mn = null;
         int i = 0;
-        while(listParticipant.get(i) != null){
-            if(! (listParticipant.get(i).isRemplacant())) {
-                mn = new MessageChoix(moi.getNom(), choix, ((Joueur)listParticipant.get(i)).getSock(), Client.CHOIX_DU_TOUR);
-                this.listMessagesEnvoyer.add(mn);
+        while (listParticipant.get(i) != null) {
+            if (!(listParticipant.get(i).isRemplacant())) {
+                mn = new MessageChoix(moi.getNom(), choix, ((Joueur) listParticipant.get(i)).getSock(), Client.CHOIX_DU_TOUR);
+                synchronized (listMessagesEnvoyer) {
+                    this.listMessagesEnvoyer.add(mn);
+                }
             }
             i++;
         }
@@ -117,38 +119,60 @@ public class Partie extends Thread{
     }
 
     public int algoIA(int i){
-
-        return i;
+        int n = nbParticipants;
+        n = n-(i+1);
+        return n;
     }
 
     public void tour(){
         this.envoyerChoix(this.moi.getRole().choixAction());
         int i = 0;
-        while(listParticipant.get(i) != null){
-            if(listParticipant.get(i).isRemplacant()) {
-                if(listParticipant.get(i).getRole() instanceof Entreprise){
-                    listParticipant.get(i).getRole().choixAction(i%2);
-                }
-                else{
+        while (listParticipant.get(i) != null) {
+            if (listParticipant.get(i).isRemplacant()) {
+                if (listParticipant.get(i).getRole() instanceof Entreprise) {
+                    listParticipant.get(i).getRole().choixAction((i + 1) % 2);
+                } else {
                     listParticipant.get(i).getRole().choixAction(algoIA(i));
                 }
             }
             i++;
         }
-        while(tousOntChoisit()){
+        while (tousOntChoisit()) {
             //wait la réponse des autres
         }
-        synchronized (listParticipant) {
-            this.resoudreTour();
+        this.resoudreTour();
+    }
+
+    public boolean pasDeGagnant(){
+        int i = 0;
+        while (listParticipant.get(i) != null) {
+            if(listParticipant.get(i).getScore() >= 10){
+                return false;
+            }
         }
+        return true;
     }
 
     public void run(){
-        this.distributionRoleManche1();
-        while(! this.active){
+        synchronized (listParticipant) {
+            this.distributionRoleManche1();
             this.tour();
-            this.distributionRoleMancheN();
         }
-
+        while(! this.active){
+            synchronized (listParticipant) {
+                this.distributionRoleMancheN();
+                this.tour();
+            }
+        }
+        synchronized (listParticipant) {
+            this.distributionRoleManche1();
+            this.tour();
+        }
+        while(pasDeGagnant()){
+            synchronized (listParticipant) {
+                this.distributionRoleMancheN();
+                this.tour();
+            }
+        }
     }
 }
