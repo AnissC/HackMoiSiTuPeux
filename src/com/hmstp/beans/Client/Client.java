@@ -92,16 +92,16 @@ public class Client{
             if(m != null){
                 switch (m.getMessage()) {
                     case Client.CONNEXION_OK:
-                        ihmClient.setEcranAffichage("connexion");
+                        ihmClient.setEcranAffichage(IHMClient.IHM_MENU);
                         break;
                     case Client.CONNEXION_KO:
-                        ihmClient.setEcranAffichage("menu");
+                        ihmClient.setEcranAffichage(IHMClient.IHM_CONNEXION);
                         break;
                     case Client.EN_PARTIE:
-                        // Affiche le bouton reconnexion
+                        ihmClient.setEcranAffichage(IHMClient.IHM_RECONNEXION);
                         break;
                     case Client.PAS_EN_PARTIE:
-                        // Affiche le menu
+                        ihmClient.setEcranAffichage(IHMClient.IHM_MENU);
                         // Choix interface graphique
                         nbjoueur = 5;
                         break;
