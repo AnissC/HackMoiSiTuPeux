@@ -68,7 +68,7 @@ public class Partie extends Thread{
     public void envoyerChoix(int choix){
         MessageChoix mn = null;
         int i = 0;
-        while (listParticipant.get(i) != null) {
+        while (i < listMessagesEnvoyer.size()) {
             if (!(listParticipant.get(i).isRemplacant())) {
                 mn = new MessageChoix(moi.getNom(), choix, Client.CHOIX_DU_TOUR);
                 synchronized (listMessagesEnvoyer) {
@@ -101,7 +101,7 @@ public class Partie extends Thread{
             listTemp.get(1).changeScore(((Entreprise)victime.getRole()).getValeur());
         }
 
-        while(listParticipant.get(0) != null){
+        while(i < listMessagesEnvoyer.size()){
             if (this.active) {
                 if (!(((Entreprise)listParticipant.get(0).getRole()).getProtection())){
                     listParticipant.get(0).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
@@ -122,7 +122,7 @@ public class Partie extends Thread{
     public void tour(){
         this.envoyerChoix(this.moi.getRole().choixAction());
         int i = 0;
-        while (listParticipant.get(i) != null) {
+        while (i < listMessagesEnvoyer.size()) {
             if (listParticipant.get(i).isRemplacant()) {
                 if (listParticipant.get(i).getRole() instanceof Entreprise) {
                     listParticipant.get(i).getRole().choixAction((i + 1) % 2);
