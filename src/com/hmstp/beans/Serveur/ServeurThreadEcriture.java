@@ -29,6 +29,7 @@ public class ServeurThreadEcriture extends Thread {
                         if(listMessagesEnvoyer.get(i).getSocket() == socket) {
                             m = listMessagesEnvoyer.remove(i).getMessage();
                             ob.writeObject(m);
+                            ob.flush();
                         }else {
                             i++;
                         }
