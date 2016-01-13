@@ -64,8 +64,12 @@ public class IHMClient extends JPanel {
     private JPanel panelBoutonAnnuler;
     private JButton boutonAnnuler;
 
-    private String ecranAffichage = "connexion";
+    private String ecranAffichage = IHM_CONNEXION;
 
+    public void setEcranAffichage(String ecranAffichage) {
+        this.ecranAffichage = ecranAffichage;
+        dessine();
+    }
 
     public void go(){
         frame = new JFrame("Hack Moi Si Tu Peux !");
