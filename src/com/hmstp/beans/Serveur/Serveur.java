@@ -152,7 +152,6 @@ public class Serveur {
             }
             m=null;
         }
-
     }
 
 
@@ -164,5 +163,6 @@ public class Serveur {
         Serveur serveur = new Serveur();
 
         serveur.gestionMessage();
+
     }
 }
