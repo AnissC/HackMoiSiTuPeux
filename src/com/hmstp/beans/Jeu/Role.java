@@ -9,6 +9,7 @@ public abstract class Role {
 	public boolean isChoixFait() {
 		return choixFait;
 	}
+
 	public void setChoixFait(boolean choixFait) {
 		this.choixFait = choixFait;
 	}
@@ -16,6 +17,12 @@ public abstract class Role {
 	public void choixAction(){
 			Client.choixAction(this);
 	}
+
 	public abstract void choixAction(int i);
+
 	public abstract int retourneChoix();
+
+	public void remmettreZero(){
+		this.choixFait = false;
+	}
 }

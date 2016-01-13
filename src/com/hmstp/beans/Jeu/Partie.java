@@ -15,6 +15,12 @@ public class Partie extends Thread{
     private ArrayList<Lettre> listMessagesEnvoyer;
     private boolean active;
     private Joueur moi;
+    private Hackeur hackeur = Hackeur.getInstance();
+    private Entreprise e1 = new Entreprise(2, "Moyenne entreprise");
+    private Entreprise e2 = new Entreprise(1, "Petite entreprise");
+    private Entreprise e3 = new Entreprise(3, "Grande entrepise");
+    private Entreprise e4 = new Entreprise(1, "Petite entreprise");
+    private Entreprise e5 = new Entreprise(1, "Petite entreprise");
 
     public Partie(ArrayList<Participant> lp, ArrayList<Lettre> lme, Joueur j){
         this.listParticipant = lp;
@@ -29,16 +35,16 @@ public class Partie extends Thread{
     }
 
     public void distributionRoleManche1(){
-        this.listParticipant.get(2).setRole(Hackeur.getInstance());
-        this.listParticipant.get(0).setRole(new Entreprise(2, "Moyenne entreprise"));
-        this.listParticipant.get(1).setRole(new Entreprise(1, "Petite entreprise"));
+        this.listParticipant.get(2).setRole(hackeur);
+        this.listParticipant.get(0).setRole(e1);
+        this.listParticipant.get(1).setRole(e2);
 
         if(this.nbParticipants >= NB4){
-            this.listParticipant.get(3).setRole( new Entreprise(3, "Grande entrepise"));
+            this.listParticipant.get(3).setRole(e3);
             if (this.nbParticipants >= NB5){
-                this.listParticipant.get(4).setRole( new Entreprise(1, "Petite entreprise"));
+                this.listParticipant.get(4).setRole(e4);
                 if (this.nbParticipants == NB6) {
-                    this.listParticipant.get(5).setRole( new Entreprise(1, "Petite entreprise"));
+                    this.listParticipant.get(5).setRole(e5);
                 }
             }
         }
@@ -46,16 +52,16 @@ public class Partie extends Thread{
 
     public void distributionRoleMancheN(){
         if (moi == listParticipant.get(0)){
-            Client.choixDistibution(Hackeur.getInstance());
-            Client.choixDistibution(new Entreprise(2, "Moyenne entreprise"));
-            Client.choixDistibution(new Entreprise(1, "Petite entreprise"));
+            Client.choixDistibution(hackeur);
+            Client.choixDistibution(e1);
+            Client.choixDistibution(e2);
 
             if(this.nbParticipants >= NB4){
-                Client.choixDistibution( new Entreprise(3, "Grande entrepise"));
+                Client.choixDistibution(e3);
                 if (this.nbParticipants >= NB5){
-                    Client.choixDistibution( new Entreprise(1, "Petite entreprise"));
+                    Client.choixDistibution(e4);
                     if (this.nbParticipants == NB6) {
-                        Client.choixDistibution( new Entreprise(1, "Petite entreprise"));
+                        Client.choixDistibution(e5);
                     }
                 }
             }
@@ -123,6 +129,12 @@ public class Partie extends Thread{
         }
 
         listParticipant = listTemp;
+
+        i= 0;
+        while(i < listParticipant.size()){
+            listParticipant.get(0).getRole().remmettreZero();;
+            i++;
+        }
     }
 
     public int algoIA(int i){
