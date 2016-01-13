@@ -17,7 +17,7 @@ public class ServeurThreadEcriture extends Thread {
     }
 
     public void message () throws IOException{
-        ObjectOutputStream ob = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+        ObjectOutputStream ob = new ObjectOutputStream(socket.getOutputStream());
         ob.flush();
         Message m = null;
         int i;

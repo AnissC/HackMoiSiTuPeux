@@ -16,7 +16,7 @@ public class ClientThreadEcoute extends Thread{
         this.socket = s;
     }
     public void reception()throws IOException, ClassNotFoundException{
-        ObjectInputStream ob = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+        ObjectInputStream ob = new ObjectInputStream(socket.getInputStream());
         while (!this.isInterrupted()){
             synchronized (this.listMessagesRecu) {
                 Message m = (Message) ob.readObject();
