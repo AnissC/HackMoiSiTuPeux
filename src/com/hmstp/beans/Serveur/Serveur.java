@@ -15,11 +15,12 @@ public class Serveur {
     private static ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
     private static ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
 
-    private static final String SQL_CREER_COMPTE = "INSERT INTO user (pseudo, motdepasse) VALUES (?, ?)";
-    private static final String SQL_SELECT_IDENTIFIANT = "SELECT pseudo FROM user WHERE pseudo = ?";
+    private static final String SQL_CREER_COMPTE = "INSERT INTO joueur (pseudo, motdepasse) VALUES (?, ?)";
+    private static final String SQL_SELECT_IDENTIFIANT = "SELECT pseudo FROM joueur WHERE pseudo = ?";
 
     public void requetePreparerInsert(MessageCompte mc){
         try{
+            System.out.println(mc.getIdentifiant() + mc.getMotdepasse());
             PreparedStatement statement = msql.initialisationRequetePreparee(msql.conn,SQL_CREER_COMPTE,true,mc.getIdentifiant(),mc.getMotdepasse());
             System.out.println(mc.getIdentifiant() + mc.getMotdepasse());
             statement.executeUpdate();
@@ -32,6 +33,7 @@ public class Serveur {
         try {
             PreparedStatement statement = msql.initialisationRequetePreparee(msql.conn,SQL_SELECT_IDENTIFIANT,true,mc.getIdentifiant());
             statement.executeUpdate();
+            System.out.println(mc.getIdentifiant());
             return statement.toString();
         }catch (Exception s){
             System.err.println("erreur dans la requete");
@@ -85,18 +87,20 @@ public class Serveur {
 
 
     public void gestionMessage() throws Exception{
-
         Message m = null;
         while (true){
             synchronized (Serveur.listMessagesRecu) {
                 if (!Serveur.listMessagesRecu.isEmpty()){
-                   m = listMessagesEnvoyer.remove(0).getMessage();
+                    m = listMessagesRecu.remove(0).getMessage();
+                    System.out.println("tootototo000");
                 }
             }
             if (m != null) {
                 MessageCompte mC = (MessageCompte) m;
+                System.out.println("tootototo000");
                 switch (m.getMessage()) {
                     case Serveur.CREER_COMPTE:
+                        System.out.println("tootototo");
                         requetePreparerInsert(mC);
                         break;
                     case Serveur.CONNEXION:
@@ -118,6 +122,7 @@ public class Serveur {
                         break;
                 }
             }
+            m=null;
         }
 
     }
@@ -129,6 +134,7 @@ public class Serveur {
         serveurConnexion.start();
 
         Serveur serveur = new Serveur();
+
         serveur.gestionMessage();
     }
 }

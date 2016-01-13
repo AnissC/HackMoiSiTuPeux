@@ -1,8 +1,6 @@
 package com.hmstp.beans.Serveur;
 
 import com.hmstp.beans.Message.*;
-
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -23,11 +21,8 @@ public class ServeurThreadEcoute extends Thread{
 
         while (!this.isInterrupted()){
             synchronized (this.listMessagesRecu) {
-                System.out.println("totot");
                 Message m = (Message) ob.readObject();
-                System.out.println(m.getMessage());
                 this.listMessagesRecu.add(new Lettre(m, socket));
-
             }
         }
         ob.close();
