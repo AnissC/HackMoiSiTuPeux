@@ -68,7 +68,7 @@ public class Partie extends Thread{
     public void envoyerChoix(int choix){
         MessageChoix mn = null;
         int i = 0;
-        while (i < listMessagesEnvoyer.size()) {
+        while (i < listParticipant.size()) {
             if (!(listParticipant.get(i).isRemplacant())) {
                 mn = new MessageChoix(moi.getNom(), choix, Client.CHOIX_DU_TOUR);
                 synchronized (listMessagesEnvoyer) {
@@ -101,7 +101,7 @@ public class Partie extends Thread{
             listTemp.get(1).changeScore(((Entreprise)victime.getRole()).getValeur());
         }
 
-        while(i < listMessagesEnvoyer.size()){
+        while(i < listParticipant.size()){
             if (this.active) {
                 if (!(((Entreprise)listParticipant.get(0).getRole()).getProtection())){
                     listParticipant.get(0).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
@@ -120,9 +120,10 @@ public class Partie extends Thread{
     }
 
     public void tour(){
-        this.envoyerChoix(this.moi.getRole().choixAction());
+        //this.moi.getRole().choixAction()
+        //this.envoyerChoix(this.moi.getRole().choixAction());
         int i = 0;
-        while (i < listMessagesEnvoyer.size()) {
+        while (i < listParticipant.size()) {
             if (listParticipant.get(i).isRemplacant()) {
                 if (listParticipant.get(i).getRole() instanceof Entreprise) {
                     listParticipant.get(i).getRole().choixAction((i + 1) % 2);
@@ -141,7 +142,7 @@ public class Partie extends Thread{
     public boolean pasDeGagnant(){
         int i = 0;
         synchronized (listParticipant) {
-            while (listParticipant.get(i) != null) {
+            while (i < listParticipant.size()) {
                 if (listParticipant.get(i).getScore() >= 10) {
                     return false;
                 }
@@ -156,7 +157,7 @@ public class Partie extends Thread{
         int max= 0;
         String gagnant = null;
         synchronized (listParticipant) {
-            while (listParticipant.get(i) != null) {
+            while (i < listParticipant.size()) {
                 if (listParticipant.get(i).getScore() > max) {
                     max = listParticipant.get(i).getScore();
                     gagnant = listParticipant.get(i).getNom();

@@ -24,13 +24,6 @@ public class Hackeur extends Role{
 		this.victime=j;
 	}
 
-	public int choixAction(){
-		//appel graphique d l'action'
-		System.out.println("J'ai choisi mon action !");
-		this.setChoixFait(true);
-		return this.victime;
-	}
-
 	public void choixAction(int i){
 		this.victime = i;
 	}

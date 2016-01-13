@@ -1,5 +1,7 @@
 package com.hmstp.beans.Jeu;
 
+import com.hmstp.beans.Client.Client;
+
 public abstract class Role {
 
 	private boolean choixFait = false;
@@ -11,6 +13,8 @@ public abstract class Role {
 		this.choixFait = choixFait;
 	}
 
-	public abstract int choixAction();
+	public void choixAction(){
+			Client.choixAction(this);
+	}
 	public abstract void choixAction(int i);
 }
