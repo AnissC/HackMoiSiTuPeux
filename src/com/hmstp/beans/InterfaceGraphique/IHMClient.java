@@ -160,7 +160,8 @@ public class IHMClient extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ecranAffichage = "menu";
-                MessageCompte mC = new MessageCompte(pseudo.getText(), mdp.getPassword().toString(), Client.CONNEXION);
+                String password = new String(mdp.getPassword());
+                MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CONNEXION);
                 Client.message(new Lettre(mC, Client.serveur));
                 dessine();
             }
@@ -228,7 +229,8 @@ public class IHMClient extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ecranAffichage = "connexion";
-                MessageCompte mC = new MessageCompte(pseudo.getText(), mdp.getPassword().toString(), Client.CREER_COMPTE);
+                String password = new String(mdp.getPassword());
+                MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CREER_COMPTE);
                 Client.message(new Lettre(mC, Client.serveur));
                 dessine();
             }

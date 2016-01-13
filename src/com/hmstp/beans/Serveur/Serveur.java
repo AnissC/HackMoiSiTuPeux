@@ -22,6 +22,7 @@ public class Serveur {
             return false;
         }
         try {
+            System.out.println("Identitifant : " + mc.getIdentifiant() + " Mot de passe : " + mc.getMotdepasse());
             PreparedStatement preparedStatement = MysqlConnect.initialisationRequetePreparee(msql.conn,SQL_CREER_COMPTE,true,mc.getIdentifiant(), mc.getMotdepasse());
             preparedStatement.execute();
         }catch (Exception e){
