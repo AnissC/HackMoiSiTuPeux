@@ -119,7 +119,12 @@ public class Client{
                                     Client.partie.run();
                                 }
                                 else {
-                                    listParticipant.add(new Joueur(Client.connexion(mJ.getJoueur()), mJ.getNom()));
+                                    Socket c  = Client.connexion(mJ.getJoueur());
+                                    listParticipant.add(new Joueur(c, mJ.getNom()));
+                                    ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, c);
+                                    clientEcoute.start();
+                                    ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, c);
+                                    clientEcriture.start();
                                 }
                                 k++;
                             }
@@ -148,10 +153,14 @@ public class Client{
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
+                        ServerSocket ss = new ServerSocket(8080);
+                        Socket sc = ss.accept();
+                        ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, sc);
+                        clientEcoute.start();
+                        ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, sc);
+                        clientEcriture.start();
+                        int h = 0;
                         synchronized (listParticipant) {
-                            ServerSocket ss = new ServerSocket(8080);
-                            Socket sc = ss.accept();
-                            int h = 0;
                             while((h < nbjoueur) && (! listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getJoueur())))) {
                                 h++;
                             }
@@ -170,6 +179,7 @@ public class Client{
                         break;
                 }
             }
+            m = null;
         }
     }
 
