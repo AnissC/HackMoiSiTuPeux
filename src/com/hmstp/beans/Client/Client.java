@@ -20,7 +20,7 @@ public class Client{
     private static int nbjoueur = 0;
     private static String nom;
     private static Partie partie;
-    private static String adresseIP = "localhost";
+    private static String adresseIP = "132.227.125.85";
 
     public static Socket serveur;
 
@@ -61,7 +61,7 @@ public class Client{
 
         while (c == null){
             try {
-                c =  new Socket(ad, 8082);
+                c =  new Socket(ad, 8080);
             } catch (UnknownHostException e) {
                 System.err.println("Nom d'hôte non trouvé");
                 e.printStackTrace();
