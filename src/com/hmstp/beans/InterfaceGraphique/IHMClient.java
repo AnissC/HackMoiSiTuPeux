@@ -284,6 +284,7 @@ public class IHMClient extends JPanel {
             panel.add(panelPseudo);
             panel.add(panelMdp);
             panel.add(panelMdpConfirme);
+            panel.remove(panelBoutonInscription);
             panel.add(panelBoutonSinscrire);
             panel.add(panelBoutonAnnuler);
             panel.add(panelBoutonQuitter);
