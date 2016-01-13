@@ -10,40 +10,28 @@ import java.util.ArrayList;
 public class Serveur {
 
 
-    MysqlConnect msql = MysqlConnect.getDbCon();
-
     private static ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
     private static ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
 
     private static final String SQL_CREER_COMPTE = "INSERT INTO joueur (pseudo, motdepasse) VALUES (?, ?)";
     private static final String SQL_SELECT_IDENTIFIANT = "SELECT pseudo FROM joueur WHERE pseudo = ?";
 
-    public void requetePreparerInsert(MessageCompte mc){
-        try{
-            System.out.println(mc.getIdentifiant() + mc.getMotdepasse());
-            PreparedStatement statement = msql.initialisationRequetePreparee(msql.conn,SQL_CREER_COMPTE,true,mc.getIdentifiant(),mc.getMotdepasse());
-            System.out.println(mc.getIdentifiant() + mc.getMotdepasse());
-            statement.executeUpdate();
-
-        }catch(Exception s){
+    MysqlConnect msql = MysqlConnect.getDbCon();
+    public boolean ajouterUtilisateur(MessageCompte mc) {
+        if (msql == null) {
+            return false;
+        }
+        try {
+            PreparedStatement preparedStatement = MysqlConnect.initialisationRequetePreparee(msql.conn,SQL_CREER_COMPTE,true,mc.getIdentifiant(), mc.getMotdepasse());
+            preparedStatement.execute();
+        }catch (Exception e){
             System.err.println("erreur dans la requete");
         }
+        return true;
     }
     public String requetePreparerSelectPseudo(MessageCompte mc){
         try {
-            PreparedStatement statement = msql.initialisationRequetePreparee(msql.conn,SQL_SELECT_IDENTIFIANT,true,mc.getIdentifiant());
-            statement.executeUpdate();
-            System.out.println(mc.getIdentifiant());
-            return statement.toString();
-        }catch (Exception s){
-            System.err.println("erreur dans la requete");
-        }
-        return "";
-    }
-
-    public String requetePreparerSelectMdp(MessageCompte mc){
-        try {
-            PreparedStatement statement = msql.initialisationRequetePreparee(msql.conn,SQL_SELECT_IDENTIFIANT,true,mc.getMotdepasse());
+            PreparedStatement statement = MysqlConnect.initialisationRequetePreparee(msql.conn,SQL_SELECT_IDENTIFIANT,true,mc.getIdentifiant());
             statement.executeUpdate();
             return statement.toString();
         }catch (Exception s){
@@ -92,25 +80,16 @@ public class Serveur {
             synchronized (Serveur.listMessagesRecu) {
                 if (!Serveur.listMessagesRecu.isEmpty()){
                     m = listMessagesRecu.remove(0).getMessage();
-                    System.out.println("tootototo000");
+                    System.out.println(m.getMessage());
                 }
             }
             if (m != null) {
-                MessageCompte mC = (MessageCompte) m;
-                System.out.println("tootototo000");
                 switch (m.getMessage()) {
                     case Serveur.CREER_COMPTE:
-                        System.out.println("tootototo");
-                        requetePreparerInsert(mC);
+                        MessageCompte mC = (MessageCompte) m;
+                        ajouterUtilisateur(mC);
                         break;
                     case Serveur.CONNEXION:
-                        String mdp = requetePreparerSelectMdp(mC);
-                        String pseudo = requetePreparerSelectPseudo(mC);
-                        if (pseudo == mC.getIdentifiant() && mdp == mC.getMotdepasse()) {
-                            System.out.println("connexion ok");
-                        }else {
-                            System.out.println("connexion ko");
-                        }
                         break;
                     case Serveur.RECONNEXION:
                         break;

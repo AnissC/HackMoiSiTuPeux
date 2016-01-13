@@ -19,10 +19,16 @@ public class ServeurThreadEcoute extends Thread{
     public void reception()throws IOException, ClassNotFoundException {
         ObjectInputStream ob = new ObjectInputStream(socket.getInputStream());
 
+        Message m = null;
+        Object o = null;
         while (!this.isInterrupted()){
-            synchronized (this.listMessagesRecu) {
-                Message m = (Message) ob.readObject();
-                this.listMessagesRecu.add(new Lettre(m, socket));
+             o = ob.readObject();
+            if (o instanceof Message){
+                m = (Message) o;
+                synchronized (this.listMessagesRecu) {
+                    this.listMessagesRecu.add(new Lettre(m, socket));
+                }
+                System.out.println(m.getMessage());
             }
         }
         ob.close();

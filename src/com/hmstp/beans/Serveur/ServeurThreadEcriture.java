@@ -37,7 +37,6 @@ public class ServeurThreadEcriture extends Thread {
                     }
                 }
             }
-
         }
 
     }
