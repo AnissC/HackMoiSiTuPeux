@@ -186,24 +186,21 @@ public class IHMJeu extends JPanel{
         panelBoutons.add(panelMoi);
 
         //=====================Tableau Score =============================//
-        ArrayList<String> joueurs= Client.classement();
-        DefaultTableModel listTableModel;
-        listTableModel = new DefaultTableModel(rowData, columnNames);
-        for (int i = 1; i < joueurs.size(); i++) {
-            listTableModel.addRow(new Object[]{"bnjour", "jbv", "fdsfh"});
-            //listTableModel.addRow(new Object[]{joueurs.get(i), Client.getRoleParNom(joueurs.get(i)), Client.score(joueurs.get(i))});
-        }
-
-        JTable listTable;
-        listTable = new JTable(listTableModel);
-        listTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        listTable.setCellEditor(null);
-        listTable.setBounds(50,25,200,200);
-
-        JFrame frame = new JFrame();
-        frame.add(listTable);
-        frame.setVisible(true);
-        frame.pack();
+        Object[][] donnees = {
+                {"Johnathan", "Sykes", 1},
+                {"Nicolas", "Van de Kampf", 2},
+                {"Damien", "Cuthbert", Color.cyan, 3},
+                {"Corinne", "Valance", Color.blue, 4},
+                {"Emilie", "Schrödinger", Color.magenta, 5},
+                {"Delphine", "Duke", Color.yellow, 6},
+                {"Eric", "Trump", Color.pink, 7},
+        };
+        String[] entetes = {"Prénom", "Nom", "Score"};
+        JTable tableau= new JTable(donnees,entetes);
+        tableau.setSize(200,200);
+        tableau.setVisible(true);
+        panelTableau.setLayout(new BorderLayout());
+        panelTableau.add(tableau);
 
         //=====================Ajout de tous les panels===================//
         panelJeu.add(panelTableau);
