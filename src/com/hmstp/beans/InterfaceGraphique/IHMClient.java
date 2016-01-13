@@ -59,6 +59,10 @@ public class IHMClient extends JPanel {
 
     private String ecranAffichage = "connexion";
 
+    public void setEcranAffichage(String eas){
+        this.ecranAffichage = eas;
+        dessine();
+    }
 
     public void go(){
         frame = new JFrame("Hack Moi Si Tu Peux !");
