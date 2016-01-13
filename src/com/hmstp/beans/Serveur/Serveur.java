@@ -5,6 +5,7 @@ import com.hmstp.beans.Message.*;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -100,15 +101,16 @@ public class Serveur {
     public void gestionMessage() throws Exception{
         Message m = null;
         Socket clientSocket = null;
-        ObjectOutputStream logs = new ObjectOutputStream(new FileOutputStream("logs.txt"));
-
+        FileOutputStream logs = new FileOutputStream("logs.txt");
+        String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
         while (true){
             synchronized (Serveur.listMessagesRecu) {
                 if (!Serveur.listMessagesRecu.isEmpty()){
                     clientSocket = listMessagesRecu.get(0).getSocket();
                     m = listMessagesRecu.remove(0).getMessage();
                     System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
-                    logs.writeObject("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
+                    byte[] contentInBytes = s.getBytes();
+                    logs.write(contentInBytes);
                 }
             }
             if (m != null) {
@@ -128,14 +130,16 @@ public class Serveur {
                             m = new Message(CONNEXION_OK);
                             listMessagesEnvoyer.add(new Lettre(m, clientSocket));
                             System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
-                            logs.writeObject("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
+                            byte[] contentInBytes = s.getBytes();
+                            logs.write(contentInBytes);
                             //Tester si en partie
                         }
                         else{
                             m = new Message(CONNEXION_KO);
                             listMessagesEnvoyer.add(new Lettre(m,clientSocket));
                             System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
-                            logs.writeObject("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
+                            byte[] contentInBytes = s.getBytes();
+                            logs.write(contentInBytes);
                         }
                         break;
                     case Serveur.RECONNEXION:
