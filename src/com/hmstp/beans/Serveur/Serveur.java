@@ -1,12 +1,10 @@
 package com.hmstp.beans.Serveur;
 
 
-import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.Message.*;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -147,6 +145,9 @@ public class Serveur {
                     case Serveur.JOUEUR_PERDU:
                         break;
                     case Serveur.NB_JOUEURS:
+                        int nombreJoueur;
+                        MessageChoix mN = (MessageChoix) m;
+                        nombreJoueur = mN.getNombre();
                         break;
                 }
             }
