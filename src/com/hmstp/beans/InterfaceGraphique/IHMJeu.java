@@ -191,7 +191,7 @@ public class IHMJeu extends JPanel{
         listTableModel = new DefaultTableModel(rowData, columnNames);
         for (int i = 1; i < joueurs.size(); i++) {
 
-            listTableModel.addRow(new Object[]{joueurs.get(i), Client.valeur(joueurs.get(i)), Client.score(joueurs.get(i))});
+            listTableModel.addRow(new Object[]{joueurs.get(i), Client.getRoleParNom(joueurs.get(i)), Client.score(joueurs.get(i))});
         }
 
         JTable listTable;
