@@ -1,6 +1,6 @@
 package com.hmstp.beans.Serveur;
 
-import com.hmstp.beans.Message.Message;
+import com.hmstp.beans.Message.*;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class ServeurThreadEcoute extends Thread{
 
     private Socket socket;
-    private ArrayList<Message> listMessagesRecu;
+    private ArrayList<Lettre> listMessagesRecu;
 
-    public ServeurThreadEcoute(ArrayList<Message> l, Socket s){
+    public ServeurThreadEcoute(ArrayList<Lettre> l, Socket s){
         this.listMessagesRecu = l;
         this.socket = s;
     }
@@ -27,7 +27,7 @@ public class ServeurThreadEcoute extends Thread{
                 System.out.println("totot");
                 Message m = (Message) ob.readObject();
                 System.out.println(m.getMessage());
-                this.listMessagesRecu.add(m);
+                this.listMessagesRecu.add(new Lettre(m, socket));
 
             }
         }

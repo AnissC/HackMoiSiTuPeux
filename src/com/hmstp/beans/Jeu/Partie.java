@@ -12,11 +12,11 @@ public class Partie extends Thread{
 
     private int nbParticipants;
     private ArrayList<Participant> listParticipant;
-    private ArrayList<Message> listMessagesEnvoyer;
+    private ArrayList<Lettre> listMessagesEnvoyer;
     private boolean active;
     private Joueur moi;
 
-    public Partie(ArrayList<Participant> lp, ArrayList<Message> lme, Joueur j){
+    public Partie(ArrayList<Participant> lp, ArrayList<Lettre> lme, Joueur j){
         this.listParticipant = lp;
         this.listMessagesEnvoyer = lme;
         this.nbParticipants = this.listParticipant.size();
@@ -74,9 +74,9 @@ public class Partie extends Thread{
         int i = 0;
         while (listParticipant.get(i) != null) {
             if (!(listParticipant.get(i).isRemplacant())) {
-                mn = new MessageChoix(moi.getNom(), choix, ((Joueur) listParticipant.get(i)).getSock(), Client.CHOIX_DU_TOUR);
+                mn = new MessageChoix(moi.getNom(), choix, Client.CHOIX_DU_TOUR);
                 synchronized (listMessagesEnvoyer) {
-                    this.listMessagesEnvoyer.add(mn);
+                    this.listMessagesEnvoyer.add(new Lettre(mn, ((Joueur) listParticipant.get(i)).getSock()));
                 }
             }
             i++;
@@ -195,6 +195,9 @@ public class Partie extends Thread{
             }
         }
 
-        MessageJoueur mj = new MessageJoueur(null, leGagnant(), Client.serveur, Client.PARTIE_FINIE);
+        MessageJoueur mj = new MessageJoueur(null, leGagnant(), Client.PARTIE_FINIE);
+        synchronized (listMessagesEnvoyer) {
+            this.listMessagesEnvoyer.add(new Lettre(mj, Client.serveur));
+        }
     }
 }

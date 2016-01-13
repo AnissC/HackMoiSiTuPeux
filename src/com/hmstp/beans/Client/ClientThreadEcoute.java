@@ -8,10 +8,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class ClientThreadEcoute extends Thread{
-    private ArrayList<Message> listMessagesRecu;
+    private ArrayList<Lettre> listMessagesRecu;
     private Socket socket;
 
-    public ClientThreadEcoute(ArrayList<Message> l, Socket s){
+    public ClientThreadEcoute(ArrayList<Lettre> l, Socket s){
         this.listMessagesRecu = l;
         this.socket = s;
     }
@@ -20,7 +20,7 @@ public class ClientThreadEcoute extends Thread{
         while (!this.isInterrupted()){
             synchronized (this.listMessagesRecu) {
                 Message m = (Message) ob.readObject();
-                this.listMessagesRecu.add(m);
+                this.listMessagesRecu.add(new Lettre(m, socket));
             }
         }
         ob.close();

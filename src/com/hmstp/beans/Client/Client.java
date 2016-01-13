@@ -85,7 +85,7 @@ public class Client{
         while(true){
             synchronized (listMessagesRecu) {
                 if (!Client.listMessagesRecu.isEmpty()) {
-                    m = Client.listMessagesRecu.remove(0);
+                    m = Client.listMessagesRecu.remove(0).getMessage();
                 }
             }
             if(m != null){
@@ -171,11 +171,12 @@ public class Client{
         }
     }
 
-    public static void message(Message msg){
+    public static void message(Lettre msg){
         synchronized (listMessagesEnvoyer){
             listMessagesEnvoyer.add(msg);
         }
     }
+
     public static void main(String[] args) throws Exception{
         Client.serveur = Client.connexion(adresseIP);
 

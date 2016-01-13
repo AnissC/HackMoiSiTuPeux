@@ -1,18 +1,17 @@
 package com.hmstp.beans.Serveur;
 
-import com.hmstp.beans.Message.Message;
+import com.hmstp.beans.Message.*;
 
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class ServeurThreadConnexion extends Thread{
 
-    private ArrayList<Message> listMessagesRecu;
-    private ArrayList<Message> listMessagesEnvoyer;
+    private ArrayList<Lettre> listMessagesRecu;
+    private ArrayList<Lettre> listMessagesEnvoyer;
 
-    public ServeurThreadConnexion(ArrayList<Message> mR, ArrayList<Message> mE){
+    public ServeurThreadConnexion(ArrayList<Lettre> mR, ArrayList<Lettre> mE){
         this.listMessagesRecu = mR;
         this.listMessagesEnvoyer = mE;
     }

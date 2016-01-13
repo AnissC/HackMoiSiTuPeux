@@ -8,10 +8,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class ServeurThreadEcriture extends Thread {
-    private ArrayList<Message> listMessagesEnvoyer;
+    private ArrayList<Lettre> listMessagesEnvoyer;
     private Socket socket;
 
-    public ServeurThreadEcriture(ArrayList <Message> list, Socket s){
+    public ServeurThreadEcriture(ArrayList <Lettre> list, Socket s){
         this.listMessagesEnvoyer = list;
         this.socket = s;
     }
@@ -27,7 +27,7 @@ public class ServeurThreadEcriture extends Thread {
                     i = 0;
                     while(i < listMessagesEnvoyer.size()){
                         if(listMessagesEnvoyer.get(i).getSocket() == socket) {
-                            m = listMessagesEnvoyer.remove(i);
+                            m = listMessagesEnvoyer.remove(i).getMessage();
                             ob.writeObject(m);
                         }else {
                             i++;

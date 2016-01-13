@@ -10,10 +10,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class ClientThreadEcriture extends Thread{
-    private ArrayList<Message> listMessagesEnvoyer;
+    private ArrayList<Lettre> listMessagesEnvoyer;
     private Socket socket;
 
-    public ClientThreadEcriture(ArrayList<Message> l, Socket s){
+    public ClientThreadEcriture(ArrayList<Lettre> l, Socket s){
         this.listMessagesEnvoyer = l;
         this.socket = s;
     }
@@ -23,10 +23,6 @@ public class ClientThreadEcriture extends Thread{
         ob.flush();
         Message m = null;
         int i;
-        synchronized (this.listMessagesEnvoyer) {
-            Message mTest = new Message(socket, "toto");
-            this.listMessagesEnvoyer.add(mTest);
-        }
 
         while (!this.isInterrupted()){
             synchronized (this.listMessagesEnvoyer) {
@@ -34,7 +30,7 @@ public class ClientThreadEcriture extends Thread{
                     i = 0;
                     while(i < listMessagesEnvoyer.size()) {
                         if(listMessagesEnvoyer.get(i).getSocket() == this.socket) {
-                            m = listMessagesEnvoyer.remove(i);
+                            m = listMessagesEnvoyer.remove(i).getMessage();
                             System.out.println(m.getMessage());
                             ob.writeObject(m);
                             System.out.println(m.getMessage());

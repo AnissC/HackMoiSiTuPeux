@@ -12,8 +12,8 @@ public class Serveur {
 
     MysqlConnect msql = MysqlConnect.getDbCon();
 
-    private static ArrayList<Message> listMessagesRecu = new ArrayList<>();
-    private static ArrayList<Message> listMessagesEnvoyer = new ArrayList<>();
+    private static ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
+    private static ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
 
     private static final String SQL_CREER_COMPTE = "INSERT INTO user (pseudo, motdepasse) VALUES (?, ?)";
     private static final String SQL_SELECT_IDENTIFIANT = "SELECT pseudo FROM user WHERE pseudo = ?";
@@ -90,7 +90,7 @@ public class Serveur {
         while (true){
             synchronized (Serveur.listMessagesRecu) {
                 if (!Serveur.listMessagesRecu.isEmpty()){
-                   m = listMessagesEnvoyer.remove(0);
+                   m = listMessagesEnvoyer.remove(0).getMessage();
                 }
             }
             if (m != null) {
