@@ -52,9 +52,6 @@ public class IHMJeu extends JPanel{
     private JLabel labelSeProteger;
     private JButton boutonSeProteger;
 
-    private static final Object[][] rowData = {};
-    private static final Object[] columnNames = {"Joueurs", "Roles","Scores"};
-
     public void start(){
         frameJeu = new JFrame("Hack moi si tu peux");
         panelJeu = new IHMJeu();
@@ -186,21 +183,21 @@ public class IHMJeu extends JPanel{
         panelBoutons.add(panelMoi);
 
         //=====================Tableau Score =============================//
-        Object[][] donnees = {
-                {"Johnathan", "Sykes", 1},
-                {"Nicolas", "Van de Kampf", 2},
-                {"Damien", "Cuthbert", Color.cyan, 3},
-                {"Corinne", "Valance", Color.blue, 4},
-                {"Emilie", "Schrödinger", Color.magenta, 5},
-                {"Delphine", "Duke", Color.yellow, 6},
-                {"Eric", "Trump", Color.pink, 7},
-        };
-        String[] entetes = {"Prénom", "Nom", "Score"};
+        ArrayList<String> joueurs = Client.classement();
+        Object[][] donnees = new Object[joueurs.size()][joueurs.size()];
+        for (int i=0;i<joueurs.size();i++){
+            donnees[i][0]= Client.classement().get(i);
+            donnees[i][1]= Client.getRoleParNom(joueurs.get(i)).toString();
+            donnees[i][2]= Client.score(joueurs.get(i));
+        }
+
+        String[] entetes = {"Prénom", "Role", "Score"};
         JTable tableau= new JTable(donnees,entetes);
         tableau.setSize(200,200);
         tableau.setVisible(true);
         panelTableau.setLayout(new BorderLayout());
-        panelTableau.add(tableau);
+        panelTableau.add(tableau.getTableHeader(),BorderLayout.NORTH);
+        panelTableau.add(tableau, BorderLayout.CENTER);
 
         //=====================Ajout de tous les panels===================//
         panelJeu.add(panelTableau);
