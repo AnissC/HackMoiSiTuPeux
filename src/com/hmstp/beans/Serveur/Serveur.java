@@ -145,6 +145,9 @@ public class Serveur {
                     case Serveur.JOUEUR_PERDU:
                         break;
                     case Serveur.NB_JOUEURS:
+                        int nombreJoueur;
+                        MessageChoix mN = (MessageChoix) m;
+                        nombreJoueur = mN.getNombre();
                         break;
                 }
             }
