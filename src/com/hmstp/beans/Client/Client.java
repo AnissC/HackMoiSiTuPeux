@@ -178,6 +178,28 @@ public class Client{
         }
     }
 
+    public static ArrayList<String> classement(){
+        int i = 0;
+        ArrayList<String> listNom = new ArrayList<>();
+        synchronized (listMessagesEnvoyer) {
+            while (i < listMessagesEnvoyer.size()) {
+                listNom.add(listParticipant.get(i).getNom());
+                i++;
+            }
+        }
+        return listNom;
+    }
+
+    public static int score(String nom){
+        int i = 0;
+        synchronized (listMessagesEnvoyer) {
+            while ((i < listMessagesEnvoyer.size()) && (listParticipant.get(i).getNom() != nom)){
+                i++;
+            }
+            return listParticipant.get(i).getScore();
+        }
+    }
+
     public static void main(String[] args) throws Exception{
         Client.serveur = Client.connexion(adresseIP);
 
