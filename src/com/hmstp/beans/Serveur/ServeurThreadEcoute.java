@@ -28,7 +28,6 @@ public class ServeurThreadEcoute extends Thread{
                 synchronized (this.listMessagesRecu) {
                     this.listMessagesRecu.add(new Lettre(m, socket));
                 }
-                System.out.println(m.getMessage());
             }
         }
         ob.close();

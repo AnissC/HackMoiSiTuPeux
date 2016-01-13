@@ -1,10 +1,13 @@
 package com.hmstp.beans.Serveur;
 
 
+import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.Message.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Serveur {
@@ -13,8 +16,10 @@ public class Serveur {
     private static ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
     private static ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
 
-    private static final String SQL_CREER_COMPTE = "INSERT INTO joueur (pseudo, motdepasse) VALUES (?, ?)";
-    private static final String SQL_SELECT_IDENTIFIANT = "SELECT pseudo FROM joueur WHERE pseudo = ?";
+    private static final String SQL_CREER_COMPTE = "INSERT INTO joueur (pseudo, motdepasse, gagne, perdu) VALUES (?, ?, 0, 0)";
+    private static final String SQL_CONNEXION = "SELECT * FROM joueur WHERE pseudo = ? AND motdepasse = ?";
+    private static final String SQL_TEST_COMPTE = "SELECT * FROM joueur WHERE pseudo = ?";
+
 
     MysqlConnect msql = MysqlConnect.getDbCon();
     public boolean ajouterUtilisateur(MessageCompte mc) {
@@ -22,23 +27,39 @@ public class Serveur {
             return false;
         }
         try {
-            System.out.println("Identitifant : " + mc.getIdentifiant() + " Mot de passe : " + mc.getMotdepasse());
-            PreparedStatement preparedStatement = MysqlConnect.initialisationRequetePreparee(msql.conn,SQL_CREER_COMPTE,true,mc.getIdentifiant(), mc.getMotdepasse());
-            preparedStatement.execute();
-        }catch (Exception e){
-            System.err.println("erreur dans la requete");
+            PreparedStatement preparedStatement = msql.conn.prepareStatement(SQL_CREER_COMPTE);
+            preparedStatement.setString(1, mc.getIdentifiant());
+            preparedStatement.setString(2, mc.getMotdepasse());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            System.err.println(e.toString());
         }
         return true;
     }
-    public String requetePreparerSelectPseudo(MessageCompte mc){
+    public boolean seConnecter(MessageCompte mc){
+        boolean exist = false;
         try {
-            PreparedStatement statement = MysqlConnect.initialisationRequetePreparee(msql.conn,SQL_SELECT_IDENTIFIANT,true,mc.getIdentifiant());
-            statement.executeUpdate();
-            return statement.toString();
-        }catch (Exception s){
-            System.err.println("erreur dans la requete");
+            PreparedStatement preparedStatement = msql.conn.prepareStatement(SQL_CONNEXION);
+            preparedStatement.setString(1,mc.getIdentifiant());
+            preparedStatement.setString(2,mc.getMotdepasse());
+            ResultSet rs = preparedStatement.executeQuery();
+            exist = rs.next();
+        }catch (SQLException e){
+            System.err.println(e.toString());
         }
-        return "";
+        return exist;
+    }
+    public boolean testCompte(MessageCompte mc){
+        boolean exist = false;
+        try {
+            PreparedStatement preparedStatement = msql.conn.prepareStatement(SQL_TEST_COMPTE);
+            preparedStatement.setString(1,mc.getIdentifiant());
+            ResultSet rs = preparedStatement.executeQuery();
+            exist = rs.next();
+        }catch (SQLException e){
+            System.err.println(e.toString());
+        }
+        return exist;
     }
 
 
@@ -77,9 +98,11 @@ public class Serveur {
 
     public void gestionMessage() throws Exception{
         Message m = null;
+        Socket clientSocket = null;
         while (true){
             synchronized (Serveur.listMessagesRecu) {
                 if (!Serveur.listMessagesRecu.isEmpty()){
+                    clientSocket = listMessagesRecu.get(0).getSocket();
                     m = listMessagesRecu.remove(0).getMessage();
                     System.out.println(m.getMessage());
                 }
@@ -88,9 +111,22 @@ public class Serveur {
                 switch (m.getMessage()) {
                     case Serveur.CREER_COMPTE:
                         MessageCompte mC = (MessageCompte) m;
-                        ajouterUtilisateur(mC);
+                        if (!testCompte(mC)){
+                            ajouterUtilisateur(mC);
+                        }
+                        else {
+                            //Renvoyé compte existant
+                        }
                         break;
                     case Serveur.CONNEXION:
+                        MessageCompte mC1 = (MessageCompte)m;
+                        if (seConnecter(mC1)){
+                            listMessagesEnvoyer.add(new Lettre(new Message(CONNEXION_OK),clientSocket));
+                            //Tester si en partie
+                        }
+                        else{
+                            listMessagesEnvoyer.add(new Lettre(new Message(CONNEXION_KO),clientSocket));
+                        }
                         break;
                     case Serveur.RECONNEXION:
                         break;
