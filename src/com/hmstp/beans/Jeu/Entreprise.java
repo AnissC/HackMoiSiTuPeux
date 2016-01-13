@@ -1,5 +1,7 @@
 package com.hmstp.beans.Jeu;
 
+import com.hmstp.beans.Client.Client;
+
 public class Entreprise extends Role {
 	private int valeur;
 	private String nom;
@@ -40,12 +42,6 @@ public class Entreprise extends Role {
 		setProtection(true);
 	}// le joueur investi pour la protection et se protège, équivalent mettre un piège
 
-	public int choixAction(){
-		// appel choix action graphique
-		System.out.println("J'ai choisi mon action");
-		this.setChoixFait(true);
-		return -1;
-	}
 
 	public void choixAction(int i){
 		if (i == 0){
@@ -55,6 +51,15 @@ public class Entreprise extends Role {
 		else if (i == 1){
 			this.protection = true;
 			this.setChoixFait(true);
+		}
+	}
+
+	public int retourneChoix(){
+		if (this.protection){
+			return 0;
+		}
+		else{
+			return 1;
 		}
 	}
 }

@@ -20,6 +20,7 @@ public class Client{
     private static IHMClient ihmClient = new IHMClient();
     private static int nbjoueur = 0;
     private static String nom;
+    private static Joueur moi;
     private static Partie partie;
     private static String adresseIP = "132.227.125.85";
 
@@ -113,9 +114,9 @@ public class Client{
                             while (!(mP.getListJoueur().isEmpty())) {
                                 mJ = mP.getListJoueur().remove(0);
                                 if (mJ.getJoueur().equals(Client.nom)){
-                                    Joueur jm = new Joueur(null, mJ.getNom());
-                                    listParticipant.add(jm);
-                                    Client.partie = new Partie(listParticipant, listMessagesEnvoyer, jm);
+                                    moi = new Joueur(null, mJ.getNom());
+                                    listParticipant.add(moi);
+                                    Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                                     Client.partie.run();
                                 }
                                 else {
@@ -137,14 +138,14 @@ public class Client{
                     case Client.CREER_PARTIE:
                         MessageJoueur mj = (MessageJoueur) m;
                         synchronized (listParticipant) {
-                            Joueur jM = new Joueur(null, mj.getNom());
-                            listParticipant.add(jM);
+                            moi = new Joueur(null, mj.getNom());
+                            listParticipant.add(moi);
                             int j = 1;
                             while (j < nbjoueur) {
                                 listParticipant.add(new Ramplacant("Ordinateur"));
                                 j++;
                             }
-                            Client.partie = new Partie(listParticipant, listMessagesEnvoyer, jM);
+                            Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                             Client.partie.run();
                         }
                         break;
@@ -189,6 +190,33 @@ public class Client{
         }
     }
 
+    public static void choixAction(Role r){
+        if (r instanceof  Hackeur){
+            ihmClient.setEcranAffichage("Hackeur");
+        }
+        else{
+            ihmClient.setEcranAffichage("Entreprise");
+        }
+    }
+
+    public static void choixDistibution(Role r){
+        if (r instanceof  Hackeur){
+            ihmClient.setEcranAffichage("Choix Hackeur");
+        }
+        else{
+            ihmClient.setEcranAffichage(((Entreprise)r).getNom());
+        }
+    }
+
+    public static void choixDistibution(int i, String nom){
+        //.........
+    }
+
+    public static void choixAction(int i){
+        moi.getRole().choixAction(i);
+    }
+
+
     public static ArrayList<String> classement(){
         int i = 0;
         ArrayList<String> listNom = new ArrayList<>();
@@ -211,13 +239,13 @@ public class Client{
         }
     }
 
-    public static int valeur(String nom){
+    public static Role getRoleParNom(String nom){
         int i = 0;
         synchronized (listMessagesEnvoyer) {
             while ((i < listMessagesEnvoyer.size()) && (listParticipant.get(i).getNom() != nom)){
                 i++;
             }
-            return ((Entreprise)listParticipant.get(i).getRole()).getValeur();
+            return listParticipant.get(i).getRole();
         }
     }
 
