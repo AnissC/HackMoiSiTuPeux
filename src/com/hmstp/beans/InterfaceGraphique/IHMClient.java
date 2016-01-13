@@ -3,6 +3,7 @@ package com.hmstp.beans.InterfaceGraphique;
 
 
 import com.hmstp.beans.Client.Client;
+import com.hmstp.beans.Message.Lettre;
 import com.hmstp.beans.Message.MessageCompte;
 
 import javax.swing.*;
@@ -156,8 +157,8 @@ public class IHMClient extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ecranAffichage = "menu";
-                MessageCompte mC = new MessageCompte(pseudo.getText(), mdp.getPassword().toString(), Client.serveur, Client.CONNEXION);
-                Client.message(mC);
+                MessageCompte mC = new MessageCompte(pseudo.getText(), mdp.getPassword().toString(), Client.CONNEXION);
+                Client.message(new Lettre(mC, Client.serveur));
                 dessine();
             }
         });
@@ -206,8 +207,8 @@ public class IHMClient extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ecranAffichage = "inscription";
-                MessageCompte mC = new MessageCompte(pseudo.getText(), mdp.getPassword().toString(), Client.serveur, Client.CREER_COMPTE);
-                Client.message(mC);
+                MessageCompte mC = new MessageCompte(pseudo.getText(), mdp.getPassword().toString(), Client.CREER_COMPTE);
+                Client.message(new Lettre(mC, Client.serveur));
                 dessine();
             }
         });
