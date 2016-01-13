@@ -12,6 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class IHMClient extends JPanel {
+
+    public static final String IHM_CONNEXION = "IHM_CONNEXION";
+    public static final String IHM_RECONNEXION = "IHM_RECONNEXION";
+    public static final String IHM_MENU = "IHM_MENU";
+    public static final String IHM_INSCRIPTION = "IHM_INSCRIPTION";
+
+
     private JFrame frame;
     private JPanel panel;
     private JPanel panelPseudo;
@@ -57,8 +64,12 @@ public class IHMClient extends JPanel {
     private JPanel panelBoutonAnnuler;
     private JButton boutonAnnuler;
 
-    private String ecranAffichage = "connexion";
+    private String ecranAffichage = IHM_CONNEXION;
 
+    public void setEcranAffichage(String ecranAffichage) {
+        this.ecranAffichage = ecranAffichage;
+        dessine();
+    }
 
     public void go(){
         frame = new JFrame("Hack Moi Si Tu Peux !");
@@ -159,10 +170,9 @@ public class IHMClient extends JPanel {
         boutonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ecranAffichage = "menu";
-                MessageCompte mC = new MessageCompte(pseudo.getText(), mdp.getPassword().toString(), Client.CONNEXION);
+                String password = new String(mdp.getPassword());
+                MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CONNEXION);
                 Client.message(new Lettre(mC, Client.serveur));
-                dessine();
             }
         });
         panelBoutonLogin.add(boutonLogin);
@@ -179,7 +189,7 @@ public class IHMClient extends JPanel {
         boutonAnnuler.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ecranAffichage = "connexion";
+                ecranAffichage = IHM_CONNEXION;
                 dessine();
             }
         });
@@ -209,7 +219,7 @@ public class IHMClient extends JPanel {
         boutonInscription.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ecranAffichage = "inscription";
+                ecranAffichage = IHM_INSCRIPTION;
                 dessine();
             }
         });
@@ -227,10 +237,9 @@ public class IHMClient extends JPanel {
         boutonSinscrire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ecranAffichage = "connexion";
-                MessageCompte mC = new MessageCompte(pseudo.getText(), mdp.getPassword().toString(), Client.CREER_COMPTE);
+                String password = new String(mdp.getPassword());
+                MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CREER_COMPTE);
                 Client.message(new Lettre(mC, Client.serveur));
-                dessine();
             }
         });
         panelBoutonSinscrire.add(boutonSinscrire);
@@ -257,14 +266,14 @@ public class IHMClient extends JPanel {
         dessine();
     }
     public void dessine(){
-        if (ecranAffichage.equals("connexion")){
+        if (ecranAffichage.equals(IHM_CONNEXION)){
             panel.removeAll();
             panel.add(panelPseudo);
             panel.add(panelMdp);
             panel.add(panelBoutonInscription);
             panel.add(panelBoutonLogin);
             panel.add(panelBoutonQuitter);
-        }else if(ecranAffichage.equals("inscription")){
+        }else if(ecranAffichage.equals(IHM_INSCRIPTION)){
             panel.removeAll();
             panel.add(panelPseudo);
             panel.add(panelMdp);
@@ -272,7 +281,7 @@ public class IHMClient extends JPanel {
             panel.add(panelBoutonSinscrire);
             panel.add(panelBoutonAnnuler);
             panel.add(panelBoutonQuitter);
-        }else if (ecranAffichage.equals("menu")){
+        }else if (ecranAffichage.equals(IHM_MENU)){
             panel.removeAll();
             panel.add(panelBoutonQuitter);
             panel.add(panelPartieA3);

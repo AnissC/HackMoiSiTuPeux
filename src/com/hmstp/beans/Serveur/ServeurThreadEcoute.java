@@ -1,8 +1,8 @@
 package com.hmstp.beans.Serveur;
 
 import com.hmstp.beans.Message.*;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -28,7 +28,6 @@ public class ServeurThreadEcoute extends Thread{
                 synchronized (this.listMessagesRecu) {
                     this.listMessagesRecu.add(new Lettre(m, socket));
                 }
-                System.out.println(m.getMessage());
             }
         }
         ob.close();

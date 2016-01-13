@@ -23,10 +23,6 @@ public class ClientThreadEcriture extends Thread{
         ob.flush();
         Message m = null;
         int i;
-        Message mj = new Message("toto");
-        synchronized (listMessagesEnvoyer) {
-            this.listMessagesEnvoyer.add(new Lettre(mj, Client.serveur));
-        }
 
         while (!this.isInterrupted()){
             synchronized (this.listMessagesEnvoyer) {
