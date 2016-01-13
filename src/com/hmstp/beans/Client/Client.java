@@ -200,6 +200,16 @@ public class Client{
         }
     }
 
+    public static int valeur(String nom){
+        int i = 0;
+        synchronized (listMessagesEnvoyer) {
+            while ((i < listMessagesEnvoyer.size()) && (listParticipant.get(i).getNom() != nom)){
+                i++;
+            }
+            return ((Entreprise)listParticipant.get(i).getRole()).getValeur();
+        }
+    }
+
     public static void main(String[] args) throws Exception{
         Client.serveur = Client.connexion(adresseIP);
 
