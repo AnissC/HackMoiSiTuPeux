@@ -179,7 +179,7 @@ public class IHMClient extends JPanel {
         boutonAnnuler.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ecranAffichage = "annuler";
+                ecranAffichage = "connexion";
                 dessine();
             }
         });
@@ -227,7 +227,7 @@ public class IHMClient extends JPanel {
         boutonSinscrire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ecranAffichage = "inscrire";
+                ecranAffichage = "connexion";
                 MessageCompte mC = new MessageCompte(pseudo.getText(), mdp.getPassword().toString(), Client.CREER_COMPTE);
                 Client.message(new Lettre(mC, Client.serveur));
                 dessine();
@@ -258,46 +258,27 @@ public class IHMClient extends JPanel {
     }
     public void dessine(){
         if (ecranAffichage.equals("connexion")){
+            panel.removeAll();
             panel.add(panelPseudo);
             panel.add(panelMdp);
             panel.add(panelBoutonInscription);
             panel.add(panelBoutonLogin);
             panel.add(panelBoutonQuitter);
         }else if(ecranAffichage.equals("inscription")){
-            panel.remove(panelBoutonLogin);
+            panel.removeAll();
             panel.add(panelPseudo);
             panel.add(panelMdp);
             panel.add(panelMdpConfirme);
-            panel.add(panelBoutonInscription);
-            panel.add(panelBoutonAnnuler);
-            panel.add(panelBoutonQuitter);
-        }else if (ecranAffichage.equals("annuler")){
-            panel.remove(panelMdpConfirme);
-            panel.remove(panelBoutonAnnuler);
-            panel.add(panelPseudo);
-            panel.add(panelMdp);
-            panel.add(panelBoutonInscription);
-            panel.add(panelBoutonLogin);
-            panel.add(panelBoutonQuitter);
-        }else if (ecranAffichage.equals("inscrire")){
-            panel.remove(panelBoutonLogin);
-            panel.add(panelPseudo);
-            panel.add(panelMdp);
-            panel.add(panelMdpConfirme);
-            panel.remove(panelBoutonInscription);
             panel.add(panelBoutonSinscrire);
             panel.add(panelBoutonAnnuler);
             panel.add(panelBoutonQuitter);
         }else if (ecranAffichage.equals("menu")){
+            panel.removeAll();
             panel.add(panelBoutonQuitter);
             panel.add(panelPartieA3);
             panel.add(panelPartieA4);
             panel.add(panelPartieA5);
             panel.add(panelPartieA6);
-            panel.remove(panelPseudo);
-            panel.remove(panelMdp);
-            panel.remove(panelBoutonInscription);
-            panel.remove(panelBoutonLogin);
         }
         frame.validate();
         frame.repaint();
