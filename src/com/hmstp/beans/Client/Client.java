@@ -239,13 +239,13 @@ public class Client{
         }
     }
 
-    public static int valeur(String nom){
+    public static Role getRoleParNom(String nom){
         int i = 0;
         synchronized (listMessagesEnvoyer) {
             while ((i < listMessagesEnvoyer.size()) && (listParticipant.get(i).getNom() != nom)){
                 i++;
             }
-            return ((Entreprise)listParticipant.get(i).getRole()).getValeur();
+            return listParticipant.get(i).getRole();
         }
     }
 
