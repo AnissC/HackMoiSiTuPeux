@@ -61,7 +61,7 @@ public class Client{
 
         while (c == null){
             try {
-                c =  new Socket(ad, 8080);
+                c =  new Socket(ad, 8082);
             } catch (UnknownHostException e) {
                 System.err.println("Nom d'hôte non trouvé");
                 e.printStackTrace();
@@ -114,7 +114,8 @@ public class Client{
                                 if (mJ.getJoueur().equals(Client.nom)){
                                     Joueur jm = new Joueur(null, mJ.getNom());
                                     listParticipant.add(jm);
-                                    Client.partie.setMoi(jm);
+                                    Client.partie = new Partie(listParticipant, listMessagesEnvoyer, jm);
+                                    Client.partie.run();
                                 }
                                 else {
                                     listParticipant.add(new Joueur(Client.connexion(mJ.getJoueur()), mJ.getNom()));

@@ -28,10 +28,6 @@ public class Partie extends Thread{
         this.active = active;
     }
 
-    public void setMoi(Joueur moi) {
-        this.moi = moi;
-    }
-
     public void distributionRoleManche1(){
         this.listParticipant.get(2).setRole(Hackeur.getInstance());
         this.listParticipant.get(0).setRole(new Entreprise(2, "Moyenne entreprise"));
