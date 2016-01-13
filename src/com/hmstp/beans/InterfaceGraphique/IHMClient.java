@@ -51,6 +51,9 @@ public class IHMClient extends JPanel {
     private JPanel panelBoutonInscription;
     private JButton boutonInscription;
 
+    private JPanel panelBoutonSinscrire;
+    private JButton boutonSinscrire;
+
     private JPanel panelBoutonAnnuler;
     private JButton boutonAnnuler;
 
@@ -207,12 +210,31 @@ public class IHMClient extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ecranAffichage = "inscription";
+                dessine();
+            }
+        });
+        panelBoutonInscription.add(boutonInscription);
+
+        /*===============/Inscription/================*/
+
+        //Panel correspondant au bouton Inscription
+        panelBoutonSinscrire = new JPanel();
+        panelBoutonSinscrire.setOpaque(false);
+        panelBoutonSinscrire.setBounds(325,400,100,50);
+
+
+        boutonSinscrire = new JButton("S'inscrire");
+        boutonSinscrire.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ecranAffichage = "inscrire";
                 MessageCompte mC = new MessageCompte(pseudo.getText(), mdp.getPassword().toString(), Client.CREER_COMPTE);
                 Client.message(new Lettre(mC, Client.serveur));
                 dessine();
             }
         });
-        panelBoutonInscription.add(boutonInscription);
+        panelBoutonSinscrire.add(boutonSinscrire);
+
 
         /*===============/Quitter/==============*/
 
@@ -258,12 +280,13 @@ public class IHMClient extends JPanel {
             panel.add(panelBoutonLogin);
             panel.add(panelBoutonQuitter);
         }else if (ecranAffichage.equals("inscrire")){
-            panel.remove(panelPseudo);
-            panel.remove(panelMdp);
-            panel.remove(panelBoutonInscription);
             panel.remove(panelBoutonLogin);
+            panel.add(panelPseudo);
+            panel.add(panelMdp);
+            panel.add(panelMdpConfirme);
+            panel.add(panelBoutonSinscrire);
+            panel.add(panelBoutonAnnuler);
             panel.add(panelBoutonQuitter);
-            panel.add(panelBoutonReconnexion);
         }else if (ecranAffichage.equals("menu")){
             panel.add(panelBoutonQuitter);
             panel.add(panelPartieA3);
