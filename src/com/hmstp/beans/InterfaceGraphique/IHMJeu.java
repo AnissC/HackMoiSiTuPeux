@@ -1,13 +1,7 @@
 package com.hmstp.beans.InterfaceGraphique;
-import com.hmstp.beans.Jeu.Participant;
-import com.hmstp.beans.InterfaceGraphique.TableauScore;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class IHMJeu extends JPanel{
     private JFrame frameJeu;//done
