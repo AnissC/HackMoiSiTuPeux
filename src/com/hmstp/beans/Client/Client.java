@@ -17,6 +17,7 @@ public class Client{
     private static ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
     private static ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
     private static ArrayList<Participant> listParticipant = new ArrayList<>();
+    private static IHMClient ihmClient = new IHMClient();
     private static int nbjoueur = 0;
     private static String nom;
     private static Partie partie;
@@ -91,10 +92,10 @@ public class Client{
             if(m != null){
                 switch (m.getMessage()) {
                     case Client.CONNEXION_OK:
-                        // Affiche un message de bienvenue
+                        ihmClient.setEcranAffichage("connexion");
                         break;
                     case Client.CONNEXION_KO:
-                        // Affiche un message d'erreur
+                        ihmClient.setEcranAffichage("menu");
                         break;
                     case Client.EN_PARTIE:
                         // Affiche le bouton reconnexion
@@ -221,7 +222,6 @@ public class Client{
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                IHMClient ihmClient = new IHMClient();
                 ihmClient.go();
             }
         });
