@@ -7,8 +7,8 @@ public class MessagePartie extends MessageNombre{
 
     private ArrayList<MessageJoueur> listJoueur;
 
-    public MessagePartie(int n, Socket s, String m){
-        super(n, s, m);
+    public MessagePartie(int n, String m){
+        super(n, m);
     }
 
     public ArrayList<MessageJoueur> getListJoueur(){

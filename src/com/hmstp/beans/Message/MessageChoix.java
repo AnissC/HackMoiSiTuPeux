@@ -5,8 +5,8 @@ import java.net.Socket;
 public class MessageChoix extends MessageNombre{
     private String joueur;
 
-    public MessageChoix(String j, int n, Socket s, String m){
-        super(n, s, m);
+    public MessageChoix(String j, int n, String m){
+        super(n, m);
         this.joueur = j;
     }
 

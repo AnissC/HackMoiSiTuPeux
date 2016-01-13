@@ -8,8 +8,8 @@ public class MessageJoueur extends Message {
     private String joueur;
     private String nom;
 
-    public MessageJoueur(String j, String n, Socket s, String m){
-        super(s, m);
+    public MessageJoueur(String j, String n, String m){
+        super(m);
         this.joueur = j;
         this.nom = n;
     }

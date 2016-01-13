@@ -18,21 +18,22 @@ public class ServeurThreadEcoute extends Thread{
         this.socket = s;
     }
 
-
     public void reception()throws IOException, ClassNotFoundException {
+
         ObjectInputStream ob = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
 
         while (!this.isInterrupted()){
             synchronized (this.listMessagesRecu) {
+                System.out.println("totot");
                 Message m = (Message) ob.readObject();
-                this.listMessagesRecu.add(m);
                 System.out.println(m.getMessage());
+                this.listMessagesRecu.add(m);
+
             }
         }
         ob.close();
 
     }
-
     @Override
     public void run(){
         try {

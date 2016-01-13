@@ -6,8 +6,8 @@ public class MessageNombre extends Message{
 
     private int nombre;
 
-    public MessageNombre(int n, Socket s, String m){
-        super(s, m);
+    public MessageNombre(int n,String m){
+        super(m);
         this.nombre = n;
     }
 
