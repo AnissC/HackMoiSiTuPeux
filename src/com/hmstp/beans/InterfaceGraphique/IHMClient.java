@@ -166,11 +166,9 @@ public class IHMClient extends JPanel {
         boutonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ecranAffichage = IHM_MENU;
                 String password = new String(mdp.getPassword());
                 MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CONNEXION);
                 Client.message(new Lettre(mC, Client.serveur));
-                dessine();
             }
         });
         panelBoutonLogin.add(boutonLogin);
@@ -235,11 +233,9 @@ public class IHMClient extends JPanel {
         boutonSinscrire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ecranAffichage = IHM_CONNEXION;
                 String password = new String(mdp.getPassword());
                 MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CREER_COMPTE);
                 Client.message(new Lettre(mC, Client.serveur));
-                dessine();
             }
         });
         panelBoutonSinscrire.add(boutonSinscrire);
