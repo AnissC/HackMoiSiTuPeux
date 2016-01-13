@@ -17,4 +17,5 @@ public abstract class Role {
 			Client.choixAction(this);
 	}
 	public abstract void choixAction(int i);
+	public abstract int retourneChoix();
 }

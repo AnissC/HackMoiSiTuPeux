@@ -53,4 +53,13 @@ public class Entreprise extends Role {
 			this.setChoixFait(true);
 		}
 	}
+
+	public int retourneChoix(){
+		if (this.protection){
+			return 0;
+		}
+		else{
+			return 1;
+		}
+	}
 }

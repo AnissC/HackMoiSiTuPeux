@@ -26,6 +26,11 @@ public class Hackeur extends Role{
 
 	public void choixAction(int i){
 		this.victime = i;
+		this.setChoixFait(true);
+	}
+
+	public int retourneChoix(){
+		return this.victime;
 	}
 
 }

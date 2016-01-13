@@ -46,7 +46,19 @@ public class Partie extends Thread{
 
     public void distributionRoleMancheN(){
         if (moi == listParticipant.get(0)){
-            //interface + envoyer aux autres le role chacun (seul les 4 premier nécéssaire)
+            Client.choixDistibution(Hackeur.getInstance());
+            Client.choixDistibution(new Entreprise(2, "Moyenne entreprise"));
+            Client.choixDistibution(new Entreprise(1, "Petite entreprise"));
+
+            if(this.nbParticipants >= NB4){
+                Client.choixDistibution( new Entreprise(3, "Grande entrepise"));
+                if (this.nbParticipants >= NB5){
+                    Client.choixDistibution( new Entreprise(1, "Petite entreprise"));
+                    if (this.nbParticipants == NB6) {
+                        Client.choixDistibution( new Entreprise(1, "Petite entreprise"));
+                    }
+                }
+            }
         }
         else if (listParticipant.get(0).isRemplacant()){
             distributionRoleManche1();
@@ -120,8 +132,12 @@ public class Partie extends Thread{
     }
 
     public void tour(){
-        //this.moi.getRole().choixAction()
-        //this.envoyerChoix(this.moi.getRole().choixAction());
+        this.moi.getRole().choixAction();
+        while (! moi.getRole().isChoixFait()) {
+            //wait le choix
+        }
+        this.envoyerChoix(this.moi.getRole().retourneChoix());
+
         int i = 0;
         while (i < listParticipant.size()) {
             if (listParticipant.get(i).isRemplacant()) {

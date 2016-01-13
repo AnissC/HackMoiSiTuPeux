@@ -199,6 +199,19 @@ public class Client{
         }
     }
 
+    public static void choixDistibution(Role r){
+        if (r instanceof  Hackeur){
+            ihmClient.setEcranAffichage("Choix Hackeur");
+        }
+        else{
+            ihmClient.setEcranAffichage(((Entreprise)r).getNom());
+        }
+    }
+
+    public static void choixDistibution(int i, String nom){
+        //.........
+    }
+
     public static void choixAction(int i){
         moi.getRole().choixAction(i);
     }
