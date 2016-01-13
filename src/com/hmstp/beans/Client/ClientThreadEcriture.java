@@ -31,9 +31,7 @@ public class ClientThreadEcriture extends Thread{
                     while(i < listMessagesEnvoyer.size()) {
                         if(listMessagesEnvoyer.get(i).getSocket() == this.socket) {
                             m = listMessagesEnvoyer.remove(i).getMessage();
-                            System.out.println(m.getMessage());
                             ob.writeObject(m);
-                            System.out.println(m.getMessage());
                         }else {
                             i++;
                         }
