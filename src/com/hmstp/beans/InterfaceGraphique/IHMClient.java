@@ -136,7 +136,7 @@ public class IHMClient extends JPanel {
         boutonPartieA3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MessageChoix mN = new MessageChoix(Client.moiNom(), 3, Client.NB_JOUEURS);
+                MessageChoix mN = new MessageChoix(Client.getNom(), 3, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
         });
@@ -151,7 +151,7 @@ public class IHMClient extends JPanel {
         boutonPartieA4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MessageChoix mN = new MessageChoix(Client.moiNom(), 4, Client.NB_JOUEURS);
+                MessageChoix mN = new MessageChoix(Client.getNom(), 4, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
         });
@@ -166,7 +166,7 @@ public class IHMClient extends JPanel {
         boutonPartieA5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MessageChoix mN = new MessageChoix(Client.moiNom(), 5, Client.NB_JOUEURS);
+                MessageChoix mN = new MessageChoix(Client.getNom(), 5, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
         });
@@ -181,7 +181,7 @@ public class IHMClient extends JPanel {
         boutonPartieA6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MessageChoix mN = new MessageChoix(Client.moiNom(), 6, Client.NB_JOUEURS);
+                MessageChoix mN = new MessageChoix(Client.getNom(), 6, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
         });
