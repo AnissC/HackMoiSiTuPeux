@@ -136,6 +136,7 @@ public class IHMClient extends JPanel {
         boutonPartieA3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Client.setNbjoueur(3);
                 MessageChoix mN = new MessageChoix(Client.getNom(), 3, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
@@ -151,6 +152,7 @@ public class IHMClient extends JPanel {
         boutonPartieA4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Client.setNbjoueur(4);
                 MessageChoix mN = new MessageChoix(Client.getNom(), 4, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
@@ -166,6 +168,7 @@ public class IHMClient extends JPanel {
         boutonPartieA5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Client.setNbjoueur(5);
                 MessageChoix mN = new MessageChoix(Client.getNom(), 5, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
@@ -181,6 +184,7 @@ public class IHMClient extends JPanel {
         boutonPartieA6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Client.setNbjoueur(6);
                 MessageChoix mN = new MessageChoix(Client.getNom(), 6, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
@@ -200,6 +204,7 @@ public class IHMClient extends JPanel {
         boutonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Client.setNom(pseudo.getText());
                 String password = new String(mdp.getPassword());
                 MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CONNEXION);
                 Client.message(new Lettre(mC, Client.serveur));
