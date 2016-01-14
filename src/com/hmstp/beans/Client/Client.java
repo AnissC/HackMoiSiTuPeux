@@ -104,6 +104,12 @@ public class Client{
                     case Client.CONNEXION_KO:
                         ihmClient.setEcranAffichage(IHMClient.IHM_CONNEXION);
                         break;
+                    case Client.INSCRIPTION_OK:
+                        ihmClient.setEcranAffichage(IHMClient.IHM_CONNEXION);
+                        break;
+                    case Client.INSCRIPTION_KO:
+                        ihmClient.setEcranAffichage(IHMClient.IHM_INSCRIPTION);
+                        break;
                     case Client.EN_PARTIE:
                         ihmClient.setEcranAffichage(IHMClient.IHM_RECONNEXION);
                         break;
@@ -202,16 +208,16 @@ public class Client{
 
     public static void choixAction(Role r){
         if (r instanceof  Hackeur){
-            ihmJeu.setEcranAffichage("Hackeur");
+            ihmJeu.setEcranAffichage(IHMJeu.IHM_HACKEUR);
         }
         else{
-            ihmJeu.setEcranAffichage("Entreprise");
+            ihmJeu.setEcranAffichage(IHMJeu.IHM_ENTREPRISE);
         }
     }
 
     public static void choixDistibution(Role r){
         if (r instanceof  Hackeur){
-            ihmJeu.setEcranAffichage("Choix Hackeur");
+            ihmJeu.setEcranAffichage(IHMJeu.IHM_ASSIGNE_ROLE);
         }
         else{
             ihmJeu.setEcranAffichage(((Entreprise)r).getNom());
