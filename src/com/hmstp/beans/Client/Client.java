@@ -123,7 +123,7 @@ public class Client{
                         synchronized (listParticipant) {
                             while (!(mP.getListJoueur().isEmpty())) {
                                 mJ = mP.getListJoueur().remove(0);
-                                if (mJ.getJoueur().equals(Client.nom)){
+                                if (mJ.getNom().equals(Client.nom)){
                                     moi = new Joueur(null, mJ.getNom());
                                     listParticipant.add(moi);
                                     Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
@@ -144,6 +144,7 @@ public class Client{
                             }
                         }
                         Client.lancerJeu();
+                        Thread.sleep(1000);
                         Client.partie.start();
                         break;
                     case Client.CREER_PARTIE:
@@ -174,7 +175,7 @@ public class Client{
                         clientEcriture.start();
                         int h = 0;
                         synchronized (listParticipant) {
-                            while((h < nbjoueur) && (! listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getJoueur())))) {
+                            while((h < nbjoueur) && (! listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
                                 h++;
                             }
                             Joueur j = new Joueur(sc, mej.getNom());
@@ -216,6 +217,10 @@ public class Client{
         Client.nbjoueur = n;
     }
 
+    public static int getNbjoueur() {
+        return nbjoueur;
+    }
+
     public static void choixAction(Role r){
         if (r instanceof  Hackeur){
             ihmJeu.setEcranAffichage(IHMJeu.IHM_HACKEUR);
@@ -255,20 +260,20 @@ public class Client{
         return listNom;
     }
 
-    public static int score(String nom){
+    public static int score(String no){
         int i = 0;
         synchronized (listParticipant) {
-            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(nom))){
+            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
                 i++;
             }
             return listParticipant.get(i).getScore();
         }
     }
 
-    public static Role getRoleParNom(String nom){
+    public static Role getRoleParNom(String no){
         int i = 0;
         synchronized (listParticipant) {
-            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(nom))){
+            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
                 i++;
             }
             return listParticipant.get(i).getRole();

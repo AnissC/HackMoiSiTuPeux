@@ -7,6 +7,8 @@ import com.hmstp.beans.Jeu.Hackeur;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class IHMJeu extends JPanel{
@@ -77,7 +79,7 @@ public class IHMJeu extends JPanel{
         //========================Panel Tableau===========================//
         panelTableau = new JPanel();
         panelTableau.setOpaque(true);
-        panelTableau.setBounds(50,25,200,200);
+        panelTableau.setBounds(50,25,550,200);
 
         //========================Panel Tchat=============================//
         panelInfo = new JPanel();
@@ -162,6 +164,12 @@ public class IHMJeu extends JPanel{
 
 
         boutonEconomiser = new JButton("Economiser");
+        boutonEconomiser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Client.choixAction(0);
+            }
+        });
         panelEconomiser.setLayout(new BorderLayout());
         panelEconomiser.add(labelEconomiser,BorderLayout.NORTH);
         panelEconomiser.add(boutonEconomiser,BorderLayout.SOUTH);
@@ -175,6 +183,12 @@ public class IHMJeu extends JPanel{
 
 
         boutonSeProteger = new JButton("Se Proteger");
+        boutonSeProteger.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Client.choixAction(1);
+            }
+        });
         panelSeProteger.setLayout(new BorderLayout());
         panelSeProteger.add(labelSeProteger,BorderLayout.NORTH);
         panelSeProteger.add(boutonSeProteger,BorderLayout.SOUTH);
@@ -196,7 +210,6 @@ public class IHMJeu extends JPanel{
     }
 
     public void dessine(){
-
         if(! ecranAffichage.equals(IHM_VIDE)) {
             //=====================Tableau Score =============================//
             ArrayList<String> joueurs = Client.classement();
@@ -207,10 +220,9 @@ public class IHMJeu extends JPanel{
                     donnees[i][1] = "Hackeur";
                 }
                 else{
-                    donnees[i][1] = "Entreprise";//((Entreprise)Client.getRoleParNom(joueurs.get(i))).getNom();
+                    donnees[i][1] = ((Entreprise)Client.getRoleParNom(joueurs.get(i))).getNom();
                 }
                 donnees[i][2] = "" + Client.score(joueurs.get(i));
-
             }
 
             String[] entetes = {"Nom", "Role", "Score"};
@@ -249,7 +261,6 @@ public class IHMJeu extends JPanel{
         panelJeu.add(panelInfo);
         panelJeu.add(panelBoutons);
 
-        frameJeu.add(panelJeu);
         frameJeu.validate();
         frameJeu.repaint();
     }
