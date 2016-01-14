@@ -206,6 +206,10 @@ public class Client{
         }
     }
 
+    public static String moiNom(){
+        return moi.getNom();
+    }
+
     public static void choixAction(Role r){
         if (r instanceof  Hackeur){
             ihmJeu.setEcranAffichage(IHMJeu.IHM_HACKEUR);
