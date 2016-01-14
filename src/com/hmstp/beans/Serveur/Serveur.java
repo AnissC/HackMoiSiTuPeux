@@ -22,6 +22,7 @@ public class Serveur {
     private static final String SQL_CREER_COMPTE = "INSERT INTO joueur (pseudo, motdepasse, gagne, perdu) VALUES (?, ?, 0, 0)";
     private static final String SQL_CONNEXION = "SELECT * FROM joueur WHERE pseudo = ? AND motdepasse = ?";
     private static final String SQL_TEST_COMPTE = "SELECT * FROM joueur WHERE pseudo = ?";
+    private static final String SQL_STATS = "INSERT INTO joueur(gagne, perdu) WHERE pseudo = ?";
 
 
     MysqlConnect msql = MysqlConnect.getDbCon();
@@ -63,6 +64,9 @@ public class Serveur {
             System.err.println(e.toString());
         }
         return exist;
+    }
+    public boolean ajoutStats(MessageCompte mC){
+        return true;
     }
 
 
@@ -161,6 +165,7 @@ public class Serveur {
                     case Serveur.RECONNEXION:
                         break;
                     case Serveur.PARTIE_FINIE:
+
                         break;
                     case Serveur.JOUEUR_PERDU:
                         break;
