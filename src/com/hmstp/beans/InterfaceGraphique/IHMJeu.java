@@ -153,6 +153,7 @@ public class IHMJeu extends JPanel{
     public void dessine(){
         int max = 0;
         if(! ecranAffichage.equals(IHM_VIDE)) {
+            panelTableau.removeAll();
             ArrayList<String> joueurs = Client.classement();
             max = joueurs.size();
             numJoueur = 0;
