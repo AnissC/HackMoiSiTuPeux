@@ -148,7 +148,12 @@ public class Partie extends Thread{
         while (! moi.getRole().isChoixFait()) {
             //wait le choix
         }
+
+        System.out.println("Choix fait");
+
         this.envoyerChoix(this.moi.getRole().retourneChoix());
+
+        System.out.println("Envoie fait");
 
         int i = 0;
         while (i < listParticipant.size()) {
@@ -161,10 +166,18 @@ public class Partie extends Thread{
             }
             i++;
         }
+
+        System.out.println("IA fait");
+
         while (tousOntChoisit()) {
             //wait la réponse des autres
         }
+
+        System.out.println("Attente fait");
+
         this.resoudreTour();
+
+        System.out.println("Resolution fait");
     }
 
     public boolean pasDeGagnant(){
