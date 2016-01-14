@@ -104,14 +104,21 @@ public class Partie extends Thread{
             i++;
         }
 
-        Participant victime = listParticipant.remove(((Hackeur) listParticipant.get(i).getRole()).getVictime());
+        Participant hackeur = listParticipant.remove(i);
+        Participant victime;
+        if(((Hackeur) hackeur.getRole()).getVictime() > i){
+            victime = listParticipant.remove(((Hackeur) hackeur.getRole()).getVictime() - 1);
+        }
+        else{
+            victime = listParticipant.remove(((Hackeur) hackeur.getRole()).getVictime());
+        }
         if (((Entreprise)victime.getRole()).getProtection()){
-            listTemp.add(0, listParticipant.remove(i));
+            listTemp.add(0, hackeur);
             listTemp.add(1, victime);
         }
         else {
             listTemp.add(0, victime);
-            listTemp.add(1, listParticipant.remove(i));
+            listTemp.add(1, hackeur);
         }
 
         //if (this.active){
