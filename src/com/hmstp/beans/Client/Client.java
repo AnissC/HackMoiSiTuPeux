@@ -198,8 +198,8 @@ public class Client{
                 }
             }
             m = null;
-            synchronized (listMessagesRecu) {
-                listMessagesRecu.notify();
+            synchronized (listParticipant) {
+                listParticipant.notify();
             }
         }
     }
