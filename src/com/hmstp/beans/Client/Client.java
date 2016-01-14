@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 
 public class Client{
-
     private static ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
     private static ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
     private static ArrayList<Participant> listParticipant = new ArrayList<>();
