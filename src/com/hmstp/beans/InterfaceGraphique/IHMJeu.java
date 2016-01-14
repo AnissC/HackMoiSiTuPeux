@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.StringJoiner;
 
 public class IHMJeu extends JPanel{
+    //public static final String IHM_CONNEXION = "IHM_CONNEXION";
+    //public static final String IHM_RECONNEXION = "IHM_RECONNEXION";
+    //public static final String IHM_MENU = "IHM_MENU";
+    //public static final String IHM_INSCRIPTION = "IHM_INSCRIPTION";
+
     private JFrame frameJeu;//done
     private JPanel panelJeu;//done
 
