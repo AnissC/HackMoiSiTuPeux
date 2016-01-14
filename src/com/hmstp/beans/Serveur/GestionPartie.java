@@ -23,10 +23,12 @@ public class GestionPartie {
         ArrayList<MessageJoueur> listeJoueur = new ArrayList<>();
         int caseLobby = nombreJoueur-JOUEUR_MIN;
         lobby[caseLobby].add(new Utilisateur(socket,nomJoueur));
+        System.out.println(caseLobby);
         MessageJoueur mej = new MessageJoueur(socket.getInetAddress().toString(), nomJoueur, Serveur.NOUVEAU_JOUEUR);
         for (int i=0;i<lobby[caseLobby].size();i++){
             MessageJoueur mj = new MessageJoueur(lobby[caseLobby].get(i).getSocket().getInetAddress().toString(),lobby[caseLobby].get(i).getNom(),Serveur.PARTIE_FINIE);
             listeJoueur.add(mj);
+            System.out.println(lobby[caseLobby].get(i).getNom() + "    " +  nomJoueur);
             if (! lobby[caseLobby].get(i).getNom().equals(nomJoueur)){
                 System.out.println(lobby[caseLobby].get(i).getSocket().getInetAddress().toString());
                 Serveur.message(new Lettre(mej,lobby[caseLobby].get(i).getSocket()));
@@ -34,7 +36,7 @@ public class GestionPartie {
         }
         Serveur.message(new Lettre(new MessagePartie(listeJoueur, Serveur.PARTIE_TROUVE), socket));
 
-        if (lobby[caseLobby].size() >= caseLobby){
+        /*if (lobby[caseLobby].size() >= caseLobby){
             listePartie.add(lobby[caseLobby]);
             for (int i=0;i<lobby[caseLobby].size();i++) {
                 Message me = new Message(Serveur.COMMENCER_PARTIE);
@@ -44,6 +46,6 @@ public class GestionPartie {
         }
         else{
 
-        }
+        }*/
     }
 }

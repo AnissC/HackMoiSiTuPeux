@@ -27,9 +27,6 @@ public class Serveur {
 
     MysqlConnect msql = MysqlConnect.getDbCon();
     public boolean ajouterUtilisateur(MessageCompte mc) {
-        if (msql == null) {
-            return false;
-        }
         try {
             PreparedStatement preparedStatement = msql.conn.prepareStatement(SQL_CREER_COMPTE);
             preparedStatement.setString(1, mc.getIdentifiant());
@@ -65,9 +62,17 @@ public class Serveur {
         }
         return exist;
     }
-    public boolean ajoutStats(MessageCompte mC){
+    /*public boolean ajoutStats(MessageCompte mc){
+        try {
+            PreparedStatement preparedStatement = msql.conn.prepareStatement(SQL_STATS);
+            preparedStatement.setString(1, mc.());
+            preparedStatement.setString(2, mc.getMotdepasse());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            System.err.println(e.toString());
+        }
         return true;
-    }
+    }*/
     public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
     public final static String INSCRIPTION_OK = "INSCRIPTION_OK";
@@ -112,7 +117,7 @@ public class Serveur {
         Message m = null;
         Socket clientSocket = null;
         FileOutputStream logs = new FileOutputStream("logs.txt");
-
+        GestionPartie gp = new GestionPartie();
         while (true){
             synchronized (Serveur.listMessagesRecu) {
                 if (!Serveur.listMessagesRecu.isEmpty()){
@@ -165,7 +170,6 @@ public class Serveur {
                     case Serveur.JOUEUR_PERDU:
                         break;
                     case Serveur.NB_JOUEURS:
-                        GestionPartie gp = new GestionPartie();
                         int nombreJoueur;
                         MessageChoix mN = (MessageChoix) m;
                         nombreJoueur = mN.getNombre();
