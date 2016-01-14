@@ -129,7 +129,8 @@ public class Client{
                                     Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                                 }
                                 else {
-                                    Socket c  = Client.connexion(mJ.getJoueur());
+                                    ServerSocket ss = new ServerSocket(8080);
+                                    Socket c = ss.accept();
                                     listParticipant.add(new Joueur(c, mJ.getNom()));
                                     ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, c);
                                     clientEcoute.start();
@@ -167,8 +168,7 @@ public class Client{
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
-                        ServerSocket ss = new ServerSocket(8080);
-                        Socket sc = ss.accept();
+                        Socket sc  = Client.connexion(mej.getJoueur());
                         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, sc);
                         clientEcoute.start();
                         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, sc);
