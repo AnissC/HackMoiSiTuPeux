@@ -84,7 +84,6 @@ public class IHMJeu extends JPanel{
         //========================Panel Bouton============================//
         panelBoutons = new JPanel();
         panelBoutons.setOpaque(true);
-        panelBoutons.setBackground(Color.GRAY);
         panelBoutons.setBounds(50,300,800,200);
 
 
@@ -231,6 +230,7 @@ public class IHMJeu extends JPanel{
             panelBoutons.removeAll();
             panelBoutons.add(labelEconomiser);
             panelBoutons.add(labelSeProteger);
+        }else{
         }
         //=====================Ajout de tous les panels===================//
         panelJeu.add(panelTableau);
