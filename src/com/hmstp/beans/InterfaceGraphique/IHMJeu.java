@@ -2,12 +2,15 @@ package com.hmstp.beans.InterfaceGraphique;
 
 
 import com.hmstp.beans.Client.Client;
+import com.hmstp.beans.Jeu.Entreprise;
+import com.hmstp.beans.Jeu.Hackeur;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class IHMJeu extends JPanel{
+    public static final String IHM_VIDE= "IHM_VIDE";
     public static final String IHM_HACKEUR = "IHM_HACKEUR";
     public static final String IHM_ENTREPRISE = "IHM_ENTREPRISE";
     public static final String IHM_ASSIGNE_ROLE = "IHM_ASSIGNE_ROLE";
@@ -53,7 +56,7 @@ public class IHMJeu extends JPanel{
     private JLabel labelSeProteger;
     private JButton boutonSeProteger;
 
-    private String ecranAffichage = "";
+    private String ecranAffichage = IHM_VIDE;
 
     public void setEcranAffichage(String ecranAffichage) {
         this.ecranAffichage = ecranAffichage;
@@ -189,28 +192,36 @@ public class IHMJeu extends JPanel{
         panelMoi.add(boutonMoi,BorderLayout.SOUTH);
 
 
-        //=====================Tableau Score =============================//
-        ArrayList<String> joueurs = Client.classement();
-        Object[][] donnees = new Object[joueurs.size()][3];
-        for (int i=0;i<joueurs.size();i++){
-            donnees[i][0] = joueurs.get(i);
-            donnees[i][1] = Client.getRoleParNom(joueurs.get(i)).toString();
-            donnees[i][2] = Client.score(joueurs.get(i));
-
-        }
-
-        String[] entetes = {"Nom", "Role", "Score"};
-        JTable tableau= new JTable(donnees,entetes);
-        tableau.setSize(200,200);
-        tableau.setVisible(true);
-        panelTableau.setLayout(new BorderLayout());
-        panelTableau.add(tableau.getTableHeader(),BorderLayout.NORTH);
-        panelTableau.add(tableau, BorderLayout.CENTER);
-
         dessine();
     }
 
     public void dessine(){
+
+        if(! ecranAffichage.equals(IHM_VIDE)) {
+            //=====================Tableau Score =============================//
+            ArrayList<String> joueurs = Client.classement();
+            String[][] donnees = new String[joueurs.size()][3];
+            for (int i = 0; i < joueurs.size(); i++) {
+                donnees[i][0] = joueurs.get(i);
+                if (Client.getRoleParNom(joueurs.get(i)) instanceof Hackeur) {
+                    donnees[i][1] = "Hackeur";
+                }
+                else{
+                    donnees[i][1] = ((Entreprise)Client.getRoleParNom(joueurs.get(i))).getNom();
+                }
+                donnees[i][2] = "" + Client.score(joueurs.get(i));
+
+            }
+
+            String[] entetes = {"Nom", "Role", "Score"};
+            JTable tableau = new JTable(donnees, entetes);
+            tableau.setSize(200, 200);
+            tableau.setVisible(true);
+            panelTableau.setLayout(new BorderLayout());
+            panelTableau.add(tableau.getTableHeader(), BorderLayout.NORTH);
+            panelTableau.add(tableau, BorderLayout.CENTER);
+        }
+
         if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
             panelBoutons.removeAll();
             panelBoutons.add(panelVictime1);
@@ -230,8 +241,8 @@ public class IHMJeu extends JPanel{
             panelBoutons.removeAll();
             panelBoutons.add(labelEconomiser);
             panelBoutons.add(labelSeProteger);
-        }else{
         }
+
         //=====================Ajout de tous les panels===================//
         panelJeu.add(panelTableau);
         panelJeu.add(panelInfo);

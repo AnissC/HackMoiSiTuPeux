@@ -139,7 +139,7 @@ public class Client{
                                 k++;
                             }
                             while(k < nbjoueur){
-                                listParticipant.add(new Ramplacant("Ordinateur "+ k));
+                                listParticipant.add(new Ramplacant("Ordinateur"+ k));
                                 k++;
                             }
                         }
@@ -153,7 +153,7 @@ public class Client{
                             listParticipant.add(moi);
                             int j = 1;
                             while (j < nbjoueur) {
-                                listParticipant.add(new Ramplacant("Ordinateur " + j));
+                                listParticipant.add(new Ramplacant("Ordinateur" + j));
                                 j++;
                             }
                             Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
@@ -258,7 +258,7 @@ public class Client{
     public static int score(String nom){
         int i = 0;
         synchronized (listParticipant) {
-            while ((i < listParticipant.size()) && (listParticipant.get(i).getNom() != nom)){
+            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(nom))){
                 i++;
             }
             return listParticipant.get(i).getScore();
@@ -268,7 +268,7 @@ public class Client{
     public static Role getRoleParNom(String nom){
         int i = 0;
         synchronized (listParticipant) {
-            while ((i < listParticipant.size()) && (listParticipant.get(i).getNom() != nom)){
+            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(nom))){
                 i++;
             }
             return listParticipant.get(i).getRole();
