@@ -5,6 +5,7 @@ package com.hmstp.beans.InterfaceGraphique;
 import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.Message.Lettre;
 import com.hmstp.beans.Message.MessageCompte;
+import com.hmstp.beans.Message.MessageNombre;
 
 import javax.swing.*;
 import java.awt.*;
@@ -131,6 +132,13 @@ public class IHMClient extends JPanel {
         panelPartieA3.setBounds(350,100,200,75);
 
         boutonPartieA3 = new JButton("Rejoindre une partie à 3");
+        boutonPartieA3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MessageNombre mN = new MessageNombre(3, Client.NB_JOUEURS);
+                Client.message(new Lettre(mN, Client.serveur));
+            }
+        });
         panelPartieA3.add(boutonPartieA3);
 
         //==============Bouton à 4==============//
@@ -139,6 +147,13 @@ public class IHMClient extends JPanel {
         panelPartieA4.setBounds(350,200,200,75);
 
         boutonPartieA4 = new JButton("Rejoindre une partie a 4");
+        boutonPartieA4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MessageNombre mN = new MessageNombre(4, Client.NB_JOUEURS);
+                Client.message(new Lettre(mN, Client.serveur));
+            }
+        });
         panelPartieA4.add(boutonPartieA4);
 
         //==============Bouton à 5==============//
@@ -147,6 +162,13 @@ public class IHMClient extends JPanel {
         panelPartieA5.setBounds(350,300,200,75);
 
         boutonPartieA5 = new JButton("Rejoindre une partie a 5");
+        boutonPartieA5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MessageNombre mN = new MessageNombre(5, Client.NB_JOUEURS);
+                Client.message(new Lettre(mN, Client.serveur));
+            }
+        });
         panelPartieA5.add(boutonPartieA5);
 
         //==============Bouton à 6===============//
@@ -155,6 +177,13 @@ public class IHMClient extends JPanel {
         panelPartieA6.setBounds(350,400,200,75);
 
         boutonPartieA6 = new JButton("Rejoindre une partie a 6");
+        boutonPartieA6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MessageNombre mN = new MessageNombre(6, Client.NB_JOUEURS);
+                Client.message(new Lettre(mN, Client.serveur));
+            }
+        });
         panelPartieA6.add(boutonPartieA6);
 
 
