@@ -15,6 +15,11 @@ public abstract class Participant {
     public int getScore() {
         return score;
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void changeScore(int score) {
         this.score += score;
         if(this.score < 0){
