@@ -25,7 +25,7 @@ public class Client{
     private static Joueur moi;
     private static Partie partie;
     private static String adresseIP = "132.227.125.85";
-    private static int port = 8080;
+    private static int port = 8082;
 
     public static Socket serveur;
 
@@ -132,7 +132,7 @@ public class Client{
                                 }
                                 else {
                                     System.out.println("ICI 1");
-                                    ServerSocket ss = new ServerSocket(8081);
+                                    ServerSocket ss = new ServerSocket(port);
                                     System.out.println("ICI 2");
                                     Socket c = ss.accept();
                                     System.out.println("ICI 3");
@@ -173,7 +173,7 @@ public class Client{
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
-                        Socket sc  = Client.connexion(mej.getJoueur(), 8081);
+                        Socket sc  = Client.connexion(mej.getJoueur(), port);
                         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, sc);
                         clientEcoute.start();
                         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, sc);
@@ -304,7 +304,7 @@ public class Client{
     }
 
     public static void main(String[] args) throws Exception{
-        Client.serveur = Client.connexion(adresseIP, port);
+        Client.serveur = Client.connexion(adresseIP, 8080);
 
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, serveur);
         clientEcoute.start();
