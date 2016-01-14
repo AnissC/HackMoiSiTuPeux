@@ -21,6 +21,7 @@ public class Client{
     private static IHMClient ihmClient = new IHMClient();
     private static IHMJeu ihmJeu = new IHMJeu();
     private static int nbjoueur = 0;
+    private static String nom;
     private static Joueur moi;
     private static Partie partie;
     private static String adresseIP = "132.227.125.85";
@@ -124,7 +125,7 @@ public class Client{
                         synchronized (listParticipant) {
                             while (!(mP.getListJoueur().isEmpty())) {
                                 mJ = mP.getListJoueur().remove(0);
-                                if (mJ.getJoueur().equals(Client.moi.getNom())){
+                                if (mJ.getJoueur().equals(Client.nom)){
                                     moi = new Joueur(null, mJ.getNom());
                                     listParticipant.add(moi);
                                     Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
@@ -205,8 +206,12 @@ public class Client{
         }
     }
 
-    public static String moiNom(){
-        return moi.getNom();
+    public static String getNom(){
+        return nom;
+    }
+
+    public static void setNom(String n){
+        Client.nom = n;
     }
 
     public static void choixAction(Role r){
