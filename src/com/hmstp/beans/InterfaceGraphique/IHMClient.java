@@ -265,6 +265,7 @@ public class IHMClient extends JPanel {
         /*======================================*/
         dessine();
     }
+
     public void dessine(){
         if (ecranAffichage.equals(IHM_CONNEXION)){
             panel.removeAll();
