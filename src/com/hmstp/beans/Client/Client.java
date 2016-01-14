@@ -141,7 +141,7 @@ public class Client{
                                 k++;
                             }
                             while(k < nbjoueur){
-                                listParticipant.add(new Ramplacant("Ordinateur"+ k));
+                                listParticipant.add(new Ramplacant("Ordinateur "+ k));
                                 k++;
                             }
                         }
@@ -154,7 +154,7 @@ public class Client{
                             listParticipant.add(moi);
                             int j = 1;
                             while (j < nbjoueur) {
-                                listParticipant.add(new Ramplacant("Ordinateur" + j));
+                                listParticipant.add(new Ramplacant("Ordinateur " + j));
                                 j++;
                             }
                             Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
