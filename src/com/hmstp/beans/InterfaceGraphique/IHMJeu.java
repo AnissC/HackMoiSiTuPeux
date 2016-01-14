@@ -207,7 +207,7 @@ public class IHMJeu extends JPanel{
                     donnees[i][1] = "Hackeur";
                 }
                 else{
-                    donnees[i][1] = ((Entreprise)Client.getRoleParNom(joueurs.get(i))).getNom();
+                    donnees[i][1] = "Entreprise";//((Entreprise)Client.getRoleParNom(joueurs.get(i))).getNom();
                 }
                 donnees[i][2] = "" + Client.score(joueurs.get(i));
 
@@ -220,6 +220,7 @@ public class IHMJeu extends JPanel{
             panelTableau.setLayout(new BorderLayout());
             panelTableau.add(tableau.getTableHeader(), BorderLayout.NORTH);
             panelTableau.add(tableau, BorderLayout.CENTER);
+            panelJeu.add(panelTableau);
         }
 
         if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
@@ -244,7 +245,6 @@ public class IHMJeu extends JPanel{
         }
 
         //=====================Ajout de tous les panels===================//
-        panelJeu.add(panelTableau);
         panelJeu.add(panelInfo);
         panelJeu.add(panelBoutons);
 
