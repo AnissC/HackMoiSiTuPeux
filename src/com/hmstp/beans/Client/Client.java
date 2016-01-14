@@ -196,7 +196,7 @@ public class Client{
                 }
             }
             m = null;
-            synchronized (listParticipant) {
+            synchronized (listMessagesRecu) {
                 listMessagesRecu.notify();
             }
         }
