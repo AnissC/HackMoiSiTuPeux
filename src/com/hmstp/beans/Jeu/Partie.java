@@ -50,6 +50,17 @@ public class Partie extends Thread{
         }
     }
 
+    public void choixDistribution(int j, Role role, String nom) {
+        int i = 0;
+        synchronized (listParticipant) {
+            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(nom))){
+                i++;
+            }
+            role.remmettreZero();
+            listParticipant.get(j).setRole(role);
+        }
+    }
+
     public void distributionRoleMancheN(){
         if (moi == listParticipant.get(0)){
             Client.choixDistibution(hackeur);
@@ -65,6 +76,16 @@ public class Partie extends Thread{
                     }
                 }
             }
+
+            while (!tousOntChoisit()) {
+                //wait le choix des rôles
+                try {
+                    Thread.sleep(100);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
         }
         else if (listParticipant.get(0).isRemplacant()){
             distributionRoleManche1();
@@ -142,10 +163,6 @@ public class Partie extends Thread{
             i--;
         }
 
-        while(i < nbParticipants){
-            listParticipant.get(i).getRole().remmettreZero();
-            i++;
-        }
     }
 
     public int algoIA(int i){
