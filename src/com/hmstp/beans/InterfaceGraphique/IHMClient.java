@@ -4,6 +4,7 @@ package com.hmstp.beans.InterfaceGraphique;
 
 import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.Message.Lettre;
+import com.hmstp.beans.Message.MessageChoix;
 import com.hmstp.beans.Message.MessageCompte;
 import com.hmstp.beans.Message.MessageNombre;
 
@@ -135,7 +136,7 @@ public class IHMClient extends JPanel {
         boutonPartieA3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MessageNombre mN = new MessageNombre(3, Client.NB_JOUEURS);
+                MessageChoix mN = new MessageChoix(Client.moiNom(), 3, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
         });
@@ -150,7 +151,7 @@ public class IHMClient extends JPanel {
         boutonPartieA4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MessageNombre mN = new MessageNombre(4, Client.NB_JOUEURS);
+                MessageChoix mN = new MessageChoix(Client.moiNom(), 4, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
         });
@@ -165,7 +166,7 @@ public class IHMClient extends JPanel {
         boutonPartieA5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MessageNombre mN = new MessageNombre(5, Client.NB_JOUEURS);
+                MessageChoix mN = new MessageChoix(Client.moiNom(), 5, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
         });
@@ -180,7 +181,7 @@ public class IHMClient extends JPanel {
         boutonPartieA6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MessageNombre mN = new MessageNombre(6, Client.NB_JOUEURS);
+                MessageChoix mN = new MessageChoix(Client.moiNom(), 6, Client.NB_JOUEURS);
                 Client.message(new Lettre(mN, Client.serveur));
             }
         });
