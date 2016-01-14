@@ -143,8 +143,8 @@ public class Client{
                                 k++;
                             }
                         }
-                        Client.partie.run();
                         Client.lancerJeu();
+                        Client.partie.start();
                         break;
                     case Client.CREER_PARTIE:
                         MessageJoueur mj = (MessageJoueur) m;
@@ -157,7 +157,7 @@ public class Client{
                                 j++;
                             }
                             Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
-                            Client.partie.run();
+                            Client.partie.start();
                         }
                         Client.lancerJeu();
                         break;
