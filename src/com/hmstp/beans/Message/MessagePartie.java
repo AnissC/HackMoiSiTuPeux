@@ -3,12 +3,13 @@ package com.hmstp.beans.Message;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class MessagePartie extends MessageNombre{
+public class MessagePartie extends Message{
 
     private ArrayList<MessageJoueur> listJoueur;
 
-    public MessagePartie(int n, String m){
-        super(n, m);
+    public MessagePartie(ArrayList<MessageJoueur> listJoueur, String m){
+        super(m);
+        this.listJoueur = listJoueur;
     }
 
     public ArrayList<MessageJoueur> getListJoueur(){
