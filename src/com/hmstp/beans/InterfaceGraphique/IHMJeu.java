@@ -233,12 +233,13 @@ public class IHMJeu extends JPanel{
             panelBoutons.add(labelEconomiser);
             panelBoutons.add(labelSeProteger);
         }
-
-
         //=====================Ajout de tous les panels===================//
         panelJeu.add(panelTableau);
         panelJeu.add(panelInfo);
         panelJeu.add(panelBoutons);
+
+        frameJeu.validate();
+        frameJeu.repaint();
     }
 
     @Override
