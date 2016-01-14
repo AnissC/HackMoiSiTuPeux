@@ -16,6 +16,7 @@ public class IHMJeu extends JPanel{
     public static final String IHM_HACKEUR = "IHM_HACKEUR";
     public static final String IHM_ENTREPRISE = "IHM_ENTREPRISE";
     public static final String IHM_ASSIGNE_ROLE = "IHM_ASSIGNE_ROLE";
+
     private int numJoueur=0;
 
     private JFrame frameJeu;
@@ -42,14 +43,17 @@ public class IHMJeu extends JPanel{
     private JPanel panelVictime3;
     private JLabel labelVictime3;
     private JButton boutonVictime3;
+    private JLabel labelVictime3Valeur;
 
     private JPanel panelVictime4;
     private JLabel labelVictime4;
     private JButton boutonVictime4;
+    private JLabel labelVictime4Valeur;
 
     private JPanel panelVictime5;
     private JLabel labelVictime5;
     private JButton boutonVictime5;
+    private JLabel labelVictime5Valeur;
 
     private JPanel panelEconomiser;
     private JLabel labelEconomiser;
@@ -197,24 +201,23 @@ public class IHMJeu extends JPanel{
                 //=====================Victime 3==============//
                 panelVictime3 = new JPanel();
                 panelVictime3.setOpaque(false);
-
                 labelVictime3 = new JLabel("Victime 3");
-
-
                 if (Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
                     numJoueur ++;
                 }
+                labelVictime3Valeur = new JLabel(Integer.toString(numJoueur));
                 boutonVictime3 = new JButton(joueurs.get(numJoueur));
                 boutonVictime3.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Client.choixAction(numJoueur);
+                        Client.choixAction(Integer.parseInt(labelVictime5Valeur.getText()));
                     }
                 });
                 numJoueur++;
                 panelVictime3.setLayout(new BorderLayout());
                 panelVictime3.add(labelVictime3,BorderLayout.NORTH);
                 panelVictime3.add(boutonVictime3,BorderLayout.SOUTH);
+                panelVictime3.add(labelVictime3Valeur);
             }
 
 
@@ -223,22 +226,23 @@ public class IHMJeu extends JPanel{
                 //=====================Victime 4==============//
                 panelVictime4 = new JPanel();
                 panelVictime4.setOpaque(false);
-
                 labelVictime4 = new JLabel("Victime 4");
                 if (Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
                     numJoueur ++;
                 }
+                labelVictime4Valeur = new JLabel(Integer.toString(numJoueur));
                 boutonVictime4 = new JButton(joueurs.get(numJoueur));
                 boutonVictime4.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Client.choixAction(numJoueur);
+                        Client.choixAction(Integer.parseInt(labelVictime5Valeur.getText()));
                     }
                 });
                 numJoueur++;
                 panelVictime4.setLayout(new BorderLayout());
                 panelVictime4.add(labelVictime4,BorderLayout.NORTH);
                 panelVictime4.add(boutonVictime4,BorderLayout.SOUTH);
+                panelVictime4.add(labelVictime4Valeur);
             }
 
 
@@ -246,24 +250,23 @@ public class IHMJeu extends JPanel{
                 //=====================Victime 5==============//
                 panelVictime5 = new JPanel();
                 panelVictime5.setOpaque(false);
-
                 labelVictime5 = new JLabel("Victime 5");
-
-
                 if (Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
                     numJoueur ++;
                 }
+                labelVictime5Valeur = new JLabel(Integer.toString(numJoueur));
                 boutonVictime5 = new JButton(joueurs.get(numJoueur));
                 boutonVictime5.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Client.choixAction(numJoueur);
+                        Client.choixAction(Integer.parseInt(labelVictime5Valeur.getText()));
                     }
                 });
                 numJoueur++;
                 panelVictime5.setLayout(new BorderLayout());
                 panelVictime5.add(labelVictime5,BorderLayout.NORTH);
                 panelVictime5.add(boutonVictime5,BorderLayout.SOUTH);
+                panelVictime5.add(labelVictime5Valeur);
             }
 
 
