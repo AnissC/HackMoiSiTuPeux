@@ -32,9 +32,9 @@ public class Client{
     public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
     public final static String INSCRIPTION_OK = "INSCRIPTION_OK";
-    // Serveur -> Client
+    // Serveur -> Client L'inscription du client s'est bien passer
     public final static String INSCRIPTION_KO = "INSCRIPTION_KO";
-    // Serveur -> Client
+    // Serveur -> Client L'inscription du client s'est mal passer
     public final static String CONNEXION = "CONNEXION";
     // Sinon connexion : Client -> Serveur, identifiant, mot de passe.
     public static final String CONNEXION_OK = "CONNEXION_OK";

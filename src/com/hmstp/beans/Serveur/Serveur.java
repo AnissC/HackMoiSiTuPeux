@@ -22,7 +22,7 @@ public class Serveur {
     private static final String SQL_CREER_COMPTE = "INSERT INTO joueur (pseudo, motdepasse, gagne, perdu) VALUES (?, ?, 0, 0)";
     private static final String SQL_CONNEXION = "SELECT * FROM joueur WHERE pseudo = ? AND motdepasse = ?";
     private static final String SQL_TEST_COMPTE = "SELECT * FROM joueur WHERE pseudo = ?";
-    private static final String SQL_STATS = "INSERT INTO joueur(gagne, perdu) WHERE pseudo = ?";
+    private static final String SQL_STATS = "INSERT INTO joueur(gagne, perdu) VALUES (?) WHERE pseudo = ?";
 
 
     MysqlConnect msql = MysqlConnect.getDbCon();
@@ -62,11 +62,12 @@ public class Serveur {
         }
         return exist;
     }
-    /*public boolean ajoutStats(MessageCompte mc){
+    /*public boolean ajoutStats(MessageJoueur mj ){
         try {
             PreparedStatement preparedStatement = msql.conn.prepareStatement(SQL_STATS);
-            preparedStatement.setString(1, mc.());
-            preparedStatement.setString(2, mc.getMotdepasse());
+            preparedStatement.setInt(1, );
+            preparedStatement.setInt(2, );
+            preparedStatement.setString(3, mj.getNom());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
             System.err.println(e.toString());
@@ -155,8 +156,7 @@ public class Serveur {
                             //Tester si en partie
                         }
                         else{
-                            m = new Message(CONNEXION_KO);
-                            listMessagesEnvoyer.add(new Lettre(m,clientSocket));
+                            listMessagesEnvoyer.add(new Lettre(new Message(CONNEXION_KO),clientSocket));
                             System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
                             String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
                             byte[] contentInBytes = s.getBytes();

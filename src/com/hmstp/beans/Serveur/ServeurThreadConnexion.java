@@ -19,7 +19,7 @@ public class ServeurThreadConnexion extends Thread{
     @Override
     public void run(){
         try {
-            ServerSocket s= new ServerSocket(8081);
+            ServerSocket s= new ServerSocket(8080);
             while (true){
                 Socket c= s.accept();
                 ServeurThreadEcriture serveurEcriture = new ServeurThreadEcriture(listMessagesEnvoyer, c);
