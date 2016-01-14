@@ -23,7 +23,7 @@ public class Entreprise extends Role {
 	// pas besoin de set pour le nom, il est définitif
 
 	public boolean getProtection(){
-		boolean p = false;
+		boolean p;
 		synchronized (this) {
 			p = this.protection;
 		}

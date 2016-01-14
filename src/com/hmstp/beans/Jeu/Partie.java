@@ -130,9 +130,11 @@ public class Partie extends Thread{
             i++;
         }
 
-        listParticipant = listTemp;
+        while(i > 0) {
+            listParticipant.add(listTemp.remove(0));
+            i--;
+        }
 
-        i= 0;
         while(i < nbParticipants){
             listParticipant.get(i).getRole().remmettreZero();
             i++;
@@ -141,7 +143,7 @@ public class Partie extends Thread{
 
     public int algoIA(int i){
         int n = nbParticipants;
-        n = n-(i+1);
+        n = (i+1)%n;
         return n;
     }
 

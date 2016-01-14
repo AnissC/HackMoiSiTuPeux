@@ -148,6 +148,7 @@ public class IHMJeu extends JPanel{
         if(! ecranAffichage.equals(IHM_VIDE)) {
             ArrayList<String> joueurs = Client.classement();
             int max = joueurs.size();
+            numJoueur = 0;
             //======================Victime 1=============//
             panelVictime1 = new JPanel();
             panelVictime1.setOpaque(false);
