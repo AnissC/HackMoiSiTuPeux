@@ -1,6 +1,7 @@
 package com.hmstp.beans.Serveur;
 
 
+import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.Message.*;
 
 import java.io.FileOutputStream;
@@ -159,9 +160,11 @@ public class Serveur {
                     case Serveur.JOUEUR_PERDU:
                         break;
                     case Serveur.NB_JOUEURS:
+                        GestionPartie gp = new GestionPartie();
                         int nombreJoueur;
                         MessageChoix mN = (MessageChoix) m;
                         nombreJoueur = mN.getNombre();
+                        gp.insererJoueurDansPartie(nombreJoueur, clientSocket,Client.getNom());
                         break;
                 }
             }
