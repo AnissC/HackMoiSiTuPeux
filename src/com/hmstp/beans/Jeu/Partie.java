@@ -228,7 +228,7 @@ public class Partie extends Thread{
 
         while(! this.active){
             synchronized (listParticipant) {
-                if (Client.pasNouveauMessages()) {
+                if (Client.pasjoueurEnAttente()) {
                     try{
                         listParticipant.wait();
                     }
@@ -251,7 +251,7 @@ public class Partie extends Thread{
 
         while(pasDeGagnant()){
             synchronized (listParticipant) {
-                if (Client.pasNouveauMessages()) {
+                if (Client.pasjoueurEnAttente()) {
                     try{
                         listParticipant.wait();
                     }

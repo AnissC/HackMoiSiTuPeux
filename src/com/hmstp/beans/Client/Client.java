@@ -20,6 +20,7 @@ public class Client{
     private static IHMClient ihmClient = new IHMClient();
     private static IHMJeu ihmJeu = new IHMJeu();
     private static int nbjoueur = 0;
+    private static boolean joueurEnAttente = false;
     private static String nom;
     private static Joueur moi;
     private static Partie partie;
@@ -173,6 +174,7 @@ public class Client{
                         clientEcoute.start();
                         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, sc);
                         clientEcriture.start();
+                        joueurEnAttente = true;
                         int h = 0;
                         synchronized (listParticipant) {
                             while((h < nbjoueur) && (! listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
@@ -208,8 +210,8 @@ public class Client{
         }
     }
 
-    public static boolean pasNouveauMessages(){
-        return listMessagesRecu.isEmpty();
+    public static boolean pasjoueurEnAttente(){
+        return joueurEnAttente;
     }
 
 
