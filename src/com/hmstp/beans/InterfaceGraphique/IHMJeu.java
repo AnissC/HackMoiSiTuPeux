@@ -201,7 +201,7 @@ public class IHMJeu extends JPanel{
             }
         }
 
-        String[] entetes = {"Prénom", "Role", "Score"};
+        String[] entetes = {"Nom", "Role", "Score"};
         JTable tableau= new JTable(donnees,entetes);
         tableau.setSize(200,200);
         tableau.setVisible(true);
