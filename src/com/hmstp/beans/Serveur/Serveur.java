@@ -70,6 +70,9 @@ public class Serveur {
     private static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
     public final static String CONNEXION = "CONNEXION";
+    public final static String INSCRIPTION_OK = "INSCRIPTION_OK";
+    //Serveur -> Client
+    public final static String INSCRIPTION_KO = "INSCRIPTION_KO";
     // Sinon connexion : Client -> Serveur, identifiant, mot de passe.
     private static final String CONNEXION_OK = "CONNEXION_OK";
     // Serveur -> Client connexion réussie
@@ -119,9 +122,12 @@ public class Serveur {
                         MessageCompte mC = (MessageCompte) m;
                         if (!testCompte(mC)){
                             ajouterUtilisateur(mC);
+                            m = new Message(INSCRIPTION_OK);
+                            listMessagesEnvoyer.add(new Lettre(m, clientSocket));
                         }
                         else {
-                            //Renvoyé compte existant
+                            m = new Message(INSCRIPTION_KO);
+                            listMessagesEnvoyer.add(new Lettre(m, clientSocket));
                         }
                         break;
                     case Serveur.CONNEXION:
