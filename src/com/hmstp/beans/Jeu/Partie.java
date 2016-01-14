@@ -227,6 +227,11 @@ public class Partie extends Thread{
         }
 
         while(! this.active){
+            try {
+                Thread.sleep(100);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
             synchronized (listParticipant) {
                 this.distributionRoleMancheN();
                 this.tour();
@@ -239,6 +244,11 @@ public class Partie extends Thread{
         }
 
         while(pasDeGagnant()){
+            try {
+                Thread.sleep(100);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
             synchronized (listParticipant) {
                 this.distributionRoleMancheN();
                 this.tour();
