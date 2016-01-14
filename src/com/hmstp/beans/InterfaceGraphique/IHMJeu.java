@@ -28,10 +28,6 @@ public class IHMJeu extends JPanel{
 
     private JPanel panelBoutons;
 
-    private JPanel panelMoi;
-    private JLabel labelMoi;
-    private JButton boutonMoi;
-
     private JPanel panelVictime1;
     private JLabel labelVictime1;
     private JButton boutonVictime1;
@@ -56,6 +52,12 @@ public class IHMJeu extends JPanel{
     private JLabel labelVictime5;
     private JButton boutonVictime5;
     private JLabel labelVictime5Valeur;
+
+
+    private JPanel panelVictime6;
+    private JLabel labelVictime6;
+    private JButton boutonVictime6;
+    private JLabel labelVictime6Valeur;
 
     private JPanel panelEconomiser;
     private JLabel labelEconomiser;
@@ -137,16 +139,6 @@ public class IHMJeu extends JPanel{
         panelSeProteger.add(boutonSeProteger,BorderLayout.SOUTH);
 
 
-        //===================Bouton pour me target=================//
-        panelMoi = new JPanel();
-        panelMoi.setOpaque(false);
-
-        labelMoi = new JLabel("Moi");
-
-        boutonMoi = new JButton("Moi");
-        panelMoi.setLayout(new BorderLayout());
-        panelMoi.add(labelMoi,BorderLayout.NORTH);
-        panelMoi.add(boutonMoi,BorderLayout.SOUTH);
         dessine();
     }
 
@@ -162,7 +154,7 @@ public class IHMJeu extends JPanel{
             panelVictime1.setOpaque(false);
 
             labelVictime1 = new JLabel("Victime 1");
-            if (Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
+            if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
                 numJoueur ++;
             }
             labelVictime1Valeur = new JLabel(Integer.toString(numJoueur));
@@ -171,7 +163,11 @@ public class IHMJeu extends JPanel{
             boutonVictime1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    Client.choixAction(Integer.parseInt(labelVictime1Valeur.getText()));
+                    if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
+                        Client.choixDistribution(Integer.parseInt(labelVictime1Valeur.getText()),Client.getRoleParNom(joueurs.get(1)),joueurs.get(1));
+                    }else{
+                        Client.choixAction(Integer.parseInt(labelVictime1Valeur.getText()));
+                    }
                 }
             });
             numJoueur++;
@@ -186,7 +182,7 @@ public class IHMJeu extends JPanel{
 
             labelVictime2 = new JLabel("Victime 2");
 
-            if (Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
+            if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
                 numJoueur ++;
             }
             labelVictime2Valeur = new JLabel(Integer.toString(numJoueur));
@@ -195,7 +191,11 @@ public class IHMJeu extends JPanel{
             boutonVictime2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    Client.choixAction(Integer.parseInt(labelVictime2Valeur.getText()));
+                    if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
+                        Client.choixDistribution(Integer.parseInt(labelVictime2Valeur.getText()),Client.getRoleParNom(joueurs.get(2)),joueurs.get(2));
+                    }else{
+                        Client.choixAction(Integer.parseInt(labelVictime2Valeur.getText()));
+                    }
                 }
             });
             numJoueur++;
@@ -209,7 +209,7 @@ public class IHMJeu extends JPanel{
                 panelVictime3 = new JPanel();
                 panelVictime3.setOpaque(false);
                 labelVictime3 = new JLabel("Victime 3");
-                if (Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
+                if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
                     numJoueur ++;
                 }
                 labelVictime3Valeur = new JLabel(Integer.toString(numJoueur));
@@ -218,7 +218,11 @@ public class IHMJeu extends JPanel{
                 boutonVictime3.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Client.choixAction(Integer.parseInt(labelVictime3Valeur.getText()));
+                        if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
+                            Client.choixDistribution(Integer.parseInt(labelVictime3Valeur.getText()),Client.getRoleParNom(joueurs.get(3)),joueurs.get(3));
+                        }else{
+                            Client.choixAction(Integer.parseInt(labelVictime3Valeur.getText()));
+                        }
                     }
                 });
                 numJoueur++;
@@ -235,7 +239,7 @@ public class IHMJeu extends JPanel{
                 panelVictime4 = new JPanel();
                 panelVictime4.setOpaque(false);
                 labelVictime4 = new JLabel("Victime 4");
-                if (Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
+                if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
                     numJoueur ++;
                 }
                 labelVictime4Valeur = new JLabel(Integer.toString(numJoueur));
@@ -244,7 +248,11 @@ public class IHMJeu extends JPanel{
                 boutonVictime4.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Client.choixAction(Integer.parseInt(labelVictime4Valeur.getText()));
+                        if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
+                            Client.choixDistribution(Integer.parseInt(labelVictime4Valeur.getText()),Client.getRoleParNom(joueurs.get(4)),joueurs.get(4));
+                        }else{
+                            Client.choixAction(Integer.parseInt(labelVictime4Valeur.getText()));
+                        }
                     }
                 });
                 numJoueur++;
@@ -260,7 +268,7 @@ public class IHMJeu extends JPanel{
                 panelVictime5 = new JPanel();
                 panelVictime5.setOpaque(false);
                 labelVictime5 = new JLabel("Victime 5");
-                if (Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
+                if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && Client.getRoleParNom(joueurs.get(numJoueur)) instanceof Hackeur){
                     numJoueur ++;
                 }
                 labelVictime5Valeur = new JLabel(Integer.toString(numJoueur));
@@ -269,7 +277,11 @@ public class IHMJeu extends JPanel{
                 boutonVictime5.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Client.choixAction(Integer.parseInt(labelVictime5Valeur.getText()));
+                        if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
+                            Client.choixDistribution(Integer.parseInt(labelVictime5Valeur.getText()),Client.getRoleParNom(joueurs.get(5)),joueurs.get(5));
+                        }else{
+                            Client.choixAction(Integer.parseInt(labelVictime5Valeur.getText()));
+                        }
                     }
                 });
                 numJoueur++;
@@ -279,6 +291,30 @@ public class IHMJeu extends JPanel{
                 panelVictime5.add(labelVictime5Valeur);
             }
 
+
+            if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
+                //=====================Victime 6==============//
+                panelVictime6 = new JPanel();
+                panelVictime6.setOpaque(false);
+                labelVictime6 = new JLabel("Victime 5");
+                labelVictime6Valeur = new JLabel(Integer.toString(numJoueur));
+                labelVictime6Valeur.setVisible(false);
+                boutonVictime6 = new JButton(joueurs.get(numJoueur));
+                boutonVictime6.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
+                            Client.choixDistribution(Integer.parseInt(labelVictime6Valeur.getText()),Client.getRoleParNom(joueurs.get(6)),joueurs.get(6));
+                        }else{
+                            Client.choixAction(Integer.parseInt(labelVictime6Valeur.getText()));
+                        }
+                    }
+                });
+                panelVictime6.setLayout(new BorderLayout());
+                panelVictime6.add(labelVictime6,BorderLayout.NORTH);
+                panelVictime6.add(boutonVictime6,BorderLayout.SOUTH);
+                panelVictime6.add(labelVictime6Valeur);
+            }
 
 
             //=====================Tableau Score =============================//
@@ -306,15 +342,16 @@ public class IHMJeu extends JPanel{
 
         if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
             panelBoutons.removeAll();
-            panelBoutons.add(panelMoi);
+            panelBoutons.add(panelVictime3);
             panelBoutons.add(panelVictime1);
             panelBoutons.add(panelVictime2);
             if (max > 3){
-                panelBoutons.add(panelVictime3);
+                panelBoutons.add(panelVictime4);
                 if (max > 4){
-                    panelBoutons.add(panelVictime4);
+                    panelBoutons.add(panelVictime5);
                     if (max > 5){
-                        panelBoutons.add(panelVictime5);
+                        panelBoutons.add(panelVictime6);
+
                     }
                 }
             }
