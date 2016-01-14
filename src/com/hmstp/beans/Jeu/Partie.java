@@ -145,24 +145,19 @@ public class Partie extends Thread{
         return n;
     }
 
-    public void tour(){
+    public void tour() {
         this.moi.getRole().choixAction();
 
-        while (! moi.getRole().isChoixFait()) {
+        while (!moi.getRole().isChoixFait()) {
             //wait le choix
-            try{
+            try {
                 Thread.sleep(100);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.err.println(e);
             }
         }
 
-        System.out.println("Choix fait");
-
         this.envoyerChoix(this.moi.getRole().retourneChoix());
-
-        System.out.println("Envoie fait");
 
         int i = 0;
         while (i < listParticipant.size()) {
@@ -176,17 +171,16 @@ public class Partie extends Thread{
             i++;
         }
 
-        System.out.println("IA fait");
-
         while (tousOntChoisit()) {
             //wait la réponse des autres
+            try {
+                Thread.sleep(100);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
         }
 
-        System.out.println("Attente fait");
-
         this.resoudreTour();
-
-        System.out.println("Resolution fait");
     }
 
     public boolean pasDeGagnant(){

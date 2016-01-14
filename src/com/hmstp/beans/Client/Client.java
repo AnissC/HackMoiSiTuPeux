@@ -239,7 +239,7 @@ public class Client{
         }
     }
 
-    public static void choixDistibution(int i, String nom){
+    public static void choixDistribution(int i, String nom){
         //.........
     }
 
