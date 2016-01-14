@@ -25,7 +25,7 @@ public class Client{
     private static Joueur moi;
     private static Partie partie;
     private static String adresseIP = "132.227.125.85";
-    private static int port = 8082;
+    private static int port = 1180;
 
     public static Socket serveur;
 
@@ -131,11 +131,8 @@ public class Client{
                                     Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                                 }
                                 else {
-                                    System.out.println("ICI 1");
                                     ServerSocket ss = new ServerSocket(port);
-                                    System.out.println("ICI 2");
                                     Socket c = ss.accept();
-                                    System.out.println("ICI 3");
                                     listParticipant.add(new Joueur(c, mJ.getNom()));
                                     ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, c);
                                     clientEcoute.start();
