@@ -25,6 +25,7 @@ public class Client{
     private static Joueur moi;
     private static Partie partie;
     private static String adresseIP = "132.227.125.85";
+    private static int port = 8080;
 
     public static Socket serveur;
 
@@ -64,12 +65,12 @@ public class Client{
     public static final String CHOIX_DU_TOUR = "CHOIX_DU_TOUR";
     // Client -> Client envoie choix avec un MessageNombre
 
-    private static Socket connexion(String ad) {
+    private static Socket connexion(String ad, int p) {
         Socket c = null;
 
         while (c == null){
             try {
-                c =  new Socket(ad, 8080);
+                c =  new Socket(ad, p);
             } catch (UnknownHostException e) {
                 System.err.println("Nom d'hôte non trouvé");
                 e.printStackTrace();
@@ -130,8 +131,11 @@ public class Client{
                                     Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                                 }
                                 else {
-                                    ServerSocket ss = new ServerSocket(8080);
+                                    System.out.println("ICI 1");
+                                    ServerSocket ss = new ServerSocket(8081);
+                                    System.out.println("ICI 2");
                                     Socket c = ss.accept();
+                                    System.out.println("ICI 3");
                                     listParticipant.add(new Joueur(c, mJ.getNom()));
                                     ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, c);
                                     clientEcoute.start();
@@ -169,7 +173,7 @@ public class Client{
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
-                        Socket sc  = Client.connexion(mej.getJoueur());
+                        Socket sc  = Client.connexion(mej.getJoueur(), 8081);
                         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, sc);
                         clientEcoute.start();
                         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, sc);
@@ -300,7 +304,7 @@ public class Client{
     }
 
     public static void main(String[] args) throws Exception{
-        Client.serveur = Client.connexion(adresseIP);
+        Client.serveur = Client.connexion(adresseIP, port);
 
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, serveur);
         clientEcoute.start();
