@@ -305,7 +305,6 @@ public class IHMJeu extends JPanel{
                     }
                 }
             }
-
         }else if(ecranAffichage.equals(IHM_HACKEUR)){
             panelBoutons.removeAll();
             panelBoutons.add(panelVictime1);
