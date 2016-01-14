@@ -161,7 +161,6 @@ public class Serveur {
                     case Serveur.RECONNEXION:
                         break;
                     case Serveur.PARTIE_FINIE:
-
                         break;
                     case Serveur.JOUEUR_PERDU:
                         break;
