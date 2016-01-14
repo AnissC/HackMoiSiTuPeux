@@ -68,10 +68,6 @@ public class Serveur {
     public boolean ajoutStats(MessageCompte mC){
         return true;
     }
-
-
-
-
     public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
     public final static String INSCRIPTION_OK = "INSCRIPTION_OK";
