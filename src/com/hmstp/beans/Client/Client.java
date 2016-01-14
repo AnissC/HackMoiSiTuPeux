@@ -30,6 +30,10 @@ public class Client{
 
     public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
+    public final static String INSCRIPTION_OK = "INSCRIPTION_OK";
+    // Serveur -> Client
+    public final static String INSCRIPTION_KO = "INSCRIPTION_KO";
+    // Serveur -> Client
     public final static String CONNEXION = "CONNEXION";
     // Sinon connexion : Client -> Serveur, identifiant, mot de passe.
     public static final String CONNEXION_OK = "CONNEXION_OK";
@@ -196,19 +200,19 @@ public class Client{
 
     public static void choixAction(Role r){
         if (r instanceof  Hackeur){
-            ihmClient.setEcranAffichage("Hackeur");
+            ihmJeu.setEcranAffichage("Hackeur");
         }
         else{
-            ihmClient.setEcranAffichage("Entreprise");
+            ihmJeu.setEcranAffichage("Entreprise");
         }
     }
 
     public static void choixDistibution(Role r){
         if (r instanceof  Hackeur){
-            ihmClient.setEcranAffichage("Choix Hackeur");
+            ihmJeu.setEcranAffichage("Choix Hackeur");
         }
         else{
-            ihmClient.setEcranAffichage(((Entreprise)r).getNom());
+            ihmJeu.setEcranAffichage(((Entreprise)r).getNom());
         }
     }
 

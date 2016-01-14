@@ -67,18 +67,19 @@ public class Serveur {
 
 
 
-    private static final String CREER_COMPTE = "CREER_COMPTE";
+    public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
-    public final static String CONNEXION = "CONNEXION";
     public final static String INSCRIPTION_OK = "INSCRIPTION_OK";
-    //Serveur -> Client
+    // Serveur -> Client
     public final static String INSCRIPTION_KO = "INSCRIPTION_KO";
+    // Serveur -> Client
+    public final static String CONNEXION = "CONNEXION";
     // Sinon connexion : Client -> Serveur, identifiant, mot de passe.
-    private static final String CONNEXION_OK = "CONNEXION_OK";
+    public static final String CONNEXION_OK = "CONNEXION_OK";
     // Serveur -> Client connexion réussie
-    private static final String CONNEXION_KO = "CONNEXION_KO";
+    public static final String CONNEXION_KO = "CONNEXION_KO";
     // Serveur -> Client connexion échouée
-    private static final String RECONNEXION = "RECONNEXION";
+    public static final String RECONNEXION = "RECONNEXION";
     // Client -> Serveur acceptation de reprise de partie
     private static final String EN_PARTIE = "EN_PARTIE";
     // Serveur -> Client propose le bouton reconnexion (après connexion réussie)
