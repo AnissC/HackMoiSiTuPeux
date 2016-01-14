@@ -240,8 +240,9 @@ public class IHMJeu extends JPanel{
             panelBoutons.add(panelVictime5);
         }else if (ecranAffichage.equals(IHM_ENTREPRISE)){
             panelBoutons.removeAll();
-            panelBoutons.add(labelEconomiser);
-            panelBoutons.add(labelSeProteger);
+            panelBoutons.add(panelEconomiser);
+            panelBoutons.add(panelSeProteger);
+
         }
 
         //=====================Ajout de tous les panels===================//
