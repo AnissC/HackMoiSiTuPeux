@@ -105,13 +105,14 @@ public class Serveur {
         Message m = null;
         Socket clientSocket = null;
         FileOutputStream logs = new FileOutputStream("logs.txt");
-        String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
+
         while (true){
             synchronized (Serveur.listMessagesRecu) {
                 if (!Serveur.listMessagesRecu.isEmpty()){
                     clientSocket = listMessagesRecu.get(0).getSocket();
                     m = listMessagesRecu.remove(0).getMessage();
                     System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
+                    String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
                     byte[] contentInBytes = s.getBytes();
                     logs.write(contentInBytes);
                 }
@@ -136,6 +137,7 @@ public class Serveur {
                             m = new Message(CONNEXION_OK);
                             listMessagesEnvoyer.add(new Lettre(m, clientSocket));
                             System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
+                            String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
                             byte[] contentInBytes = s.getBytes();
                             logs.write(contentInBytes);
                             //Tester si en partie
@@ -144,6 +146,7 @@ public class Serveur {
                             m = new Message(CONNEXION_KO);
                             listMessagesEnvoyer.add(new Lettre(m,clientSocket));
                             System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
+                            String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
                             byte[] contentInBytes = s.getBytes();
                             logs.write(contentInBytes);
                         }
