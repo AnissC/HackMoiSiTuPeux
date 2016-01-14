@@ -192,13 +192,12 @@ public class IHMJeu extends JPanel{
 
         //=====================Tableau Score =============================//
         ArrayList<String> joueurs = Client.classement();
-        Object[][] donnees = new Object[joueurs.size()][joueurs.size()];
+        Object[][] donnees = new Object[joueurs.size()][3];
         for (int i=0;i<joueurs.size();i++){
-            for (int j=0;j<joueurs.size();j++) {
-                donnees[i][j] = Client.classement().get(i);
-                donnees[i][j] = Client.getRoleParNom(joueurs.get(i)).toString();
-                donnees[i][j] = Client.score(joueurs.get(i));
-            }
+            donnees[i][0] = joueurs.get(i);
+            donnees[i][1] = Client.getRoleParNom(joueurs.get(i)).toString();
+            donnees[i][2] = Client.score(joueurs.get(i));
+
         }
 
         String[] entetes = {"Nom", "Role", "Score"};
