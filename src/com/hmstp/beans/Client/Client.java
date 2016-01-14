@@ -196,6 +196,9 @@ public class Client{
                 }
             }
             m = null;
+            synchronized (listParticipant) {
+                listMessagesRecu.notify();
+            }
         }
     }
 
@@ -204,6 +207,11 @@ public class Client{
             listMessagesEnvoyer.add(msg);
         }
     }
+
+    public static boolean pasNouveauMessages(){
+        return listMessagesRecu.isEmpty();
+    }
+
 
     public static String getNom(){
         return nom;
