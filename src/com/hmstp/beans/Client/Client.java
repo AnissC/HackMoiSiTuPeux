@@ -173,7 +173,9 @@ public class Client{
                             while((h < nbjoueur) && (! listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getJoueur())))) {
                                 h++;
                             }
-                            listParticipant.set(h, new Joueur(sc, mej.getNom()));
+                            Joueur j = new Joueur(sc, mej.getNom());
+                            j.setScore(listParticipant.get(h).getScore());
+                            listParticipant.set(h, j);
                         }
                         break;
                     case Client.CHOIX_DU_TOUR:
