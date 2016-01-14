@@ -193,7 +193,7 @@ public class IHMJeu extends JPanel{
             panelVictime2.add(boutonVictime2,BorderLayout.SOUTH);
 
 
-            if (numJoueur < max){
+            if (max > 3){
                 //=====================Victime 3==============//
                 panelVictime3 = new JPanel();
                 panelVictime3.setOpaque(false);
@@ -219,7 +219,7 @@ public class IHMJeu extends JPanel{
 
 
 
-            if (numJoueur < max){
+            if (max > 4){
                 //=====================Victime 4==============//
                 panelVictime4 = new JPanel();
                 panelVictime4.setOpaque(false);
@@ -242,7 +242,7 @@ public class IHMJeu extends JPanel{
             }
 
 
-            if (numJoueur < max){
+            if (max > 5){
                 //=====================Victime 5==============//
                 panelVictime5 = new JPanel();
                 panelVictime5.setOpaque(false);
