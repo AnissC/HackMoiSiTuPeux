@@ -122,29 +122,34 @@ public class Client{
                         MessagePartie mP = (MessagePartie) m;
                         MessageJoueur mJ;
                         int k = 0;
-                        synchronized (listParticipant) {
-                            while (!(mP.getListJoueur().isEmpty())) {
-                                mJ = mP.getListJoueur().remove(0);
-                                if (mJ.getNom().equals(Client.nom)){
-                                    moi = new Joueur(null, mJ.getNom());
+
+                        while (!(mP.getListJoueur().isEmpty())) {
+                            mJ = mP.getListJoueur().remove(0);
+                            if (mJ.getNom().equals(Client.nom)){
+                                moi = new Joueur(null, mJ.getNom());
+                                synchronized (listParticipant) {
                                     listParticipant.add(moi);
                                     Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                                 }
-                                else {
-                                    ServerSocket ss = new ServerSocket(port);
-                                    Socket c = ss.accept();
+                            }
+                            else {
+                                ServerSocket ss = new ServerSocket(port);
+                                Socket c = ss.accept();
+                                synchronized (listParticipant) {
                                     listParticipant.add(new Joueur(c, mJ.getNom()));
-                                    ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, c);
-                                    clientEcoute.start();
-                                    ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, c);
-                                    clientEcriture.start();
                                 }
-                                k++;
+                                ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, c);
+                                clientEcoute.start();
+                                ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, c);
+                                clientEcriture.start();
                             }
-                            while(k < nbjoueur){
-                                listParticipant.add(new Ramplacant("Ordinateur"+ k));
-                                k++;
+                            k++;
+                        }
+                        while(k < nbjoueur){
+                            synchronized (listParticipant) {
+                                listParticipant.add(new Ramplacant("Ordinateur" + k));
                             }
+                            k++;
                         }
                         Client.lancerJeu();
                         Thread.sleep(1000);
