@@ -145,9 +145,10 @@ public class IHMJeu extends JPanel{
     }
 
     public void dessine(){
+        int max = 0;
         if(! ecranAffichage.equals(IHM_VIDE)) {
             ArrayList<String> joueurs = Client.classement();
-            int max = joueurs.size();
+            max = joueurs.size();
             numJoueur = 0;
             //======================Victime 1=============//
             panelVictime1 = new JPanel();
@@ -292,19 +293,32 @@ public class IHMJeu extends JPanel{
 
         if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
             panelBoutons.removeAll();
+            panelBoutons.add(panelMoi);
             panelBoutons.add(panelVictime1);
             panelBoutons.add(panelVictime2);
-            panelBoutons.add(panelVictime3);
-            panelBoutons.add(panelVictime4);
-            panelBoutons.add(panelVictime5);
-            panelBoutons.add(panelMoi);
+            if (max > 3){
+                panelBoutons.add(panelVictime3);
+                if (max > 4){
+                    panelBoutons.add(panelVictime4);
+                    if (max > 5){
+                        panelBoutons.add(panelVictime5);
+                    }
+                }
+            }
+
         }else if(ecranAffichage.equals(IHM_HACKEUR)){
             panelBoutons.removeAll();
             panelBoutons.add(panelVictime1);
             panelBoutons.add(panelVictime2);
-            panelBoutons.add(panelVictime3);
-            panelBoutons.add(panelVictime4);
-            panelBoutons.add(panelVictime5);
+            if (max > 3){
+                panelBoutons.add(panelVictime3);
+                if (max > 4){
+                    panelBoutons.add(panelVictime4);
+                    if (max > 5){
+                        panelBoutons.add(panelVictime5);
+                    }
+                }
+            }
         }else if (ecranAffichage.equals(IHM_ENTREPRISE)){
             panelBoutons.removeAll();
             panelBoutons.add(panelEconomiser);
