@@ -243,8 +243,8 @@ public class Client{
     public static ArrayList<String> classement(){
         int i = 0;
         ArrayList<String> listNom = new ArrayList<>();
-        synchronized (listMessagesEnvoyer) {
-            while (i < listMessagesEnvoyer.size()) {
+        synchronized (listParticipant) {
+            while (i < listParticipant.size()) {
                 listNom.add(listParticipant.get(i).getNom());
                 i++;
             }
@@ -254,8 +254,8 @@ public class Client{
 
     public static int score(String nom){
         int i = 0;
-        synchronized (listMessagesEnvoyer) {
-            while ((i < listMessagesEnvoyer.size()) && (listParticipant.get(i).getNom() != nom)){
+        synchronized (listParticipant) {
+            while ((i < listParticipant.size()) && (listParticipant.get(i).getNom() != nom)){
                 i++;
             }
             return listParticipant.get(i).getScore();
@@ -264,8 +264,8 @@ public class Client{
 
     public static Role getRoleParNom(String nom){
         int i = 0;
-        synchronized (listMessagesEnvoyer) {
-            while ((i < listMessagesEnvoyer.size()) && (listParticipant.get(i).getNom() != nom)){
+        synchronized (listParticipant) {
+            while ((i < listParticipant.size()) && (listParticipant.get(i).getNom() != nom)){
                 i++;
             }
             return listParticipant.get(i).getRole();
