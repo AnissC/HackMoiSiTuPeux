@@ -28,6 +28,7 @@ public class GestionPartie {
             MessageJoueur mj = new MessageJoueur(lobby[caseLobby].get(i).getSocket().getInetAddress().toString(),lobby[caseLobby].get(i).getNom(),Serveur.PARTIE_FINIE);
             listeJoueur.add(mj);
             if (! lobby[caseLobby].get(i).getNom().equals(nomJoueur)){
+                System.out.println(lobby[caseLobby].get(i).getSocket().getInetAddress().toString());
                 Serveur.message(new Lettre(mej,lobby[caseLobby].get(i).getSocket()));
             }
         }
