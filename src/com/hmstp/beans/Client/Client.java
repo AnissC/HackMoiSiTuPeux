@@ -221,6 +221,7 @@ public class Client{
             ihmJeu.setEcranAffichage(IHMJeu.IHM_HACKEUR);
         }
         else{
+            System.out.println("TOTO");
             ihmJeu.setEcranAffichage(IHMJeu.IHM_ENTREPRISE);
         }
     }
