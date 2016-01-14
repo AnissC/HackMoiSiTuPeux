@@ -249,6 +249,7 @@ public class IHMJeu extends JPanel{
         panelJeu.add(panelInfo);
         panelJeu.add(panelBoutons);
 
+        frameJeu.add(panelJeu);
         frameJeu.validate();
         frameJeu.repaint();
     }
