@@ -115,7 +115,6 @@ public class Client{
                     case Client.PAS_EN_PARTIE:
                         ihmClient.setEcranAffichage(IHMClient.IHM_MENU);
                         // Choix interface graphique
-                        nbjoueur = 5;
                         break;
                     case Client.PARTIE_TROUVE:
                         MessagePartie mP = (MessagePartie) m;
@@ -128,7 +127,6 @@ public class Client{
                                     moi = new Joueur(null, mJ.getNom());
                                     listParticipant.add(moi);
                                     Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
-                                    Client.partie.run();
                                 }
                                 else {
                                     Socket c  = Client.connexion(mJ.getJoueur());
@@ -145,6 +143,7 @@ public class Client{
                                 k++;
                             }
                         }
+                        Client.partie.run();
                         Client.lancerJeu();
                         break;
                     case Client.CREER_PARTIE:
@@ -211,6 +210,10 @@ public class Client{
 
     public static void setNom(String n){
         Client.nom = n;
+    }
+
+    public static void setNbjoueur(int n){
+        Client.nbjoueur = n;
     }
 
     public static void choixAction(Role r){
