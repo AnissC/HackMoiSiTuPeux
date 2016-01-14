@@ -141,7 +141,7 @@ public class Client{
                                 k++;
                             }
                             while(k < nbjoueur){
-                                listParticipant.add(new Ramplacant("Ordinateur"));
+                                listParticipant.add(new Ramplacant("Ordinateur"+ k));
                                 k++;
                             }
                         }
