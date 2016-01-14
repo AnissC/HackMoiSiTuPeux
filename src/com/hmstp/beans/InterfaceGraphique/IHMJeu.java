@@ -52,7 +52,14 @@ public class IHMJeu extends JPanel{
     private JLabel labelSeProteger;
     private JButton boutonSeProteger;
 
-    public void start(){
+    private String ecranAffichage = "a remplir";
+
+    public void setEcranAffichage(String ecranAffichage) {
+        this.ecranAffichage = ecranAffichage;
+        dessine();
+    }
+
+    public void go(){
         frameJeu = new JFrame("Hack moi si tu peux");
         panelJeu = new IHMJeu();
         panelJeu.setLayout(null);
@@ -237,7 +244,7 @@ public class IHMJeu extends JPanel{
             @Override
             public void run() {
                 IHMJeu game = new IHMJeu();
-                game.start();
+                game.go();
             }
         });
     }

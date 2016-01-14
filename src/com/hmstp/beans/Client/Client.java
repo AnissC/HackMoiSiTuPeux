@@ -1,6 +1,7 @@
 package com.hmstp.beans.Client;
 
 import com.hmstp.beans.InterfaceGraphique.IHMClient;
+import com.hmstp.beans.InterfaceGraphique.IHMJeu;
 import com.hmstp.beans.Jeu.*;
 import com.hmstp.beans.Message.*;
 
@@ -18,6 +19,7 @@ public class Client{
     private static ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
     private static ArrayList<Participant> listParticipant = new ArrayList<>();
     private static IHMClient ihmClient = new IHMClient();
+    private static IHMJeu ihmJeu = new IHMJeu();
     private static int nbjoueur = 0;
     private static String nom;
     private static Joueur moi;
@@ -134,6 +136,7 @@ public class Client{
                                 k++;
                             }
                         }
+                        Client.lancerJeu();
                         break;
                     case Client.CREER_PARTIE:
                         MessageJoueur mj = (MessageJoueur) m;
@@ -148,6 +151,7 @@ public class Client{
                             Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                             Client.partie.run();
                         }
+                        Client.lancerJeu();
                         break;
                     case Client.COMMENCER_PARTIE:
                         partie.setActive(true);
@@ -247,6 +251,15 @@ public class Client{
             }
             return listParticipant.get(i).getRole();
         }
+    }
+
+    public static void lancerJeu(){
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ihmJeu.go();
+            }
+        });
     }
 
     public static void main(String[] args) throws Exception{
