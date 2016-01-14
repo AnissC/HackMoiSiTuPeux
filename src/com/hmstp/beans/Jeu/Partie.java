@@ -76,7 +76,7 @@ public class Partie extends Thread{
 
     public boolean tousOntChoisit(){
         for (int i = 0; i < nbParticipants; i++) {
-            if (listParticipant.get(i).getRole().isChoixFait()) {
+            if (! listParticipant.get(i).getRole().isChoixFait()) {
                 return true;
             }
         }
@@ -106,33 +106,35 @@ public class Partie extends Thread{
 
         Participant victime = listParticipant.remove(((Hackeur) listParticipant.get(i).getRole()).getVictime());
         if (((Entreprise)victime.getRole()).getProtection()){
-            listTemp.add(listParticipant.remove(i));
-            listTemp.add(victime);
+            listTemp.add(0, listParticipant.remove(i));
+            listTemp.add(1, victime);
         }
         else {
-            listTemp.add(victime);
-            listTemp.add(listParticipant.remove(i));
+            listTemp.add(0, victime);
+            listTemp.add(1, listParticipant.remove(i));
         }
 
-        if (this.active){
+        //if (this.active){
             listTemp.get(0).changeScore(0 - ((Entreprise)victime.getRole()).getValeur());
             listTemp.get(1).changeScore(((Entreprise)victime.getRole()).getValeur());
-        }
+        //}
 
-        while(i < listParticipant.size()){
-            if (this.active) {
+        i=2;
+        while(i < nbParticipants){
+            //if (this.active) {
                 if (!(((Entreprise)listParticipant.get(0).getRole()).getProtection())){
                     listParticipant.get(0).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
                 }
-            }
+            //}
             listTemp.add(listParticipant.remove(0));
+            i++;
         }
 
         listParticipant = listTemp;
 
         i= 0;
-        while(i < listParticipant.size()){
-            listParticipant.get(0).getRole().remmettreZero();;
+        while(i < nbParticipants){
+            listParticipant.get(i).getRole().remmettreZero();
             i++;
         }
     }
@@ -143,17 +145,19 @@ public class Partie extends Thread{
         return n;
     }
 
-    public void tour(){
+    public void tour() {
         this.moi.getRole().choixAction();
-        while (! moi.getRole().isChoixFait()) {
+
+        while (!moi.getRole().isChoixFait()) {
             //wait le choix
+            try {
+                Thread.sleep(100);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
         }
 
-        System.out.println("Choix fait");
-
         this.envoyerChoix(this.moi.getRole().retourneChoix());
-
-        System.out.println("Envoie fait");
 
         int i = 0;
         while (i < listParticipant.size()) {
@@ -167,17 +171,16 @@ public class Partie extends Thread{
             i++;
         }
 
-        System.out.println("IA fait");
-
         while (tousOntChoisit()) {
             //wait la réponse des autres
+            try {
+                Thread.sleep(100);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
         }
 
-        System.out.println("Attente fait");
-
         this.resoudreTour();
-
-        System.out.println("Resolution fait");
     }
 
     public boolean pasDeGagnant(){
