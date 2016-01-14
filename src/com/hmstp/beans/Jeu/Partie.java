@@ -25,7 +25,7 @@ public class Partie extends Thread{
     public Partie(ArrayList<Participant> lp, ArrayList<Lettre> lme, Joueur j){
         this.listParticipant = lp;
         this.listMessagesEnvoyer = lme;
-        this.nbParticipants = this.listParticipant.size();
+        this.nbParticipants = Client.getNbjoueur();
         this.active = false;
         this.moi = j;
     }

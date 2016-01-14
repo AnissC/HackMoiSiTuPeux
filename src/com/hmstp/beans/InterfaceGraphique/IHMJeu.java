@@ -196,7 +196,6 @@ public class IHMJeu extends JPanel{
     }
 
     public void dessine(){
-
         if(! ecranAffichage.equals(IHM_VIDE)) {
             //=====================Tableau Score =============================//
             ArrayList<String> joueurs = Client.classement();
@@ -207,10 +206,9 @@ public class IHMJeu extends JPanel{
                     donnees[i][1] = "Hackeur";
                 }
                 else{
-                    donnees[i][1] = "Entreprise";//((Entreprise)Client.getRoleParNom(joueurs.get(i))).getNom();
+                    donnees[i][1] = ((Entreprise)Client.getRoleParNom(joueurs.get(i))).getNom();
                 }
                 donnees[i][2] = "" + Client.score(joueurs.get(i));
-
             }
 
             String[] entetes = {"Nom", "Role", "Score"};
@@ -249,7 +247,6 @@ public class IHMJeu extends JPanel{
         panelJeu.add(panelInfo);
         panelJeu.add(panelBoutons);
 
-        frameJeu.add(panelJeu);
         frameJeu.validate();
         frameJeu.repaint();
     }
