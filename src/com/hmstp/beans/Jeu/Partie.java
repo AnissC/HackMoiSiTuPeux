@@ -62,8 +62,8 @@ public class Partie extends Thread{
     }
 
     public void distributionRoleMancheN(){
-        if (moi == listParticipant.get(0)){
-            /*Client.choixDistibution(hackeur);
+        if (moi.isPerdant()){
+            Client.choixDistibution(hackeur);
             Client.choixDistibution(e1);
             Client.choixDistibution(e2);
 
@@ -84,16 +84,16 @@ public class Partie extends Thread{
                 } catch (Exception e) {
                     System.err.println(e);
                 }
-            }*/
+            }
 
         }
         else if (listParticipant.get(0).isRemplacant()){
             distributionRoleManche1();
             int i = 0;
-            while(i < nbParticipants){
+            /*while(i < nbParticipants){
                 listParticipant.get(i).getRole().remmettreZero();
                 i++;
-            }
+            }*/
         }
         else{
             //afficher un message d'attente
@@ -124,55 +124,40 @@ public class Partie extends Thread{
     }
 
     public void resoudreTour(){
-        ArrayList<Participant> listTemp = new ArrayList<>();
         int i = 0;
         while (!(listParticipant.get(i).getRole() instanceof Hackeur)) {
             i++;
         }
 
-        Participant hackeur = listParticipant.remove(i);
-        Participant victime;
-        if(((Hackeur) hackeur.getRole()).getVictime() > i){
-            victime = listParticipant.remove(((Hackeur) hackeur.getRole()).getVictime() - 1);
-        }
-        else{
-            victime = listParticipant.remove(((Hackeur) hackeur.getRole()).getVictime());
-        }
+        Participant hackeur = listParticipant.get(i);
+        Participant victime = listParticipant.get(((Hackeur) hackeur.getRole()).getVictime());
 
         if (((Entreprise)victime.getRole()).getProtection()){
-            listTemp.add(hackeur);
-            listTemp.add(victime);
+            hackeur.setPerdant(true);
+            if (this.active) {
+                hackeur.changeScore(0 - ((Entreprise) victime.getRole()).getValeur());
+                victime.changeScore(((Entreprise) victime.getRole()).getValeur());
+            }
         }
         else {
-            listTemp.add(victime);
-            listTemp.add(hackeur);
+            victime.setPerdant(true);
+            if (this.active) {
+                victime.changeScore(0 - ((Entreprise) victime.getRole()).getValeur());
+                hackeur.changeScore(((Entreprise) victime.getRole()).getValeur());
+            }
         }
 
-        if (this.active){
-            listTemp.get(0).changeScore(0 - ((Entreprise)victime.getRole()).getValeur());
-            listTemp.get(1).changeScore(((Entreprise)victime.getRole()).getValeur());
-        }
 
-        i=2;
+        i=0;
         while(i < nbParticipants){
             if (this.active) {
-                if (!(((Entreprise)listParticipant.get(0).getRole()).getProtection())){
-                    listParticipant.get(0).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
+                if ((!(listParticipant.get(i) == hackeur)) || (!(listParticipant.get(i) == victime))){
+                    listParticipant.get(i).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
                 }
             }
-            listTemp.add(listParticipant.remove(0));
             i++;
         }
 
-        while(i > 0) {
-            listParticipant.add(listTemp.remove(0));
-            i--;
-        }
-
-        while(i < nbParticipants){
-            listParticipant.get(i).getRole().remmettreZero();
-            i++;
-        }
 
     }
 

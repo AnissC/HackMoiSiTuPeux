@@ -5,6 +5,7 @@ public abstract class Participant {
     private Role role;
     private int score;
     private String nom;
+    private boolean perdant;
 
     public Participant(String n){
         this.role = null;
@@ -25,6 +26,14 @@ public abstract class Participant {
         if(this.score < 0){
             this.score = 0;
         }
+    }
+
+    public boolean isPerdant() {
+        return perdant;
+    }
+
+    public void setPerdant(boolean perdant) {
+        this.perdant = perdant;
     }
 
     public Role getRole() {
