@@ -133,13 +133,14 @@ public class Partie extends Thread{
         else{
             victime = listParticipant.remove(((Hackeur) hackeur.getRole()).getVictime());
         }
+
         if (((Entreprise)victime.getRole()).getProtection()){
-            listTemp.add(0, hackeur);
-            listTemp.add(1, victime);
+            listTemp.add(hackeur);
+            listTemp.add(victime);
         }
         else {
-            listTemp.add(0, victime);
-            listTemp.add(1, hackeur);
+            listTemp.add(victime);
+            listTemp.add(hackeur);
         }
 
         //if (this.active){
