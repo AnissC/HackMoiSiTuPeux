@@ -139,7 +139,7 @@ public class Partie extends Thread{
         int taille = 6;
         while(i < taille){
             if (! listRole.get(i).isChoixFait()) {
-                System.out.println(listRole.get(i).isChoixFait());
+                System.out.println(listRole.get(i));
                 try {
                     Thread.sleep(100);
                 } catch (Exception e) {
