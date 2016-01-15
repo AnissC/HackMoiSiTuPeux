@@ -199,7 +199,6 @@ public class Partie extends Thread{
             if (listParticipant.get(i).isRemplacant()) {
                 if (listParticipant.get(i).getRole() instanceof Entreprise) {
                     listParticipant.get(i).getRole().choixAction(litRandom.get(max()%nbParticipants) % 2);
-                    litRandom.add(litRandom.remove(0));
                 } else {
                     listParticipant.get(i).getRole().choixAction(litRandom.get(max()%nbParticipants));
                 }
