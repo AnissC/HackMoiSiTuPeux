@@ -168,7 +168,6 @@ public class Client{
                                 j++;
                             }
                             Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
-                            Client.partie.start();
                         }
                         Client.lancerJeu();
                         Thread.sleep(1000);
