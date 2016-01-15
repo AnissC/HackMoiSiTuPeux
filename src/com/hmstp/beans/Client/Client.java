@@ -24,7 +24,7 @@ public class Client{
     private static String nom;
     private static Joueur moi;
     private static Partie partie;
-    private static String adresseIP = "132.227.125.85";
+    private static String adresseIP = "169.254.129.165";
     private static int port = 1180;
 
     public static Socket serveur;
