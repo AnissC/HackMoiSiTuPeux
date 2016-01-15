@@ -183,6 +183,7 @@ public class Client{
                             }
                             Joueur j = new Joueur(socketclient, mej.getNom());
                             j.setScore(listParticipant.get(h).getScore());
+                            j.setRole(listParticipant.get(h).getRole());
                             listParticipant.set(h, j);
                         }
                         synchronized (listParticipant) {

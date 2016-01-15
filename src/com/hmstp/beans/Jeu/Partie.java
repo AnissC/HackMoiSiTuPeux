@@ -169,10 +169,10 @@ public class Partie extends Thread{
             i--;
         }
 
-        /*while(i < nbParticipants){
+        while(i < nbParticipants){
             listParticipant.get(i).getRole().remmettreZero();
             i++;
-        }*/
+        }
 
     }
 
