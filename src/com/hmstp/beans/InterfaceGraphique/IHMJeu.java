@@ -342,15 +342,16 @@ public class IHMJeu extends JPanel{
 
         if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
             panelBoutons.removeAll();
-            panelBoutons.add(panelVictime3);
+            panelBoutons.add(panelVictime6);
             panelBoutons.add(panelVictime1);
             panelBoutons.add(panelVictime2);
             if (max > 3){
-                panelBoutons.add(panelVictime4);
+                panelBoutons.add(panelVictime3);
+
                 if (max > 4){
-                    panelBoutons.add(panelVictime5);
+                    panelBoutons.add(panelVictime4);
                     if (max > 5){
-                        panelBoutons.add(panelVictime6);
+                        panelBoutons.add(panelVictime5);
 
                     }
                 }
