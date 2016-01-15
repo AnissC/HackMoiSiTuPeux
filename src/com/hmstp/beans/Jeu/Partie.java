@@ -50,7 +50,7 @@ public class Partie extends Thread{
         }
     }
 
-    public void choixDistribution(int j, Role role, String nom) {
+    public void choixDistribution(Participant p ,Role role, String nom) {
         int i = 0;
         synchronized (listParticipant) {
             while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(nom))){

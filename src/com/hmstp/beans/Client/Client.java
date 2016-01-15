@@ -262,7 +262,7 @@ public class Client{
         }
     }
 
-    public static void choixDistribution(int i, int role, String nom){
+    public static void choixDistribution(Participant p, int role){
         partie.choixDistribution(i, role, nom);
     }
 
