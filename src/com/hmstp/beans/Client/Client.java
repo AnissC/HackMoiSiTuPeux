@@ -25,7 +25,7 @@ public class Client{
 
     //public static String adresseIP = "169.254.129.165";
     public static String adresseIP = "132.227.125.85";
-    public static int port = 8080;
+    public static int port = 1180;
     public static Socket serveur;
 
     public static final String CREER_COMPTE = "CREER_COMPTE";
@@ -135,11 +135,11 @@ public class Client{
                                 }
                             }
                             else {
-                                Socket c  = Client.connexion(mJrecu.getJoueur().substring(1), port);
+                                Socket autreC  = Client.connexion(mJrecu.getJoueur().substring(1), port);
                                 synchronized (listParticipant) {
-                                    listParticipant.add(new Joueur(c, mJrecu.getNom()));
+                                    listParticipant.add(new Joueur(autreC, mJrecu.getNom()));
                                     mJenvoyer = new MessageJoueur(null, nom, Client.NOUVEAU_JOUEUR);
-                                    Client.message(new Lettre(mJenvoyer,c));
+                                    Client.message(new Lettre(mJenvoyer,autreC));
                                 }
                             }
                             k++;
@@ -155,7 +155,7 @@ public class Client{
                         Client.partie.start();
                         break;
                     case Client.CREER_PARTIE:
-                        MessageJoueur mj = (MessageJoueur) m;
+                       /* MessageJoueur mj = (MessageJoueur) m;
                         synchronized (listParticipant) {
                             moi = new Joueur(null, mj.getNom());
                             listParticipant.add(moi);
@@ -167,7 +167,7 @@ public class Client{
                             Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                             Client.partie.start();
                         }
-                        Client.lancerJeu();
+                        Client.lancerJeu();*/
                         break;
                     case Client.COMMENCER_PARTIE:
                         partie.setActive(true);
@@ -296,7 +296,7 @@ public class Client{
     }
 
     public static void main(String[] args) throws Exception{
-        Client.serveur = Client.connexion(adresseIP, 8081);
+        Client.serveur = Client.connexion(adresseIP, 8080);
 
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, serveur);
         clientEcoute.start();
