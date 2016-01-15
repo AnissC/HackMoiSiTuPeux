@@ -144,7 +144,9 @@ public class Client{
                                 Socket autreC  = Client.connexion(mJrecu.getJoueur().substring(1), port);
                                 synchronized (listParticipant) {
                                     listParticipant.add(new Joueur(autreC, mJrecu.getNom()));
+                                    System.out.println("Bonjour");
                                     mJenvoyer = new MessageJoueur(null, nom, Client.NOUVEAU_JOUEUR);
+                                    System.out.println("Bonsoir");
                                     Client.message(new Lettre(mJenvoyer,autreC));
                                 }
                             }
