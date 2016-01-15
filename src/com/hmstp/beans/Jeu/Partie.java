@@ -46,7 +46,8 @@ public class Partie extends Thread{
 
         i=0;
         while(i < nbParticipants){
-            Integer j = litRandomTemp.remove((nbParticipants*2+3+i)%litRandomTemp.size());
+            //random controlé
+            Integer j = litRandomTemp.remove((nbParticipants*2+3+i*3-i)%litRandomTemp.size());
             litRandom.add(j);
             i++;
         }
