@@ -223,12 +223,14 @@ public class Client{
                     case Client.CHOIX_DU_TOUR:
                         MessageChoix mC = (MessageChoix) m;
                         int o = 0;
-                        synchronized (listParticipant) {
-                            while ((o < nbjoueur) && (listParticipant.get(o).getNom().equals(mC.getJoueur()))) {
-                                o++;
-                            }
-                            listParticipant.get(o).getRole().choixAction(mC.getNombre());
+                        while ((o < listParticipant.size()) && (! listParticipant.get(o).getNom().equals(mC.getJoueur()))){
+                            o++;
                         }
+                        listParticipant.get(o).getRole().choixAction(mC.getNombre());
+                        break;
+                    case Client.CHOIX_DU_ROLE:
+                        MessageChoix mc = (MessageChoix) m;
+                        choixDistribution(mc.getJoueur(),mc.getNombre());
                         break;
                 }
             }
@@ -277,6 +279,9 @@ public class Client{
     }
 
     public static void choixDistribution(Participant p, int role){
+        partie.choixDistribution(p, role);
+    }
+    public static void choixDistribution(String p, int role){
         partie.choixDistribution(p, role);
     }
 
