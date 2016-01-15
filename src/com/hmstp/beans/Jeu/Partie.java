@@ -136,7 +136,7 @@ public class Partie extends Thread{
 
     public boolean tousOntChoisit(){
         int i = 0;
-        int taille = listRole.size();
+        int taille = 6;
         while(i < taille){
             if (! listRole.get(i).isChoixFait()) {
                 return true;
