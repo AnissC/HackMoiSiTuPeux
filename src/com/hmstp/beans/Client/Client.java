@@ -267,13 +267,8 @@ public class Client{
         }
     }
 
-    public static void choixDistibution(Role r){
-        if (r instanceof  Hackeur){
-            ihmJeu.setEcranAffichage(IHMJeu.IHM_ASSIGNE_ROLE);
-        }
-        else{
-            ihmJeu.setEcranAffichage(((Entreprise)r).getNom());
-        }
+    public static void choixDistibution(){
+        ihmJeu.setEcranAffichage(IHMJeu.IHM_ASSIGNE_ROLE);
     }
 
     public static void choixDistribution(Participant p, int role){

@@ -71,19 +71,7 @@ public class Partie extends Thread{
 
     public void distributionRoleMancheN(){
         if (moi.isPerdant()){
-            Client.choixDistibution(hackeur);
-            Client.choixDistibution(e1);
-            Client.choixDistibution(e2);
-
-            if(this.nbParticipants >= NB4){
-                Client.choixDistibution(e3);
-                if (this.nbParticipants >= NB5){
-                    Client.choixDistibution(e4);
-                    if (this.nbParticipants == NB6) {
-                        Client.choixDistibution(e5);
-                    }
-                }
-            }
+            Client.choixDistibution();
 
             while (!tousOntChoisit()) {
                 //wait le choix des rôles
