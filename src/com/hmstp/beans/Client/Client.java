@@ -290,13 +290,12 @@ public class Client{
                 j = 0 ;
                 i++;
             }
+            while(i > 0) {
+                listParticipant.add(listTemp.remove(0));
+                i--;
+            }
+            return listTemp;
         }
-
-        while(i > 0) {
-            listParticipant.add(listTemp.remove(0));
-            i--;
-        }
-        return listTemp;
     }
 
     public static int score(String no){
