@@ -281,14 +281,15 @@ public class Client{
         int j = 0;
 
         synchronized (listParticipant) {
-            MJ = mpSyn.getListJoueur().get(i);
-            while ((j < listParticipant.size()) && (! listParticipant.get(j).getNom().equals(MJ.getNom()))){
 
-                j++;
-            }
         }
         while(i < nbjoueur){
-            listTemp.add(listParticipant.remove(0));
+            MJ = mpSyn.getListJoueur().get(i);
+            while ((j < listParticipant.size()) && (! listParticipant.get(j).getNom().equals(MJ.getNom()))){
+                j++;
+            }
+            listTemp.add(listParticipant.remove(j));
+            j = 0 ;
             i++;
         }
         while(i > 0) {
