@@ -322,12 +322,12 @@ public class IHMJeu extends JPanel{
             String[][] donnees = new String[joueurs.size()][3];
             for (int i = 0; i < joueurs.size(); i++) {
                 donnees[i][0] = joueurs.get(i).getNom();
-                if (Client.getRoleParNom(joueurs.get(i).getNom()) instanceof Hackeur) {
+                if (joueurs.get(i).getRole() instanceof Hackeur) {
                     donnees[i][1] = "Hackeur";
 
                 }
                 else{
-                    donnees[i][1] = ((Entreprise)Client.getRoleParNom(joueurs.get(i).getNom())).getNom();
+                    donnees[i][1] = ((Entreprise)joueurs.get(i).getRole()).getNom();
                 }
                 donnees[i][2] = "" + Client.score(joueurs.get(i).getNom());
             }
