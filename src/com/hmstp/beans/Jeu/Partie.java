@@ -15,8 +15,9 @@ public class Partie extends Thread{
     private ArrayList<Lettre> listMessagesEnvoyer;
     private boolean active;
     private int perdant;
-    private ArrayList<Integer> litRandom;
+    private ArrayList<Integer> listRandom;
     private Joueur moi;
+    private ArrayList<Role> listRole;
     private Hackeur hackeur = Hackeur.getInstance();
     private Entreprise e1 = new Entreprise(2, "Moyenne entreprise");
     private Entreprise e2 = new Entreprise(1, "Petite entreprise");
@@ -32,11 +33,18 @@ public class Partie extends Thread{
         this.moi = j;
         this.initRandom();
 
+        listRole.add(hackeur);
+        listRole.add(e1);
+        listRole.add(e2);
+        listRole.add(e3);
+        listRole.add(e4);
+        listRole.add(e5);
+
     }
 
     public void initRandom() {
         int i = 0;
-        litRandom = new ArrayList<>();
+        listRandom = new ArrayList<>();
         ArrayList<Integer>litRandomTemp = new ArrayList<>();
 
         while(i < nbParticipants){
@@ -50,11 +58,11 @@ public class Partie extends Thread{
         while(i < nbParticipants){
             //random controlé
             Integer j = litRandomTemp.remove((nbParticipants*2+3+i*3-i)%litRandomTemp.size());
-            litRandom.add(j);
+            listRandom.add(j);
             i++;
         }
 
-        System.out.println(litRandom.toString());
+        System.out.println(listRandom.toString());
     }
 
     public void setActive(boolean active) {
@@ -62,16 +70,16 @@ public class Partie extends Thread{
     }
 
     public void distributionRoleManche1(){
-        this.listParticipant.get(litRandom.get((max())%nbParticipants)).setRole(hackeur);
-        this.listParticipant.get(litRandom.get((1+max())%nbParticipants)).setRole(e1);
-        this.listParticipant.get(litRandom.get((2+max())%nbParticipants)).setRole(e2);
+        this.listParticipant.get(listRandom.get((max())%nbParticipants)).setRole(hackeur);
+        this.listParticipant.get(listRandom.get((1+max())%nbParticipants)).setRole(e1);
+        this.listParticipant.get(listRandom.get((2+max())%nbParticipants)).setRole(e2);
 
         if(this.nbParticipants >= NB4){
-            this.listParticipant.get(litRandom.get(3+max())%nbParticipants).setRole(e3);
+            this.listParticipant.get(listRandom.get(3+max())%nbParticipants).setRole(e3);
             if (this.nbParticipants >= NB5){
-                this.listParticipant.get(litRandom.get((4+max())%nbParticipants)).setRole(e4);
+                this.listParticipant.get(listRandom.get((4+max())%nbParticipants)).setRole(e4);
                 if (this.nbParticipants == NB6) {
-                    this.listParticipant.get(litRandom.get((5+max())%nbParticipants)).setRole(e5);
+                    this.listParticipant.get(listRandom.get((5+max())%nbParticipants)).setRole(e5);
                 }
             }
         }
@@ -99,7 +107,7 @@ public class Partie extends Thread{
         if (moi.isPerdant()){
             Client.choixDistibution();
 
-            while (!tousOntChoisit()) {
+            while (! tousOntChoisit()) {
                 //wait le choix des rôles
                 try {
                     Thread.sleep(100);
@@ -131,8 +139,8 @@ public class Partie extends Thread{
     }
 
     public boolean tousOntChoisit(){
-        for (int i = 0; i < nbParticipants; i++) {
-            if (! listParticipant.get(i).getRole().isChoixFait()) {
+        for (int i = 0; i < listRole.size(); i++) {
+            if (! listRole.get(i).isChoixFait()) {
                 return true;
             }
         }
@@ -212,9 +220,9 @@ public class Partie extends Thread{
         while (i < listParticipant.size()) {
             if (listParticipant.get(i).isRemplacant()) {
                 if (listParticipant.get(i).getRole() instanceof Entreprise) {
-                    listParticipant.get(i).getRole().choixAction(litRandom.get(max()%nbParticipants) % 2);
+                    listParticipant.get(i).getRole().choixAction(listRandom.get(max()%nbParticipants) % 2);
                 } else {
-                    temp = litRandom.get(max()%nbParticipants);
+                    temp = listRandom.get(max()%nbParticipants);
                     if (temp == i){
                         temp = (temp + 1)%nbParticipants;
                     }
