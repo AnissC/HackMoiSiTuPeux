@@ -25,7 +25,7 @@ public class Client{
     private static Joueur moi;
     private static Partie partie;
     private static String adresseIP = "169.254.129.165";
-    private static int port = 8081;
+    private static int port = 8080;
 
     public static Socket serveur;
 
@@ -133,8 +133,7 @@ public class Client{
                                 }
                             }
                             else {
-                                ServerSocket ss = new ServerSocket(port);
-                                Socket c = ss.accept();
+                                Socket c  = Client.connexion(mJ.getJoueur(), port);
                                 synchronized (listParticipant) {
                                     listParticipant.add(new Joueur(c, mJ.getNom()));
                                 }
@@ -175,10 +174,11 @@ public class Client{
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
-                        Socket sc  = Client.connexion(mej.getJoueur(), port);
-                        ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, sc);
+                        ServerSocket ss = new ServerSocket(port);
+                        Socket c = ss.accept();
+                        ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, c);
                         clientEcoute.start();
-                        ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, sc);
+                        ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, c);
                         clientEcriture.start();
                         joueurEnAttente = true;
                         int h = 0;
@@ -186,7 +186,7 @@ public class Client{
                             while((h < nbjoueur) && (! listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
                                 h++;
                             }
-                            Joueur j = new Joueur(sc, mej.getNom());
+                            Joueur j = new Joueur(c, mej.getNom());
                             j.setScore(listParticipant.get(h).getScore());
                             listParticipant.set(h, j);
                         }
@@ -306,7 +306,7 @@ public class Client{
     }
 
     public static void main(String[] args) throws Exception{
-        Client.serveur = Client.connexion(adresseIP, 8080);
+        Client.serveur = Client.connexion(adresseIP, 8081);
 
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, serveur);
         clientEcoute.start();
