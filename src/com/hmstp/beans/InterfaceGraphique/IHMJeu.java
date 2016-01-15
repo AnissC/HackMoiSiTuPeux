@@ -310,7 +310,7 @@ public class IHMJeu extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     suiviAssignationRole++;
                     Client.choixDistribution(joueurs.get(0),suiviAssignationRole);
-                    panelBoutons.remove(boutonParticipant1);
+                    panelParticipant1.setVisible(false);
                 }
             });
             panelParticipant1.setLayout(new BorderLayout());
@@ -329,7 +329,7 @@ public class IHMJeu extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     suiviAssignationRole++;
                     Client.choixDistribution(joueurs.get(1),suiviAssignationRole);
-                    panelBoutons.remove(boutonParticipant2);
+                    panelParticipant2.setVisible(false);
                 }
             });
             panelParticipant2.setLayout(new BorderLayout());
@@ -349,7 +349,7 @@ public class IHMJeu extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     suiviAssignationRole++;
                     Client.choixDistribution(joueurs.get(3),suiviAssignationRole);
-                    panelBoutons.remove(boutonParticipant3);
+                    panelParticipant3.setVisible(false);
                 }
             });
                 panelParticipant3.setLayout(new BorderLayout());
@@ -369,7 +369,7 @@ public class IHMJeu extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     suiviAssignationRole++;
                     Client.choixDistribution(joueurs.get(4),suiviAssignationRole);
-                    panelBoutons.remove(boutonParticipant4);
+                    panelParticipant4.setVisible(false);
                 }
             });
             panelParticipant4.setLayout(new BorderLayout());
@@ -389,7 +389,7 @@ public class IHMJeu extends JPanel{
                     public void actionPerformed(ActionEvent e) {
                         suiviAssignationRole++;
                         Client.choixDistribution(joueurs.get(5), suiviAssignationRole);
-                        panelBoutons.remove(boutonParticipant5);
+                        panelParticipant5.setVisible(false);
                     }
                 });
                 panelParticipant5.setLayout(new BorderLayout());
@@ -409,7 +409,7 @@ public class IHMJeu extends JPanel{
                     public void actionPerformed(ActionEvent e) {
                         suiviAssignationRole++;
                         Client.choixDistribution(joueurs.get(2), suiviAssignationRole);
-                        panelBoutons.remove(boutonParticipant6);
+                        panelParticipant6.setVisible(false);
                     }
                 });
                 panelParticipant6.setLayout(new BorderLayout());
