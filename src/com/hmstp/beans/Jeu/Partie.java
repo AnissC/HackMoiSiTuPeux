@@ -15,6 +15,7 @@ public class Partie extends Thread{
     private ArrayList<Lettre> listMessagesEnvoyer;
     private boolean active;
     private int perdant;
+    private ArrayList<Integer> litRandom;
     private Joueur moi;
     private Hackeur hackeur = Hackeur.getInstance();
     private Entreprise e1 = new Entreprise(2, "Moyenne entreprise");
@@ -29,6 +30,26 @@ public class Partie extends Thread{
         this.nbParticipants = Client.getNbjoueur();
         this.active = false;
         this.moi = j;
+        this.initRandom();
+
+    }
+
+    public void initRandom() {
+        int i = 0;
+        litRandom = new ArrayList<>();
+        ArrayList<Integer>litRandomTemp = new ArrayList<>();
+
+        while(i < nbParticipants){
+            litRandomTemp.add(i);
+            i++;
+        }
+
+        i=0;
+        while(i < nbParticipants){
+            Integer j = litRandomTemp.remove((nbParticipants*2+3+i)%litRandomTemp.size());
+            litRandom.add(j);
+            i++;
+        }
     }
 
     public void setActive(boolean active) {
@@ -36,16 +57,16 @@ public class Partie extends Thread{
     }
 
     public void distributionRoleManche1(){
-        this.listParticipant.get(2).setRole(hackeur);
-        this.listParticipant.get(0).setRole(e1);
-        this.listParticipant.get(1).setRole(e2);
+        this.listParticipant.get(litRandom.get((max())%nbParticipants)).setRole(hackeur);
+        this.listParticipant.get(litRandom.get((1+max())%nbParticipants)).setRole(e1);
+        this.listParticipant.get(litRandom.get((2+max())%nbParticipants)).setRole(e2);
 
         if(this.nbParticipants >= NB4){
-            this.listParticipant.get(3).setRole(e3);
+            this.listParticipant.get(litRandom.get(3+max())%nbParticipants).setRole(e3);
             if (this.nbParticipants >= NB5){
-                this.listParticipant.get(4).setRole(e4);
+                this.listParticipant.get(litRandom.get((4+max())%nbParticipants)).setRole(e4);
                 if (this.nbParticipants == NB6) {
-                    this.listParticipant.get(5).setRole(e5);
+                    this.listParticipant.get(litRandom.get((5+max())%nbParticipants)).setRole(e5);
                 }
             }
         }
@@ -155,12 +176,6 @@ public class Partie extends Thread{
         }
     }
 
-    public int algoIA(int i){
-        int n = nbParticipants;
-        n = (i+1)%n;
-        return n;
-    }
-
     public void tour() {
         this.moi.getRole().choixAction();
 
@@ -179,9 +194,10 @@ public class Partie extends Thread{
         while (i < listParticipant.size()) {
             if (listParticipant.get(i).isRemplacant()) {
                 if (listParticipant.get(i).getRole() instanceof Entreprise) {
-                    listParticipant.get(i).getRole().choixAction((i + 1) % 2);
+                    listParticipant.get(i).getRole().choixAction(litRandom.get(max()%nbParticipants) % 2);
+                    litRandom.add(litRandom.remove(0));
                 } else {
-                    listParticipant.get(i).getRole().choixAction(algoIA(i));
+                    listParticipant.get(i).getRole().choixAction(litRandom.get(max()%nbParticipants));
                 }
             }
             i++;
@@ -210,6 +226,19 @@ public class Partie extends Thread{
             return true;
         }
 
+    }
+
+    public int max(){
+        int i = 0;
+        int max= 0;
+        synchronized (listParticipant) {
+            while (i < listParticipant.size()) {
+                if (listParticipant.get(i).getScore() > max) {
+                    max = listParticipant.get(i).getScore();
+                }
+            }
+        }
+        return max;
     }
 
     public String leGagnant(){
