@@ -3,6 +3,7 @@ package com.hmstp.beans.Client;
 import com.hmstp.beans.InterfaceGraphique.*;
 import com.hmstp.beans.Jeu.*;
 import com.hmstp.beans.Message.*;
+import com.hmstp.beans.Serveur.Serveur;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -127,7 +128,7 @@ public class Client{
                         while (!(mP.getListJoueur().isEmpty())) {
                             mJrecu = mP.getListJoueur().remove(0);
                             if (mJrecu.getNom().equals(Client.nom)){
-                                moi = new Joueur(null, mJrecu.getNom());
+                                moi = new Joueur(Client.serveur, mJrecu.getNom());
                                 synchronized (listParticipant) {
                                     listParticipant.add(moi);
                                     Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
