@@ -19,7 +19,7 @@ public class ClientThreadConnexion extends Thread{
     @Override
     public void run(){
         try {
-            ServerSocket s= new ServerSocket(Client.port);
+            ServerSocket s  = new ServerSocket(Client.port);
             while (true){
                 Socket c= s.accept();
                 ClientThreadEcriture serveurEcriture = new ClientThreadEcriture(listMessagesEnvoyer, c);

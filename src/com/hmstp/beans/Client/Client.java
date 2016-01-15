@@ -19,6 +19,7 @@ public class Client{
     private static IHMJeu ihmJeu = new IHMJeu();
     private static int nbjoueur = 0;
     private static int joueurEnAttente = 0;
+    private static int partieEnAttente = 0;
     private static String nom;
     private static Joueur moi;
     private static Partie partie;
@@ -171,13 +172,26 @@ public class Client{
                         break;
                     case Client.COMMENCER_PARTIE:
                         MessagePartie mpSyn = (MessagePartie) m;
-                        joueurEnAttente++;
-                        System.out.println("avant" + joueurEnAttente);
+                        partieEnAttente++;
+                        System.out.println("avant" + partieEnAttente);
+                        synchronized (listParticipant) {
+                            if (joueurEnAttente > 0) {
+                                try{
+                                    synchronized (partie) {
+                                        partie.wait();
+                                    }
+                                }
+                                catch (Exception e) {
+                                    System.err.println(e);
+                                }
+
+                            }
+                        }
                         synchronized (listParticipant) {
                             classement(mpSyn);
 
-                            joueurEnAttente--;
-                            System.out.println("après" + joueurEnAttente);
+                            partieEnAttente--;
+                            System.out.println("après" + partieEnAttente);
                             listParticipant.notify();
                         }
                         partie.setActive(true);
@@ -224,7 +238,7 @@ public class Client{
     }
 
     public static boolean pasjoueurEnAttente(){
-        return joueurEnAttente > 0;
+        return ((joueurEnAttente > 0) && (partieEnAttente > 0)) ;
     }
 
 
