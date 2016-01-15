@@ -169,7 +169,10 @@ public class Partie extends Thread{
         i=0;
         while(i < nbParticipants){
             //if (this.active) {
-                if ((!(listParticipant.get(i) == hackeur)) || (!(listParticipant.get(i) == victime))){
+                if ((listParticipant.get(i) == hackeur) || (listParticipant.get(i) == victime)){
+                    // point déjà calculé
+                }
+                else{
                     listParticipant.get(i).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
                 }
             //}
