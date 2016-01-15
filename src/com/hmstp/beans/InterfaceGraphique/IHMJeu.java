@@ -236,7 +236,7 @@ public class IHMJeu extends JPanel{
                     }
                     labelVictime3Valeur = new JLabel(Integer.toString(numJoueur));
                     labelVictime3Valeur.setVisible(false);
-                    boutonVictime3 = new JButton(joueurs.get(numJoueur).getNom());
+                    boutonVictime3 = new JButton(joueurs.get(numJoueur).getNom());// embeded ligne cancer
                     boutonVictime3.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -309,7 +309,8 @@ public class IHMJeu extends JPanel{
                 boutonParticipant1.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Client.choixDistribution(joueurs.get(suiviAssignationRole),suiviAssignationRole);
+                        Client.choixDistribution(joueurs.get(0),suiviAssignationRole);
+                        System.out.println(suiviAssignationRole);
                         suiviAssignationRole++;
                         panelBoutons.remove(panelParticipant1);
                         panelBoutons.repaint();
@@ -331,7 +332,7 @@ public class IHMJeu extends JPanel{
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        Client.choixDistribution(joueurs.get(suiviAssignationRole),suiviAssignationRole);
+                        Client.choixDistribution(joueurs.get(1),suiviAssignationRole);
                         suiviAssignationRole++;
                         panelBoutons.remove(panelParticipant2);
                         panelBoutons.repaint();
@@ -352,7 +353,7 @@ public class IHMJeu extends JPanel{
                     boutonParticipant3.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            Client.choixDistribution(joueurs.get(suiviAssignationRole),suiviAssignationRole);
+                            Client.choixDistribution(joueurs.get(3),suiviAssignationRole);
                             suiviAssignationRole++;
                             panelBoutons.remove(panelParticipant3);
                             panelBoutons.repaint();
@@ -374,7 +375,7 @@ public class IHMJeu extends JPanel{
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            Client.choixDistribution(joueurs.get(suiviAssignationRole),suiviAssignationRole);
+                            Client.choixDistribution(joueurs.get(4),suiviAssignationRole);
                             suiviAssignationRole++;
                             panelBoutons.remove(panelParticipant4);
                             panelBoutons.repaint();
@@ -395,7 +396,7 @@ public class IHMJeu extends JPanel{
                     boutonParticipant5.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            Client.choixDistribution(joueurs.get(suiviAssignationRole), suiviAssignationRole);
+                            Client.choixDistribution(joueurs.get(5), suiviAssignationRole);
                             suiviAssignationRole++;
                             panelBoutons.remove(panelParticipant5);
                             panelBoutons.repaint();
@@ -414,7 +415,7 @@ public class IHMJeu extends JPanel{
                     boutonParticipant6.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            Client.choixDistribution(joueurs.get(suiviAssignationRole), suiviAssignationRole);
+                            Client.choixDistribution(joueurs.get(2), suiviAssignationRole);
                             suiviAssignationRole++;
                             panelBoutons.remove(panelParticipant6);
                             panelBoutons.repaint();
