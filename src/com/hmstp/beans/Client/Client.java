@@ -188,7 +188,7 @@ public class Client{
                             }
                         }
                         synchronized (listParticipant) {
-                            classement(mpSyn);
+                            //classement(mpSyn);
 
                             partieEnAttente--;
                             System.out.println("après" + partieEnAttente);
@@ -288,7 +288,7 @@ public class Client{
         return listParticipant;
     }
 
-    public static ArrayList<Participant> classement(MessagePartie mpSyn){
+    /*public static ArrayList<Participant> classement(MessagePartie mpSyn){
         ArrayList<Participant> listTemp = new ArrayList<>();
         MessageJoueur MJ;
         int i = 0;
@@ -310,7 +310,7 @@ public class Client{
             }
             return listTemp;
         }
-    }
+    }*/
 
     public static int score(String no){
         int i = 0;
