@@ -129,7 +129,7 @@ public class Client{
                         while (!(mP.getListJoueur().isEmpty())) {
                             mJrecu = mP.getListJoueur().remove(0);
                             if (mJrecu.getNom().equals(Client.nom)){
-                                moi = new Joueur(Client.serveur, mJrecu.getNom());
+                                moi = new Joueur(null, mJrecu.getNom());
                                 synchronized (listParticipant) {
                                     listParticipant.add(moi);
                                     Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
