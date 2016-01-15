@@ -50,20 +50,20 @@ public class Partie extends Thread{
         }
     }
 
-    public void choixDistribution(Participant p ,Role role, String nom) {
-        int i = 0;
+    public void choixDistribution(Participant p, int role) {
+        /*int i = 0;
         synchronized (listParticipant) {
             while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(nom))){
                 i++;
             }
             role.remmettreZero();
             listParticipant.get(j).setRole(role);
-        }
+        }*/
     }
 
     public void distributionRoleMancheN(){
         if (moi == listParticipant.get(0)){
-            Client.choixDistibution(hackeur);
+            /*Client.choixDistibution(hackeur);
             Client.choixDistibution(e1);
             Client.choixDistibution(e2);
 
@@ -77,7 +77,7 @@ public class Partie extends Thread{
                 }
             }
 
-            /*while (!tousOntChoisit()) {
+            while (!tousOntChoisit()) {
                 //wait le choix des rôles
                 try {
                     Thread.sleep(100);

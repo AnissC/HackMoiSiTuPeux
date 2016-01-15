@@ -263,7 +263,7 @@ public class Client{
     }
 
     public static void choixDistribution(Participant p, int role){
-        partie.choixDistribution(i, role, nom);
+        partie.choixDistribution(p, role);
     }
 
     public static void choixAction(int i){
