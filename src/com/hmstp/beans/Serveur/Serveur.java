@@ -1,12 +1,8 @@
 package com.hmstp.beans.Serveur;
 
-
-import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.Message.*;
 
 import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
