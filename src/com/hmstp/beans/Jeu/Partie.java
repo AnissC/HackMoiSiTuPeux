@@ -268,6 +268,7 @@ public class Partie extends Thread{
                 i++;
             }
         }
+        System.out.println(max);
         return max;
     }
 
