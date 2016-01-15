@@ -52,14 +52,21 @@ public class Partie extends Thread{
     }
 
     public void choixDistribution(Participant p, int role) {
-        /*int i = 0;
-        synchronized (listParticipant) {
-            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(nom))){
-                i++;
-            }
-            role.remmettreZero();
-            listParticipant.get(j).setRole(role);
-        }*/
+        switch (role) {
+            case 0 : p.setRole(hackeur);
+                break;
+            case 1 : p.setRole(e1);
+                break;
+            case 2 : p.setRole(e2);
+                break;
+            case 3 : p.setRole(e3);
+                break;
+            case 4 : p.setRole(e4);
+                break;
+            case 5 : p.setRole(e5);
+                break;
+        }
+        p.getRole().remmettreZero();
     }
 
     public void distributionRoleMancheN(){
