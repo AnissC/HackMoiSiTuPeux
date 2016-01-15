@@ -64,7 +64,9 @@ public class Client{
     // Client -> Serveur envoie le nombre de joueurs souhaité pour la partie
 
     public static final String CHOIX_DU_TOUR = "CHOIX_DU_TOUR";
-    // Client -> Client envoie choix avec un MessageNombre
+    // Client -> Client envoie choix avec un MessageChoix
+    public static final String CHOIX_DU_ROLE = "CHOIX_DU_ROLE";
+    // Client -> Client envoie choix avec un MessageChoix
 
     private static Socket connexion(String ad, int p) {
         Socket c = null;
