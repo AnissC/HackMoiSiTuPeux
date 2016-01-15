@@ -71,7 +71,7 @@ public class Partie extends Thread{
         this.listParticipant.get(listRandom.get((2+max())%nbParticipants)).setRole(e2);
 
         if(this.nbParticipants >= NB4){
-            this.listParticipant.get(listRandom.get(3+max()%nbParticipants)).setRole(e3);
+            this.listParticipant.get(listRandom.get((3+max())%nbParticipants)).setRole(e3);
             if (this.nbParticipants >= NB5){
                 this.listParticipant.get(listRandom.get((4+max())%nbParticipants)).setRole(e4);
                 if (this.nbParticipants == NB6) {
