@@ -162,107 +162,6 @@ public class IHMJeu extends JPanel{
         panelSeProteger.add(labelSeProteger,BorderLayout.NORTH);
         panelSeProteger.add(boutonSeProteger,BorderLayout.SOUTH);
 
-        //============Bouton Participant 1======================//
-        panelParticipant1 = new JPanel();
-        panelParticipant1.setOpaque(false);
-
-        labelParticipant1 = new JLabel("Participant 1");
-
-        boutonParticipant1 = new JButton("Participant 1");
-        boutonParticipant1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                suiviAssignationRole++;
-                //Client.choixDistribution();
-            }
-        });
-        panelParticipant1.setLayout(new BorderLayout());
-        panelParticipant1.add(labelParticipant1, BorderLayout.NORTH);
-        panelParticipant1.add(boutonParticipant1,BorderLayout.SOUTH);
-
-        //============Bouton Participant 2======================//
-        panelParticipant2 = new JPanel();
-        panelParticipant2.setOpaque(false);
-
-        labelParticipant2 = new JLabel("Participant 2");
-
-        boutonParticipant2 = new JButton("Participant 2");
-        boutonParticipant2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                suiviAssignationRole++;
-                //Client.choixDistribution();
-            }
-        });
-        panelParticipant2.setLayout(new BorderLayout());
-        panelParticipant2.add(labelParticipant2, BorderLayout.NORTH);
-        panelParticipant2.add(boutonParticipant2,BorderLayout.SOUTH);
-
-        //============Bouton Participant 3======================//
-        panelParticipant3 = new JPanel();
-        panelParticipant3.setOpaque(false);
-
-        labelParticipant3 = new JLabel("Participant 3");
-
-        boutonParticipant3 = new JButton("Participant 3");
-        boutonParticipant3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                suiviAssignationRole++;
-                //Client.choixDistribution();
-            }
-        });
-        panelParticipant3.setLayout(new BorderLayout());
-        panelParticipant3.add(labelParticipant3, BorderLayout.NORTH);
-        panelParticipant3.add(boutonParticipant3,BorderLayout.SOUTH);
-        //============Bouton Participant 4======================//
-        panelParticipant4 = new JPanel();
-        panelParticipant4.setOpaque(false);
-
-        labelParticipant4 = new JLabel("Participant 4");
-
-        boutonParticipant4 = new JButton("Participant 4");
-        boutonParticipant4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                suiviAssignationRole++;
-            }
-        });
-        panelParticipant4.setLayout(new BorderLayout());
-        panelParticipant4.add(labelParticipant4, BorderLayout.NORTH);
-        panelParticipant4.add(boutonParticipant4,BorderLayout.SOUTH);
-        //============Bouton Participant 5======================//
-        panelParticipant5 = new JPanel();
-        panelParticipant5.setOpaque(false);
-
-        labelParticipant5 = new JLabel("Participant 5");
-
-        boutonParticipant5 = new JButton("Participant 5");
-        boutonParticipant5.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                suiviAssignationRole++;
-            }
-        });
-        panelParticipant5.setLayout(new BorderLayout());
-        panelParticipant5.add(labelParticipant5, BorderLayout.NORTH);
-        panelParticipant5.add(boutonParticipant5,BorderLayout.SOUTH);
-        //============Bouton Participant 6======================//
-        panelParticipant6 = new JPanel();
-        panelParticipant6.setOpaque(false);
-
-        labelParticipant6 = new JLabel("Participant 6");
-
-        boutonParticipant6 = new JButton("Participant 6");
-        boutonParticipant6.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                suiviAssignationRole++;
-            }
-        });
-        panelParticipant6.setLayout(new BorderLayout());
-        panelParticipant6.add(labelParticipant6, BorderLayout.NORTH);
-        panelParticipant6.add(boutonParticipant6,BorderLayout.SOUTH);
 
         dessine();
     }
@@ -288,11 +187,7 @@ public class IHMJeu extends JPanel{
             boutonVictime1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
-                        Client.choixDistribution(Integer.parseInt(labelVictime1Valeur.getText()),Client.getRoleParNom(joueurs.get(1).getNom()),joueurs.get(1).getNom());
-                    }else{
-                        Client.choixAction(Integer.parseInt(labelVictime1Valeur.getText()));
-                    }
+                    Client.choixAction(Integer.parseInt(labelVictime1Valeur.getText()));
                 }
             });
             numJoueur++;
@@ -316,11 +211,7 @@ public class IHMJeu extends JPanel{
             boutonVictime2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
-                        Client.choixDistribution(Integer.parseInt(labelVictime2Valeur.getText()),Client.getRoleParNom(joueurs.get(2).getNom()),joueurs.get(2).getNom());
-                    }else{
-                        Client.choixAction(Integer.parseInt(labelVictime2Valeur.getText()));
-                    }
+                    Client.choixAction(Integer.parseInt(labelVictime2Valeur.getText()));
                 }
             });
             numJoueur++;
@@ -343,11 +234,7 @@ public class IHMJeu extends JPanel{
                 boutonVictime3.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
-                            Client.choixDistribution(Integer.parseInt(labelVictime3Valeur.getText()),Client.getRoleParNom(joueurs.get(3).getNom()),joueurs.get(3).getNom());
-                        }else{
-                            Client.choixAction(Integer.parseInt(labelVictime3Valeur.getText()));
-                        }
+                        Client.choixAction(Integer.parseInt(labelVictime3Valeur.getText()));
                     }
                 });
                 numJoueur++;
@@ -356,8 +243,6 @@ public class IHMJeu extends JPanel{
                 panelVictime3.add(boutonVictime3,BorderLayout.SOUTH);
                 panelVictime3.add(labelVictime3Valeur);
             }
-
-
 
             if (max > 4){
                 //=====================Victime 4==============//
@@ -373,11 +258,7 @@ public class IHMJeu extends JPanel{
                 boutonVictime4.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
-                            Client.choixDistribution(Integer.parseInt(labelVictime4Valeur.getText()),Client.getRoleParNom(joueurs.get(4).getNom()),joueurs.get(4).getNom());
-                        }else{
-                            Client.choixAction(Integer.parseInt(labelVictime4Valeur.getText()));
-                        }
+                        Client.choixAction(Integer.parseInt(labelVictime4Valeur.getText()));
                     }
                 });
                 numJoueur++;
@@ -402,11 +283,7 @@ public class IHMJeu extends JPanel{
                 boutonVictime5.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
-                            Client.choixDistribution(Integer.parseInt(labelVictime5Valeur.getText()),Client.getRoleParNom(joueurs.get(5).getNom()),joueurs.get(5).getNom());
-                        }else{
-                            Client.choixAction(Integer.parseInt(labelVictime5Valeur.getText()));
-                        }
+                        Client.choixAction(Integer.parseInt(labelVictime5Valeur.getText()));
                     }
                 });
                 numJoueur++;
@@ -428,11 +305,7 @@ public class IHMJeu extends JPanel{
                 boutonVictime6.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
-                            Client.choixDistribution(Integer.parseInt(labelVictime6Valeur.getText()),Client.getRoleParNom(joueurs.get(6).getNom()),joueurs.get(6).getNom());
-                        }else{
-                            Client.choixAction(Integer.parseInt(labelVictime6Valeur.getText()));
-                        }
+                        Client.choixAction(Integer.parseInt(labelVictime6Valeur.getText()));
                     }
                 });
                 panelVictime6.setLayout(new BorderLayout());
@@ -440,6 +313,112 @@ public class IHMJeu extends JPanel{
                 panelVictime6.add(boutonVictime6,BorderLayout.SOUTH);
                 panelVictime6.add(labelVictime6Valeur);
             }
+
+
+            //============Bouton Participant 1======================//
+            panelParticipant1 = new JPanel();
+            panelParticipant1.setOpaque(false);
+
+            labelParticipant1 = new JLabel("Participant 1");
+
+            boutonParticipant1 = new JButton("Participant 1");
+            boutonParticipant1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    suiviAssignationRole++;
+                    Client.choixDistribution(joueurs.get(0),suiviAssignationRole);
+                }
+            });
+            panelParticipant1.setLayout(new BorderLayout());
+            panelParticipant1.add(labelParticipant1, BorderLayout.NORTH);
+            panelParticipant1.add(boutonParticipant1,BorderLayout.SOUTH);
+
+            //============Bouton Participant 2======================//
+            panelParticipant2 = new JPanel();
+            panelParticipant2.setOpaque(false);
+
+            labelParticipant2 = new JLabel("Participant 2");
+
+            boutonParticipant2 = new JButton("Participant 2");
+            boutonParticipant2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    suiviAssignationRole++;
+                    Client.choixDistribution(joueurs.get(1),suiviAssignationRole);
+                }
+            });
+            panelParticipant2.setLayout(new BorderLayout());
+            panelParticipant2.add(labelParticipant2, BorderLayout.NORTH);
+            panelParticipant2.add(boutonParticipant2,BorderLayout.SOUTH);
+
+            //============Bouton Participant 3======================//
+            panelParticipant3 = new JPanel();
+            panelParticipant3.setOpaque(false);
+
+            labelParticipant3 = new JLabel("Participant 3");
+
+            boutonParticipant3 = new JButton("Participant 3");
+            boutonParticipant3.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    suiviAssignationRole++;
+                    Client.choixDistribution(joueurs.get(2),suiviAssignationRole);
+                }
+            });
+            panelParticipant3.setLayout(new BorderLayout());
+            panelParticipant3.add(labelParticipant3, BorderLayout.NORTH);
+            panelParticipant3.add(boutonParticipant3,BorderLayout.SOUTH);
+            //============Bouton Participant 4======================//
+            panelParticipant4 = new JPanel();
+            panelParticipant4.setOpaque(false);
+
+            labelParticipant4 = new JLabel("Participant 4");
+
+            boutonParticipant4 = new JButton("Participant 4");
+            boutonParticipant4.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    suiviAssignationRole++;
+                    Client.choixDistribution(joueurs.get(3),suiviAssignationRole);
+                }
+            });
+            panelParticipant4.setLayout(new BorderLayout());
+            panelParticipant4.add(labelParticipant4, BorderLayout.NORTH);
+            panelParticipant4.add(boutonParticipant4,BorderLayout.SOUTH);
+            //============Bouton Participant 5======================//
+            panelParticipant5 = new JPanel();
+            panelParticipant5.setOpaque(false);
+
+            labelParticipant5 = new JLabel("Participant 5");
+
+            boutonParticipant5 = new JButton("Participant 5");
+            boutonParticipant5.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    suiviAssignationRole++;
+                    Client.choixDistribution(joueurs.get(4),suiviAssignationRole);
+                }
+            });
+            panelParticipant5.setLayout(new BorderLayout());
+            panelParticipant5.add(labelParticipant5, BorderLayout.NORTH);
+            panelParticipant5.add(boutonParticipant5,BorderLayout.SOUTH);
+            //============Bouton Participant 6======================//
+            panelParticipant6 = new JPanel();
+            panelParticipant6.setOpaque(false);
+
+            labelParticipant6 = new JLabel("Participant 6");
+
+            boutonParticipant6 = new JButton("Participant 6");
+            boutonParticipant6.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    suiviAssignationRole++;
+                    Client.choixDistribution(joueurs.get(5),suiviAssignationRole);
+                }
+            });
+            panelParticipant6.setLayout(new BorderLayout());
+            panelParticipant6.add(labelParticipant6, BorderLayout.NORTH);
+            panelParticipant6.add(boutonParticipant6,BorderLayout.SOUTH);
 
 
             //=====================Tableau Score =============================//
