@@ -52,8 +52,6 @@ public class Partie extends Thread{
             i++;
         }
 
-        System.out.println(litRandomTemp.toString());
-
         i=0;
         while(i < nbParticipants){
             //random controlé
@@ -61,8 +59,6 @@ public class Partie extends Thread{
             listRandom.add(j);
             i++;
         }
-
-        System.out.println(listRandom.toString());
     }
 
     public void setActive(boolean active) {
@@ -204,7 +200,7 @@ public class Partie extends Thread{
     public void tour() {
         this.moi.getRole().choixAction();
 
-        while (!moi.getRole().isChoixFait()) {
+        while (! moi.getRole().isChoixFait()) {
             //wait le choix
             try {
                 Thread.sleep(100);
