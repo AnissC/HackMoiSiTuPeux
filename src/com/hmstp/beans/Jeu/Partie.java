@@ -168,11 +168,11 @@ public class Partie extends Thread{
 
         i=0;
         while(i < nbParticipants){
-            if (this.active) {
+            //if (this.active) {
                 if ((!(listParticipant.get(i) == hackeur)) || (!(listParticipant.get(i) == victime))){
                     listParticipant.get(i).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
                 }
-            }
+            //}
             i++;
         }
     }
@@ -237,6 +237,7 @@ public class Partie extends Thread{
                 if (listParticipant.get(i).getScore() > max) {
                     max = listParticipant.get(i).getScore();
                 }
+                i++;
             }
         }
         return max;
