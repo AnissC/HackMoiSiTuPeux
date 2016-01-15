@@ -220,6 +220,7 @@ public class Partie extends Thread{
         int temp;
         while (i < listParticipant.size()) {
             if (listParticipant.get(i).isRemplacant()) {
+                System.out.println("WOW j'ai eu peur Oo");
                 if (listParticipant.get(i).getRole() instanceof Entreprise) {
                     listParticipant.get(i).getRole().choixAction(listRandom.get(max()%nbParticipants) % 2);
                 } else {
