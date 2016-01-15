@@ -27,7 +27,13 @@ public class GestionPartie {
             MessageJoueur mj = new MessageJoueur(lobby[caseLobby].get(i).getSocket().getInetAddress().toString(),lobby[caseLobby].get(i).getNom(),Serveur.PARTIE_FINIE);
             listeJoueur.add(mj);
         }
-        Serveur.message(new Lettre(new MessagePartie(listeJoueur, Serveur.PARTIE_TROUVE), socket));
+        if (lobby[caseLobby].size() == 1){
+            Serveur.message(new Lettre(new MessageJoueur(null, nomJoueur, Serveur.CREER_PARTIE), socket));
+        }
+        else{
+            Serveur.message(new Lettre(new MessagePartie(listeJoueur, Serveur.PARTIE_TROUVE), socket));
+        }
+
         if (lobby[caseLobby].size() >= nombreJoueur){
             listePartie.add(lobby[caseLobby]);
             for (int i=0;i<lobby[caseLobby].size();i++) {

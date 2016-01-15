@@ -23,6 +23,7 @@ public class Client{
     private static String nom;
     private static Joueur moi;
     private static Partie partie;
+    public static boolean premier = false;
 
     //public static String adresseIP = "169.254.129.165";
     public static String adresseIP = "132.227.125.85";
@@ -156,7 +157,8 @@ public class Client{
                         Client.partie.start();
                         break;
                     case Client.CREER_PARTIE:
-                       /* MessageJoueur mj = (MessageJoueur) m;
+                        MessageJoueur mj = (MessageJoueur) m;
+                        premier = true;
                         synchronized (listParticipant) {
                             moi = new Joueur(null, mj.getNom());
                             listParticipant.add(moi);
@@ -168,7 +170,9 @@ public class Client{
                             Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                             Client.partie.start();
                         }
-                        Client.lancerJeu();*/
+                        Client.lancerJeu();
+                        Thread.sleep(1000);
+                        Client.partie.start();
                         break;
                     case Client.COMMENCER_PARTIE:
                         MessagePartie mpSyn = (MessagePartie) m;

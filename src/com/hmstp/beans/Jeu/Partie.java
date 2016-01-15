@@ -288,10 +288,12 @@ public class Partie extends Thread{
         return gagnant;
     }
 
-    public void run(){
-        synchronized (listParticipant) {
-            this.distributionRoleManche1();
-            this.tour();
+    public void run() {
+        if (Client.premier){
+            synchronized (listParticipant) {
+                this.distributionRoleManche1();
+                this.tour();
+            }
         }
 
         while(! this.active){
