@@ -7,6 +7,7 @@ import com.hmstp.beans.Jeu.Hackeur;
 import com.hmstp.beans.Jeu.Participant;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,13 +69,37 @@ public class IHMJeu extends JPanel{
     private JLabel labelSeProteger;
     private JButton boutonSeProteger;
 
+    private JPanel panelParticipant1;
+    private JLabel labelParticipant1;
+    private JButton boutonParticipant1;
+
+    private JPanel panelParticipant2;
+    private JLabel labelParticipant2;
+    private JButton boutonParticipant2;
+
+    private JPanel panelParticipant3;
+    private JLabel labelParticipant3;
+    private JButton boutonParticipant3;
+
+    private JPanel panelParticipant4;
+    private JLabel labelParticipant4;
+    private JButton boutonParticipant4;
+
+    private JPanel panelParticipant5;
+    private JLabel labelParticipant5;
+    private JButton boutonParticipant5;
+
+    private JPanel panelParticipant6;
+    private JLabel labelParticipant6;
+    private JButton boutonParticipant6;
+
     private String ecranAffichage = IHM_VIDE;
+    public int suiviAssignationRole =0;
 
     public void setEcranAffichage(String ecranAffichage) {
         this.ecranAffichage = ecranAffichage;
         dessine();
     }
-
     public void go(){
         frameJeu = new JFrame("Hack moi si tu peux");
         panelJeu = new IHMJeu();
@@ -101,7 +126,6 @@ public class IHMJeu extends JPanel{
         panelBoutons.setOpaque(true);
         panelBoutons.setBounds(50,300,800,200);
 
-
         //==================Bouton Economiser=============//
         panelEconomiser = new JPanel();
         panelEconomiser.setOpaque(false);
@@ -127,7 +151,6 @@ public class IHMJeu extends JPanel{
 
         labelSeProteger = new JLabel("Se Proteger");
 
-
         boutonSeProteger = new JButton("Se Proteger");
         boutonSeProteger.addActionListener(new ActionListener() {
             @Override
@@ -139,6 +162,107 @@ public class IHMJeu extends JPanel{
         panelSeProteger.add(labelSeProteger,BorderLayout.NORTH);
         panelSeProteger.add(boutonSeProteger,BorderLayout.SOUTH);
 
+        //============Bouton Participant 1======================//
+        panelParticipant1 = new JPanel();
+        panelParticipant1.setOpaque(false);
+
+        labelParticipant1 = new JLabel("Participant 1");
+
+        boutonParticipant1 = new JButton("Participant 1");
+        boutonParticipant1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                suiviAssignationRole++;
+                //Client.choixDistribution();
+            }
+        });
+        panelParticipant1.setLayout(new BorderLayout());
+        panelParticipant1.add(labelParticipant1, BorderLayout.NORTH);
+        panelParticipant1.add(boutonParticipant1,BorderLayout.SOUTH);
+
+        //============Bouton Participant 2======================//
+        panelParticipant2 = new JPanel();
+        panelParticipant2.setOpaque(false);
+
+        labelParticipant2 = new JLabel("Participant 2");
+
+        boutonParticipant2 = new JButton("Participant 2");
+        boutonParticipant2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                suiviAssignationRole++;
+                //Client.choixDistribution();
+            }
+        });
+        panelParticipant2.setLayout(new BorderLayout());
+        panelParticipant2.add(labelParticipant2, BorderLayout.NORTH);
+        panelParticipant2.add(boutonParticipant2,BorderLayout.SOUTH);
+
+        //============Bouton Participant 3======================//
+        panelParticipant3 = new JPanel();
+        panelParticipant3.setOpaque(false);
+
+        labelParticipant3 = new JLabel("Participant 3");
+
+        boutonParticipant3 = new JButton("Participant 3");
+        boutonParticipant3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                suiviAssignationRole++;
+                //Client.choixDistribution();
+            }
+        });
+        panelParticipant3.setLayout(new BorderLayout());
+        panelParticipant3.add(labelParticipant3, BorderLayout.NORTH);
+        panelParticipant3.add(boutonParticipant3,BorderLayout.SOUTH);
+        //============Bouton Participant 4======================//
+        panelParticipant4 = new JPanel();
+        panelParticipant4.setOpaque(false);
+
+        labelParticipant4 = new JLabel("Participant 4");
+
+        boutonParticipant4 = new JButton("Participant 4");
+        boutonParticipant4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                suiviAssignationRole++;
+            }
+        });
+        panelParticipant4.setLayout(new BorderLayout());
+        panelParticipant4.add(labelParticipant4, BorderLayout.NORTH);
+        panelParticipant4.add(boutonParticipant4,BorderLayout.SOUTH);
+        //============Bouton Participant 5======================//
+        panelParticipant5 = new JPanel();
+        panelParticipant5.setOpaque(false);
+
+        labelParticipant5 = new JLabel("Participant 5");
+
+        boutonParticipant5 = new JButton("Participant 5");
+        boutonParticipant5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                suiviAssignationRole++;
+            }
+        });
+        panelParticipant5.setLayout(new BorderLayout());
+        panelParticipant5.add(labelParticipant5, BorderLayout.NORTH);
+        panelParticipant5.add(boutonParticipant5,BorderLayout.SOUTH);
+        //============Bouton Participant 6======================//
+        panelParticipant6 = new JPanel();
+        panelParticipant6.setOpaque(false);
+
+        labelParticipant6 = new JLabel("Participant 6");
+
+        boutonParticipant6 = new JButton("Participant 6");
+        boutonParticipant6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                suiviAssignationRole++;
+            }
+        });
+        panelParticipant6.setLayout(new BorderLayout());
+        panelParticipant6.add(labelParticipant6, BorderLayout.NORTH);
+        panelParticipant6.add(boutonParticipant6,BorderLayout.SOUTH);
 
         dessine();
     }
@@ -343,17 +467,16 @@ public class IHMJeu extends JPanel{
 
         if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
             panelBoutons.removeAll();
-            panelBoutons.add(panelVictime6);
-            panelBoutons.add(panelVictime1);
-            panelBoutons.add(panelVictime2);
+
+            panelBoutons.add(panelParticipant1);
+            panelBoutons.add(panelParticipant2);
+            panelBoutons.add(panelParticipant3);
             if (max > 3){
-                panelBoutons.add(panelVictime3);
-
+                panelBoutons.add(panelParticipant4);
                 if (max > 4){
-                    panelBoutons.add(panelVictime4);
+                    panelBoutons.add(panelParticipant5);
                     if (max > 5){
-                        panelBoutons.add(panelVictime5);
-
+                        panelBoutons.add(panelParticipant6);
                     }
                 }
             }
