@@ -262,7 +262,7 @@ public class Client{
         }
     }
 
-    public static void choixDistribution(int i, Role role, String nom){
+    public static void choixDistribution(int i, int role, String nom){
         partie.choixDistribution(i, role, nom);
     }
 
@@ -281,17 +281,17 @@ public class Client{
         int j = 0;
 
         synchronized (listParticipant) {
-
-        }
-        while(i < nbjoueur){
-            MJ = mpSyn.getListJoueur().get(i);
-            while ((j < listParticipant.size()) && (! listParticipant.get(j).getNom().equals(MJ.getNom()))){
-                j++;
+            while(i < nbjoueur){
+                MJ = mpSyn.getListJoueur().get(i);
+                while ((j < listParticipant.size()) && (! listParticipant.get(j).getNom().equals(MJ.getNom()))){
+                    j++;
+                }
+                listTemp.add(listParticipant.remove(j));
+                j = 0 ;
+                i++;
             }
-            listTemp.add(listParticipant.remove(j));
-            j = 0 ;
-            i++;
         }
+
         while(i > 0) {
             listParticipant.add(listTemp.remove(0));
             i--;
