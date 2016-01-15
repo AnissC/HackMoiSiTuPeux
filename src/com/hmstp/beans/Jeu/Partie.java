@@ -86,6 +86,7 @@ public class Partie extends Thread{
         envoyerChoix(role, p.getNom(), Client.CHOIX_DU_ROLE);
         p.getRole().remmettreZero();
     }
+
     public void choixDistribution(String no, int role) {
         int i = 0;
             while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
@@ -313,9 +314,9 @@ public class Partie extends Thread{
     }
 
     public void run() {
-        if (Client.premier){
-            synchronized (listParticipant) {
-                this.distributionRoleManche1();
+        synchronized (listParticipant) {
+            this.distributionRoleManche1();
+            if (Client.premier) {
                 this.tour();
             }
         }
