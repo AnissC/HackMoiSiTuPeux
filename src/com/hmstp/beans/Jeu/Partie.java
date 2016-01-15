@@ -325,6 +325,7 @@ public class Partie extends Thread{
             synchronized (listParticipant) {
                 while (Client.pasjoueurEnAttente()) {
                     try{
+                        System.out.println("TOTO");
                         listParticipant.wait();
                     }
                     catch (Exception e) {

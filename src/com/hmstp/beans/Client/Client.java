@@ -249,7 +249,7 @@ public class Client{
     }
 
     public static boolean pasjoueurEnAttente(){
-        return ((joueurEnAttente > 0) && (partieEnAttente > 0)) ;
+        return ((joueurEnAttente > 0) || (partieEnAttente > 0)) ;
     }
 
 
