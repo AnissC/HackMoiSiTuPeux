@@ -14,7 +14,7 @@ public class Partie extends Thread{
     private ArrayList<Participant> listParticipant;
     private ArrayList<Lettre> listMessagesEnvoyer;
     private boolean active;
-    private Role tableauRole[] = new Role[6];
+    private int perdant;
     private Joueur moi;
     private Hackeur hackeur = Hackeur.getInstance();
     private Entreprise e1 = new Entreprise(2, "Moyenne entreprise");
@@ -82,13 +82,16 @@ public class Partie extends Thread{
                 }
             }
         }
-        else if (listParticipant.get(0).isRemplacant()){
+        else if (listParticipant.get(perdant).isRemplacant()){
             distributionRoleManche1();
             int i = 0;
             while(i < nbParticipants){
                 listParticipant.get(i).getRole().remmettreZero();
                 i++;
             }
+        }
+        else{
+            //afficher un message d'attente
         }
     }
 
@@ -126,6 +129,7 @@ public class Partie extends Thread{
 
         if (((Entreprise)victime.getRole()).getProtection()){
             hackeur.setPerdant(true);
+            perdant = i;
             //if (this.active) {
                 hackeur.changeScore(0 - ((Entreprise) victime.getRole()).getValeur());
                 victime.changeScore(((Entreprise) victime.getRole()).getValeur());
@@ -133,12 +137,12 @@ public class Partie extends Thread{
         }
         else {
             victime.setPerdant(true);
+            perdant = ((Hackeur) hackeur.getRole()).getVictime();
             //if (this.active) {
                 victime.changeScore(0 - ((Entreprise) victime.getRole()).getValeur());
                 hackeur.changeScore(((Entreprise) victime.getRole()).getValeur());
             //}
         }
-
 
         i=0;
         while(i < nbParticipants){
