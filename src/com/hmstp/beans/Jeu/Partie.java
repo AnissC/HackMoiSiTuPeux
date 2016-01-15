@@ -14,6 +14,7 @@ public class Partie extends Thread{
     private ArrayList<Participant> listParticipant;
     private ArrayList<Lettre> listMessagesEnvoyer;
     private boolean active;
+    private Role tableauRole[] = new Role[6];
     private Joueur moi;
     private Hackeur hackeur = Hackeur.getInstance();
     private Entreprise e1 = new Entreprise(2, "Moyenne entreprise");
