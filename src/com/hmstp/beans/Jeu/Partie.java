@@ -207,7 +207,6 @@ public class Partie extends Thread{
         while (! moi.getRole().isChoixFait()) {
             //wait le choix
             try {
-                System.out.println("titu");
                 Thread.sleep(100);
             } catch (Exception e) {
                 System.err.println(e);
@@ -215,6 +214,7 @@ public class Partie extends Thread{
         }
         System.out.println("toto");
         this.envoyerChoix(this.moi.getRole().retourneChoix());
+        System.out.println("titu");
 
         int i = 0;
         int temp;
@@ -233,6 +233,8 @@ public class Partie extends Thread{
             i++;
         }
 
+        System.out.println("titu");
+
         while (tousOntChoisit()) {
             //wait la réponse des autres
             try {
@@ -241,8 +243,9 @@ public class Partie extends Thread{
                 System.err.println(e);
             }
         }
-
+        System.out.println("tata");
         this.resoudreTour();
+        System.out.println("tata");
     }
 
     public boolean pasDeGagnant(){
