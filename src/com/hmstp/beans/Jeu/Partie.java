@@ -200,15 +200,17 @@ public class Partie extends Thread{
     public void tour() {
         this.moi.getRole().choixAction();
 
+        System.out.println("toto");
         while (! moi.getRole().isChoixFait()) {
             //wait le choix
             try {
+                System.out.println("titu");
                 Thread.sleep(100);
             } catch (Exception e) {
                 System.err.println(e);
             }
         }
-
+        System.out.println("toto");
         this.envoyerChoix(this.moi.getRole().retourneChoix());
 
         int i = 0;
