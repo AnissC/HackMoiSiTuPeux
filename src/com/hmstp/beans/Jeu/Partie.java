@@ -82,6 +82,21 @@ public class Partie extends Thread{
     }
 
     public void choixDistribution(Participant p, int role) {
+        attribuerRole(p,role);
+        envoyerChoix(role, p.getNom(), Client.CHOIX_DU_ROLE);
+        p.getRole().remmettreZero();
+    }
+    public void choixDistribution(String no, int role) {
+        int i = 0;
+            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
+                i++;
+            }
+        Participant p = listParticipant.get(i);
+        attribuerRole(p,role);
+        p.getRole().remmettreZero();
+    }
+
+    public void attribuerRole(Participant p, int role){
         switch (role) {
             case 0 : p.setRole(hackeur);
                 break;
@@ -96,7 +111,6 @@ public class Partie extends Thread{
             case 5 : p.setRole(e5);
                 break;
         }
-        p.getRole().remmettreZero();
     }
 
     public void distributionRoleMancheN(){
@@ -155,12 +169,12 @@ public class Partie extends Thread{
         return true;
     }
 
-    public void envoyerChoix(int choix){
+    public void envoyerChoix(int choix, String nom, String mess){
         MessageChoix mn = null;
         int i = 0;
         while (i < listParticipant.size()) {
             if (!(listParticipant.get(i).isRemplacant())) {
-                mn = new MessageChoix(moi.getNom(), choix, Client.CHOIX_DU_TOUR);
+                mn = new MessageChoix(nom, choix, mess);
                 synchronized (listMessagesEnvoyer) {
                     this.listMessagesEnvoyer.add(new Lettre(mn, ((Joueur) listParticipant.get(i)).getSock()));
                 }
@@ -223,7 +237,7 @@ public class Partie extends Thread{
             }
         }
 
-        this.envoyerChoix(this.moi.getRole().retourneChoix());
+        this.envoyerChoix(this.moi.getRole().retourneChoix(),moi.getNom() ,Client.CHOIX_DU_TOUR);
 
         int i = 0;
         int temp;
