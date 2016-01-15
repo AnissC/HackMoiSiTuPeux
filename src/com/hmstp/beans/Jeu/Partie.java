@@ -216,7 +216,7 @@ public class Partie extends Thread{
                 } else {
                     temp = litRandom.get(max()%nbParticipants);
                     if (temp == i){
-                        temp = (temp++)%nbParticipants;
+                        temp = (temp + 1)%nbParticipants;
                     }
                     listParticipant.get(i).getRole().choixAction(temp);
                 }
