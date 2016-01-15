@@ -1,13 +1,11 @@
 package com.hmstp.beans.Client;
 
-import com.hmstp.beans.InterfaceGraphique.IHMClient;
-import com.hmstp.beans.InterfaceGraphique.IHMJeu;
+import com.hmstp.beans.InterfaceGraphique.*;
 import com.hmstp.beans.Jeu.*;
 import com.hmstp.beans.Message.*;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -24,9 +22,9 @@ public class Client{
     private static String nom;
     private static Joueur moi;
     private static Partie partie;
-    private static String adresseIP = "169.254.129.165";
-    private static int port = 8080;
 
+    public static String adresseIP = "169.254.129.165";
+    public static int port = 8080;
     public static Socket serveur;
 
     public static final String CREER_COMPTE = "CREER_COMPTE";
@@ -90,10 +88,12 @@ public class Client{
 
     private static void gestionMessage() throws Exception{
         Message m = null;
+        Socket socketclient = null;
         //Condition = bouton quitter
         while(true){
             synchronized (listMessagesRecu) {
                 if (!Client.listMessagesRecu.isEmpty()) {
+                    socketclient = Client.listMessagesRecu.get(0).getSocket();
                     m = Client.listMessagesRecu.remove(0).getMessage();
                 }
             }
@@ -120,27 +120,26 @@ public class Client{
                         break;
                     case Client.PARTIE_TROUVE:
                         MessagePartie mP = (MessagePartie) m;
-                        MessageJoueur mJ;
+                        MessageJoueur mJrecu;
+                        MessageJoueur mJenvoyer;
                         int k = 0;
 
                         while (!(mP.getListJoueur().isEmpty())) {
-                            mJ = mP.getListJoueur().remove(0);
-                            if (mJ.getNom().equals(Client.nom)){
-                                moi = new Joueur(null, mJ.getNom());
+                            mJrecu = mP.getListJoueur().remove(0);
+                            if (mJrecu.getNom().equals(Client.nom)){
+                                moi = new Joueur(null, mJrecu.getNom());
                                 synchronized (listParticipant) {
                                     listParticipant.add(moi);
                                     Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                                 }
                             }
                             else {
-                                Socket c  = Client.connexion(mJ.getJoueur(), port);
+                                Socket c  = Client.connexion(mJrecu.getJoueur(), port);
                                 synchronized (listParticipant) {
-                                    listParticipant.add(new Joueur(c, mJ.getNom()));
+                                    listParticipant.add(new Joueur(c, mJrecu.getNom()));
+                                    mJenvoyer = new MessageJoueur(moi.getSock().getInetAddress().toString(), moi.getNom(), Client.NOUVEAU_JOUEUR);
+                                    Client.message(new Lettre(mJenvoyer,c));
                                 }
-                                ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, c);
-                                clientEcoute.start();
-                                ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, c);
-                                clientEcriture.start();
                             }
                             k++;
                         }
@@ -174,19 +173,13 @@ public class Client{
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
-                        ServerSocket ss = new ServerSocket(port);
-                        Socket c = ss.accept();
-                        ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, c);
-                        clientEcoute.start();
-                        ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, c);
-                        clientEcriture.start();
                         joueurEnAttente = true;
                         int h = 0;
                         synchronized (listParticipant) {
                             while((h < nbjoueur) && (! listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
                                 h++;
                             }
-                            Joueur j = new Joueur(c, mej.getNom());
+                            Joueur j = new Joueur(socketclient, mej.getNom());
                             j.setScore(listParticipant.get(h).getScore());
                             listParticipant.set(h, j);
                         }
@@ -319,6 +312,9 @@ public class Client{
                 ihmClient.go();
             }
         });
+
+        ClientThreadConnexion serveurConnexion = new ClientThreadConnexion(listMessagesRecu, listMessagesEnvoyer);
+        serveurConnexion.start();
 
         Client.gestionMessage();
 
