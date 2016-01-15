@@ -18,7 +18,6 @@ public class Serveur {
     private static final String SQL_CREER_COMPTE = "INSERT INTO joueur (pseudo, motdepasse, gagne, perdu) VALUES (?, ?, 0, 0)";
     private static final String SQL_CONNEXION = "SELECT * FROM joueur WHERE pseudo = ? AND motdepasse = ?";
     private static final String SQL_TEST_COMPTE = "SELECT * FROM joueur WHERE pseudo = ?";
-    private static final String SQL_STATS = "INSERT INTO joueur(gagne, perdu) VALUES (?) WHERE pseudo = ?";
 
 
     MysqlConnect msql = MysqlConnect.getDbCon();
@@ -58,18 +57,7 @@ public class Serveur {
         }
         return exist;
     }
-    /*public boolean ajoutStats(MessageJoueur mj ){
-        try {
-            PreparedStatement preparedStatement = msql.conn.prepareStatement(SQL_STATS);
-            preparedStatement.setInt(1, );
-            preparedStatement.setInt(2, );
-            preparedStatement.setString(3, mj.getNom());
-            preparedStatement.executeUpdate();
-        }catch (SQLException e){
-            System.err.println(e.toString());
-        }
-        return true;
-    }*/
+
     public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
     public final static String INSCRIPTION_OK = "INSCRIPTION_OK";
