@@ -192,7 +192,7 @@ public class Partie extends Thread{
                     // point déjà calculé
                 }
                 else{
-                    if(((Entreprise)listParticipant.get(i).getRole()).getProtection()){
+                    if(!((Entreprise)listParticipant.get(i).getRole()).getProtection()){
                         listParticipant.get(i).changeScore(((Entreprise)listParticipant.get(i).getRole()).getValeur());
                     }
                 }
