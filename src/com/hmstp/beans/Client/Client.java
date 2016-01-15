@@ -18,7 +18,7 @@ public class Client{
     private static IHMClient ihmClient = new IHMClient();
     private static IHMJeu ihmJeu = new IHMJeu();
     private static int nbjoueur = 0;
-    private static boolean joueurEnAttente = false;
+    private static int joueurEnAttente = 0;
     private static String nom;
     private static Joueur moi;
     private static Partie partie;
@@ -174,7 +174,8 @@ public class Client{
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
-                        joueurEnAttente = true;
+                        joueurEnAttente++;
+                        System.out.println("avant" + joueurEnAttente);
                         int h = 0;
                         synchronized (listParticipant) {
                             while((h < nbjoueur) && (! listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
@@ -183,6 +184,11 @@ public class Client{
                             Joueur j = new Joueur(socketclient, mej.getNom());
                             j.setScore(listParticipant.get(h).getScore());
                             listParticipant.set(h, j);
+                        }
+                        synchronized (listParticipant) {
+                            joueurEnAttente--;
+                            System.out.println("après" + joueurEnAttente);
+                            listParticipant.notify();
                         }
                         break;
                     case Client.CHOIX_DU_TOUR:
@@ -198,9 +204,6 @@ public class Client{
                 }
             }
             m = null;
-            synchronized (listParticipant) {
-                listParticipant.notify();
-            }
         }
     }
 
@@ -211,7 +214,7 @@ public class Client{
     }
 
     public static boolean pasjoueurEnAttente(){
-        return joueurEnAttente;
+        return joueurEnAttente > 0;
     }
 
 

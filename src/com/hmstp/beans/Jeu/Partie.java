@@ -258,6 +258,7 @@ public class Partie extends Thread{
             synchronized (listParticipant) {
                 if (Client.pasjoueurEnAttente()) {
                     try{
+                        System.out.println("wait");
                         listParticipant.wait();
                     }
                     catch (Exception e) {
