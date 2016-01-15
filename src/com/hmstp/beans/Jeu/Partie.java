@@ -140,12 +140,17 @@ public class Partie extends Thread{
         while(i < taille){
             if (! listRole.get(i).isChoixFait()) {
                 System.out.println(listRole.get(i).isChoixFait());
+                try {
+                    Thread.sleep(100);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
                 return true;
             }
             i++;
         }
         try {
-            Thread.sleep(300000);
+            Thread.sleep(100);
         } catch (Exception e) {
             System.err.println(e);
         }
