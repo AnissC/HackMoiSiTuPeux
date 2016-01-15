@@ -27,6 +27,7 @@ public class IHMJeu extends JPanel{
     private JPanel panelTableau;
 
     private JPanel panelInfo;
+    private JLabel labelInfo;
 
     private JPanel panelBoutons;
 
@@ -116,10 +117,14 @@ public class IHMJeu extends JPanel{
         panelTableau.setOpaque(true);
         panelTableau.setBounds(50,25,550,200);
 
-        //========================Panel Tchat=============================//
+        //========================Panel info=============================//
         panelInfo = new JPanel();
         panelInfo.setOpaque(true);
-        panelInfo.setBounds(650,25,150,150);
+        panelInfo.setBounds(630,25,200,200);
+
+        labelInfo = new JLabel();
+        labelInfo.setLayout(new BorderLayout());
+        panelInfo.add(labelInfo,BorderLayout.NORTH);
 
         //========================Panel Bouton============================//
         panelBoutons = new JPanel();
@@ -423,7 +428,11 @@ public class IHMJeu extends JPanel{
                 }
                 donnees[i][2] = "" + Client.score(joueurs.get(i).getNom());
             }
-
+            if(Client.getRoleParNom(Client.getNom()) instanceof Hackeur){
+                labelInfo.setText("<html><body> Vous êtes Hackeur,<br/>"+" veuillez choisir votre victime</body></html>");
+            }else{
+                labelInfo.setText("<html><body> Vous êtes une entreprise;<br/>"+" veuillez choisir votre action :<br/> - économiser,<br/> - se protéger</body>>/html>");
+            }
             String[] entetes = {"Nom", "Role", "Score"};
             JTable tableau = new JTable(donnees, entetes);
             tableau.setSize(200, 200);
