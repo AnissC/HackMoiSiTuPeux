@@ -136,23 +136,12 @@ public class Partie extends Thread{
 
     public boolean tousOntChoisit(){
         int i = 0;
-        int taille = 6;
+        int taille = listRole.size();
         while(i < taille){
             if (! listRole.get(i).isChoixFait()) {
-                System.out.println(listRole.get(i));
-                try {
-                    Thread.sleep(100);
-                } catch (Exception e) {
-                    System.err.println(e);
-                }
                 return true;
             }
             i++;
-        }
-        try {
-            Thread.sleep(100);
-        } catch (Exception e) {
-            System.err.println(e);
         }
         return false;
     }
@@ -233,12 +222,14 @@ public class Partie extends Thread{
             if (listParticipant.get(i).isRemplacant()) {
                 if (listParticipant.get(i).getRole() instanceof Entreprise) {
                     listParticipant.get(i).getRole().choixAction(listRandom.get(max()%nbParticipants) % 2);
+                    listParticipant.get(i).getRole().setChoixFait(true);
                 } else {
                     temp = listRandom.get(max()%nbParticipants);
                     if (temp == i){
                         temp = (temp + 1)%nbParticipants;
                     }
                     listParticipant.get(i).getRole().choixAction(temp);
+                    listParticipant.get(i).getRole().setChoixFait(true);
                 }
             }
             i++;
