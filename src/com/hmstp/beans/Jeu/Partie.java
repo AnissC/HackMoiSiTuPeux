@@ -55,7 +55,7 @@ public class Partie extends Thread{
         i=0;
         while(i < nbParticipants){
             //random controlé
-            Integer j = litRandomTemp.remove((nbParticipants*2+3+i*3-i)%litRandomTemp.size());
+            Integer j = litRandomTemp.remove((nbParticipants+3+i*3-i)%litRandomTemp.size());
             listRandom.add(j);
             i++;
         }
@@ -202,7 +202,6 @@ public class Partie extends Thread{
     public void tour() {
         this.moi.getRole().choixAction();
 
-        System.out.println("toto");
         while (! moi.getRole().isChoixFait()) {
             //wait le choix
             try {
@@ -211,9 +210,8 @@ public class Partie extends Thread{
                 System.err.println(e);
             }
         }
-        System.out.println("toto");
+
         this.envoyerChoix(this.moi.getRole().retourneChoix());
-        System.out.println("titu");
 
         int i = 0;
         int temp;
@@ -234,8 +232,6 @@ public class Partie extends Thread{
             i++;
         }
 
-        System.out.println("titu");
-
         while (tousOntChoisit()) {
             //wait la réponse des autres
             try {
@@ -244,9 +240,8 @@ public class Partie extends Thread{
                 System.err.println(e);
             }
         }
-        System.out.println("tata");
+
         this.resoudreTour();
-        System.out.println("tata");
     }
 
     public boolean pasDeGagnant(){
