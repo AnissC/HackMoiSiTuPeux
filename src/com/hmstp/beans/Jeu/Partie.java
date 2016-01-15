@@ -17,7 +17,7 @@ public class Partie extends Thread{
     private int perdant;
     private ArrayList<Integer> listRandom;
     private Joueur moi;
-    private ArrayList<Role> listRole;
+    private ArrayList<Role> listRole = new ArrayList<>();
     private Hackeur hackeur = Hackeur.getInstance();
     private Entreprise e1 = new Entreprise(2, "Moyenne entreprise");
     private Entreprise e2 = new Entreprise(1, "Petite entreprise");
