@@ -173,6 +173,7 @@ public class IHMJeu extends JPanel{
 
     public void dessine(){
         int max = 0;
+        suiviAssignationRole = 0;
         if(! ecranAffichage.equals(IHM_VIDE)) {
             panelTableau.removeAll();
             ArrayList<Participant> joueurs = Client.setListParticipant();
@@ -310,7 +311,6 @@ public class IHMJeu extends JPanel{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Client.choixDistribution(joueurs.get(0),suiviAssignationRole);
-                        System.out.println(suiviAssignationRole);
                         suiviAssignationRole++;
                         panelBoutons.remove(panelParticipant1);
                         panelBoutons.repaint();
