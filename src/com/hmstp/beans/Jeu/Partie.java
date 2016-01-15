@@ -44,6 +44,8 @@ public class Partie extends Thread{
             i++;
         }
 
+        System.out.println(litRandomTemp.toString());
+
         i=0;
         while(i < nbParticipants){
             //random controlé
@@ -51,6 +53,8 @@ public class Partie extends Thread{
             litRandom.add(j);
             i++;
         }
+
+        System.out.println(litRandom.toString());
     }
 
     public void setActive(boolean active) {
