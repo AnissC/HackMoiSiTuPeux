@@ -23,6 +23,6 @@ public abstract class Role {
 	public abstract int retourneChoix();
 
 	public void remmettreZero(){
-		this.choixFait = false;
+		setChoixFait(false);
 	}
 }
