@@ -103,7 +103,7 @@ public class Partie extends Thread{
         if (moi.isPerdant()){
             Client.choixDistibution();
 
-            while (! tousOntChoisit()) {
+            while (! tousNontChoisit()) {
                 //wait le choix des rôles
                 try {
                     Thread.sleep(100);
@@ -138,11 +138,21 @@ public class Partie extends Thread{
         int i = 0;
         while(i < nbParticipants){
             if (! listRole.get(i).isChoixFait()) {
-                return true;
+                return false;
             }
             i++;
         }
-        return false;
+        return true;
+    }
+    public boolean tousNontChoisit(){
+        int i = 0;
+        while(i < nbParticipants){
+            if (listRole.get(i).isChoixFait()) {
+                return false;
+            }
+            i++;
+        }
+        return true;
     }
 
     public void envoyerChoix(int choix){
@@ -234,7 +244,7 @@ public class Partie extends Thread{
             i++;
         }
 
-        while (tousOntChoisit()) {
+        while (!tousOntChoisit()) {
             //wait la réponse des autres
             try {
                 Thread.sleep(100);
