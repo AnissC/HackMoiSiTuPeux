@@ -32,8 +32,7 @@ public class GestionPartie {
         if (lobby[caseLobby].size() >= caseLobby){
             listePartie.add(lobby[caseLobby]);
             for (int i=0;i<lobby[caseLobby].size();i++) {
-                Message me = new Message(Serveur.COMMENCER_PARTIE);
-                Serveur.message(new Lettre(me,lobby[caseLobby].get(i).getSocket()));
+                Serveur.message(new Lettre(new MessagePartie(listeJoueur, Serveur.COMMENCER_PARTIE), lobby[caseLobby].get(i).getSocket()));
             }
             lobby[caseLobby] = new ArrayList<>();
         }

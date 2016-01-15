@@ -170,6 +170,16 @@ public class Client{
                         Client.lancerJeu();*/
                         break;
                     case Client.COMMENCER_PARTIE:
+                        MessagePartie mpSyn = (MessagePartie) m;
+                        joueurEnAttente++;
+                        System.out.println("avant" + joueurEnAttente);
+                        synchronized (listParticipant) {
+                            classement(mpSyn);
+
+                            joueurEnAttente--;
+                            System.out.println("après" + joueurEnAttente);
+                            listParticipant.notify();
+                        }
                         partie.setActive(true);
                         break;
                     case Client.NOUVEAU_JOUEUR:
@@ -185,8 +195,7 @@ public class Client{
                             j.setScore(listParticipant.get(h).getScore());
                             j.setRole(listParticipant.get(h).getRole());
                             listParticipant.set(h, j);
-                        }
-                        synchronized (listParticipant) {
+
                             joueurEnAttente--;
                             System.out.println("après" + joueurEnAttente);
                             listParticipant.notify();
@@ -261,9 +270,32 @@ public class Client{
         moi.getRole().choixAction(i);
     }
 
-
-    public static ArrayList<Participant> classement(){
+    public static ArrayList<Participant> setListParticipant(){
         return listParticipant;
+    }
+
+    public static ArrayList<Participant> classement(MessagePartie mpSyn){
+        ArrayList<Participant> listTemp = new ArrayList<>();
+        MessageJoueur MJ;
+        int i = 0;
+        int j = 0;
+
+        synchronized (listParticipant) {
+            MJ = mpSyn.getListJoueur().get(i);
+            while ((j < listParticipant.size()) && (! listParticipant.get(j).getNom().equals(MJ.getNom()))){
+
+                j++;
+            }
+        }
+        while(i < nbjoueur){
+            listTemp.add(listParticipant.remove(0));
+            i++;
+        }
+        while(i > 0) {
+            listParticipant.add(listTemp.remove(0));
+            i--;
+        }
+        return listTemp;
     }
 
     public static int score(String no){

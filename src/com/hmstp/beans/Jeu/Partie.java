@@ -148,18 +148,18 @@ public class Partie extends Thread{
             listTemp.add(hackeur);
         }
 
-        //if (this.active){
+        if (this.active){
             listTemp.get(0).changeScore(0 - ((Entreprise)victime.getRole()).getValeur());
             listTemp.get(1).changeScore(((Entreprise)victime.getRole()).getValeur());
-        //}
+        }
 
         i=2;
         while(i < nbParticipants){
-            //if (this.active) {
+            if (this.active) {
                 if (!(((Entreprise)listParticipant.get(0).getRole()).getProtection())){
                     listParticipant.get(0).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
                 }
-            //}
+            }
             listTemp.add(listParticipant.remove(0));
             i++;
         }
