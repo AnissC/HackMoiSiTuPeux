@@ -90,10 +90,10 @@ public class Partie extends Thread{
         else if (listParticipant.get(0).isRemplacant()){
             distributionRoleManche1();
             int i = 0;
-            /*while(i < nbParticipants){
+            while(i < nbParticipants){
                 listParticipant.get(i).getRole().remmettreZero();
                 i++;
-            }*/
+            }
         }
         else{
             //afficher un message d'attente
@@ -157,8 +157,6 @@ public class Partie extends Thread{
             }
             i++;
         }
-
-
     }
 
     public int algoIA(int i){
