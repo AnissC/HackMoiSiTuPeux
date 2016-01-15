@@ -324,7 +324,6 @@ public class IHMJeu extends JPanel{
                 donnees[i][0] = joueurs.get(i).getNom();
                 if (joueurs.get(i).getRole() instanceof Hackeur) {
                     donnees[i][1] = "Hackeur";
-
                 }
                 else{
                     donnees[i][1] = ((Entreprise)joueurs.get(i).getRole()).getNom();

@@ -3,7 +3,6 @@ package com.hmstp.beans.Client;
 import com.hmstp.beans.InterfaceGraphique.*;
 import com.hmstp.beans.Jeu.*;
 import com.hmstp.beans.Message.*;
-import com.hmstp.beans.Serveur.Serveur;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -24,7 +23,8 @@ public class Client{
     private static Joueur moi;
     private static Partie partie;
 
-    public static String adresseIP = "169.254.129.165";
+    //public static String adresseIP = "169.254.129.165";
+    public static String adresseIP = "132.227.125.85";
     public static int port = 8080;
     public static Socket serveur;
 

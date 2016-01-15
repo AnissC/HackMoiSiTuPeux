@@ -77,14 +77,14 @@ public class Partie extends Thread{
                 }
             }
 
-            while (!tousOntChoisit()) {
+            /*while (!tousOntChoisit()) {
                 //wait le choix des rôles
                 try {
                     Thread.sleep(100);
                 } catch (Exception e) {
                     System.err.println(e);
                 }
-            }
+            }*/
 
         }
         else if (listParticipant.get(0).isRemplacant()){
@@ -162,6 +162,11 @@ public class Partie extends Thread{
         while(i > 0) {
             listParticipant.add(listTemp.remove(0));
             i--;
+        }
+
+        while(i < nbParticipants){
+            listParticipant.get(i).getRole().remmettreZero();
+            i++;
         }
 
     }
