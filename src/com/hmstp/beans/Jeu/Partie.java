@@ -82,25 +82,7 @@ public class Partie extends Thread{
     }
 
     public void choixDistribution(Participant p, int role) {
-        allouerRole(p,role);
-        envoyerChoix(role, Client.CHOIX_DU_ROLE, p.getNom());
-        p.getRole().remmettreZero();
-    }
-
-    public void choixDistribution(String nom, int role) {
-        int i = 0;
-        synchronized (listParticipant) {
-            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(nom))){
-                i++;
-            }
-        }
-        Participant p = listParticipant.get(i);
-        allouerRole(p,role);
-        p.getRole().remmettreZero();
-    }
-
-    public void allouerRole(Participant p, int i){
-        switch (i) {
+        switch (role) {
             case 0 : p.setRole(hackeur);
                 break;
             case 1 : p.setRole(e1);
@@ -114,6 +96,7 @@ public class Partie extends Thread{
             case 5 : p.setRole(e5);
                 break;
         }
+        p.getRole().remmettreZero();
     }
 
     public void distributionRoleMancheN(){
@@ -162,12 +145,12 @@ public class Partie extends Thread{
         return false;
     }
 
-    public void envoyerChoix(int choix, String mess, String nom){
+    public void envoyerChoix(int choix){
         MessageChoix mn = null;
         int i = 0;
         while (i < listParticipant.size()) {
             if (!(listParticipant.get(i).isRemplacant())) {
-                mn = new MessageChoix(nom, choix, mess);
+                mn = new MessageChoix(moi.getNom(), choix, Client.CHOIX_DU_TOUR);
                 synchronized (listMessagesEnvoyer) {
                     this.listMessagesEnvoyer.add(new Lettre(mn, ((Joueur) listParticipant.get(i)).getSock()));
                 }
@@ -230,7 +213,7 @@ public class Partie extends Thread{
             }
         }
 
-        this.envoyerChoix(this.moi.getRole().retourneChoix(), Client.CHOIX_DU_TOUR, moi.getNom());
+        this.envoyerChoix(this.moi.getRole().retourneChoix());
 
         int i = 0;
         int temp;
@@ -306,9 +289,9 @@ public class Partie extends Thread{
     }
 
     public void run() {
-        synchronized (listParticipant) {
-            this.distributionRoleManche1();
-            if (Client.premier){
+        if (Client.premier){
+            synchronized (listParticipant) {
+                this.distributionRoleManche1();
                 this.tour();
             }
         }
