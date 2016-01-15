@@ -130,17 +130,17 @@ public class Partie extends Thread{
 
         if (((Entreprise)victime.getRole()).getProtection()){
             hackeur.setPerdant(true);
-            if (this.active) {
+            //if (this.active) {
                 hackeur.changeScore(0 - ((Entreprise) victime.getRole()).getValeur());
                 victime.changeScore(((Entreprise) victime.getRole()).getValeur());
-            }
+            //}
         }
         else {
             victime.setPerdant(true);
-            if (this.active) {
+            //if (this.active) {
                 victime.changeScore(0 - ((Entreprise) victime.getRole()).getValeur());
                 hackeur.changeScore(((Entreprise) victime.getRole()).getValeur());
-            }
+            //}
         }
 
 
