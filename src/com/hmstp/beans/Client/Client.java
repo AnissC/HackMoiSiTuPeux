@@ -355,24 +355,25 @@ public class Client{
     }
 
 
-    public  void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception{
         Client client = new Client();
+        Client.port++;
         client.serveur = Client.connexion(adresseIP, 8080);
 
-        ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, serveur);
+        ClientThreadEcoute clientEcoute = new ClientThreadEcoute(client.listMessagesRecu, client.serveur);
         clientEcoute.start();
-        ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, serveur);
+        ClientThreadEcriture clientEcriture = new ClientThreadEcriture(client.listMessagesEnvoyer, client.serveur);
         clientEcriture.start();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ihmClient.go();
-                ihmClient.setClient(client);
+                client.ihmClient.go();
+                client.ihmClient.setClient(client);
             }
         });
 
-        ClientThreadConnexion serveurConnexion = new ClientThreadConnexion(listMessagesRecu, listMessagesEnvoyer);
+        ClientThreadConnexion serveurConnexion = new ClientThreadConnexion(client.listMessagesRecu, client.listMessagesEnvoyer);
         serveurConnexion.start();
 
         client.gestionMessage();
