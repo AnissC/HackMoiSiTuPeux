@@ -119,6 +119,15 @@ public class Partie extends Thread{
         else{
             //afficher un message d'attente
         }
+
+        int k = 0;
+        while(k < nbParticipants){
+            if(listParticipant.get(k).isPerdant()){
+                listParticipant.get(k).setPerdant(false);
+            }
+            k++;
+        }
+        perdant = -1;
     }
 
     public boolean tousOntChoisit(){
@@ -199,12 +208,17 @@ public class Partie extends Thread{
         this.envoyerChoix(this.moi.getRole().retourneChoix());
 
         int i = 0;
+        int temp;
         while (i < listParticipant.size()) {
             if (listParticipant.get(i).isRemplacant()) {
                 if (listParticipant.get(i).getRole() instanceof Entreprise) {
                     listParticipant.get(i).getRole().choixAction(litRandom.get(max()%nbParticipants) % 2);
                 } else {
-                    listParticipant.get(i).getRole().choixAction(litRandom.get(max()%nbParticipants));
+                    temp = litRandom.get(max()%nbParticipants);
+                    if (temp == i){
+                        temp = (temp++)%nbParticipants;
+                    }
+                    listParticipant.get(i).getRole().choixAction(temp);
                 }
             }
             i++;
