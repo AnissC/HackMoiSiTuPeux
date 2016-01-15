@@ -293,28 +293,6 @@ public class IHMJeu extends JPanel{
                 panelVictime5.add(labelVictime5Valeur);
             }
 
-
-            if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
-                //=====================Victime 6==============//
-                panelVictime6 = new JPanel();
-                panelVictime6.setOpaque(false);
-                labelVictime6 = new JLabel("Victime 5");
-                labelVictime6Valeur = new JLabel(Integer.toString(numJoueur));
-                labelVictime6Valeur.setVisible(false);
-                boutonVictime6 = new JButton(joueurs.get(numJoueur).getNom());
-                boutonVictime6.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        Client.choixAction(Integer.parseInt(labelVictime6Valeur.getText()));
-                    }
-                });
-                panelVictime6.setLayout(new BorderLayout());
-                panelVictime6.add(labelVictime6,BorderLayout.NORTH);
-                panelVictime6.add(boutonVictime6,BorderLayout.SOUTH);
-                panelVictime6.add(labelVictime6Valeur);
-            }
-
-
             //============Bouton Participant 1======================//
             panelParticipant1 = new JPanel();
             panelParticipant1.setOpaque(false);
@@ -350,8 +328,9 @@ public class IHMJeu extends JPanel{
             panelParticipant2.setLayout(new BorderLayout());
             panelParticipant2.add(labelParticipant2, BorderLayout.NORTH);
             panelParticipant2.add(boutonParticipant2,BorderLayout.SOUTH);
-
+            if (max > 3) {
             //============Bouton Participant 3======================//
+
             panelParticipant3 = new JPanel();
             panelParticipant3.setOpaque(false);
 
@@ -365,10 +344,12 @@ public class IHMJeu extends JPanel{
                     Client.choixDistribution(joueurs.get(2),suiviAssignationRole);
                 }
             });
-            panelParticipant3.setLayout(new BorderLayout());
-            panelParticipant3.add(labelParticipant3, BorderLayout.NORTH);
-            panelParticipant3.add(boutonParticipant3,BorderLayout.SOUTH);
+                panelParticipant3.setLayout(new BorderLayout());
+                panelParticipant3.add(labelParticipant3, BorderLayout.NORTH);
+                panelParticipant3.add(boutonParticipant3, BorderLayout.SOUTH);
+            }
             //============Bouton Participant 4======================//
+            if(max>4){
             panelParticipant4 = new JPanel();
             panelParticipant4.setOpaque(false);
 
@@ -385,42 +366,45 @@ public class IHMJeu extends JPanel{
             panelParticipant4.setLayout(new BorderLayout());
             panelParticipant4.add(labelParticipant4, BorderLayout.NORTH);
             panelParticipant4.add(boutonParticipant4,BorderLayout.SOUTH);
+            }
             //============Bouton Participant 5======================//
-            panelParticipant5 = new JPanel();
-            panelParticipant5.setOpaque(false);
+            if(max>5) {
+                panelParticipant5 = new JPanel();
+                panelParticipant5.setOpaque(false);
 
-            labelParticipant5 = new JLabel("Participant 5");
+                labelParticipant5 = new JLabel("Participant 5");
 
-            boutonParticipant5 = new JButton("Participant 5");
-            boutonParticipant5.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    suiviAssignationRole++;
-                    Client.choixDistribution(joueurs.get(4),suiviAssignationRole);
-                }
-            });
-            panelParticipant5.setLayout(new BorderLayout());
-            panelParticipant5.add(labelParticipant5, BorderLayout.NORTH);
-            panelParticipant5.add(boutonParticipant5,BorderLayout.SOUTH);
+                boutonParticipant5 = new JButton("Participant 5");
+                boutonParticipant5.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        suiviAssignationRole++;
+                        Client.choixDistribution(joueurs.get(4), suiviAssignationRole);
+                    }
+                });
+                panelParticipant5.setLayout(new BorderLayout());
+                panelParticipant5.add(labelParticipant5, BorderLayout.NORTH);
+                panelParticipant5.add(boutonParticipant5, BorderLayout.SOUTH);
+            }
             //============Bouton Participant 6======================//
-            panelParticipant6 = new JPanel();
-            panelParticipant6.setOpaque(false);
+            if(ecranAffichage.equals(IHM_ASSIGNE_ROLE)) {
+                panelParticipant6 = new JPanel();
+                panelParticipant6.setOpaque(false);
 
-            labelParticipant6 = new JLabel("Participant 6");
+                labelParticipant6 = new JLabel("Participant 6");
 
-            boutonParticipant6 = new JButton("Participant 6");
-            boutonParticipant6.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    suiviAssignationRole++;
-                    Client.choixDistribution(joueurs.get(5),suiviAssignationRole);
-                }
-            });
-            panelParticipant6.setLayout(new BorderLayout());
-            panelParticipant6.add(labelParticipant6, BorderLayout.NORTH);
-            panelParticipant6.add(boutonParticipant6,BorderLayout.SOUTH);
-
-
+                boutonParticipant6 = new JButton("Participant 6");
+                boutonParticipant6.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        suiviAssignationRole++;
+                        Client.choixDistribution(joueurs.get(5), suiviAssignationRole);
+                    }
+                });
+                panelParticipant6.setLayout(new BorderLayout());
+                panelParticipant6.add(labelParticipant6, BorderLayout.NORTH);
+                panelParticipant6.add(boutonParticipant6, BorderLayout.SOUTH);
+            }
             //=====================Tableau Score =============================//
             String[][] donnees = new String[joueurs.size()][3];
             for (int i = 0; i < joueurs.size(); i++) {
