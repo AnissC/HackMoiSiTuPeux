@@ -33,6 +33,7 @@ public class IHMClient extends JPanel {
 
     private JPanel panelMdpConfirme;
     private JLabel labelMdpConfirme;
+    private JLabel labelErreurMdpConfirme;
     private JPasswordField mdpConfirme;
 
     private JPanel panelBoutonLogin;
@@ -103,7 +104,7 @@ public class IHMClient extends JPanel {
 
         /*================/Mot de Passe/===============*/
 
-        //Pseudo correspondant au mot de passe
+        //Panel correspondant au mot de passe
         panelMdp = new JPanel();
         panelMdp.setOpaque(false);
         panelMdp.setBounds(325,150,250,65);
@@ -115,6 +116,7 @@ public class IHMClient extends JPanel {
         panelMdp.add(labelMdp,BorderLayout.NORTH);
         panelMdp.add(mdp, BorderLayout.SOUTH);
 
+        //Panel correspondant au mot de passe confirme
         panelMdpConfirme = new JPanel();
         panelMdpConfirme.setOpaque(false);
         panelMdpConfirme.setBounds(325,250,250,65);
@@ -125,6 +127,9 @@ public class IHMClient extends JPanel {
         panelMdpConfirme.setLayout(new BorderLayout());
         panelMdpConfirme.add(labelMdpConfirme,BorderLayout.NORTH);
         panelMdpConfirme.add(mdpConfirme, BorderLayout.SOUTH);
+
+        labelErreurMdpConfirme = new JLabel("Erreur dans la confirmation de mot de passe : ");
+        labelErreurMdpConfirme.setForeground(Color.RED);
 
 
         //==============Bouton à 3==============//
@@ -272,9 +277,13 @@ public class IHMClient extends JPanel {
         boutonSinscrire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String passwordConfirme = new String(mdpConfirme.getPassword());
                 String password = new String(mdp.getPassword());
-                MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CREER_COMPTE);
-                Client.message(new Lettre(mC, Client.serveur));
+
+                if (password.equals(passwordConfirme)){
+                    MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CREER_COMPTE);
+                    Client.message(new Lettre(mC, Client.serveur));
+                }
             }
         });
         panelBoutonSinscrire.add(boutonSinscrire);
