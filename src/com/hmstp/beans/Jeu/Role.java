@@ -24,8 +24,8 @@ public abstract class Role {
 		this.numero = numero;
 	}
 
-	public void choixAction(){
-			Client.choixAction(this);
+	public void choixAction(Client c){
+			c.choixAction(this);
 	}
 
 	public abstract void choixAction(int i);

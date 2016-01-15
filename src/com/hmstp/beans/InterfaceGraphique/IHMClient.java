@@ -3,10 +3,7 @@ package com.hmstp.beans.InterfaceGraphique;
 
 
 import com.hmstp.beans.Client.Client;
-import com.hmstp.beans.Message.Lettre;
-import com.hmstp.beans.Message.MessageChoix;
-import com.hmstp.beans.Message.MessageCompte;
-import com.hmstp.beans.Message.MessageNombre;
+import com.hmstp.beans.Message.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +16,6 @@ public class IHMClient extends JPanel {
     public static final String IHM_RECONNEXION = "IHM_RECONNEXION";
     public static final String IHM_MENU = "IHM_MENU";
     public static final String IHM_INSCRIPTION = "IHM_INSCRIPTION";
-
 
     private JFrame frame;
     private JPanel panel;
@@ -68,6 +64,11 @@ public class IHMClient extends JPanel {
     private JButton boutonAnnuler;
 
     private String ecranAffichage = IHM_CONNEXION;
+    private Client client;
+
+    public void setClient(Client client){
+        this.client = client;
+    }
 
     public void setEcranAffichage(String ecranAffichage) {
         this.ecranAffichage = ecranAffichage;
@@ -141,9 +142,9 @@ public class IHMClient extends JPanel {
         boutonPartieA3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Client.setNbjoueur(3);
-                MessageChoix mN = new MessageChoix(Client.getNom(), 3, Client.NB_JOUEURS);
-                Client.message(new Lettre(mN, Client.serveur));
+                client.setNbjoueur(3);
+                MessageChoix mN = new MessageChoix(client.getNom(), 3, client.NB_JOUEURS);
+                client.message(new Lettre(mN, client.serveur));
             }
         });
         panelPartieA3.add(boutonPartieA3);
@@ -157,9 +158,9 @@ public class IHMClient extends JPanel {
         boutonPartieA4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Client.setNbjoueur(4);
-                MessageChoix mN = new MessageChoix(Client.getNom(), 4, Client.NB_JOUEURS);
-                Client.message(new Lettre(mN, Client.serveur));
+                client.setNbjoueur(4);
+                MessageChoix mN = new MessageChoix(client.getNom(), 4, client.NB_JOUEURS);
+                client.message(new Lettre(mN, client.serveur));
             }
         });
         panelPartieA4.add(boutonPartieA4);
@@ -173,9 +174,9 @@ public class IHMClient extends JPanel {
         boutonPartieA5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Client.setNbjoueur(5);
-                MessageChoix mN = new MessageChoix(Client.getNom(), 5, Client.NB_JOUEURS);
-                Client.message(new Lettre(mN, Client.serveur));
+                client.setNbjoueur(5);
+                MessageChoix mN = new MessageChoix(client.getNom(), 5, client.NB_JOUEURS);
+                client.message(new Lettre(mN, client.serveur));
             }
         });
         panelPartieA5.add(boutonPartieA5);
@@ -189,9 +190,9 @@ public class IHMClient extends JPanel {
         boutonPartieA6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Client.setNbjoueur(6);
-                MessageChoix mN = new MessageChoix(Client.getNom(), 6, Client.NB_JOUEURS);
-                Client.message(new Lettre(mN, Client.serveur));
+                client.setNbjoueur(6);
+                MessageChoix mN = new MessageChoix(client.getNom(), 6, client.NB_JOUEURS);
+                client.message(new Lettre(mN, client.serveur));
             }
         });
         panelPartieA6.add(boutonPartieA6);
@@ -209,10 +210,10 @@ public class IHMClient extends JPanel {
         boutonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Client.setNom(pseudo.getText());
+                client.setNom(pseudo.getText());
                 String password = new String(mdp.getPassword());
-                MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CONNEXION);
-                Client.message(new Lettre(mC, Client.serveur));
+                MessageCompte mC = new MessageCompte(pseudo.getText(), password, client.CONNEXION);
+                client.message(new Lettre(mC, client.serveur));
             }
         });
         panelBoutonLogin.add(boutonLogin);
@@ -281,8 +282,8 @@ public class IHMClient extends JPanel {
                 String password = new String(mdp.getPassword());
 
                 if (password.equals(passwordConfirme)){
-                    MessageCompte mC = new MessageCompte(pseudo.getText(), password, Client.CREER_COMPTE);
-                    Client.message(new Lettre(mC, Client.serveur));
+                    MessageCompte mC = new MessageCompte(pseudo.getText(), password, client.CREER_COMPTE);
+                    client.message(new Lettre(mC, client.serveur));
                 }
             }
         });
@@ -357,8 +358,8 @@ public class IHMClient extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                IHMClient ihmClient = new IHMClient();
-                ihmClient.go();
+                IHMClient ihmclient = new IHMClient();
+                ihmclient.go();
             }
         });
     }

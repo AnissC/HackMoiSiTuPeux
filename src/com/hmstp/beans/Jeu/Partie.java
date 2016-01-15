@@ -15,6 +15,7 @@ public class Partie extends Thread{
     private ArrayList<Lettre> listMessagesEnvoyer;
     private boolean active;
     private int perdant;
+    private Client client;
     private ArrayList<Integer> listRandom;
     private Joueur moi;
     private ArrayList<Role> listRole = new ArrayList<>();
@@ -25,11 +26,12 @@ public class Partie extends Thread{
     private Entreprise e4 = new Entreprise(1, "Petite entreprise", 4);
     private Entreprise e5 = new Entreprise(1, "Petite entreprise", 5);
 
-    public Partie(ArrayList<Participant> lp, ArrayList<Lettre> lme, Joueur j){
+    public Partie(ArrayList<Participant> lp, ArrayList<Lettre> lme, Joueur j, int nb, Client c){
         this.listParticipant = lp;
         this.listMessagesEnvoyer = lme;
-        this.nbParticipants = Client.getNbjoueur();
+        this.nbParticipants = nb;
         this.active = false;
+        this.client = c;
         this.moi = j;
         this.initRandom();
 
@@ -116,7 +118,7 @@ public class Partie extends Thread{
 
     public void distributionRoleMancheN(){
         if (moi.isPerdant()){
-            Client.choixDistibution();
+            client.choixDistibution();
 
             while (! tousNontChoisit()) {
                 //wait le choix des rôles
@@ -227,7 +229,7 @@ public class Partie extends Thread{
     }
 
     public void tour() {
-        this.moi.getRole().choixAction();
+        this.moi.getRole().choixAction(client);
 
         while (! moi.getRole().isChoixFait()) {
             //wait le choix
@@ -316,14 +318,14 @@ public class Partie extends Thread{
     public void run() {
         synchronized (listParticipant) {
             this.distributionRoleManche1();
-            if (Client.premier) {
+            if (client.premier) {
                 this.tour();
             }
         }
 
         while(! this.active){
             synchronized (listParticipant) {
-                while (Client.pasjoueurEnAttente()) {
+                while (client.pasjoueurEnAttente()) {
                     try{
                         System.out.println("TOTO");
                         listParticipant.wait();
@@ -347,7 +349,7 @@ public class Partie extends Thread{
 
         while(pasDeGagnant()){
             synchronized (listParticipant) {
-                while (Client.pasjoueurEnAttente()) {
+                while (client.pasjoueurEnAttente()) {
                     try{
                         listParticipant.wait();
                     }
@@ -365,7 +367,7 @@ public class Partie extends Thread{
 
         MessageJoueur mj = new MessageJoueur(null, leGagnant(), Client.PARTIE_FINIE);
         synchronized (listMessagesEnvoyer) {
-            this.listMessagesEnvoyer.add(new Lettre(mj, Client.serveur));
+            this.listMessagesEnvoyer.add(new Lettre(mj, client.serveur));
         }
     }
 }

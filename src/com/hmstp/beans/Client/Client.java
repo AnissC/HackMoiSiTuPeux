@@ -12,23 +12,23 @@ import java.util.ArrayList;
 
 
 public class Client{
-    private static ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
-    private static ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
-    private static ArrayList<Participant> listParticipant = new ArrayList<>();
-    private static IHMClient ihmClient = new IHMClient();
-    private static IHMJeu ihmJeu = new IHMJeu();
-    private static int nbjoueur = 0;
-    private static int joueurEnAttente = 0;
-    private static int partieEnAttente = 0;
-    private static String nom;
-    private static Joueur moi;
-    private static Partie partie;
-    public static boolean premier = false;
+    private  ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
+    private  ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
+    private  ArrayList<Participant> listParticipant = new ArrayList<>();
+    private  IHMClient ihmClient = new IHMClient();
+    private  IHMJeu ihmJeu = new IHMJeu();
+    private  int nbjoueur = 0;
+    private  int joueurEnAttente = 0;
+    private  int partieEnAttente = 0;
+    private  String nom;
+    private  Joueur moi;
+    private  Partie partie;
+    public  boolean premier = false;
 
     //public static String adresseIP = "169.254.129.165";
     public static String adresseIP = "132.227.125.85";
     public static int port = 1180;
-    public static Socket serveur;
+    public  Socket serveur;
 
     public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
@@ -93,15 +93,15 @@ public class Client{
         return c;
     }
 
-    private static void gestionMessage() throws Exception{
+    private  void gestionMessage() throws Exception{
         Message m = null;
         Socket socketclient = null;
         //Condition = bouton quitter
         while(true){
             synchronized (listMessagesRecu) {
-                if (!Client.listMessagesRecu.isEmpty()) {
-                    socketclient = Client.listMessagesRecu.get(0).getSocket();
-                    m = Client.listMessagesRecu.remove(0).getMessage();
+                if (!listMessagesRecu.isEmpty()) {
+                    socketclient = listMessagesRecu.get(0).getSocket();
+                    m = listMessagesRecu.remove(0).getMessage();
                 }
             }
             if(m != null){
@@ -133,11 +133,11 @@ public class Client{
 
                         while (!(mP.getListJoueur().isEmpty())) {
                             mJrecu = mP.getListJoueur().remove(0);
-                            if (mJrecu.getNom().equals(Client.nom)){
+                            if (mJrecu.getNom().equals(nom)){
                                 moi = new Joueur(null, mJrecu.getNom());
                                 synchronized (listParticipant) {
                                     listParticipant.add(moi);
-                                    Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
+                                    partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                                 }
                             }
                             else {
@@ -147,7 +147,7 @@ public class Client{
                                     System.out.println("Bonjour");
                                     mJenvoyer = new MessageJoueur(null, nom, Client.NOUVEAU_JOUEUR);
                                     System.out.println("Bonsoir");
-                                    Client.message(new Lettre(mJenvoyer,autreC));
+                                    message(new Lettre(mJenvoyer,autreC));
                                 }
                             }
                             k++;
@@ -158,12 +158,12 @@ public class Client{
                             }
                             k++;
                         }
-                        Client.lancerJeu();
+                        lancerJeu();
                         break;
                     case Client.ROLE:
                         MessageChoix MC = (MessageChoix) m;
                         choixDistribution(moi.getNom(), MC.getNombre());
-                        Client.partie.start();
+                        partie.start();
                         break;
                     case Client.CREER_PARTIE:
                         MessageJoueur mj = (MessageJoueur) m;
@@ -171,16 +171,16 @@ public class Client{
                         synchronized (listParticipant) {
                             moi = new Joueur(null, mj.getNom());
                             listParticipant.add(moi);
-                            Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
+                            partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                             int j = 1;
                             while (j < nbjoueur) {
                                 listParticipant.add(new Ramplacant("Ordinateur" + j));
                                 j++;
                             }
                         }
-                        Client.lancerJeu();
+                        lancerJeu();
                         Thread.sleep(1000);
-                        Client.partie.start();
+                        partie.start();
                         break;
                     case Client.COMMENCER_PARTIE:
                         MessagePartie mpSyn = (MessagePartie) m;
@@ -244,34 +244,34 @@ public class Client{
         }
     }
 
-    public static void message(Lettre msg){
+    public  void message(Lettre msg){
         synchronized (listMessagesEnvoyer){
             listMessagesEnvoyer.add(msg);
         }
     }
 
-    public static boolean pasjoueurEnAttente(){
+    public  boolean pasjoueurEnAttente(){
         return ((joueurEnAttente > 0) || (partieEnAttente > 0));
     }
 
 
-    public static String getNom(){
+    public  String getNom(){
         return nom;
     }
 
-    public static void setNom(String n){
-        Client.nom = n;
+    public  void setNom(String n){
+        nom = n;
     }
 
-    public static void setNbjoueur(int n){
-        Client.nbjoueur = n;
+    public  void setNbjoueur(int n){
+        nbjoueur = n;
     }
 
-    public static int getNbjoueur() {
+    public  int getNbjoueur() {
         return nbjoueur;
     }
 
-    public static void choixAction(Role r){
+    public  void choixAction(Role r){
         if (r instanceof  Hackeur){
             ihmJeu.setEcranAffichage(IHMJeu.IHM_HACKEUR);
         }
@@ -280,22 +280,22 @@ public class Client{
         }
     }
 
-    public static void choixDistibution(){
+    public  void choixDistibution(){
         ihmJeu.setEcranAffichage(IHMJeu.IHM_ASSIGNE_ROLE);
     }
 
-    public static void choixDistribution(Participant p, int role){
+    public  void choixDistribution(Participant p, int role){
         partie.choixDistribution(p, role);
     }
-    public static void choixDistribution(String p, int role){
+    public  void choixDistribution(String p, int role){
         partie.choixDistribution(p, role);
     }
 
-    public static void choixAction(int i){
+    public  void choixAction(int i){
         moi.getRole().choixAction(i);
     }
 
-    public static ArrayList<Participant> setListParticipant(){
+    public  ArrayList<Participant> setListParticipant(){
         return listParticipant;
     }
 
@@ -323,7 +323,7 @@ public class Client{
         }
     }*/
 
-    public static int score(String no){
+    public  int score(String no){
         int i = 0;
         synchronized (listParticipant) {
             while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
@@ -333,7 +333,7 @@ public class Client{
         }
     }
 
-    public static Role getRoleParNom(String no){
+    public  Role getRoleParNom(String no){
         int i = 0;
         synchronized (listParticipant) {
             while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
@@ -343,17 +343,21 @@ public class Client{
         }
     }
 
-    public static void lancerJeu(){
+    public  void lancerJeu(){
+        Client clienttemp = this;
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 ihmJeu.go();
+                ihmJeu.setClient(clienttemp);
             }
         });
     }
 
-    public static void main(String[] args) throws Exception{
-        Client.serveur = Client.connexion(adresseIP, 8080);
+
+    public  void main(String[] args) throws Exception{
+        Client client = new Client();
+        client.serveur = Client.connexion(adresseIP, 8080);
 
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, serveur);
         clientEcoute.start();
@@ -364,13 +368,14 @@ public class Client{
             @Override
             public void run() {
                 ihmClient.go();
+                ihmClient.setClient(client);
             }
         });
 
         ClientThreadConnexion serveurConnexion = new ClientThreadConnexion(listMessagesRecu, listMessagesEnvoyer);
         serveurConnexion.start();
 
-        Client.gestionMessage();
+        client.gestionMessage();
 
     }
 }

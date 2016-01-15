@@ -1,6 +1,8 @@
 package com.hmstp.beans.Jeu;
 
 
+import com.hmstp.beans.Client.Client;
+
 import java.net.Socket;
 
 public class Joueur extends Participant{
@@ -17,8 +19,8 @@ public class Joueur extends Participant{
 	}
 
 
-	public void choixAction() {
-		this.getRole().choixAction();
+	public void choixAction(Client c) {
+		this.getRole().choixAction(c);
 	}
 
 	@Override

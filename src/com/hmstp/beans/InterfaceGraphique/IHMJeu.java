@@ -2,12 +2,9 @@ package com.hmstp.beans.InterfaceGraphique;
 
 
 import com.hmstp.beans.Client.Client;
-import com.hmstp.beans.Jeu.Entreprise;
-import com.hmstp.beans.Jeu.Hackeur;
-import com.hmstp.beans.Jeu.Participant;
+import com.hmstp.beans.Jeu.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -96,6 +93,11 @@ public class IHMJeu extends JPanel{
 
     private String ecranAffichage = IHM_VIDE;
     public int suiviAssignationRole =0;
+    private Client client;
+
+    public void setClient(Client client){
+        this.client = client;
+    }
 
     public void setEcranAffichage(String ecranAffichage) {
         this.ecranAffichage = ecranAffichage;
@@ -142,7 +144,7 @@ public class IHMJeu extends JPanel{
         boutonEconomiser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Client.choixAction(0);
+                client.choixAction(0);
             }
         });
         panelEconomiser.setLayout(new BorderLayout());
@@ -160,7 +162,7 @@ public class IHMJeu extends JPanel{
         boutonSeProteger.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Client.choixAction(1);
+                client.choixAction(1);
             }
         });
         panelSeProteger.setLayout(new BorderLayout());
@@ -176,7 +178,7 @@ public class IHMJeu extends JPanel{
         suiviAssignationRole = 0;
         if(! ecranAffichage.equals(IHM_VIDE)) {
             panelTableau.removeAll();
-            ArrayList<Participant> joueurs = Client.setListParticipant();
+            ArrayList<Participant> joueurs = client.setListParticipant();
             max = joueurs.size();
             numJoueur = 0;
             if (ecranAffichage.equals(IHM_HACKEUR)){
@@ -185,7 +187,7 @@ public class IHMJeu extends JPanel{
                 panelVictime1.setOpaque(false);
 
                 labelVictime1 = new JLabel("Victime 1");
-                if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && Client.getRoleParNom(joueurs.get(numJoueur).getNom()) instanceof Hackeur){
+                if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && client.getRoleParNom(joueurs.get(numJoueur).getNom()) instanceof Hackeur){
                     numJoueur ++;
                 }
                 labelVictime1Valeur = new JLabel(Integer.toString(numJoueur));
@@ -194,7 +196,7 @@ public class IHMJeu extends JPanel{
                 boutonVictime1.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Client.choixAction(Integer.parseInt(labelVictime1Valeur.getText()));
+                        client.choixAction(Integer.parseInt(labelVictime1Valeur.getText()));
                     }
                 });
                 numJoueur++;
@@ -209,7 +211,7 @@ public class IHMJeu extends JPanel{
 
                 labelVictime2 = new JLabel("Victime 2");
 
-                if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && Client.getRoleParNom(joueurs.get(numJoueur).getNom()) instanceof Hackeur){
+                if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && client.getRoleParNom(joueurs.get(numJoueur).getNom()) instanceof Hackeur){
                     numJoueur ++;
                 }
                 labelVictime2Valeur = new JLabel(Integer.toString(numJoueur));
@@ -218,7 +220,7 @@ public class IHMJeu extends JPanel{
                 boutonVictime2.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Client.choixAction(Integer.parseInt(labelVictime2Valeur.getText()));
+                        client.choixAction(Integer.parseInt(labelVictime2Valeur.getText()));
                     }
                 });
                 numJoueur++;
@@ -232,7 +234,7 @@ public class IHMJeu extends JPanel{
                     panelVictime3 = new JPanel();
                     panelVictime3.setOpaque(false);
                     labelVictime3 = new JLabel("Victime 3");
-                    if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && Client.getRoleParNom(joueurs.get(numJoueur).getNom()) instanceof Hackeur){
+                    if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && client.getRoleParNom(joueurs.get(numJoueur).getNom()) instanceof Hackeur){
                         numJoueur ++;
                     }
                     labelVictime3Valeur = new JLabel(Integer.toString(numJoueur));
@@ -241,7 +243,7 @@ public class IHMJeu extends JPanel{
                     boutonVictime3.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            Client.choixAction(Integer.parseInt(labelVictime3Valeur.getText()));
+                            client.choixAction(Integer.parseInt(labelVictime3Valeur.getText()));
                         }
                     });
                     numJoueur++;
@@ -256,7 +258,7 @@ public class IHMJeu extends JPanel{
                     panelVictime4 = new JPanel();
                     panelVictime4.setOpaque(false);
                     labelVictime4 = new JLabel("Victime 4");
-                    if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && Client.getRoleParNom(joueurs.get(numJoueur).getNom()) instanceof Hackeur){
+                    if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && client.getRoleParNom(joueurs.get(numJoueur).getNom()) instanceof Hackeur){
                         numJoueur ++;
                     }
                     labelVictime4Valeur = new JLabel(Integer.toString(numJoueur));
@@ -265,7 +267,7 @@ public class IHMJeu extends JPanel{
                     boutonVictime4.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            Client.choixAction(Integer.parseInt(labelVictime4Valeur.getText()));
+                            client.choixAction(Integer.parseInt(labelVictime4Valeur.getText()));
                         }
                     });
                     numJoueur++;
@@ -281,7 +283,7 @@ public class IHMJeu extends JPanel{
                     panelVictime5 = new JPanel();
                     panelVictime5.setOpaque(false);
                     labelVictime5 = new JLabel("Victime 5");
-                    if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && Client.getRoleParNom(joueurs.get(numJoueur).getNom()) instanceof Hackeur){
+                    if (!ecranAffichage.equals(IHM_ASSIGNE_ROLE) && client.getRoleParNom(joueurs.get(numJoueur).getNom()) instanceof Hackeur){
                         numJoueur ++;
                     }
                     labelVictime5Valeur = new JLabel(Integer.toString(numJoueur));
@@ -290,7 +292,7 @@ public class IHMJeu extends JPanel{
                     boutonVictime5.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            Client.choixAction(Integer.parseInt(labelVictime5Valeur.getText()));
+                            client.choixAction(Integer.parseInt(labelVictime5Valeur.getText()));
                         }
                     });
                     numJoueur++;
@@ -310,7 +312,7 @@ public class IHMJeu extends JPanel{
                 boutonParticipant1.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Client.choixDistribution(joueurs.get(0),suiviAssignationRole);
+                        client.choixDistribution(joueurs.get(0),suiviAssignationRole);
                         suiviAssignationRole++;
                         panelBoutons.remove(panelParticipant1);
                         panelBoutons.repaint();
@@ -332,7 +334,7 @@ public class IHMJeu extends JPanel{
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        Client.choixDistribution(joueurs.get(1),suiviAssignationRole);
+                        client.choixDistribution(joueurs.get(1),suiviAssignationRole);
                         suiviAssignationRole++;
                         panelBoutons.remove(panelParticipant2);
                         panelBoutons.repaint();
@@ -353,7 +355,7 @@ public class IHMJeu extends JPanel{
                     boutonParticipant3.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            Client.choixDistribution(joueurs.get(3),suiviAssignationRole);
+                            client.choixDistribution(joueurs.get(3),suiviAssignationRole);
                             suiviAssignationRole++;
                             panelBoutons.remove(panelParticipant3);
                             panelBoutons.repaint();
@@ -375,7 +377,7 @@ public class IHMJeu extends JPanel{
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            Client.choixDistribution(joueurs.get(4),suiviAssignationRole);
+                            client.choixDistribution(joueurs.get(4),suiviAssignationRole);
                             suiviAssignationRole++;
                             panelBoutons.remove(panelParticipant4);
                             panelBoutons.repaint();
@@ -396,7 +398,7 @@ public class IHMJeu extends JPanel{
                     boutonParticipant5.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            Client.choixDistribution(joueurs.get(5), suiviAssignationRole);
+                            client.choixDistribution(joueurs.get(5), suiviAssignationRole);
                             suiviAssignationRole++;
                             panelBoutons.remove(panelParticipant5);
                             panelBoutons.repaint();
@@ -415,7 +417,7 @@ public class IHMJeu extends JPanel{
                     boutonParticipant6.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            Client.choixDistribution(joueurs.get(2), suiviAssignationRole);
+                            client.choixDistribution(joueurs.get(2), suiviAssignationRole);
                             suiviAssignationRole++;
                             panelBoutons.remove(panelParticipant6);
                             panelBoutons.repaint();
@@ -437,9 +439,9 @@ public class IHMJeu extends JPanel{
                 else{
                     donnees[i][1] = ((Entreprise)joueurs.get(i).getRole()).getNom();
                 }
-                donnees[i][2] = "" + Client.score(joueurs.get(i).getNom());
+                donnees[i][2] = "" + client.score(joueurs.get(i).getNom());
             }
-            if(Client.getRoleParNom(Client.getNom()) instanceof Hackeur){
+            if(client.getRoleParNom(client.getNom()) instanceof Hackeur){
                 labelInfo.setText("<html><body> Vous êtes Hackeur,<br/>"+" veuillez choisir votre victime</body></html>");
             }else{
                 labelInfo.setText("<html><body> Vous êtes une entreprise;<br/>"+" veuillez choisir votre action :<br/> - économiser,<br/> - se protéger</body>>/html>");
