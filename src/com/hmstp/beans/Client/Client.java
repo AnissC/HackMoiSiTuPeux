@@ -258,16 +258,8 @@ public class Client{
     }
 
 
-    public static ArrayList<String> classement(){
-        int i = 0;
-        ArrayList<String> listNom = new ArrayList<>();
-        synchronized (listParticipant) {
-            while (i < listParticipant.size()) {
-                listNom.add(listParticipant.get(i).getNom());
-                i++;
-            }
-        }
-        return listNom;
+    public static ArrayList<Participant> classement(){
+        return listParticipant;
     }
 
     public static int score(String no){
