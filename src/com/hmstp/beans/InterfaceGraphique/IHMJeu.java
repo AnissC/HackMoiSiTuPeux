@@ -299,12 +299,13 @@ public class IHMJeu extends JPanel{
 
             labelParticipant1 = new JLabel("Participant 1");
 
-            boutonParticipant1 = new JButton("Participant 1");
+            boutonParticipant1 = new JButton(joueurs.get(0).getNom());
             boutonParticipant1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     suiviAssignationRole++;
                     Client.choixDistribution(joueurs.get(0),suiviAssignationRole);
+                    panelBoutons.remove(boutonParticipant1);
                 }
             });
             panelParticipant1.setLayout(new BorderLayout());
@@ -317,12 +318,13 @@ public class IHMJeu extends JPanel{
 
             labelParticipant2 = new JLabel("Participant 2");
 
-            boutonParticipant2 = new JButton("Participant 2");
+            boutonParticipant2 = new JButton(joueurs.get(1).getNom());
             boutonParticipant2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     suiviAssignationRole++;
                     Client.choixDistribution(joueurs.get(1),suiviAssignationRole);
+                    panelBoutons.remove(boutonParticipant2);
                 }
             });
             panelParticipant2.setLayout(new BorderLayout());
@@ -336,12 +338,13 @@ public class IHMJeu extends JPanel{
 
             labelParticipant3 = new JLabel("Participant 3");
 
-            boutonParticipant3 = new JButton("Participant 3");
+            boutonParticipant3 = new JButton(joueurs.get(3).getNom());
             boutonParticipant3.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     suiviAssignationRole++;
-                    Client.choixDistribution(joueurs.get(2),suiviAssignationRole);
+                    Client.choixDistribution(joueurs.get(3),suiviAssignationRole);
+                    panelBoutons.remove(boutonParticipant3);
                 }
             });
                 panelParticipant3.setLayout(new BorderLayout());
@@ -355,12 +358,13 @@ public class IHMJeu extends JPanel{
 
             labelParticipant4 = new JLabel("Participant 4");
 
-            boutonParticipant4 = new JButton("Participant 4");
+            boutonParticipant4 = new JButton(joueurs.get(4).getNom());
             boutonParticipant4.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     suiviAssignationRole++;
-                    Client.choixDistribution(joueurs.get(3),suiviAssignationRole);
+                    Client.choixDistribution(joueurs.get(4),suiviAssignationRole);
+                    panelBoutons.remove(boutonParticipant4);
                 }
             });
             panelParticipant4.setLayout(new BorderLayout());
@@ -374,12 +378,13 @@ public class IHMJeu extends JPanel{
 
                 labelParticipant5 = new JLabel("Participant 5");
 
-                boutonParticipant5 = new JButton("Participant 5");
+                boutonParticipant5 = new JButton(joueurs.get(5).getNom());
                 boutonParticipant5.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         suiviAssignationRole++;
-                        Client.choixDistribution(joueurs.get(4), suiviAssignationRole);
+                        Client.choixDistribution(joueurs.get(5), suiviAssignationRole);
+                        panelBoutons.remove(boutonParticipant5);
                     }
                 });
                 panelParticipant5.setLayout(new BorderLayout());
@@ -393,12 +398,13 @@ public class IHMJeu extends JPanel{
 
                 labelParticipant6 = new JLabel("Participant 6");
 
-                boutonParticipant6 = new JButton("Participant 6");
+                boutonParticipant6 = new JButton(joueurs.get(2).getNom());
                 boutonParticipant6.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         suiviAssignationRole++;
-                        Client.choixDistribution(joueurs.get(5), suiviAssignationRole);
+                        Client.choixDistribution(joueurs.get(2), suiviAssignationRole);
+                        panelBoutons.remove(boutonParticipant6);
                     }
                 });
                 panelParticipant6.setLayout(new BorderLayout());
@@ -430,16 +436,17 @@ public class IHMJeu extends JPanel{
 
         if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
             panelBoutons.removeAll();
-
             panelBoutons.add(panelParticipant1);
             panelBoutons.add(panelParticipant2);
-            panelBoutons.add(panelParticipant3);
+            panelBoutons.add(panelParticipant6);
             if (max > 3){
-                panelBoutons.add(panelParticipant4);
+                panelBoutons.add(panelParticipant3);
+
                 if (max > 4){
-                    panelBoutons.add(panelParticipant5);
+                    panelBoutons.add(panelParticipant4);
+
                     if (max > 5){
-                        panelBoutons.add(panelParticipant6);
+                        panelBoutons.add(panelParticipant5);
                     }
                 }
             }
@@ -460,7 +467,6 @@ public class IHMJeu extends JPanel{
             panelBoutons.removeAll();
             panelBoutons.add(panelEconomiser);
             panelBoutons.add(panelSeProteger);
-
         }
 
         //=====================Ajout de tous les panels===================//
