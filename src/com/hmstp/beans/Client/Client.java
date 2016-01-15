@@ -162,12 +162,12 @@ public class Client{
                         synchronized (listParticipant) {
                             moi = new Joueur(null, mj.getNom());
                             listParticipant.add(moi);
+                            Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                             int j = 1;
                             while (j < nbjoueur) {
                                 listParticipant.add(new Ramplacant("Ordinateur" + j));
                                 j++;
                             }
-                            Client.partie = new Partie(listParticipant, listMessagesEnvoyer, moi);
                         }
                         Client.lancerJeu();
                         Thread.sleep(1000);

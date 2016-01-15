@@ -289,9 +289,9 @@ public class Partie extends Thread{
     }
 
     public void run() {
-        if (Client.premier){
-            synchronized (listParticipant) {
-                this.distributionRoleManche1();
+        synchronized (listParticipant) {
+            this.distributionRoleManche1();
+            if (Client.premier){
                 this.tour();
             }
         }
