@@ -173,7 +173,7 @@ public class Partie extends Thread{
                     // point déjà calculé
                 }
                 else{
-                    listParticipant.get(i).changeScore(((Entreprise)listParticipant.get(0).getRole()).getValeur());
+                    listParticipant.get(i).changeScore(((Entreprise)listParticipant.get(i).getRole()).getValeur());
                 }
             //}
             i++;
