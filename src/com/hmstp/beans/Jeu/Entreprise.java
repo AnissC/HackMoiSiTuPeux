@@ -7,10 +7,11 @@ public class Entreprise extends Role {
 	private String nom;
 	private boolean protection;
 	
-	public Entreprise(int valeur, String nom){
+	public Entreprise(int valeur, String nom, int n){
 		this.valeur=valeur;
 		this.nom=nom;
 		this.protection=false;
+		this.setNumero(n);
 	}
 	
 	public int getValeur(){

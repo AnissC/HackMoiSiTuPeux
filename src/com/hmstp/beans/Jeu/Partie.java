@@ -19,11 +19,11 @@ public class Partie extends Thread{
     private Joueur moi;
     private ArrayList<Role> listRole = new ArrayList<>();
     private Hackeur hackeur = Hackeur.getInstance();
-    private Entreprise e1 = new Entreprise(2, "Moyenne entreprise");
-    private Entreprise e2 = new Entreprise(1, "Petite entreprise");
-    private Entreprise e3 = new Entreprise(3, "Grande entrepise");
-    private Entreprise e4 = new Entreprise(1, "Petite entreprise");
-    private Entreprise e5 = new Entreprise(1, "Petite entreprise");
+    private Entreprise e1 = new Entreprise(2, "Moyenne entreprise", 1);
+    private Entreprise e2 = new Entreprise(1, "Petite entreprise", 2);
+    private Entreprise e3 = new Entreprise(3, "Grande entrepise", 3);
+    private Entreprise e4 = new Entreprise(1, "Petite entreprise", 4);
+    private Entreprise e5 = new Entreprise(1, "Petite entreprise", 5);
 
     public Partie(ArrayList<Participant> lp, ArrayList<Lettre> lme, Joueur j){
         this.listParticipant = lp;
@@ -323,7 +323,7 @@ public class Partie extends Thread{
 
         while(! this.active){
             synchronized (listParticipant) {
-                if (Client.pasjoueurEnAttente()) {
+                while (Client.pasjoueurEnAttente()) {
                     try{
                         listParticipant.wait();
                     }
@@ -346,7 +346,7 @@ public class Partie extends Thread{
 
         while(pasDeGagnant()){
             synchronized (listParticipant) {
-                if (Client.pasjoueurEnAttente()) {
+                while (Client.pasjoueurEnAttente()) {
                     try{
                         listParticipant.wait();
                     }

@@ -2,10 +2,11 @@ package com.hmstp.beans.Jeu;
 
 public class Hackeur extends Role{
 	private int victime;
-	private static Hackeur instance = new Hackeur();
+	private static Hackeur instance = new Hackeur(0);
 	
-	private Hackeur(){
+	private Hackeur(int n){
 		this.victime = -1;
+		this.setNumero(n);
 	}
 
 	public static Hackeur getInstance(){

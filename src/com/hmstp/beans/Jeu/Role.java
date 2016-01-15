@@ -6,12 +6,22 @@ public abstract class Role {
 
 	private boolean choixFait = false;
 
+	private int numero = -1;
+
 	public boolean isChoixFait() {
 		return choixFait;
 	}
 
 	public void setChoixFait(boolean choixFait) {
 		this.choixFait = choixFait;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 	public void choixAction(){

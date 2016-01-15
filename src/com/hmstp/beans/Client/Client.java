@@ -67,6 +67,8 @@ public class Client{
     // Client -> Client envoie choix avec un MessageChoix
     public static final String CHOIX_DU_ROLE = "CHOIX_DU_ROLE";
     // Client -> Client envoie choix avec un MessageChoix
+    public static final String ROLE = "ROLE";
+    // Client -> Client envoie choix avec un MessageChoix
 
     private static Socket connexion(String ad, int p) {
         Socket c = null;
@@ -155,7 +157,10 @@ public class Client{
                             k++;
                         }
                         Client.lancerJeu();
-                        Thread.sleep(1000);
+                        break;
+                    case Client.ROLE:
+                        MessageChoix MC = (MessageChoix) m;
+                        choixDistribution(moi.getNom(), MC.getNombre());
                         Client.partie.start();
                         break;
                     case Client.CREER_PARTIE:
@@ -178,7 +183,6 @@ public class Client{
                     case Client.COMMENCER_PARTIE:
                         MessagePartie mpSyn = (MessagePartie) m;
                         partieEnAttente++;
-                        System.out.println("avant" + partieEnAttente);
                         synchronized (listParticipant) {
                             if (joueurEnAttente > 0) {
                                 try{
@@ -196,7 +200,6 @@ public class Client{
                             //classement(mpSyn);
 
                             partieEnAttente--;
-                            System.out.println("après" + partieEnAttente);
                             listParticipant.notify();
                         }
                         partie.setActive(true);
@@ -214,6 +217,7 @@ public class Client{
                             j.setScore(listParticipant.get(h).getScore());
                             j.setRole(listParticipant.get(h).getRole());
                             listParticipant.set(h, j);
+                            message(new Lettre(new MessageChoix(j.getNom(),j.getRole().getNumero(),Client.ROLE), j.getSock()));
 
                             joueurEnAttente--;
                             System.out.println("après" + joueurEnAttente);
