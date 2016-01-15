@@ -81,7 +81,6 @@ public class Partie extends Thread{
                     System.err.println(e);
                 }
             }
-
         }
         else if (listParticipant.get(0).isRemplacant()){
             distributionRoleManche1();
@@ -90,9 +89,6 @@ public class Partie extends Thread{
                 listParticipant.get(i).getRole().remmettreZero();
                 i++;
             }
-        }
-        else{
-            //afficher un message d'attente
         }
     }
 
