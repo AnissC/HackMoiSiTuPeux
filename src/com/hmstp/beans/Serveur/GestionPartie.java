@@ -81,11 +81,12 @@ public class GestionPartie {
 
     public void joueurPerdu(String nomJoueur){
         ArrayList<Utilisateur> listJoueur = null;
-        int taille = listJoueur.size();
         int i = 0;
+        int taille;
 
         listJoueur = trouverJoueurLobby(nomJoueur);
         if (listJoueur != null){
+            taille = listJoueur.size();
             while (i < taille && listJoueur.get(i).getNom().equals(nomJoueur)) {
                 i++;
             }
@@ -96,10 +97,12 @@ public class GestionPartie {
     public void reconnexion(String nom, Socket so){
         ArrayList<Utilisateur>listetemp = trouverJoueurListes(nom);
         ArrayList<MessageJoueur> listeJoueur = new ArrayList<>();
-        int taille = listetemp.size();
+        listetemp = trouverJoueurListes(nom);
+        int taille;
         int i = 0;
 
         if(listetemp != null){
+            taille = listetemp.size();
             while(i < taille){
                 MessageJoueur mj = new MessageJoueur(listetemp.get(i).getSocket().getInetAddress().toString(),listetemp.get(i).getNom(), null);
                 listeJoueur.add(mj);
