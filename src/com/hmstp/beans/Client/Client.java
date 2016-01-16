@@ -22,6 +22,7 @@ public class Client{
     private  int partieEnAttente = 0;
     private  String nom;
     private  Joueur moi;
+    private boolean partieInit = false;
     private  Partie partie;
     public  boolean premier = false;
 
@@ -133,28 +134,27 @@ public class Client{
 
                         while (!(mP.getListJoueur().isEmpty())) {
                             mJrecu = mP.getListJoueur().remove(0);
-                            if (mJrecu.getNom().equals(nom)){
+                            if (mJrecu.getNom().equals(nom)) {
                                 moi = new Joueur(null, mJrecu.getNom());
                                 //synchronized (listParticipant) {
-                                    //listParticipant.add(moi);
-                                    //partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
+                                //listParticipant.add(moi);
+                                //partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                                 //}
-                            }
-                            else {
-                                Socket autreC  = Client.connexion(mJrecu.getJoueur().substring(1), port);
+                            } else {
+                                Socket autreC = Client.connexion(mJrecu.getJoueur().substring(1), port);
                                 ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, autreC);
                                 clientEcoute.start();
                                 ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, autreC);
                                 clientEcriture.start();
                                 //synchronized (listParticipant) {
-                                    //listParticipant.add(new Joueur(autreC, mJrecu.getNom()));
-                                    mJenvoyer = new MessageJoueur(null, nom, Client.NOUVEAU_JOUEUR);
-                                    message(new Lettre(mJenvoyer,autreC));
+                                //listParticipant.add(new Joueur(autreC, mJrecu.getNom()));
+                                mJenvoyer = new MessageJoueur(null, nom, Client.NOUVEAU_JOUEUR);
+                                message(new Lettre(mJenvoyer, autreC));
                                 //}
                             }
                             k++;
                         }
-                        while(k < nbjoueur){
+                        while (k < nbjoueur) {
                             synchronized (listParticipant) {
                                 listParticipant.add(new Ramplacant("Ordinateur" + k));
                             }
@@ -164,12 +164,15 @@ public class Client{
                         break;
                     case Client.LIST:
                         MessageList mL = (MessageList) m;
-                        synchronized (listParticipant) {
-                            listParticipant = mL.getListMessageParticipant();
-                            partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
-                            partie.perdant = mL.getNombre();
+                        if (partieInit){
+                            synchronized (listParticipant) {
+                                listParticipant = mL.getListMessageParticipant();
+                                partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
+                                partie.perdant = mL.getNombre();
+                            }
+                            partie.start();
+                            partieInit = true;
                         }
-                        partie.start();
                         break;
                     case Client.CREER_PARTIE:
                         MessageJoueur mj = (MessageJoueur) m;
