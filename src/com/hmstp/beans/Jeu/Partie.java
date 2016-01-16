@@ -117,8 +117,14 @@ public class Partie extends Thread{
     }
 
     public void distributionRoleMancheN(){
+        int i = 0;
         if (moi.isPerdant()){
+            while(i < nbParticipants){
+                listRole.get(i).setChoixFait(true);
+                i++;
+            }
             client.choixDistibution();
+
             System.out.println("Je choisis");
             while (! tousNontChoisit()) {
                 //wait le choix des rôles
@@ -132,15 +138,14 @@ public class Partie extends Thread{
         else if (listParticipant.get(perdant).isRemplacant()){
             System.out.println("L'ordi choisit");
             distributionRoleManche1();
-            int i = 0;
-            while(i < nbParticipants){
-                listParticipant.get(i).getRole().remmettreZero();
-                i++;
+            int f = 0;
+            while(f < nbParticipants){
+                listParticipant.get(f).getRole().remmettreZero();
+                f++;
             }
         }
         else{
             System.out.println("Un joueur choisit");
-            int i = 0;
             while(i < nbParticipants){
                 listRole.get(i).setChoixFait(true);
                 i++;
