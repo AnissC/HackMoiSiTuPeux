@@ -67,8 +67,8 @@ public class Client{
     // Client -> Client envoie choix avec un MessageChoix
     public static final String CHOIX_DU_ROLE = "CHOIX_DU_ROLE";
     // Client -> Client envoie choix avec un MessageChoix
-    public static final String ROLE = "ROLE";
-    // Client -> Client envoie choix avec un MessageChoix
+    public static final String LIST = "LIST";
+    // Client -> Client envoie choix avec un MessageList
 
     private static Socket connexion(String ad, int p) {
         Socket c = null;
@@ -162,7 +162,7 @@ public class Client{
                         }
                         lancerJeu();
                         break;
-                    case Client.ROLE:
+                    case Client.LIST:
                         MessageChoix MC = (MessageChoix) m;
                         choixDistribution(moi.getNom(), MC.getNombre());
                         partie.start();
@@ -221,7 +221,7 @@ public class Client{
                             j.setScore(listParticipant.get(h).getScore());
                             j.setRole(listParticipant.get(h).getRole());
                             listParticipant.set(h, j);
-                            message(new Lettre(new MessageChoix(j.getNom(),j.getRole().getNumero(),Client.ROLE), j.getSock()));
+                            message(new Lettre(new MessageChoix(j.getNom(),j.getRole().getNumero(),Client.LIST), j.getSock()));
 
                             joueurEnAttente--;
                             System.out.println("après" + joueurEnAttente);

@@ -6,7 +6,7 @@ import com.hmstp.beans.Client.Client;
 import java.net.Socket;
 
 public class Joueur extends Participant{
-	private Socket sock;
+	private transient Socket sock;
 
 
 	public Joueur(Socket so, String n){

@@ -2,7 +2,7 @@ package com.hmstp.beans.Jeu;
 
 import com.hmstp.beans.Client.Client;
 
-public abstract class Role {
+public abstract class Role implements java.io.Serializable{
 
 	private boolean choixFait = false;
 
