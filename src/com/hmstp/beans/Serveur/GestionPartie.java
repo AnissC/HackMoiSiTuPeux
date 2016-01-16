@@ -54,7 +54,7 @@ public class GestionPartie {
             }
             k++;
         }
-        if (lobby[k].get(i).getNom().equals(nom)){
+        if (k < lobby.length && i < lobby[k].size()){
             listRetour = lobby[k];
         }
         return listRetour;
@@ -72,7 +72,7 @@ public class GestionPartie {
             k++;
         }
 
-        if (listePartie.get(i).get(k).getNom().equals(nom)){
+        if (k < listePartie.size() && i < listePartie.get(k).size()){
             listRetour = listePartie.get(i);
         }
 
