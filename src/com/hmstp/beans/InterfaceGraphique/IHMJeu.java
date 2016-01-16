@@ -453,8 +453,6 @@ public class IHMJeu extends JPanel{
                     panelParticipant6.add(labelParticipant6, BorderLayout.NORTH);
                     panelParticipant6.add(boutonParticipant6, BorderLayout.SOUTH);
                 }
-            }else if (ecranAffichage.equals(IHM_ENATTENTE)){
-                panelBoutons.removeAll();
             }
 
             //=====================Tableau Score =============================//
@@ -477,6 +475,7 @@ public class IHMJeu extends JPanel{
                 labelInfo.setText("<html><body>Veuillez choisir <br /> le Hacker</body></html>");
             }else if (ecranAffichage.equals(IHM_ENATTENTE)){
                 labelInfo.setText("<html><body>En attente d'un joueur</body></html>");
+                panelBoutons.removeAll();
             }
             String[] entetes = {"Nom", "Role", "Score"};
             JTable tableau = new JTable(donnees, entetes);
