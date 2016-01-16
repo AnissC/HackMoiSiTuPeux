@@ -48,8 +48,8 @@ public class GestionPartie {
         int i = 0;
         ArrayList<Utilisateur> listRetour = null;
 
-        while((k < lobby.length) && !(lobby[k].get(i).getNom().equals(nom))) {
-            while ((i < (k + 2)) && !(lobby[k].get(i).getNom().equals(nom))) {
+        while((k < lobby.length) && (lobby[k].size() < i) &&!(lobby[k].get(i).getNom().equals(nom))) {
+            while ((i < (k + 2)) && (lobby[k].size() < i) && !(lobby[k].get(i).getNom().equals(nom))) {
                 i++;
             }
             k++;
@@ -65,8 +65,8 @@ public class GestionPartie {
         int i = 0;
         ArrayList<Utilisateur> listRetour = null;
 
-        while(k < listePartie.size() && !(listePartie.get(i).get(k).getNom().equals(nom))){
-            while (i < listePartie.get(k).size() && !(listePartie.get(i).get(k).getNom().equals(nom))){
+        while(k < listePartie.size() && (listePartie.get(k).size() < i) &&!(listePartie.get(k).get(i).getNom().equals(nom))){
+            while (i < listePartie.get(k).size() && (listePartie.get(k).size() < i) && !(listePartie.get(k).get(i).getNom().equals(nom))){
                 i++;
             }
             k++;
