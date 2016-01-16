@@ -1,0 +1,6 @@
+Adresse IP : /132.227.125.40 Action : CONNEXION
+Adresse IP : /132.227.125.40 Action : CONNEXION_OK
+Adresse IP : /132.227.125.85 Action : CONNEXION
+Adresse IP : /132.227.125.85 Action : CONNEXION_OK
+Adresse IP : /132.227.125.85 Action : NB_JOUEURS
+Adresse IP : /132.227.125.40 Action : NB_JOUEURS
