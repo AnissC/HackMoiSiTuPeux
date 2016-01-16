@@ -300,6 +300,14 @@ public class Partie extends Thread{
 
     }
 
+    public void resetPoint(){
+        int i = 0;
+        while (i < listParticipant.size()) {
+            listParticipant.get(i).setScore(0);
+            i++;
+        }
+    }
+
     public int max(){
         int i = 0;
         int max= 0;
@@ -372,6 +380,7 @@ public class Partie extends Thread{
         }
 
         synchronized (listParticipant) {
+            this.resetPoint();
             this.distributionRoleManche1();
             this.tour();
         }
