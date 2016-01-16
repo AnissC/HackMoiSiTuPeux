@@ -246,14 +246,15 @@ public class Partie extends Thread{
         while (! moi.getRole().isChoixFait()) {
             //wait le choix
             try {
-                Thread.sleep(100);
+                System.out.println("papa");
+                Thread.sleep(2000);
             } catch (Exception e) {
                 System.err.println(e);
             }
         }
-
+        System.out.println("avantEnvoyer");
         this.envoyerChoix(this.moi.getRole().retourneChoix(),moi.getNom() ,Client.CHOIX_DU_TOUR);
-
+        System.out.println("aprésEnvoyer");
         int i = 0;
         int temp;
         while (i < listParticipant.size()) {
