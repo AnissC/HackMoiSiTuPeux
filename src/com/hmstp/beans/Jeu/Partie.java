@@ -14,7 +14,7 @@ public class Partie extends Thread{
     private ArrayList<Participant> listParticipant;
     private ArrayList<Lettre> listMessagesEnvoyer;
     private boolean active;
-    private int perdant;
+    public int perdant;
     private Client client;
     private ArrayList<Integer> listRandom;
     private Joueur moi;
@@ -316,9 +316,9 @@ public class Partie extends Thread{
     }
 
     public void run() {
-        synchronized (listParticipant) {
-            this.distributionRoleManche1();
-            if (client.premier) {
+        if (client.premier) {
+            synchronized (listParticipant) {
+                this.distributionRoleManche1();
                 this.tour();
             }
         }

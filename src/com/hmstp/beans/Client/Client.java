@@ -163,8 +163,11 @@ public class Client{
                         lancerJeu();
                         break;
                     case Client.LIST:
-                        MessageChoix MC = (MessageChoix) m;
-                        choixDistribution(moi.getNom(), MC.getNombre());
+                        MessageList mL = (MessageList) m;
+                        synchronized (listParticipant) {
+                            listParticipant = mL.getListMessageParticipant();
+                        }
+                        partie.perdant = mL.getNombre();
                         partie.start();
                         break;
                     case Client.CREER_PARTIE:
@@ -221,7 +224,7 @@ public class Client{
                             j.setScore(listParticipant.get(h).getScore());
                             j.setRole(listParticipant.get(h).getRole());
                             listParticipant.set(h, j);
-                            message(new Lettre(new MessageChoix(j.getNom(),j.getRole().getNumero(),Client.LIST), j.getSock()));
+                            message(new Lettre(new MessageList(partie.perdant, Client.LIST, listParticipant), j.getSock()));
 
                             joueurEnAttente--;
                             System.out.println("après" + joueurEnAttente);
