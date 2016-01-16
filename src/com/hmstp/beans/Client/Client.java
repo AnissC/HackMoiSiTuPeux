@@ -246,12 +246,8 @@ public class Client{
                         break;
                     case Client.CHOIX_DU_TOUR:
                         MessageChoix mC = (MessageChoix) m;
-                        int o = 0;
                         synchronized (listParticipant) {
-                            while ((o < listParticipant.size()) && (!listParticipant.get(o).getNom().equals(mC.getJoueur()))) {
-                                o++;
-                            }
-                            listParticipant.get(o).getRole().choixAction(mC.getNombre());
+                            getRoleParNom(mC.getJoueur()).choixAction(mC.getNombre());
                         }
                         break;
                     case Client.CHOIX_DU_ROLE:
