@@ -207,6 +207,7 @@ public class Client{
                         partie.setActive(true);
                         break;
                     case Client.NOUVEAU_JOUEUR:
+                        System.out.println("ici" + joueurEnAttente);
                         MessageJoueur mej = (MessageJoueur) m;
                         joueurEnAttente++;
                         System.out.println("avant" + joueurEnAttente);
