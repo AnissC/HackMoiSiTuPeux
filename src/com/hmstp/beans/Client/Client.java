@@ -335,14 +335,12 @@ public class Client{
 
     public void joueurParti(Socket socket){
         int i = 0;
-        synchronized (listParticipant) {
-            while (i < listParticipant.size()) {
-                if ((!listParticipant.get(i).isRemplacant()) && (((Joueur)listParticipant.get(i)).getSock() == socket)) {
-                    this.joueurParti(i);
-                    return;
-                }
-                i++;
+        while (i < listParticipant.size()) {
+            if ((!listParticipant.get(i).isRemplacant()) && (((Joueur)listParticipant.get(i)).getSock() == socket)) {
+                this.joueurParti(i);
+                return;
             }
+            i++;
         }
     }
 
