@@ -246,7 +246,7 @@ public class Partie extends Thread{
         while (! moi.getRole().isChoixFait()) {
             //wait le choix
             try {
-                Thread.sleep(2000);
+                Thread.sleep(100);
             } catch (Exception e) {
                 System.err.println(e);
             }
