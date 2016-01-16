@@ -156,7 +156,7 @@ public class Serveur {
                         break;
                     case Serveur.RECONNEXION:
                         MessageJoueur Mj = (MessageJoueur) m;
-                        gp.reconnexion(Mj.getJoueur(), clientSocket);
+                        gp.reconnexion(Mj.getNom(), clientSocket);
                         break;
                     case Serveur.PARTIE_FINIE:
                         MessageJoueur mJ = (MessageJoueur) m;
