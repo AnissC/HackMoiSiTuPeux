@@ -37,9 +37,9 @@ public class ClientThreadEcoute extends Thread{
         try {
             this.reception();
         }catch (IOException e){
-            System.err.println("Erreur Client : Client Thread Ecoute");
+            System.err.println("Erreur Client : Client Thread Ecoute IO");
         }catch (ClassNotFoundException ea){
-            System.err.println("Erreur Client : Client Thread Ecoute");
+            System.err.println("Erreur Client : Client Thread Ecoute ClassNotFound");
         }
     }
 }
