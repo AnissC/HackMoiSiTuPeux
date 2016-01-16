@@ -453,6 +453,8 @@ public class IHMJeu extends JPanel{
                     panelParticipant6.add(labelParticipant6, BorderLayout.NORTH);
                     panelParticipant6.add(boutonParticipant6, BorderLayout.SOUTH);
                 }
+            }else if (ecranAffichage.equals(IHM_ENATTENTE)){
+                panelBoutons.removeAll();
             }
 
             //=====================Tableau Score =============================//
@@ -519,11 +521,7 @@ public class IHMJeu extends JPanel{
             panelBoutons.removeAll();
             panelBoutons.add(panelEconomiser);
             panelBoutons.add(panelSeProteger);
-        }else if (ecranAffichage.equals(IHM_ENATTENTE)){
-            panelBoutons.remove(panelEconomiser);
-            panelBoutons.remove(panelSeProteger);
         }
-
         //=====================Ajout de tous les panels===================//
         panelJeu.add(panelInfo);
         panelJeu.add(panelBoutons);
