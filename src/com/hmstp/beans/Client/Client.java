@@ -168,6 +168,7 @@ public class Client{
                                 int o = 0;
                                 while (o < nbjoueur) {
                                     if (listParticipant.get(o).getNom().equals(moi.getNom())) {
+                                        System.out.println("moi");
                                         moi.setRole(getRoleParNom(moi.getNom()));
                                         listParticipant.set(o, moi);
                                     } else {
