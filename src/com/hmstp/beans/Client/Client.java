@@ -357,7 +357,7 @@ public class Client{
 
     public static void main(String[] args) throws Exception{
         Client client = new Client();
-        client.serveur = Client.connexion(adresseIP, 8080);
+        client.serveur = Client.connexion(adresseIP, 8081);
 
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(client.listMessagesRecu, client.serveur);
         clientEcoute.start();
