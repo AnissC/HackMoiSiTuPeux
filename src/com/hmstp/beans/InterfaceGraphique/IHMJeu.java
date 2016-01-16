@@ -453,8 +453,6 @@ public class IHMJeu extends JPanel{
                     panelParticipant6.add(labelParticipant6, BorderLayout.NORTH);
                     panelParticipant6.add(boutonParticipant6, BorderLayout.SOUTH);
                 }
-            }else if (ecranAffichage.equals(IHM_ENATTENTE)){
-                panelBoutons.removeAll();
             }
 
             //=====================Tableau Score =============================//
@@ -470,9 +468,9 @@ public class IHMJeu extends JPanel{
                 donnees[i][2] = "" + client.score(joueurs.get(i).getNom());
             }
             if(client.getRoleParNom(client.getNom()) instanceof Hackeur && ecranAffichage.equals(IHM_HACKEUR)){
-                labelInfo.setText("<html><body> Vous êtes Hackeur,<br/>"+" veuillez choisir votre victime</body></html>");
+                labelInfo.setText("<html><body> Vous Ítes Hackeur,<br/>"+" veuillez choisir votre victime</body></html>");
             }else if (ecranAffichage.equals(IHM_ENTREPRISE)){
-                labelInfo.setText("<html><body> Vous êtes une entreprise;<br/>"+" veuillez choisir votre action :<br/> - économiser,<br/> - se protéger</body>>/html>");
+                labelInfo.setText("<html><body> Vous Ítes une entreprise;<br/>"+" veuillez choisir votre action :<br/> - Èconomiser,<br/> - se protÈger</body>>/html>");
             }else if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
                 labelInfo.setText("<html><body>Veuillez choisir <br /> le Hacker</body></html>");
             }else if (ecranAffichage.equals(IHM_ENATTENTE)){
@@ -487,6 +485,7 @@ public class IHMJeu extends JPanel{
             panelTableau.add(tableau, BorderLayout.CENTER);
             panelJeu.add(panelTableau);
         }
+
         if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
             panelBoutons.removeAll();
             panelBoutons.add(panelParticipant1);
@@ -520,6 +519,9 @@ public class IHMJeu extends JPanel{
             panelBoutons.removeAll();
             panelBoutons.add(panelEconomiser);
             panelBoutons.add(panelSeProteger);
+        }else{
+            panelBoutons.removeAll();
+            System.out.println("removeAll - Marche");
         }
         //=====================Ajout de tous les panels===================//
         panelJeu.add(panelInfo);
