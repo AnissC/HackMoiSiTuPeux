@@ -120,10 +120,6 @@ public class Partie extends Thread{
     public void distributionRoleMancheN(){
         //int i = 0;
         if (moi.isPerdant()){
-            /*while(i < nbParticipants){
-                listRole.get(i).setChoixFait(true);
-                i++;
-            }*/
             client.choixDistibution();
 
             System.out.println("Je choisis");
@@ -147,10 +143,6 @@ public class Partie extends Thread{
         }
         else{
             System.out.println("Un joueur choisit");
-            /*while(i < nbParticipants){
-                listRole.get(i).setChoixFait(true);
-                i++;
-            }*/
 
             while (! tousNontChoisit()) {
                 //wait le choix des rôles
@@ -338,6 +330,7 @@ public class Partie extends Thread{
 
     public void miseANiveaurRole(Participant p){
         p.setRole(listRole.get(p.getRole().getNumero()));
+        p.getRole().setChoixFait(true);
     }
 
     public void run() {
