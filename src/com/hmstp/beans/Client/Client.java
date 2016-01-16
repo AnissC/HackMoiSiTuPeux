@@ -170,6 +170,7 @@ public class Client{
                                 partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                                 partie.perdant = mL.getNombre();
                                 partieInit = true;
+                                moi.setRole(getRoleParNom(moi.getNom()));
                             }
                             partie.start();
                         }
