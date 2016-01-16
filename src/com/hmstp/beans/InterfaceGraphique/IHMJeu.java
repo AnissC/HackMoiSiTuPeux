@@ -203,8 +203,6 @@ public class IHMJeu extends JPanel{
                 panelVictime1.setLayout(new BorderLayout());
                 panelVictime1.add(labelVictime1, SpringLayout.NORTH);
                 panelVictime1.add(boutonVictime1,SpringLayout.SOUTH);
-
-
                 //=====================Victime 2==============//
                 panelVictime2 = new JPanel();
                 panelVictime2.setOpaque(false);
@@ -227,8 +225,6 @@ public class IHMJeu extends JPanel{
                 panelVictime2.setLayout(new BorderLayout());
                 panelVictime2.add(labelVictime2,BorderLayout.NORTH);
                 panelVictime2.add(boutonVictime2,BorderLayout.SOUTH);
-
-
                 if (max > 3){
                     //=====================Victime 3==============//
                     panelVictime3 = new JPanel();
@@ -252,7 +248,6 @@ public class IHMJeu extends JPanel{
                     panelVictime3.add(boutonVictime3,BorderLayout.SOUTH);
                     panelVictime3.add(labelVictime3Valeur);
                 }
-
                 if (max > 4){
                     //=====================Victime 4==============//
                     panelVictime4 = new JPanel();
@@ -276,8 +271,6 @@ public class IHMJeu extends JPanel{
                     panelVictime4.add(boutonVictime4,BorderLayout.SOUTH);
                     panelVictime4.add(labelVictime4Valeur);
                 }
-
-
                 if (max > 5){
                     //=====================Victime 5==============//
                     panelVictime5 = new JPanel();
