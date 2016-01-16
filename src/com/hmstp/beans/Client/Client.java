@@ -164,9 +164,11 @@ public class Client{
                         break;
                     case Client.LIST:
                         MessageList mL = (MessageList) m;
-                        listParticipant = mL.getListMessageParticipant();
-                        partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
-                        partie.perdant = mL.getNombre();
+                        synchronized (listParticipant) {
+                            listParticipant = mL.getListMessageParticipant();
+                            partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
+                            partie.perdant = mL.getNombre();
+                        }
                         partie.start();
                         break;
                     case Client.CREER_PARTIE:
