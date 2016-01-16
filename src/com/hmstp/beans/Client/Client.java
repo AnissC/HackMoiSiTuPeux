@@ -153,12 +153,12 @@ public class Client{
                             }
                             k++;
                         }
-                        /*while (k < nbjoueur) {
+                        while (k < nbjoueur) {
                             synchronized (listParticipant) {
                                 listParticipant.add(new Ramplacant("Ordinateur" + k));
                             }
                             k++;
-                        }*/
+                        }
                         lancerJeu();
                         break;
                     case Client.LIST:
@@ -167,13 +167,15 @@ public class Client{
                             synchronized (listParticipant) {
                                 int o = 0;
                                 while (o < nbjoueur) {
-                                    if (listParticipant.get(o).getNom().equals(moi.getNom())) {
-                                        moi.setRole(getRoleParNom(moi.getNom()));
-                                        listParticipant.set(o, moi);
-                                    } else {
-                                        listParticipant.get(o).setPerdant(mL.getListMessageParticipant().get(o).isPerdant());
-                                        listParticipant.get(o).setRole(mL.getListMessageParticipant().get(o).getRole());
-                                        listParticipant.get(o).setScore(mL.getListMessageParticipant().get(o).getScore());
+                                    if(! listParticipant.get(o).isRemplacant()) {
+                                        if (listParticipant.get(o).getNom().equals(moi.getNom())) {
+                                            moi.setRole(getRoleParNom(moi.getNom()));
+                                            listParticipant.set(o, moi);
+                                        } else {
+                                            listParticipant.get(o).setPerdant(mL.getListMessageParticipant().get(o).isPerdant());
+                                            listParticipant.get(o).setRole(mL.getListMessageParticipant().get(o).getRole());
+                                            listParticipant.get(o).setScore(mL.getListMessageParticipant().get(o).getScore());
+                                        }
                                     }
                                     o++;
                                 }
