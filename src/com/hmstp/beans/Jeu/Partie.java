@@ -332,6 +332,10 @@ public class Partie extends Thread{
                     max = listParticipant.get(i).getScore();
                     gagnant = listParticipant.get(i).getNom();
                 }
+                else if (listParticipant.get(i).getScore() == max){if(listParticipant.get(i).getRole() == hackeur || listParticipant.get(i).getRole().getNumero() == hackeur.getVictime()){
+                        gagnant = listParticipant.get(i).getNom();
+                    }
+                }
             }
         }
         return gagnant;
