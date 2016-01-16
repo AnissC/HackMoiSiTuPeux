@@ -137,7 +137,14 @@ public class Serveur {
                             String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
                             byte[] contentInBytes = s.getBytes();
                             logs.write(contentInBytes);
-                            //Tester si en partie
+                            if(gp.trouverJoueurListes(mC1.getIdentifiant()) != null){
+                                m = new Message(EN_PARTIE);
+                                listMessagesEnvoyer.add(new Lettre(m, clientSocket));
+                            }
+                            else{
+                                m = new Message(PAS_EN_PARTIE);
+                                listMessagesEnvoyer.add(new Lettre(m, clientSocket));
+                            }
                         }
                         else{
                             listMessagesEnvoyer.add(new Lettre(new Message(CONNEXION_KO),clientSocket));
@@ -148,10 +155,16 @@ public class Serveur {
                         }
                         break;
                     case Serveur.RECONNEXION:
+                        MessageJoueur Mj = (MessageJoueur) m;
+                        gp.reconnexion(Mj.getJoueur(), clientSocket);
                         break;
                     case Serveur.PARTIE_FINIE:
+                        MessageJoueur mJ = (MessageJoueur) m;
+                        //gp.finirPartie();
                         break;
                     case Serveur.JOUEUR_PERDU:
+                        MessageJoueur MJ = (MessageJoueur) m;
+                        gp.joueurPerdu(MJ.getNom());
                         break;
                     case Serveur.NB_JOUEURS:
                         int nombreJoueur;
