@@ -519,9 +519,6 @@ public class IHMJeu extends JPanel{
             panelBoutons.removeAll();
             panelBoutons.add(panelEconomiser);
             panelBoutons.add(panelSeProteger);
-        }else/*(ecranAffichage.equals(IHM_ENATTENTE))*/{
-            panelBoutons.removeAll();
-            System.out.println("removeAll - Marche");
         }
         //=====================Ajout de tous les panels===================//
         panelJeu.add(panelInfo);
