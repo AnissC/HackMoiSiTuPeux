@@ -23,6 +23,7 @@ public class ClientThreadEcoute extends Thread{
             o = ob.readObject();
             if (o instanceof Message){
                 m = (Message) o;
+                System.out.println("Je recois : "+ m.getMessage());
                 synchronized (this.listMessagesRecu) {
                     this.listMessagesRecu.add(new Lettre(m, socket));
                 }

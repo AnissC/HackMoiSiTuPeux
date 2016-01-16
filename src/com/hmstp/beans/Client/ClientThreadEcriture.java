@@ -33,6 +33,7 @@ public class ClientThreadEcriture extends Thread{
                             m = listMessagesEnvoyer.remove(i).getMessage();
                             ob.writeObject(m);
                             ob.flush();
+                            System.out.println("J'envoie : "+ m.getMessage());
                         }else {
                             i++;
                         }
