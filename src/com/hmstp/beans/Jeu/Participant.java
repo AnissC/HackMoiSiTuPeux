@@ -1,7 +1,7 @@
 package com.hmstp.beans.Jeu;
 
 
-public abstract class Participant {
+public abstract class Participant implements java.io.Serializable {
     private Role role;
     private int score;
     private String nom;
