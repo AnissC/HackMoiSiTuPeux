@@ -246,15 +246,11 @@ public class Client{
                         break;
                     case Client.CHOIX_DU_TOUR:
                         MessageChoix mC = (MessageChoix) m;
-                        synchronized (listParticipant) {
-                            getRoleParNom(mC.getJoueur()).choixAction(mC.getNombre());
-                        }
+                        getRoleParNom(mC.getJoueur()).choixAction(mC.getNombre());
                         break;
                     case Client.CHOIX_DU_ROLE:
                         MessageChoix mc = (MessageChoix) m;
-                        synchronized (listParticipant) {
-                            choixDistribution(mc.getJoueur(), mc.getNombre());
-                        }
+                        choixDistribution(mc.getJoueur(), mc.getNombre());
                         break;
                 }
             }
