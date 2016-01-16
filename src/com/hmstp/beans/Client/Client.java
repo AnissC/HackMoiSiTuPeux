@@ -72,7 +72,7 @@ public class Client{
 
     public Client(){
         super();
-        Client.port++;
+        Client.port = port + ((int) (Math.random()*100));
     }
 
     private static Socket connexion(String ad, int p) {
@@ -381,6 +381,5 @@ public class Client{
         serveurConnexion.start();
 
         client.gestionMessage();
-
     }
 }
