@@ -70,6 +70,11 @@ public class Client{
     public static final String ROLE = "ROLE";
     // Client -> Client envoie choix avec un MessageChoix
 
+    public Client(){
+        super();
+        Client.port++;
+    }
+
     private static Socket connexion(String ad, int p) {
         Socket c = null;
 
@@ -357,7 +362,6 @@ public class Client{
 
     public static void main(String[] args) throws Exception{
         Client client = new Client();
-        Client.port++;
         client.serveur = Client.connexion(adresseIP, 8080);
 
         ClientThreadEcoute clientEcoute = new ClientThreadEcoute(client.listMessagesRecu, client.serveur);
