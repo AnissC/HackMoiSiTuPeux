@@ -217,10 +217,10 @@ public class Client{
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
-                        joueurEnAttente++;
-                        System.out.println("avant" + joueurEnAttente);
                         int h = 0;
                         if (partieInit) {
+                            joueurEnAttente++;
+                            System.out.println("avant" + joueurEnAttente);
                             synchronized (listParticipant) {
                                 while ((h < nbjoueur) && (!listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
                                     h++;
