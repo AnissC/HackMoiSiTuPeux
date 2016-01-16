@@ -254,7 +254,7 @@ public class Partie extends Thread{
                 System.err.println(e);
             }
         }
-        this.envoyerChoix(this.moi.getRole().retourneChoix(),moi.getNom() ,Client.CHOIX_DU_TOUR);
+        this.envoyerChoix(this.moi.getRole().retourneChoix(), moi.getNom() ,Client.CHOIX_DU_TOUR);
         System.out.println("aprésEnvoyer");
         int i = 0;
         int temp;

@@ -1,7 +1,5 @@
 package com.hmstp.beans.Message;
 
-import java.net.Socket;
-
 public class MessageChoix extends MessageNombre{
     private String joueur;
 

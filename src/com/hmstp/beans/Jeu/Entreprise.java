@@ -44,12 +44,10 @@ public class Entreprise extends Role {
 	}
 
 	public int retourneChoix(){
-		synchronized (this) {
-			if (this.protection) {
-				return 0;
-			} else {
-				return 1;
-			}
+		if (this.protection) {
+			return 1;
+		} else {
+			return 0;
 		}
 	}
 }
