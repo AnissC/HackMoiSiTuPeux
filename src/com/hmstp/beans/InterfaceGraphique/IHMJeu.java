@@ -15,6 +15,7 @@ public class IHMJeu extends JPanel{
     public static final String IHM_HACKEUR = "IHM_HACKEUR";
     public static final String IHM_ENTREPRISE = "IHM_ENTREPRISE";
     public static final String IHM_ASSIGNE_ROLE = "IHM_ASSIGNE_ROLE";
+    public static final String IHM_ENATTENTE = "IHM_ENATTENTE";
 
     private int numJoueur=0;
 
@@ -170,10 +171,35 @@ public class IHMJeu extends JPanel{
         panelSeProteger.add(labelSeProteger,BorderLayout.NORTH);
         panelSeProteger.add(boutonSeProteger,BorderLayout.SOUTH);
 
-
         dessine();
     }
 
+
+    public void changeLabelInfo(int u){
+        switch (u) {
+            case 1:
+                labelInfo.setText("<html><body>Veuillez choisir <br /> La Moyenne Entreprise</body></html>");
+                panelInfo.repaint();
+                break;
+            case 2:
+                labelInfo.setText("<html><body>Veuillez choisir <br /> la Petite Entreprise</body></html>");
+                panelInfo.repaint();
+                break;
+            case 3:
+                labelInfo.setText("<html><body>Veuillez choisir <br /> la Grande Entreprise</body></html>");
+                panelInfo.repaint();
+                break;
+            case 4:
+                labelInfo.setText("<html><body>Veuillez choisir <br /> la Petite Entreprise</body></html>");
+                panelInfo.repaint();
+                break;
+            case 5:
+                labelInfo.setText("<html><body>Veuillez choisir <br /> la Petite Entreprise</body></html>");
+                panelInfo.repaint();
+                break;
+        }
+        panelInfo.repaint();
+    }
     public void dessine(){
         int max = 0;
         suiviAssignationRole = 0;
@@ -308,6 +334,7 @@ public class IHMJeu extends JPanel{
                     public void actionPerformed(ActionEvent e) {
                         client.choixDistribution(joueurs.get(0),suiviAssignationRole);
                         suiviAssignationRole++;
+                        changeLabelInfo(suiviAssignationRole);
                         panelBoutons.remove(panelParticipant1);
                         panelBoutons.repaint();
 
@@ -330,6 +357,7 @@ public class IHMJeu extends JPanel{
 
                         client.choixDistribution(joueurs.get(1),suiviAssignationRole);
                         suiviAssignationRole++;
+                        changeLabelInfo(suiviAssignationRole);
                         panelBoutons.remove(panelParticipant2);
                         panelBoutons.repaint();
                     }
@@ -351,6 +379,7 @@ public class IHMJeu extends JPanel{
                         public void actionPerformed(ActionEvent e) {
                             client.choixDistribution(joueurs.get(3),suiviAssignationRole);
                             suiviAssignationRole++;
+                            changeLabelInfo(suiviAssignationRole);
                             panelBoutons.remove(panelParticipant3);
                             panelBoutons.repaint();
                         }
@@ -373,6 +402,7 @@ public class IHMJeu extends JPanel{
 
                             client.choixDistribution(joueurs.get(4),suiviAssignationRole);
                             suiviAssignationRole++;
+                            changeLabelInfo(suiviAssignationRole);
                             panelBoutons.remove(panelParticipant4);
                             panelBoutons.repaint();
                         }
@@ -394,6 +424,7 @@ public class IHMJeu extends JPanel{
                         public void actionPerformed(ActionEvent e) {
                             client.choixDistribution(joueurs.get(5), suiviAssignationRole);
                             suiviAssignationRole++;
+                            changeLabelInfo(suiviAssignationRole);
                             panelBoutons.remove(panelParticipant5);
                             panelBoutons.repaint();
                         }
@@ -413,6 +444,7 @@ public class IHMJeu extends JPanel{
                         public void actionPerformed(ActionEvent e) {
                             client.choixDistribution(joueurs.get(2), suiviAssignationRole);
                             suiviAssignationRole++;
+                            changeLabelInfo(suiviAssignationRole);
                             panelBoutons.remove(panelParticipant6);
                             panelBoutons.repaint();
                         }
@@ -435,10 +467,14 @@ public class IHMJeu extends JPanel{
                 }
                 donnees[i][2] = "" + client.score(joueurs.get(i).getNom());
             }
-            if(client.getRoleParNom(client.getNom()) instanceof Hackeur){
+            if(client.getRoleParNom(client.getNom()) instanceof Hackeur && ecranAffichage.equals(IHM_HACKEUR)){
                 labelInfo.setText("<html><body> Vous êtes Hackeur,<br/>"+" veuillez choisir votre victime</body></html>");
-            }else{
+            }else if (ecranAffichage.equals(IHM_ENTREPRISE)){
                 labelInfo.setText("<html><body> Vous êtes une entreprise;<br/>"+" veuillez choisir votre action :<br/> - économiser,<br/> - se protéger</body>>/html>");
+            }else if (ecranAffichage.equals(IHM_ASSIGNE_ROLE)){
+                labelInfo.setText("<html><body>Veuillez choisir <br /> le Hacker</body></html>");
+            }else if (ecranAffichage.equals(IHM_ENATTENTE)){
+                labelInfo.setText("<html><body>En attente d'un joueur</body></html>");
             }
             String[] entetes = {"Nom", "Role", "Score"};
             JTable tableau = new JTable(donnees, entetes);
@@ -483,6 +519,9 @@ public class IHMJeu extends JPanel{
             panelBoutons.removeAll();
             panelBoutons.add(panelEconomiser);
             panelBoutons.add(panelSeProteger);
+        }else if (ecranAffichage.equals(IHM_ENATTENTE)){
+            panelBoutons.removeAll();
+
         }
 
         //=====================Ajout de tous les panels===================//
