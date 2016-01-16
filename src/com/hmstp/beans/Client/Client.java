@@ -317,8 +317,12 @@ public class Client{
     }
 
     public  void choixAction(int i){
+        System.out.println("toto1");
         ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
+        System.out.println("toto");
         moi.getRole().choixAction(i);
+
+
     }
 
     public void joueurParti(int joueur){
