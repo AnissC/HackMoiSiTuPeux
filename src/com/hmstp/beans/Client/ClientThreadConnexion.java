@@ -12,7 +12,7 @@ public class ClientThreadConnexion extends Thread{
     private ArrayList<Lettre> listMessagesEnvoyer;
     private Client client;
 
-    public ClientThreadConnexion(ArrayList<Lettre> mR, ArrayList<Lettre> mE,  Client client){
+    public ClientThreadConnexion(ArrayList<Lettre> mR, ArrayList<Lettre> mE, Client client){
         this.listMessagesRecu = mR;
         this.listMessagesEnvoyer = mE;
         this.client = client;
