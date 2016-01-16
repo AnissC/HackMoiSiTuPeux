@@ -306,7 +306,7 @@ public class IHMJeu extends JPanel{
                 panelParticipant1 = new JPanel();
                 panelParticipant1.setOpaque(false);
 
-                labelParticipant1 = new JLabel("Participant 1");
+                labelParticipant1 = new JLabel(joueurs.get(0).getNom());
 
                 boutonParticipant1 = new JButton(joueurs.get(0).getNom());
                 boutonParticipant1.addActionListener(new ActionListener() {
@@ -327,7 +327,7 @@ public class IHMJeu extends JPanel{
                 panelParticipant2 = new JPanel();
                 panelParticipant2.setOpaque(false);
 
-                labelParticipant2 = new JLabel("Participant 2");
+                labelParticipant2 = new JLabel(joueurs.get(1).getNom());
 
                 boutonParticipant2 = new JButton(joueurs.get(1).getNom());
                 boutonParticipant2.addActionListener(new ActionListener() {
@@ -349,7 +349,7 @@ public class IHMJeu extends JPanel{
                     panelParticipant3 = new JPanel();
                     panelParticipant3.setOpaque(false);
 
-                    labelParticipant3 = new JLabel("Participant 3");
+                    labelParticipant3 = new JLabel(joueurs.get(3).getNom());
 
                     boutonParticipant3 = new JButton(joueurs.get(3).getNom());
                     boutonParticipant3.addActionListener(new ActionListener() {
@@ -370,7 +370,7 @@ public class IHMJeu extends JPanel{
                     panelParticipant4 = new JPanel();
                     panelParticipant4.setOpaque(false);
 
-                    labelParticipant4 = new JLabel("Participant 4");
+                    labelParticipant4 = new JLabel(joueurs.get(4).getNom());
 
                     boutonParticipant4 = new JButton(joueurs.get(4).getNom());
                     boutonParticipant4.addActionListener(new ActionListener() {
@@ -392,7 +392,7 @@ public class IHMJeu extends JPanel{
                     panelParticipant5 = new JPanel();
                     panelParticipant5.setOpaque(false);
 
-                    labelParticipant5 = new JLabel("Participant 5");
+                    labelParticipant5 = new JLabel(joueurs.get(5).getNom());
 
                     boutonParticipant5 = new JButton(joueurs.get(5).getNom());
                     boutonParticipant5.addActionListener(new ActionListener() {
@@ -412,7 +412,7 @@ public class IHMJeu extends JPanel{
                 if(ecranAffichage.equals(IHM_ASSIGNE_ROLE)) {
                     panelParticipant6 = new JPanel();
                     panelParticipant6.setOpaque(false);
-                    labelParticipant6 = new JLabel("Participant 6");
+                    labelParticipant6 = new JLabel(joueurs.get(2).getNom());
                     boutonParticipant6 = new JButton(joueurs.get(2).getNom());
                     boutonParticipant6.addActionListener(new ActionListener() {
                         @Override
