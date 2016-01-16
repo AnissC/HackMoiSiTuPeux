@@ -118,7 +118,6 @@ public class Partie extends Thread{
     }
 
     public void distributionRoleMancheN(){
-        //int i = 0;
         if (moi.isPerdant()){
             client.choixDistibution();
 
@@ -328,7 +327,7 @@ public class Partie extends Thread{
         return gagnant;
     }
 
-    public void miseANiveaurRole(Participant p){
+    public void miseANiveauRole(Participant p){
         p.setRole(listRole.get(p.getRole().getNumero()));
         p.getRole().setChoixFait(true);
     }
@@ -344,7 +343,7 @@ public class Partie extends Thread{
             synchronized (listParticipant) {
                 int i = 0;
                 while (i < listParticipant.size()) {
-                    miseANiveaurRole(listParticipant.get(i));
+                    miseANiveauRole(listParticipant.get(i));
                     i++;
                 }
             }
@@ -354,7 +353,6 @@ public class Partie extends Thread{
             synchronized (listParticipant) {
                 while (client.pasjoueurEnAttente()) {
                     try{
-                        System.out.println("TOTO");
                         listParticipant.wait();
                     }
                     catch (Exception e) {
@@ -362,8 +360,6 @@ public class Partie extends Thread{
                     }
 
                 }
-            }
-            synchronized (listParticipant) {
                 this.distributionRoleMancheN();
                 this.tour();
             }
@@ -385,8 +381,6 @@ public class Partie extends Thread{
                     }
 
                 }
-            }
-            synchronized (listParticipant) {
                 this.distributionRoleMancheN();
                 this.tour();
             }

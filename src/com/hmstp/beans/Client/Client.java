@@ -169,10 +169,10 @@ public class Client{
                                 listParticipant = mL.getListMessageParticipant();
                                 partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                                 partie.perdant = mL.getNombre();
-                                partieInit = true;
                                 moi.setRole(getRoleParNom(moi.getNom()));
                             }
                             partie.start();
+                            partieInit = true;
                         }
                         break;
                     case Client.CREER_PARTIE:
@@ -182,7 +182,6 @@ public class Client{
                             moi = new Joueur(null, mj.getNom());
                             listParticipant.add(moi);
                             partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
-                            partieInit = true;
                             int j = 1;
                             while (j < nbjoueur) {
                                 listParticipant.add(new Ramplacant("Ordinateur" + j));
@@ -192,6 +191,7 @@ public class Client{
                         lancerJeu();
                         Thread.sleep(1000);
                         partie.start();
+                        partieInit = true;
                         break;
                     case Client.COMMENCER_PARTIE:
                         MessagePartie mpSyn = (MessagePartie) m;
