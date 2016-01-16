@@ -70,11 +70,6 @@ public class Client{
     public static final String ROLE = "ROLE";
     // Client -> Client envoie choix avec un MessageChoix
 
-    public Client(){
-        super();
-        Client.port = port + ((int) (Math.random()*100));
-    }
-
     private static Socket connexion(String ad, int p) {
         Socket c = null;
 
