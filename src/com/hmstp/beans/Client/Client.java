@@ -317,8 +317,8 @@ public class Client{
     }
 
     public  void choixAction(int i){
-        ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
         moi.getRole().choixAction(i);
+        ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
     }
 
     public  ArrayList<Participant> setListParticipant(){
