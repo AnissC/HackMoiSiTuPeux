@@ -135,10 +135,10 @@ public class Client{
                             mJrecu = mP.getListJoueur().remove(0);
                             if (mJrecu.getNom().equals(nom)){
                                 moi = new Joueur(null, mJrecu.getNom());
-                                synchronized (listParticipant) {
-                                    listParticipant.add(moi);
-                                    partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
-                                }
+                                //synchronized (listParticipant) {
+                                    //listParticipant.add(moi);
+                                    //partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
+                                //}
                             }
                             else {
                                 Socket autreC  = Client.connexion(mJrecu.getJoueur().substring(1), port);
@@ -146,11 +146,11 @@ public class Client{
                                 clientEcoute.start();
                                 ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, autreC);
                                 clientEcriture.start();
-                                synchronized (listParticipant) {
-                                    listParticipant.add(new Joueur(autreC, mJrecu.getNom()));
+                                //synchronized (listParticipant) {
+                                    //listParticipant.add(new Joueur(autreC, mJrecu.getNom()));
                                     mJenvoyer = new MessageJoueur(null, nom, Client.NOUVEAU_JOUEUR);
                                     message(new Lettre(mJenvoyer,autreC));
-                                }
+                                //}
                             }
                             k++;
                         }
@@ -165,6 +165,7 @@ public class Client{
                     case Client.LIST:
                         MessageList mL = (MessageList) m;
                         listParticipant = mL.getListMessageParticipant();
+                        partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                         partie.perdant = mL.getNombre();
                         partie.start();
                         break;
