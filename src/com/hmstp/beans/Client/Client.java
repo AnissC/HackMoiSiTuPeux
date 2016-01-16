@@ -164,9 +164,7 @@ public class Client{
                         break;
                     case Client.LIST:
                         MessageList mL = (MessageList) m;
-                        synchronized (listParticipant) {
-                            listParticipant = mL.getListMessageParticipant();
-                        }
+                        listParticipant = mL.getListMessageParticipant();
                         partie.perdant = mL.getNombre();
                         partie.start();
                         break;
