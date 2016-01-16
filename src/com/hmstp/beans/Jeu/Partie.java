@@ -241,6 +241,9 @@ public class Partie extends Thread{
     }
 
     public void tour() {
+        System.out.println(moi);
+        System.out.println(moi.getRole());
+
         this.moi.getRole().choixAction(client);
 
         while (! moi.getRole().isChoixFait()) {
