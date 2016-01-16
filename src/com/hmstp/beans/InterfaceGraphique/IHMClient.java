@@ -245,6 +245,13 @@ public class IHMClient extends JPanel {
         labelBoutonReconnexion.setForeground(Color.WHITE);
 
         boutonReconnexion = new JButton("Reconnexion");
+        boutonReconnexion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MessageJoueur mJ = new MessageJoueur(null, client.getNom(), Client.RECONNEXION);
+                client.message(new Lettre(mJ,client.serveur));
+            }
+        });
         panelBoutonReconnexion.add(labelBoutonReconnexion, BorderLayout.NORTH);
         panelBoutonReconnexion.add(boutonReconnexion, BorderLayout.SOUTH);
 
@@ -334,6 +341,9 @@ public class IHMClient extends JPanel {
             panel.add(panelPartieA4);
             panel.add(panelPartieA5);
             panel.add(panelPartieA6);
+        }else if (ecranAffichage.equals(IHM_RECONNEXION)){
+            panel.removeAll();
+            panel.add(panelBoutonReconnexion);
         }
         frame.validate();
         frame.repaint();
