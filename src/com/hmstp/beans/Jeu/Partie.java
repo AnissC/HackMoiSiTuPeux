@@ -140,6 +140,12 @@ public class Partie extends Thread{
         }
         else{
             System.out.println("Un joueur choisit");
+            int i = 0;
+            while(i < nbParticipants){
+                listRole.get(i).setChoixFait(true);
+                i++;
+            }
+
             while (! tousNontChoisit()) {
                 //wait le choix des rôles
                 try {
