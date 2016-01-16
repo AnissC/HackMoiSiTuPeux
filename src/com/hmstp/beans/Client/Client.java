@@ -108,7 +108,7 @@ public class Client{
             if(m != null){
                 switch (m.getMessage()) {
                     case Client.CONNEXION_OK:
-                        ihmClient.setEcranAffichage(IHMClient.IHM_MENU);
+                        ihmClient.setEcranAffichage(IHMClient.IHM_CONNEXION);
                         break;
                     case Client.CONNEXION_KO:
                         ihmClient.setEcranAffichage(IHMClient.IHM_CONNEXION);
@@ -124,7 +124,6 @@ public class Client{
                         break;
                     case Client.PAS_EN_PARTIE:
                         ihmClient.setEcranAffichage(IHMClient.IHM_MENU);
-                        // Choix interface graphique
                         break;
                     case Client.PARTIE_TROUVE:
                         MessagePartie mP = (MessagePartie) m;
