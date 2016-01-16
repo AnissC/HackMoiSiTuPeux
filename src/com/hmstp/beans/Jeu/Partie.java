@@ -100,6 +100,7 @@ public class Partie extends Thread{
     }
 
     public void attribuerRole(Participant p, int role){
+        System.out.println();
         switch (role) {
             case 0 : p.setRole(hackeur);
                 break;
