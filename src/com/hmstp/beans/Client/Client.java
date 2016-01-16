@@ -256,6 +256,7 @@ public class Client{
                         break;
                     case Client.CHOIX_DU_TOUR:
                         MessageChoix mC = (MessageChoix) m;
+                        System.out.println("Choix :" + mC.getNombre());
                         getRoleParNom(mC.getJoueur()).choixAction(mC.getNombre());
                         break;
                     case Client.CHOIX_DU_ROLE:
