@@ -12,7 +12,7 @@ public class ClientThreadEcoute extends Thread{
     private Socket socket;
     private Client client;
 
-    public ClientThreadEcoute(ArrayList<Lettre> l, Socket s, Client client){
+    public ClientThreadEcoute(ArrayList<Lettre> l, Socket s,  Client client){
         this.listMessagesRecu = l;
         this.socket = s;
         this.client = client;
