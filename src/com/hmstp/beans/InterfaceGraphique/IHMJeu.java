@@ -169,7 +169,6 @@ public class IHMJeu extends JPanel{
         panelSeProteger.add(labelSeProteger,BorderLayout.NORTH);
         panelSeProteger.add(boutonSeProteger,BorderLayout.SOUTH);
 
-
         dessine();
     }
 
