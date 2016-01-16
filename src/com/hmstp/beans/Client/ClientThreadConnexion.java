@@ -10,10 +10,12 @@ public class ClientThreadConnexion extends Thread{
 
     private ArrayList<Lettre> listMessagesRecu;
     private ArrayList<Lettre> listMessagesEnvoyer;
+    private Client client;
 
-    public ClientThreadConnexion(ArrayList<Lettre> mR, ArrayList<Lettre> mE){
+    public ClientThreadConnexion(ArrayList<Lettre> mR, ArrayList<Lettre> mE, Client client){
         this.listMessagesRecu = mR;
         this.listMessagesEnvoyer = mE;
+        this.client = client;
     }
 
     @Override
@@ -24,7 +26,7 @@ public class ClientThreadConnexion extends Thread{
                 Socket c= s.accept();
                 ClientThreadEcriture serveurEcriture = new ClientThreadEcriture(listMessagesEnvoyer, c);
                 serveurEcriture.start();
-                ClientThreadEcoute serveurEcoute = new ClientThreadEcoute(listMessagesRecu, c);
+                ClientThreadEcoute serveurEcoute = new ClientThreadEcoute(listMessagesRecu, c, client);
                 serveurEcoute.start();
             }
         } catch (Exception e) {

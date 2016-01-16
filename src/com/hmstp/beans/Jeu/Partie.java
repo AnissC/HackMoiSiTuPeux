@@ -3,6 +3,7 @@ package com.hmstp.beans.Jeu;
 import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.Message.*;
 
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class Partie extends Thread{

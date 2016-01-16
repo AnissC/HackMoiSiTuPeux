@@ -141,7 +141,7 @@ public class Client{
                                 }
                             } else {
                                 Socket autreC = Client.connexion(mJrecu.getJoueur().substring(1), port);
-                                ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, autreC);
+                                ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, autreC, this);
                                 clientEcoute.start();
                                 ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, autreC);
                                 clientEcriture.start();
@@ -321,6 +321,27 @@ public class Client{
         moi.getRole().choixAction(i);
     }
 
+    public void joueurParti(int joueur){
+        Participant p = new Ramplacant(listParticipant.get(joueur).getNom());
+        p.setScore(listParticipant.get(joueur).getScore());
+        p.setRole(listParticipant.get(joueur).getRole());
+        listParticipant.set(joueur, p);
+        p.getRole().choixAction(1);
+    }
+
+    public void joueurParti(Socket socket){
+        int i = 0;
+        synchronized (listParticipant) {
+            while (i < listParticipant.size()) {
+                if ((!listParticipant.get(i).isRemplacant()) && (((Joueur)listParticipant.get(i)).getSock() == socket)) {
+                    this.joueurParti(i);
+                    return;
+                }
+                i++;
+            }
+        }
+    }
+
     public  ArrayList<Participant> setListParticipant(){
         return listParticipant;
     }
@@ -383,7 +404,7 @@ public class Client{
         Client client = new Client();
         client.serveur = Client.connexion(adresseIP, 8081);
 
-        ClientThreadEcoute clientEcoute = new ClientThreadEcoute(client.listMessagesRecu, client.serveur);
+        ClientThreadEcoute clientEcoute = new ClientThreadEcoute(client.listMessagesRecu, client.serveur, client);
         clientEcoute.start();
         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(client.listMessagesEnvoyer, client.serveur);
         clientEcriture.start();
@@ -396,7 +417,7 @@ public class Client{
             }
         });
 
-        ClientThreadConnexion serveurConnexion = new ClientThreadConnexion(client.listMessagesRecu, client.listMessagesEnvoyer);
+        ClientThreadConnexion serveurConnexion = new ClientThreadConnexion(client.listMessagesRecu, client.listMessagesEnvoyer, client);
         serveurConnexion.start();
 
         client.gestionMessage();
