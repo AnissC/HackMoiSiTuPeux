@@ -99,6 +99,7 @@ public class IHMJeu extends JPanel{
         this.client = client;
     }
 
+
     public void setEcranAffichage(String ecranAffichage) {
         this.ecranAffichage = ecranAffichage;
         dessine();
