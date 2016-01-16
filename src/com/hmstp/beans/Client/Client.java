@@ -142,6 +142,10 @@ public class Client{
                             }
                             else {
                                 Socket autreC  = Client.connexion(mJrecu.getJoueur().substring(1), port);
+                                ClientThreadEcoute clientEcoute = new ClientThreadEcoute(listMessagesRecu, autreC);
+                                clientEcoute.start();
+                                ClientThreadEcriture clientEcriture = new ClientThreadEcriture(listMessagesEnvoyer, autreC);
+                                clientEcriture.start();
                                 synchronized (listParticipant) {
                                     listParticipant.add(new Joueur(autreC, mJrecu.getNom()));
                                     mJenvoyer = new MessageJoueur(null, nom, Client.NOUVEAU_JOUEUR);
