@@ -154,17 +154,17 @@ public class Client{
                             }
                             k++;
                         }
-                        while (k < nbjoueur) {
+                        /*while (k < nbjoueur) {
                             synchronized (listParticipant) {
                                 listParticipant.add(new Ramplacant("Ordinateur" + k));
                             }
                             k++;
-                        }
+                        }*/
                         lancerJeu();
                         break;
                     case Client.LIST:
                         MessageList mL = (MessageList) m;
-                        if (partieInit){
+                        if (! partieInit){
                             synchronized (listParticipant) {
                                 listParticipant = mL.getListMessageParticipant();
                                 partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
@@ -220,19 +220,26 @@ public class Client{
                         joueurEnAttente++;
                         System.out.println("avant" + joueurEnAttente);
                         int h = 0;
-                        synchronized (listParticipant) {
-                            while((h < nbjoueur) && (! listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
-                                h++;
-                            }
-                            Joueur j = new Joueur(socketclient, mej.getNom());
-                            j.setScore(listParticipant.get(h).getScore());
-                            j.setRole(listParticipant.get(h).getRole());
-                            listParticipant.set(h, j);
-                            message(new Lettre(new MessageList(partie.perdant, Client.LIST, listParticipant), j.getSock()));
+                        if (partieInit) {
+                            synchronized (listParticipant) {
+                                while ((h < nbjoueur) && (!listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
+                                    h++;
+                                }
+                                Joueur j = new Joueur(socketclient, mej.getNom());
+                                j.setScore(listParticipant.get(h).getScore());
+                                j.setRole(listParticipant.get(h).getRole());
+                                listParticipant.set(h, j);
+                                message(new Lettre(new MessageList(partie.perdant, Client.LIST, listParticipant), j.getSock()));
 
-                            joueurEnAttente--;
-                            System.out.println("après" + joueurEnAttente);
-                            listParticipant.notify();
+                                joueurEnAttente--;
+                                System.out.println("après" + joueurEnAttente);
+                                listParticipant.notify();
+                            }
+                        }
+                        else{
+                            synchronized (listMessagesRecu) {
+                                listMessagesRecu.add(new Lettre(mej, socketclient));
+                            }
                         }
                         break;
                     case Client.CHOIX_DU_TOUR:
