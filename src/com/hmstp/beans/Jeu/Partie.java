@@ -342,7 +342,7 @@ public class Partie extends Thread{
             synchronized (listParticipant) {
                 int i = 0;
                 while (i < listParticipant.size()) {
-                    miseANiveauRole(listParticipant.get(i));
+                    //miseANiveauRole(listParticipant.get(i));
                     i++;
                 }
             }
