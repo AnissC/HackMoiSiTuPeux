@@ -138,7 +138,14 @@ public class Partie extends Thread{
             }
         }
         else{
-            //afficher un message d'attente
+            while (! tousNontChoisit()) {
+                //wait le choix des rôles
+                try {
+                    Thread.sleep(100);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
         }
 
         int k = 0;
