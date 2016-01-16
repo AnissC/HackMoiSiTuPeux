@@ -327,7 +327,9 @@ public class Client{
         p.setScore(listParticipant.get(joueur).getScore());
         p.setRole(listParticipant.get(joueur).getRole());
         listParticipant.set(joueur, p);
-        p.getRole().choixAction(1);
+        if(partieInit) {
+            p.getRole().choixAction(1);
+        }
         message(new Lettre(new MessageJoueur(null, p.getNom(), Client.JOUEUR_PERDU),this.serveur));
     }
 
