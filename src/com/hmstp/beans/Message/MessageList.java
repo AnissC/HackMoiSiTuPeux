@@ -11,4 +11,8 @@ public class MessageList extends MessageNombre{
         super(perdant,m);
         this.listMessageParticipant = listMessageParticipant;
     }
+
+    public ArrayList<Participant> getListMessageParticipant() {
+        return listMessageParticipant;
+    }
 }
