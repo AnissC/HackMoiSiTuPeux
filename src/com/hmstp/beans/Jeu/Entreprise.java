@@ -34,16 +34,12 @@ public class Entreprise extends Role {
 
 	public void choixAction(int i){
 		if (i == 0){
-			synchronized (this) {
-				this.protection = false;
-				this.setChoixFait(true);
-			}
+			this.protection = false;
+			this.setChoixFait(true);
 		}
 		else{
-			synchronized (this) {
-				this.protection = true;
-				this.setChoixFait(true);
-			}
+			this.protection = true;
+			this.setChoixFait(true);
 		}
 	}
 

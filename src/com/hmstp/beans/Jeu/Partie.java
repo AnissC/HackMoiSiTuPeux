@@ -155,7 +155,6 @@ public class Partie extends Thread{
             }
             k++;
         }
-        perdant = -1;
     }
 
     public boolean tousOntChoisit(){
