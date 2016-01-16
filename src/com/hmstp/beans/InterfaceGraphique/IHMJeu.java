@@ -521,6 +521,7 @@ public class IHMJeu extends JPanel{
             panelBoutons.add(panelSeProteger);
         }else if (ecranAffichage.equals(IHM_ENATTENTE)){
             panelBoutons.removeAll();
+            panelBoutons.add(labelInfo);
             panelBoutons.validate();
             panelBoutons.repaint();
 
