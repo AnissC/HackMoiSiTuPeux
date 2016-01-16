@@ -336,11 +336,24 @@ public class Partie extends Thread{
         return gagnant;
     }
 
+    public void miseANiveaurRole(Participant p){
+        p.setRole(listRole.get(p.getRole().getNumero()));
+    }
+
     public void run() {
         if (client.premier) {
             synchronized (listParticipant) {
                 this.distributionRoleManche1();
                 this.tour();
+            }
+        }
+        else{
+            synchronized (listParticipant) {
+                int i = 0;
+                while (i < listParticipant.size()) {
+                    miseANiveaurRole(listParticipant.get(i));
+                    i++;
+                }
             }
         }
 
