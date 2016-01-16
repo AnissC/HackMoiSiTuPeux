@@ -166,7 +166,7 @@ public class Client{
                         if (! partieInit){
                             synchronized (listParticipant) {
                                 int o = 0;
-                                while (o < listParticipant.size()) {
+                                while (o < nbjoueur) {
                                     if (listParticipant.get(o).getNom().equals(moi.getNom())) {
                                         moi.setRole(getRoleParNom(moi.getNom()));
                                         listParticipant.set(o, moi);
