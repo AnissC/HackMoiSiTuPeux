@@ -359,12 +359,10 @@ public class Client{
 
     public  Role getRoleParNom(String no){
         int i = 0;
-        synchronized (listParticipant) {
-            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
-                i++;
-            }
-            return listParticipant.get(i).getRole();
+        while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
+            i++;
         }
+        return listParticipant.get(i).getRole();
     }
 
     public  void lancerJeu(){
