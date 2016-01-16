@@ -170,6 +170,11 @@ public class Client{
                                 partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                                 partie.perdant = mL.getNombre();
                                 moi.setRole(getRoleParNom(moi.getNom()));
+                                int o = 0;
+                                while ((o < listParticipant.size()) && (! listParticipant.get(o).getNom().equals(moi.getNom()))){
+                                    o++;
+                                }
+                                listParticipant.set(o, moi);
                             }
                             partie.start();
                             partieInit = true;
