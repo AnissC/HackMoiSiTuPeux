@@ -10,10 +10,12 @@ import java.util.ArrayList;
 public class ClientThreadEcoute extends Thread{
     private ArrayList<Lettre> listMessagesRecu;
     private Socket socket;
+    private Client client;
 
-    public ClientThreadEcoute(ArrayList<Lettre> l, Socket s){
+    public ClientThreadEcoute(ArrayList<Lettre> l, Socket s, Client client){
         this.listMessagesRecu = l;
         this.socket = s;
+        this.client = client;
     }
     public void reception()throws IOException, ClassNotFoundException{
         ObjectInputStream ob = new ObjectInputStream(socket.getInputStream());
@@ -37,7 +39,9 @@ public class ClientThreadEcoute extends Thread{
         try {
             this.reception();
         }catch (IOException e){
-            System.err.println(e);;
+            client.joueurParti(socket);
+            System.err.println(e);
+
         }catch (ClassNotFoundException ea){
             System.err.println(ea);
         }
