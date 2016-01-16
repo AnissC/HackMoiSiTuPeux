@@ -10,7 +10,7 @@ public class Entreprise extends Role {
 	public Entreprise(int valeur, String nom, int n){
 		this.valeur=valeur;
 		this.nom=nom;
-		this.protection=false;
+		this.protection=true;
 		this.setNumero(n);
 	}
 	
@@ -39,7 +39,7 @@ public class Entreprise extends Role {
 				this.setChoixFait(true);
 			}
 		}
-		else if (i == 1){
+		else{
 			synchronized (this) {
 				this.protection = true;
 				this.setChoixFait(true);
