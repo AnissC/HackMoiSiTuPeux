@@ -519,7 +519,7 @@ public class IHMJeu extends JPanel{
             panelBoutons.removeAll();
             panelBoutons.add(panelEconomiser);
             panelBoutons.add(panelSeProteger);
-        }else{
+        }else/*(ecranAffichage.equals(IHM_ENATTENTE))*/{
             panelBoutons.removeAll();
             System.out.println("removeAll - Marche");
         }
