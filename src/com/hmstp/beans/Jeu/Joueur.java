@@ -19,10 +19,6 @@ public class Joueur extends Participant{
 	}
 
 
-	public void choixAction(Client c) {
-		this.getRole().choixAction(c);
-	}
-
 	@Override
 	public boolean isRemplacant() {
 		return false;
