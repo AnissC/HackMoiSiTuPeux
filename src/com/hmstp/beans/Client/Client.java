@@ -12,18 +12,18 @@ import java.util.ArrayList;
 
 
 public class Client{
-    private  ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
-    private  ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
-    private  ArrayList<Participant> listParticipant = new ArrayList<>();
-    private  IHMClient ihmClient = new IHMClient();
+    private ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
+    private ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
+    private ArrayList<Participant> listParticipant = new ArrayList<>();
+    private IHMClient ihmClient = new IHMClient();
     public  IHMJeu ihmJeu = new IHMJeu();
-    private  int nbjoueur = 0;
-    private  int joueurEnAttente = 0;
-    private  int partieEnAttente = 0;
-    private  String nom;
-    private  Joueur moi;
+    private int nbjoueur = 0;
+    private int joueurEnAttente = 0;
+    private int partieEnAttente = 0;
+    private String nom;
+    private Joueur moi;
     private boolean partieInit = false;
-    private  Partie partie;
+    private Partie partie;
     public  boolean premier = false;
 
     public static String adresseIP = "192.168.0.20";
@@ -230,25 +230,8 @@ public class Client{
                         MessageJoueur mej = (MessageJoueur) m;
                         int h = 0;
                         if (partieInit) {
-                            joueurEnAttente++;
-                            System.out.println("avant" + joueurEnAttente);
-                            synchronized (listParticipant) {
-                                while ((h < nbjoueur) && (!listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
-                                    h++;
-                                }
-                                System.out.println("PASSE ICI 1");
-                                Joueur j = new Joueur(socketclient, mej.getNom());
-                                j.setScore(listParticipant.get(h).getScore());
-                                j.setRole(listParticipant.get(h).getRole());
-                                System.out.println("PASSE ICI 2");
-                                listParticipant.set(h, j);
-                                System.out.println("PASSE ICI 3");
-                                message(new Lettre(new MessageList(partie.perdant, Client.LIST, listParticipant), j.getSock()));
-
-                                joueurEnAttente--;
-                                System.out.println("après" + joueurEnAttente);
-                                listParticipant.notify();
-                            }
+                            ClientNouveauJoueur cnj = new ClientNouveauJoueur(partie, listParticipant, joueurEnAttente, mej, nbjoueur, socketclient,this);
+                            cnj.start();
                         }
                         else{
                             synchronized (listMessagesRecu) {
