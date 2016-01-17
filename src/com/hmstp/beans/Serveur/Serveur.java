@@ -122,10 +122,18 @@ public class Serveur {
                             ajouterUtilisateur(mC);
                             m = new Message(INSCRIPTION_OK);
                             listMessagesEnvoyer.add(new Lettre(m, clientSocket));
+                            System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
+                            String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
+                            byte[] contentInBytes = s.getBytes();
+                            logs.write(contentInBytes);
                         }
                         else {
                             m = new Message(INSCRIPTION_KO);
                             listMessagesEnvoyer.add(new Lettre(m, clientSocket));
+                            System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
+                            String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
+                            byte[] contentInBytes = s.getBytes();
+                            logs.write(contentInBytes);
                         }
                         break;
                     case Serveur.CONNEXION:

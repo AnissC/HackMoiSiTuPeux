@@ -27,7 +27,7 @@ public class Client{
     public  boolean premier = false;
 
     //public static String adresseIP = "169.254.129.165";
-    public static String adresseIP = "132.227.125.85";
+    public static String adresseIP = "localhost";
     public static int port = 1180;
     public  Socket serveur;
 
