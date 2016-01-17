@@ -202,7 +202,7 @@ public class Serveur {
                         break;
                     case Serveur.PARTIE_FINIE:
                         MessageJoueur mJ = (MessageJoueur) m;
-                        gp.finirPartie(mJ.getNom());
+                        gp.finirPartie(mJ.getNom(), this);
                         break;
                     case Serveur.JOUEUR_PERDU:
                         MessageJoueur MJ = (MessageJoueur) m;

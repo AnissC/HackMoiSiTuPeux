@@ -109,7 +109,7 @@ public class GestionPartie {
             Serveur.message(new Lettre(new MessagePartie(listeJoueur, Serveur.PARTIE_TROUVE), so));
         }
     }
-    public void finirPartie(String nom){
+    public void finirPartie(String nom, Serveur serveur){
         ArrayList<Utilisateur>listetemp = trouverJoueurListes(nom);
         ArrayList<MessageJoueur> listeJoueur = new ArrayList<>();
         int taille;
@@ -119,10 +119,10 @@ public class GestionPartie {
             taille = listetemp.size();
             while(i < taille){
                 if(listetemp.get(i).getNom().equals(nom)){
-                    //appelle BDD gagnant
+                    serveur.joueurAGagner(nom, true);
                 }
                 else{
-                    //appelle BDD perdant
+                    serveur.joueurAGagner(nom, false);
                 }
             }
         }
