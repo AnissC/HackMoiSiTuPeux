@@ -227,7 +227,6 @@ public class Client{
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
-                        int h = 0;
                         if (partieInit) {
                             joueurEnAttente++;
                             ClientNouveauJoueur cnj = new ClientNouveauJoueur(partie, listParticipant, mej, nbjoueur, socketclient,this);
