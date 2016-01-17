@@ -93,7 +93,7 @@ public class Client{
         }
         return c;
     }
-    // Permet de réaliser la connexion
+
     private  void gestionMessage() throws Exception{
         Message m = null;
         Socket socketclient = null;
@@ -230,7 +230,8 @@ public class Client{
                         MessageJoueur mej = (MessageJoueur) m;
                         int h = 0;
                         if (partieInit) {
-                            ClientNouveauJoueur cnj = new ClientNouveauJoueur(partie, listParticipant, joueurEnAttente, mej, nbjoueur, socketclient,this);
+                            joueurEnAttente++;
+                            ClientNouveauJoueur cnj = new ClientNouveauJoueur(partie, listParticipant, mej, nbjoueur, socketclient,this);
                             cnj.start();
                         }
                         else{
@@ -253,17 +254,21 @@ public class Client{
             m = null;
         }
     }
-    // Permet de lire les messages (client ou serveur)
+
     public  void message(Lettre msg){
         synchronized (listMessagesEnvoyer){
             listMessagesEnvoyer.add(msg);
         }
     }
-    // Permet d'àjouter un message à la liste de message après la synchronisation de celle-ci
+
     public  boolean pasjoueurEnAttente(){
         return ((joueurEnAttente > 0) || (partieEnAttente > 0));
     }
-    // Permet de vérifier si il y a des joueurs qui sont en attente ou des parties qui sont en hold
+
+    public  void joueuraccept(){
+        joueurEnAttente--;
+    }
+
 
     public  String getNom(){
         return nom;
@@ -289,16 +294,14 @@ public class Client{
             ihmJeu.setEcranAffichage(IHMJeu.IHM_ENTREPRISE);
         }
     }
-    // Permet de faire appel aux méthodes choix action de entreprise ou hackeur
+
     public  void choixDistibution(){
         ihmJeu.setEcranAffichage(IHMJeu.IHM_ASSIGNE_ROLE);
     }
-    // Fait appel à l'interface de distribution des roles
+
     public  void choixDistribution(Participant p, int role){
         partie.choixDistribution(p, role);
     }
-    // Permet d'assigner à chaque participant un role, l'assignation est aidée par le tableau info qui indique quel role
-    // doit être distribué au moment donné
     public  void choixDistribution(String p, int role){
         partie.choixDistribution(p, role);
     }

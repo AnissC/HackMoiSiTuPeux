@@ -386,6 +386,7 @@ public class Partie extends Thread{
                 while (client.pasjoueurEnAttente()) {
                     try{
                         listParticipant.wait();
+                        client.joueuraccept();
                     }
                     catch (Exception e) {
                         System.err.println(e);
