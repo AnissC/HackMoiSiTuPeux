@@ -189,6 +189,7 @@ public class Client{
                                 }
                                 partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                                 partie.perdant = mL.getNombre();
+                                System.out.print(partie.perdant);
                             }
                             partie.start();
                             partieInit = true;
