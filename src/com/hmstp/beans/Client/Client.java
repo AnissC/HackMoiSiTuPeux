@@ -204,27 +204,33 @@ public class Client{
                         break;
                     case Client.COMMENCER_PARTIE:
                         MessagePartie mpSyn = (MessagePartie) m;
-                        partieEnAttente++;
-                        synchronized (listParticipant) {
-                            if (joueurEnAttente > 0) {
-                                try{
-                                    synchronized (partie) {
-                                        partie.wait();
+                        if (partieInit) {
+                            partieEnAttente++;
+                            synchronized (listParticipant) {
+                                if (joueurEnAttente > 0) {
+                                    try {
+                                        synchronized (partie) {
+                                            partie.wait();
+                                        }
+                                    } catch (Exception e) {
+                                        System.err.println(e);
                                     }
-                                }
-                                catch (Exception e) {
-                                    System.err.println(e);
-                                }
 
+                                }
+                            }
+                            synchronized (listParticipant) {
+                                //classement(mpSyn);
+
+                                partieEnAttente--;
+                                listParticipant.notify();
+                            }
+                            partie.setActive(true);
+                        }
+                        else{
+                            synchronized (listMessagesRecu) {
+                                listMessagesRecu.add(new Lettre(mpSyn, socketclient));
                             }
                         }
-                        synchronized (listParticipant) {
-                            //classement(mpSyn);
-
-                            partieEnAttente--;
-                            listParticipant.notify();
-                        }
-                        partie.setActive(true);
                         break;
                     case Client.NOUVEAU_JOUEUR:
                         MessageJoueur mej = (MessageJoueur) m;
