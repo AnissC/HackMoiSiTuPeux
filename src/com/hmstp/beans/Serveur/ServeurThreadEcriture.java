@@ -18,6 +18,7 @@ public class ServeurThreadEcriture extends Thread {
 
     public void message () throws IOException{
         ObjectOutputStream ob = new ObjectOutputStream(socket.getOutputStream());
+        FileOutputStream logs = new FileOutputStream("logs.txt");
         ob.flush();
         Message m = null;
         int i;
@@ -30,6 +31,10 @@ public class ServeurThreadEcriture extends Thread {
                             m = listMessagesEnvoyer.remove(i).getMessage();
                             ob.writeObject(m);
                             ob.flush();
+                            System.out.println("Reçu : Adresse IP : " + socket.getInetAddress() + " Action : " + m.getMessage() + "\n");
+                            String s = "Reçu : Adresse IP : " + socket.getInetAddress() + " Action : " + m.getMessage() + "\n";
+                            byte[] contentInBytes = s.getBytes();
+                            logs.write(contentInBytes);
                         }else {
                             i++;
                         }

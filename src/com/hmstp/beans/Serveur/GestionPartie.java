@@ -1,5 +1,5 @@
 package com.hmstp.beans.Serveur;
-/** Cette classe permet de gérer les joueurs dans les parties*/
+
 import com.hmstp.beans.Message.*;
 
 import java.net.Socket;
@@ -18,7 +18,7 @@ public class GestionPartie {
         }
         listePartie = new ArrayList<>();
     }
-    /** Cette méthode permet d'intégrer un joueur dans une partie*/
+
     public void insererJoueurDansPartie(int nombreJoueur, Socket socket, String nomJoueur){
         ArrayList<MessageJoueur> listeJoueur = new ArrayList<>();
         int caseLobby = nombreJoueur-JOUEUR_MIN;
@@ -42,7 +42,7 @@ public class GestionPartie {
             lobby[caseLobby] = new ArrayList<>();
         }
     }
-    /** Cette méthode permet de trouver une partie à laquelle on peut intégrer un joueur*/
+
     public ArrayList<Utilisateur> trouverJoueurLobby(String nom){
         int k = 0;
         int i = 0;
@@ -59,7 +59,7 @@ public class GestionPartie {
         }
         return listRetour;
     }
-    /** renvoie la liste de la partie ou le joueur se trouve, sinon renvoie null*/
+
     public ArrayList<Utilisateur> trouverJoueurListes(String nom){
         int k = 0;
         int i = 0;
@@ -78,7 +78,7 @@ public class GestionPartie {
 
         return listRetour;
     }
-    /** Cette méthode permet de supprimer un joueur si celui-ci est déconnecté*/
+
     public void joueurPerdu(String nomJoueur){
         ArrayList<Utilisateur> listJoueur = null;
         int i = 0;
@@ -93,7 +93,7 @@ public class GestionPartie {
             listJoueur.remove(i);
         }
     }
-    /** Cette méthode permet de gérer la reconnexion d'un joueur qui a été déconnecté d'une partie*/
+
     public void reconnexion(String nom, Socket so){
         ArrayList<Utilisateur>listetemp = trouverJoueurListes(nom);
         ArrayList<MessageJoueur> listeJoueur = new ArrayList<>();
@@ -109,8 +109,7 @@ public class GestionPartie {
             Serveur.message(new Lettre(new MessagePartie(listeJoueur, Serveur.PARTIE_TROUVE), so));
         }
     }
-    /** Cette méthode retourne le nom du joueur gagnat à la fin de la partie*/
-    public void finirPartie(String nom){
+    public void finirPartie(String nom, Serveur serveur){
         ArrayList<Utilisateur>listetemp = trouverJoueurListes(nom);
         ArrayList<MessageJoueur> listeJoueur = new ArrayList<>();
         int taille;
@@ -120,10 +119,10 @@ public class GestionPartie {
             taille = listetemp.size();
             while(i < taille){
                 if(listetemp.get(i).getNom().equals(nom)){
-                    //appelle BDD gagnant
+                    serveur.joueurAGagner(nom, true);
                 }
                 else{
-                    //appelle BDD perdant
+                    serveur.joueurAGagner(nom, false);
                 }
             }
         }

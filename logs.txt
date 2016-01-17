@@ -1,0 +1,7 @@
+Adresse IP : /192.168.43.30 Action : CONNEXION
+Adresse IP : /192.168.43.30 Action : CONNEXION_OK
+Adresse IP : /192.168.43.37 Action : CONNEXION
+Adresse IP : /192.168.43.37 Action : CONNEXION_OK
+Adresse IP : /192.168.43.30 Action : NB_JOUEURS
+Adresse IP : /192.168.43.37 Action : NB_JOUEURS
+Adresse IP : /192.168.43.30 Action : JOUEUR_PERDU
