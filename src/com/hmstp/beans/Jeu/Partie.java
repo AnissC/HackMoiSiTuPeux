@@ -383,7 +383,7 @@ public class Partie extends Thread{
 
         while(! this.active){
             synchronized (listParticipant) {
-                while (client.pasjoueurEnAttente()) {
+                if (client.pasjoueurEnAttente()) {
                     try{
                         listParticipant.wait();
                         client.joueuraccept();
@@ -406,7 +406,7 @@ public class Partie extends Thread{
 
         while(pasDeGagnant()){
             synchronized (listParticipant) {
-                while (client.pasjoueurEnAttente()) {
+                if (client.pasjoueurEnAttente()) {
                     try{
                         listParticipant.wait();
                     }
