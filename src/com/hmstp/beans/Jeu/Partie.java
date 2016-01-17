@@ -190,6 +190,8 @@ public class Partie extends Thread{
     public void envoyerChoix(int choix, String nom, String mess){
         MessageChoix mn = null;
         int i = 0;
+        client.ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
+
         while (i < listParticipant.size()) {
             if (!(listParticipant.get(i).isRemplacant())) {
                 mn = new MessageChoix(nom, choix, mess);

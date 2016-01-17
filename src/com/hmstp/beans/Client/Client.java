@@ -319,8 +319,6 @@ public class Client{
 
     public  void choixAction(int i){
         moi.getRole().choixAction(i);
-
-
     }
 
     public void joueurParti(int joueur){
