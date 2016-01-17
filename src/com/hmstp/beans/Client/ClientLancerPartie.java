@@ -25,9 +25,7 @@ public class ClientLancerPartie extends Thread{
                     partie.setActive(true);
                     e = false;
                 }
-                System.out.println("TOTO");
             }
         }
-        System.out.println("TOTO Fin");
     }
 }
