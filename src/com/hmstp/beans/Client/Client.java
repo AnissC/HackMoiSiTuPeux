@@ -209,7 +209,7 @@ public class Client{
                         if (partieInit) {
                             partieEnAttente++;
                             ClientLancerPartie clp = new ClientLancerPartie(partie, listParticipant);
-                            //clp.start();
+                            clp.start();
                         }
                         else{
                             synchronized (listMessagesRecu) {
