@@ -399,11 +399,17 @@ public class Partie extends Thread{
             }
         }
 
+        boolean tour_de_chauffe = true;
+
         synchronized (listParticipant) {
-            this.resetPoint();
-            this.distributionRoleManche1();
-            this.tour();
+            while(tour_de_chauffe) {
+                this.resetPoint();
+                this.distributionRoleManche1();
+                this.tour();
+                tour_de_chauffe = false;
+            }
         }
+
 
         while(pasDeGagnant()){
             synchronized (listParticipant) {
