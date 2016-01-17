@@ -236,10 +236,13 @@ public class Client{
                                 while ((h < nbjoueur) && (!listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
                                     h++;
                                 }
+                                System.out.println("PASSE ICI 1");
                                 Joueur j = new Joueur(socketclient, mej.getNom());
                                 j.setScore(listParticipant.get(h).getScore());
                                 j.setRole(listParticipant.get(h).getRole());
+                                System.out.println("PASSE ICI 2");
                                 listParticipant.set(h, j);
+                                System.out.println("PASSE ICI 3");
                                 message(new Lettre(new MessageList(partie.perdant, Client.LIST, listParticipant), j.getSock()));
 
                                 joueurEnAttente--;
