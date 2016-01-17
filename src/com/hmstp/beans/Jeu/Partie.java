@@ -144,7 +144,7 @@ public class Partie extends Thread{
         }
         else{
             System.out.println("Un joueur choisit");
-            //client.ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
+            client.ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
 
             while (! tousNontChoisit()) {
                 //wait le choix des rôles
