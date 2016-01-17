@@ -168,8 +168,8 @@ public class Client{
                                 while (o < nbjoueur) {
                                     if (listParticipant.get(o).getNom().equals(moi.getNom())) {
                                         System.out.println("moi");
-                                        moi.setRole(mL.getListMessageParticipant().get(o).getRole());
-                                        listParticipant.set(o, moi);
+                                        listParticipant.get(o).setRole(mL.getListMessageParticipant().get(o).getRole());
+                                        moi = ((Joueur)listParticipant.get(o));
                                     } else {
                                         listParticipant.get(o).setPerdant(mL.getListMessageParticipant().get(o).isPerdant());
                                         listParticipant.get(o).setRole(mL.getListMessageParticipant().get(o).getRole());
