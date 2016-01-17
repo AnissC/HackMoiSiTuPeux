@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class Client{
     private ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
+    private ArrayList<NouveauJoueur> listMessagesNouveauJoueur = new ArrayList<>();
     private ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
     private ArrayList<Participant> listParticipant = new ArrayList<>();
     private IHMClient ihmClient = new IHMClient();
@@ -220,8 +221,7 @@ public class Client{
                         MessageJoueur mej = (MessageJoueur) m;
                         if (partieInit) {
                             joueurEnAttente++;
-                            ClientNouveauJoueur cnj = new ClientNouveauJoueur(partie, listParticipant, mej, nbjoueur, socketclient,this);
-                            cnj.start();
+                            listMessagesNouveauJoueur.add(new NouveauJoueur(partie, listParticipant,mej,nbjoueur,socketclient,this));
                         }
                         else{
                             synchronized (listMessagesRecu) {
@@ -394,6 +394,8 @@ public class Client{
         clientEcoute.start();
         ClientThreadEcriture clientEcriture = new ClientThreadEcriture(client.listMessagesEnvoyer, client.serveur);
         clientEcriture.start();
+        ClientNouveauJoueur cnj = new ClientNouveauJoueur(client.listMessagesNouveauJoueur);
+        cnj.start();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
