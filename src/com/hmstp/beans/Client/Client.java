@@ -26,7 +26,7 @@ public class Client{
     private  Partie partie;
     public  boolean premier = false;
 
-    public static String adresseIP = "192.168.0.14";
+    public static String adresseIP = "192.168.0.20";
     //public static String adresseIP = "132.227.125.85";
     public static int port = 1180;
     public  Socket serveur;
@@ -316,7 +316,6 @@ public class Client{
     }
 
     public  void choixAction(int i){
-        //ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
         moi.getRole().choixAction(i);
 
 
