@@ -392,6 +392,18 @@ public class Partie extends Thread{
                     }
 
                 }
+                int o = 0;
+                while( o < nbParticipants) {
+                    System.out.print(listParticipant.get(o).getNom());
+                    System.out.print(" ");
+                    System.out.print(listParticipant.get(o).getRole().getNumero());
+                    System.out.print(" ");
+                    System.out.print(listParticipant.get(o).getScore());
+                    System.out.print(" ");
+                    System.out.print(listParticipant.get(o).isPerdant());
+                    System.out.println("");
+                    o++;
+                }
                 this.distributionRoleMancheN();
                 this.tour();
             }
@@ -399,16 +411,15 @@ public class Partie extends Thread{
 
         boolean tour_de_chauffe = true;
 
-        synchronized (listParticipant) {
-            while(tour_de_chauffe) {
-                this.distributionRoleManche1();
-                this.tour();
-                tour_de_chauffe = false;
+        while(tour_de_chauffe){
+            synchronized (listParticipant) {
+            this.distributionRoleManche1();
+            this.tour();
+            tour_de_chauffe = false;
             }
-
-            this.resetPoint();
         }
 
+        this.resetPoint();
 
         while(pasDeGagnant()){
             synchronized (listParticipant) {
@@ -421,7 +432,6 @@ public class Partie extends Thread{
                     catch (Exception e) {
                         System.err.println(e);
                     }
-
                 }
                 this.distributionRoleMancheN();
                 this.tour();

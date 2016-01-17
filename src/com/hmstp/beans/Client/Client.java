@@ -165,7 +165,6 @@ public class Client{
                         if (! partieInit){
                             synchronized (listParticipant) {
                                 int o = 0;
-                                System.out.println("TABLEAU POUR COMPRENDRE : ");
                                 while (o < nbjoueur) {
                                     if (listParticipant.get(o).getNom().equals(moi.getNom())) {
                                         moi.setRole(mL.getListMessageParticipant().get(o).getRole());
@@ -177,15 +176,6 @@ public class Client{
                                         listParticipant.get(o).setRole(mL.getListMessageParticipant().get(o).getRole());
                                         listParticipant.get(o).setScore(mL.getListMessageParticipant().get(o).getScore());
                                     }
-                                    System.out.print(listParticipant.get(o).getNom());
-                                    System.out.print(" ");
-                                    System.out.print(listParticipant.get(o).getRole().getNumero());
-                                    System.out.print(" ");
-                                    System.out.print(listParticipant.get(o).getScore());
-                                    System.out.print(" ");
-                                    System.out.print(listParticipant.get(o).isPerdant());
-                                    System.out.println("");
-                                    o++;
                                 }
                                 partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                                 partie.perdant = mL.getNombre();
