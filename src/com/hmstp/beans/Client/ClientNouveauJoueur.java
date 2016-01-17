@@ -26,7 +26,7 @@ public class ClientNouveauJoueur extends Thread{
     }
 
     public void run(){
-        synchronized (partie) {
+        synchronized (client) {
             int h = 0;
             synchronized (listParticipant) {
                 while ((h < nbjoueur) && (!listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
@@ -35,6 +35,7 @@ public class ClientNouveauJoueur extends Thread{
                 Joueur j = new Joueur(socketclient, mej.getNom());
                 j.setScore(listParticipant.get(h).getScore());
                 j.setRole(listParticipant.get(h).getRole());
+                j.setPerdant(listParticipant.get(h).isPerdant());
                 listParticipant.set(h, j);
                 client.message(new Lettre(new MessageList(partie.perdant, Client.LIST, listParticipant), j.getSock()));
                 listParticipant.notify();
