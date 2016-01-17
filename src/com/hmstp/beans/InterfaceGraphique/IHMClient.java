@@ -1,6 +1,7 @@
 package com.hmstp.beans.InterfaceGraphique;
 
-
+/** Cette classe contient les interfaces de connexion, d'inscription, et l'écran d'accueil, ou le joueur peut choisir
+ * à quel type de partie il veut participer (3,4,5 ou 6 joueurs)*/
 
 import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.Message.*;

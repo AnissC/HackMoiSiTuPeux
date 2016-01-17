@@ -1,7 +1,7 @@
 package com.hmstp.beans.Jeu;
 
 import com.hmstp.beans.Client.Client;
-
+/** Cette classe permet de gérer les différentes actions réalisables durant la partie, selon le role du participant*/
 public abstract class Role implements java.io.Serializable{
 
 	private boolean choixFait = false;

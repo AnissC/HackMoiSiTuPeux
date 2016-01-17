@@ -1,5 +1,6 @@
 package com.hmstp.beans.Jeu;
 
+/** Cette classe contient toutes les méthodes nécessaires au bon déroulement de la partie*/
 import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.InterfaceGraphique.IHMJeu;
 import com.hmstp.beans.Message.*;
@@ -211,7 +212,7 @@ public class Partie extends Thread{
         Participant hackeur = listParticipant.get(i);
         Participant victime = listParticipant.get(((Hackeur) hackeur.getRole()).getVictime());
 
-        if (((Entreprise)victime.getRole()).getProtection()){
+        if (((Entreprise) victime.getRole()).getProtection()){
             hackeur.setPerdant(true);
             perdant = i;
             //if (this.active) {

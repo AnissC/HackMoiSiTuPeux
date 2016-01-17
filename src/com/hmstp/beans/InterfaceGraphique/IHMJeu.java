@@ -1,6 +1,13 @@
 package com.hmstp.beans.InterfaceGraphique;
 
 
+/** Cette classe regroupe les interfaces qui seront utilisées par le joueur selon le role qu'il a. Nous avons donc les vues
+ * hackeur (équivalente à loup), entreprise (grande entreprise qui sont le chaperon rouge,
+ * les moyennes entreprises qui fait office de chevreau)et  les petites entreprises qui représentent les trois petits cochons.
+ *
+ * Nous avons mis une vue  lorsqu'un joueur assigne les roles des autres, une vue sans les boutons pour que les joueurs
+ * ne puissent pas choisir leurs actions avant l'assignation de tous les roles.*/
+
 import com.hmstp.beans.Client.Client;
 import com.hmstp.beans.Jeu.*;
 

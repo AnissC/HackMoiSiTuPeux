@@ -1,5 +1,5 @@
 package com.hmstp.beans.Serveur;
-
+/** Cette classe permet d'écouter les messages par les clients*/
 import com.hmstp.beans.Message.*;
 
 import java.io.*;

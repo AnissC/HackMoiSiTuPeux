@@ -1,5 +1,6 @@
 package com.hmstp.beans.Jeu;
 
+/** Cette classe représente le loup dans le jeu classique*/
 public class Hackeur extends Role{
 	private int victime;
 	private static Hackeur instance = new Hackeur(0);

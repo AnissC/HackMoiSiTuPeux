@@ -1,6 +1,10 @@
 package com.hmstp.beans.Jeu;
 
 import com.hmstp.beans.Client.Client;
+/** Cette classe représente les 3 roles des victimes :
+ * - une grande entreprise vaut 3 points, équivalent au chaperon rouge;
+ * - une moyenne entreprise vaut  2 points, équivalent au chevreau;
+ * - une petite entreprise vaut  1 point, équivalent au petit cochon.*/
 
 public class Entreprise extends Role {
 	private int valeur;

@@ -1,5 +1,5 @@
 package com.hmstp.beans.Serveur;
-
+/** La classe qui permet d'écrire des messages au clients*/
 
 import com.hmstp.beans.Message.*;
 

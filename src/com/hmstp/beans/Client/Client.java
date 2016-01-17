@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-
+/** Cette classe qui permet de gérer les clients qui se connecte au sereur.*/
 public class Client{
     private ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
     private ArrayList<NouveauJoueur> listMessagesNouveauJoueur = new ArrayList<>();
@@ -71,7 +71,8 @@ public class Client{
     // Client -> Client envoie choix avec un MessageChoix
     public static final String LIST = "LIST";
     // Client -> Client envoie choix avec un MessageList
-
+    /** Cette méthode permet  de connecter le client au sereur, et l'avertit si jamais le serveur n'est pas opérationnel
+     */
     private static Socket connexion(String ad, int p) {
         Socket c = null;
 
@@ -94,7 +95,7 @@ public class Client{
         }
         return c;
     }
-
+    /** Cette méthode gère les messages des clients*/
     private  void gestionMessage() throws Exception{
         Message m = null;
         Socket socketclient = null;
@@ -245,7 +246,7 @@ public class Client{
             m = null;
         }
     }
-
+    /** Cette méthode initialise le message et l'ajoute à la liste des messages qui seront envoyés*/
     public  void message(Lettre msg){
         synchronized (listMessagesEnvoyer){
             listMessagesEnvoyer.add(msg);
@@ -277,7 +278,7 @@ public class Client{
     public  int getNbjoueur() {
         return nbjoueur;
     }
-
+    /** Cette méthode permet d'initialiser l'interface graphique selon le role du client*/
     public  void choixAction(Role r){
         if (r instanceof  Hackeur){
             ihmJeu.setEcranAffichage(IHMJeu.IHM_HACKEUR);
@@ -286,14 +287,15 @@ public class Client{
             ihmJeu.setEcranAffichage(IHMJeu.IHM_ENTREPRISE);
         }
     }
-
+    /** Cette méthode fait appel à l'interface graphique choix role lorsque le joueur doit assigner les roles*/
     public  void choixDistibution(){
         ihmJeu.setEcranAffichage(IHMJeu.IHM_ASSIGNE_ROLE);
     }
-
+    /** Cette méthode prend en paramètre un participant et un role et assigne à ce participant le role en paramètre*/
     public  void choixDistribution(Participant p, int role){
         partie.choixDistribution(p, role);
     }
+
     public  void choixDistribution(String p, int role){
         partie.choixDistribution(p, role);
     }
@@ -312,7 +314,9 @@ public class Client{
         }
         message(new Lettre(new MessageJoueur(null, p.getNom(), Client.JOUEUR_PERDU),this.serveur));
     }
-
+    /** En cas de déconnexion d'un joueur, fait appel à la méthode prenant en paramètre  un entier pour le remplacer
+     * par une intelligence artificielle et envoie un message au serveur pour le prévenir de la déconnexion du joueur
+     * à qui la socket a été assignée*/
     public void joueurParti(Socket socket){
         int i = 0;
         while (i < listParticipant.size()) {
