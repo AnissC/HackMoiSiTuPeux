@@ -93,9 +93,9 @@ public class Partie extends Thread{
 
     public void choixDistribution(String no, int role) {
         int i = 0;
-            while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
-                i++;
-            }
+        while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
+            i++;
+        }
         Participant p = listParticipant.get(i);
         attribuerRole(p,role);
         p.getRole().remmettreZero();
