@@ -401,11 +401,12 @@ public class Partie extends Thread{
 
         synchronized (listParticipant) {
             while(tour_de_chauffe) {
-                this.resetPoint();
                 this.distributionRoleManche1();
                 this.tour();
                 tour_de_chauffe = false;
             }
+
+            this.resetPoint();
         }
 
 
