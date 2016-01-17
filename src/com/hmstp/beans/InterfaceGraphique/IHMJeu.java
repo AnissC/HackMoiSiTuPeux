@@ -204,6 +204,9 @@ public class IHMJeu extends JPanel{
         int max = 0;
         suiviAssignationRole = 0;
         if(! ecranAffichage.equals(IHM_VIDE)) {
+            if (ecranAffichage.equals(IHM_ENATTENTE)){
+                removeAll();
+            }
             panelTableau.removeAll();
             ArrayList<Participant> joueurs = client.setListParticipant();
             max = joueurs.size();
