@@ -182,6 +182,8 @@ public class Client{
                                     System.out.print(listParticipant.get(o).getRole().getNumero());
                                     System.out.print(" ");
                                     System.out.print(listParticipant.get(o).getScore());
+                                    System.out.print(" ");
+                                    System.out.print(listParticipant.get(o).isPerdant());
                                     System.out.println("");
                                     o++;
                                 }
