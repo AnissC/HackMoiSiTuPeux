@@ -4,41 +4,38 @@ package com.hmstp.beans.Client;
 import com.hmstp.beans.Jeu.*;
 import com.hmstp.beans.Message.*;
 
-import java.net.Socket;
 import java.util.ArrayList;
 
 public class ClientNouveauJoueur extends Thread{
 
-    private Partie partie;
-    private ArrayList<Participant> listParticipant;
-    private MessageJoueur mej;
-    private int nbjoueur;
-    private Socket socketclient;
-    private Client client;
+    private ArrayList<NouveauJoueur> listMessagesNouveauJoueur;
 
-    public ClientNouveauJoueur(Partie partie, ArrayList<Participant> listParticipant, MessageJoueur m, int nb, Socket s, Client client){
-        this.partie = partie;
-        this.listParticipant = listParticipant;
-        this.mej = m;
-        this.nbjoueur = nb;
-        this.socketclient = s;
-        this.client = client;
+    public ClientNouveauJoueur(ArrayList<NouveauJoueur> listMessagesNouveauJoueur ){
+        this.listMessagesNouveauJoueur = listMessagesNouveauJoueur;
     }
 
     public void run(){
-        synchronized (client) {
-            int h = 0;
-            synchronized (listParticipant) {
-                while ((h < nbjoueur) && (!listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
-                    h++;
+        int h = 0;
+        NouveauJoueur nj;
+        ArrayList<Participant> listParticipant;
+
+        while (!this.isInterrupted()){
+            synchronized (listMessagesNouveauJoueur.get(0).getListParticipant()) {
+                if (!listMessagesNouveauJoueur.isEmpty()){
+                    nj = listMessagesNouveauJoueur.remove(0);
+                    listParticipant = nj.getListParticipant();
+                    while ((h < nj.getNbjoueur()) && (!listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(nj.getMej().getNom())))) {
+                        h++;
+                    }
+                    Joueur j = new Joueur(nj.getSocketclient(), nj.getMej().getNom());
+                    j.setScore(listParticipant.get(h).getScore());
+                    j.setRole(listParticipant.get(h).getRole());
+                    j.setPerdant(listParticipant.get(h).isPerdant());
+                    listParticipant.set(h, j);
+                    nj.getClient().message(new Lettre(new MessageList(nj.getPartie().perdant, Client.LIST, listParticipant), j.getSock()));
+                    listParticipant.notify();
+
                 }
-                Joueur j = new Joueur(socketclient, mej.getNom());
-                j.setScore(listParticipant.get(h).getScore());
-                j.setRole(listParticipant.get(h).getRole());
-                j.setPerdant(listParticipant.get(h).isPerdant());
-                listParticipant.set(h, j);
-                client.message(new Lettre(new MessageList(partie.perdant, Client.LIST, listParticipant), j.getSock()));
-                listParticipant.notify();
             }
         }
     }
