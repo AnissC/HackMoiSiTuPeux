@@ -142,8 +142,8 @@ public class Serveur {
                 if (!Serveur.listMessagesRecu.isEmpty()){
                     clientSocket = listMessagesRecu.get(0).getSocket();
                     m = listMessagesRecu.remove(0).getMessage();
-                    System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
-                    String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
+                    System.out.println("Envoi : Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
+                    String s = "Envoi : Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
                     byte[] contentInBytes = s.getBytes();
                     logs.write(contentInBytes);
                 }
@@ -156,18 +156,10 @@ public class Serveur {
                             ajouterUtilisateur(mC);
                             m = new Message(INSCRIPTION_OK);
                             listMessagesEnvoyer.add(new Lettre(m, clientSocket));
-                            System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
-                            String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
-                            byte[] contentInBytes = s.getBytes();
-                            logs.write(contentInBytes);
                         }
                         else {
                             m = new Message(INSCRIPTION_KO);
                             listMessagesEnvoyer.add(new Lettre(m, clientSocket));
-                            System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
-                            String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
-                            byte[] contentInBytes = s.getBytes();
-                            logs.write(contentInBytes);
                         }
                         break;
                     case Serveur.CONNEXION:
@@ -175,10 +167,6 @@ public class Serveur {
                         if (seConnecter(mC1)){
                             m = new Message(CONNEXION_OK);
                             listMessagesEnvoyer.add(new Lettre(m, clientSocket));
-                            System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
-                            String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
-                            byte[] contentInBytes = s.getBytes();
-                            logs.write(contentInBytes);
                             if(gp.trouverJoueurListes(mC1.getIdentifiant()) != null){
                                 m = new Message(EN_PARTIE);
                                 listMessagesEnvoyer.add(new Lettre(m, clientSocket));
@@ -190,10 +178,6 @@ public class Serveur {
                         }
                         else{
                             listMessagesEnvoyer.add(new Lettre(new Message(CONNEXION_KO),clientSocket));
-                            System.out.println("Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n");
-                            String s = "Adresse IP : " + clientSocket.getInetAddress() + " Action : " + m.getMessage() + "\n";
-                            byte[] contentInBytes = s.getBytes();
-                            logs.write(contentInBytes);
                         }
                         break;
                     case Serveur.RECONNEXION:
