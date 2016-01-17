@@ -20,8 +20,8 @@ public class ClientNouveauJoueur extends Thread{
         ArrayList<Participant> listParticipant;
 
         while (!this.isInterrupted()){
-            synchronized (listMessagesNouveauJoueur.get(0).getListParticipant()) {
-                if (!listMessagesNouveauJoueur.isEmpty()){
+            if (!listMessagesNouveauJoueur.isEmpty()){
+                synchronized (listMessagesNouveauJoueur.get(0).getListParticipant()) {
                     nj = listMessagesNouveauJoueur.remove(0);
                     listParticipant = nj.getListParticipant();
                     while ((h < nj.getNbjoueur()) && (!listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(nj.getMej().getNom())))) {
