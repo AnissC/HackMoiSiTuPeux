@@ -266,7 +266,7 @@ public class Client{
     }
 
     public  void joueuraccept(){
-        joueurEnAttente--;
+        joueurEnAttente = 0;
     }
 
 
