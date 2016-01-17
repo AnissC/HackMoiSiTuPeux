@@ -14,18 +14,16 @@ public class ClientLancerPartie extends Thread{
 
 
     public void run() {
-        synchronized (partie) {
-            boolean e = true;
-            int h = 0;
-            while (e) {
-                synchronized (listParticipant) {
-                    while (h < listParticipant.size() && !listParticipant.get(h).isRemplacant()) {
-                        h++;
-                    }
-                    if (h == listParticipant.size()) {
-                        partie.setActive(true);
-                        e = false;
-                    }
+        boolean e = true;
+        int h = 0;
+        while (e) {
+            synchronized (listParticipant) {
+                while (h < listParticipant.size() && !listParticipant.get(h).isRemplacant()) {
+                    h++;
+                }
+                if (h == listParticipant.size()) {
+                    partie.setActive(true);
+                    e = false;
                 }
             }
         }
