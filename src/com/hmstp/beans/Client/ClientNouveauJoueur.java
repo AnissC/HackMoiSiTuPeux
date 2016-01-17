@@ -17,6 +17,7 @@ public class ClientNouveauJoueur extends Thread{
     public void run(){
         int h = 0;
         NouveauJoueur nj;
+        Joueur j;
         ArrayList<Participant> listParticipant;
 
         while (!this.isInterrupted()){
@@ -27,7 +28,7 @@ public class ClientNouveauJoueur extends Thread{
                     while ((h < nj.getNbjoueur()) && (!listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(nj.getMej().getNom())))) {
                         h++;
                     }
-                    Joueur j = new Joueur(nj.getSocketclient(), nj.getMej().getNom());
+                    j = new Joueur(nj.getSocketclient(), nj.getMej().getNom());
                     j.setScore(listParticipant.get(h).getScore());
                     j.setRole(listParticipant.get(h).getRole());
                     j.setPerdant(listParticipant.get(h).isPerdant());
