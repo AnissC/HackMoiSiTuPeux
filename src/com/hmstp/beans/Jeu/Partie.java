@@ -245,8 +245,7 @@ public class Partie extends Thread{
     }
 
     public void tour() {
-        System.out.println(moi);
-        System.out.println(moi.getRole());
+        System.out.println("Début tour");
 
         this.moi.getRole().choixAction(client);
 
@@ -258,10 +257,13 @@ public class Partie extends Thread{
                 System.err.println(e);
             }
         }
+        System.out.println("Choix fait");
+
         this.envoyerChoix(this.moi.getRole().retourneChoix(), moi.getNom() ,Client.CHOIX_DU_TOUR);
         client.ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
 
-        System.out.println("aprésEnvoyer");
+        System.out.println("Choix envoyé");
+
         int i = 0;
         int temp;
         while (i < listParticipant.size()) {
@@ -281,6 +283,8 @@ public class Partie extends Thread{
             i++;
         }
 
+        System.out.println("IA a choisit");
+
         while (!tousOntChoisit()) {
             //wait la réponse des autres
             try {
@@ -290,7 +294,11 @@ public class Partie extends Thread{
             }
         }
 
+        System.out.println("Les joueurs on choisit");
+
         this.resoudreTour();
+
+        System.out.println("Tour résolu");
     }
 
     public boolean pasDeGagnant(){
