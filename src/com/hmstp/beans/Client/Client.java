@@ -169,6 +169,8 @@ public class Client{
                                     if (listParticipant.get(o).getNom().equals(moi.getNom())) {
                                         System.out.println("moi");
                                         moi.setRole(mL.getListMessageParticipant().get(o).getRole());
+                                        moi.setScore(mL.getListMessageParticipant().get(0).getScore());
+                                        moi.setPerdant(mL.getListMessageParticipant().get(0).isPerdant());
                                         listParticipant.set(o, moi);
                                     } else {
                                         listParticipant.get(o).setPerdant(mL.getListMessageParticipant().get(o).isPerdant());
