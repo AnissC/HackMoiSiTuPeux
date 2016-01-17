@@ -190,7 +190,6 @@ public class Partie extends Thread{
     public void envoyerChoix(int choix, String nom, String mess){
         MessageChoix mn = null;
         int i = 0;
-        client.ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
 
         while (i < listParticipant.size()) {
             if (!(listParticipant.get(i).isRemplacant())) {
@@ -260,6 +259,8 @@ public class Partie extends Thread{
             }
         }
         this.envoyerChoix(this.moi.getRole().retourneChoix(), moi.getNom() ,Client.CHOIX_DU_TOUR);
+        client.ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
+
         System.out.println("aprésEnvoyer");
         int i = 0;
         int temp;
