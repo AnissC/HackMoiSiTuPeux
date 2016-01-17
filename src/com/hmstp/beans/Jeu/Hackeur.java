@@ -5,7 +5,7 @@ public class Hackeur extends Role{
 	private static Hackeur instance = new Hackeur(0);
 	
 	private Hackeur(int n){
-		this.victime = -1;
+		this.victime = 1;
 		this.setNumero(n);
 	}
 

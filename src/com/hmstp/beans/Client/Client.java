@@ -365,7 +365,13 @@ public class Client{
         while ((i < listParticipant.size()) && (! listParticipant.get(i).getNom().equals(no))){
             i++;
         }
-        return listParticipant.get(i).getRole();
+        if(i == listParticipant.size()) {
+            return null;
+        }
+        else{
+
+            return listParticipant.get(i).getRole();
+        }
     }
 
     public  void lancerJeu(){

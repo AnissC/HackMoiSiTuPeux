@@ -357,8 +357,6 @@ public class Partie extends Thread{
 
     public void miseANiveauRole(Participant p){
         if(!p.isRemplacant()) {
-            System.out.println(p.getRole());
-            System.out.println(p.getRole().getNumero());
             p.setRole(listRole.get(p.getRole().getNumero()));
             p.getRole().setChoixFait(true);
         }
