@@ -1,29 +1,15 @@
-# README #
+# README HMSTP #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Ce dont vous avez besoin pour contruire votre projet Hack Moi Si Tu Peux
 
-### What is this repository for? ###
+### Les librairies ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Ajoutez dans le dossier lib le fichier qui suit
+* [mysql-connector-java](https://dev.mysql.com/downloads/connector/j/5.0.html)
 
-### How do I get set up? ###
+### Base de Données MySQL ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Lancez WAMP ou MAMP ou XAMP
+* Créer un base de données qui s'intitule hmstp
+* lancez le fichier dumpSQL.sql qui se trouve dans lib 
+* Configurez la classe MysqlConnect avec vos accés de base de données
