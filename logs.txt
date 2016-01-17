@@ -1,0 +1,11 @@
+Adresse IP : /192.168.0.17 Action : CONNEXION
+Adresse IP : /192.168.0.17 Action : CONNEXION_OK
+Adresse IP : /192.168.0.17 Action : NB_JOUEURS
+Adresse IP : /192.168.0.14 Action : CONNEXION
+Adresse IP : /192.168.0.14 Action : CONNEXION_OK
+Adresse IP : /192.168.0.14 Action : NB_JOUEURS
+Adresse IP : /192.168.0.14 Action : JOUEUR_PERDU
+Adresse IP : /192.168.0.17 Action : CONNEXION
+Adresse IP : /192.168.0.17 Action : CONNEXION_OK
+Adresse IP : /192.168.0.17 Action : NB_JOUEURS
+Adresse IP : /192.168.0.14 Action : JOUEUR_PERDU
