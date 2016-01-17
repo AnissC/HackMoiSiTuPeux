@@ -1,5 +1,5 @@
 package com.hmstp.beans.Client;
-
+/** Cette classe permet le lancement du jeu quand le client trouve une partie*/
 import com.hmstp.beans.Jeu.*;
 import java.util.ArrayList;
 
