@@ -1,6 +1,6 @@
-Adresse IP : /127.0.0.1 Action : CONNEXION
-Adresse IP : /127.0.0.1 Action : CONNEXION_OK
-Adresse IP : /127.0.0.1 Action : NB_JOUEURS
-Adresse IP : /127.0.0.1 Action : CONNEXION
-Adresse IP : /127.0.0.1 Action : CONNEXION_OK
-Adresse IP : /127.0.0.1 Action : NB_JOUEURS
+Adresse IP : /192.168.0.21 Action : CONNEXION
+Adresse IP : /192.168.0.21 Action : CONNEXION_OK
+Adresse IP : /192.168.0.21 Action : NB_JOUEURS
+Adresse IP : /192.168.0.12 Action : CONNEXION
+Adresse IP : /192.168.0.12 Action : CONNEXION_OK
+Adresse IP : /192.168.0.12 Action : NB_JOUEURS
