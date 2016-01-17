@@ -18,6 +18,8 @@ public class Serveur {
     private static final String SQL_CREER_COMPTE = "INSERT INTO joueur (pseudo, motdepasse, gagne, perdu) VALUES (?, ?, 0, 0)";
     private static final String SQL_CONNEXION = "SELECT * FROM joueur WHERE pseudo = ? AND motdepasse = ?";
     private static final String SQL_TEST_COMPTE = "SELECT * FROM joueur WHERE pseudo = ?";
+    private static final String SQL_UPDATE_STAT_GAGNE = "UPDATE joueur SET gagne = ? WHERE pseudo = ?";
+    private static final String SQL_UPDATE_STAT_PERDU = "UPDATE joueur SET perdu = ? WHERE pseudo = ?";
 
 
     MysqlConnect msql = MysqlConnect.getDbCon();
@@ -169,6 +171,8 @@ public class Serveur {
                     case Serveur.PARTIE_FINIE:
                         MessageJoueur mJ = (MessageJoueur) m;
                         //gp.finirPartie();
+                        //Appel requete gagne
+                        //Appel requete perdu
                         break;
                     case Serveur.JOUEUR_PERDU:
                         MessageJoueur MJ = (MessageJoueur) m;
