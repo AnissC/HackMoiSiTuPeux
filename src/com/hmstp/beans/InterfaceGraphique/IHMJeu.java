@@ -226,7 +226,6 @@ public class IHMJeu extends JPanel{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         client.choixAction(Integer.parseInt(labelVictime1Valeur.getText()));
-                        setEcranAffichage(IHM_ENATTENTE);
                     }
                 });
                 numJoueur++;
@@ -249,7 +248,6 @@ public class IHMJeu extends JPanel{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         client.choixAction(Integer.parseInt(labelVictime2Valeur.getText()));
-                        setEcranAffichage(IHM_ENATTENTE);
                     }
                 });
                 numJoueur++;
@@ -271,7 +269,6 @@ public class IHMJeu extends JPanel{
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             client.choixAction(Integer.parseInt(labelVictime3Valeur.getText()));
-                            setEcranAffichage(IHM_ENATTENTE);
                         }
                     });
                     numJoueur++;
@@ -295,7 +292,6 @@ public class IHMJeu extends JPanel{
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             client.choixAction(Integer.parseInt(labelVictime4Valeur.getText()));
-                            setEcranAffichage(IHM_ENATTENTE);
                         }
                     });
                     numJoueur++;
@@ -319,7 +315,6 @@ public class IHMJeu extends JPanel{
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             client.choixAction(Integer.parseInt(labelVictime5Valeur.getText()));
-                            setEcranAffichage(IHM_ENATTENTE);
                         }
                     });
                     numJoueur++;
