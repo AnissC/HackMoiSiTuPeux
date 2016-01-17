@@ -230,7 +230,8 @@ public class Client{
                         MessageJoueur mej = (MessageJoueur) m;
                         int h = 0;
                         if (partieInit) {
-                            ClientNouveauJoueur cnj = new ClientNouveauJoueur(partie, listParticipant, joueurEnAttente, mej, nbjoueur, socketclient,this);
+                            joueurEnAttente++;
+                            ClientNouveauJoueur cnj = new ClientNouveauJoueur(partie, listParticipant, mej, nbjoueur, socketclient,this);
                             cnj.start();
                         }
                         else{
@@ -262,6 +263,10 @@ public class Client{
 
     public  boolean pasjoueurEnAttente(){
         return ((joueurEnAttente > 0) || (partieEnAttente > 0));
+    }
+
+    public  void joueuraccept(){
+        joueurEnAttente--;
     }
 
 

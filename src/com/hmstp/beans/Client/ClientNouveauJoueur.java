@@ -11,16 +11,14 @@ public class ClientNouveauJoueur extends Thread{
 
     private Partie partie;
     private ArrayList<Participant> listParticipant;
-    private int joueurEnAttente;
     private MessageJoueur mej;
     private int nbjoueur;
     private Socket socketclient;
     private Client client;
 
-    public ClientNouveauJoueur(Partie partie, ArrayList<Participant> listParticipant, int joueurEnAttente, MessageJoueur m, int nb, Socket s, Client client){
+    public ClientNouveauJoueur(Partie partie, ArrayList<Participant> listParticipant, MessageJoueur m, int nb, Socket s, Client client){
         this.partie = partie;
         this.listParticipant = listParticipant;
-        this.joueurEnAttente = joueurEnAttente;
         this.mej = m;
         this.nbjoueur = nb;
         this.socketclient = s;
@@ -29,7 +27,6 @@ public class ClientNouveauJoueur extends Thread{
 
     public void run(){
         int h = 0;
-        joueurEnAttente++;
         synchronized (listParticipant) {
             while ((h < nbjoueur) && (!listParticipant.get(h).isRemplacant() || (listParticipant.get(h).getNom().equals(mej.getNom())))) {
                 h++;
@@ -39,8 +36,6 @@ public class ClientNouveauJoueur extends Thread{
             j.setRole(listParticipant.get(h).getRole());
             listParticipant.set(h, j);
             client.message(new Lettre(new MessageList(partie.perdant, Client.LIST, listParticipant), j.getSock()));
-
-            joueurEnAttente--;
             listParticipant.notify();
         }
     }
