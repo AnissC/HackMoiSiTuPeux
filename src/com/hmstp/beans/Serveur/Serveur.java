@@ -14,11 +14,15 @@ public class Serveur {
 
     private static ArrayList<Lettre> listMessagesRecu = new ArrayList<>();
     private static ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
+    int nbGagne = 0;
+    int nbPerdu = 0;
 
     private static final String SQL_CREER_COMPTE = "INSERT INTO joueur (pseudo, motdepasse, gagne, perdu) VALUES (?, ?, 0, 0)";
     private static final String SQL_CONNEXION = "SELECT * FROM joueur WHERE pseudo = ? AND motdepasse = ?";
     private static final String SQL_TEST_COMPTE = "SELECT * FROM joueur WHERE pseudo = ?";
     private static final String SQL_UPDATE_STAT_GAGNE = "UPDATE joueur SET gagne = ? WHERE pseudo = ?";
+    private static final String SQL_GAGNER = "SELECT gagne from joueur WHERE pseudo = ?";
+    private static final String SQL_PERDU = "SELECT perdu from joueur WHERE pseudo = ?";
     private static final String SQL_UPDATE_STAT_PERDU = "UPDATE joueur SET perdu = ? WHERE pseudo = ?";
 
 
@@ -59,6 +63,34 @@ public class Serveur {
         }
         return exist;
     }
+
+    public boolean joueurAGagner(String nom, boolean gagner){
+        try {
+            if (gagner){
+                PreparedStatement preparedStatement1 = msql.conn.prepareStatement(SQL_GAGNER);
+                preparedStatement1.setString(1,nom);
+                nbGagne = preparedStatement1.executeUpdate();
+
+                PreparedStatement preparedStatement = msql.conn.prepareStatement(SQL_UPDATE_STAT_GAGNE);
+                preparedStatement.setInt(1,nbGagne+1);
+                preparedStatement.setString(2, nom);
+                preparedStatement.executeUpdate();
+            }else{
+                PreparedStatement preparedStatement2 = msql.conn.prepareStatement(SQL_PERDU);
+                preparedStatement2.setString(1,nom);
+                nbPerdu = preparedStatement2.executeUpdate();
+
+                PreparedStatement preparedStatement3 = msql.conn.prepareStatement(SQL_UPDATE_STAT_PERDU);
+                preparedStatement3.setInt(1,nbGagne+1);
+                preparedStatement3.setString(2, nom);
+                preparedStatement3.executeUpdate();
+            }
+        }catch (SQLException e){
+            System.err.println(e.toString());
+        }
+        return true;
+    }
+
 
     public static final String CREER_COMPTE = "CREER_COMPTE";
     // Client -> Serveur, identifiant, mot de passe.
