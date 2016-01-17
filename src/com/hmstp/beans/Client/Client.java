@@ -221,7 +221,9 @@ public class Client{
                         MessageJoueur mej = (MessageJoueur) m;
                         if (partieInit) {
                             joueurEnAttente++;
-                            listMessagesNouveauJoueur.add(new NouveauJoueur(partie, listParticipant,mej,nbjoueur,socketclient,this));
+                            synchronized (listMessagesNouveauJoueur) {
+                                listMessagesNouveauJoueur.add(new NouveauJoueur(partie, listParticipant, mej, nbjoueur, socketclient, this));
+                            }
                         }
                         else{
                             synchronized (listMessagesRecu) {
