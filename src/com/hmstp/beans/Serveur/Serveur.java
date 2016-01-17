@@ -81,7 +81,7 @@ public class Serveur {
                 nbPerdu = preparedStatement2.executeUpdate();
 
                 PreparedStatement preparedStatement3 = msql.conn.prepareStatement(SQL_UPDATE_STAT_PERDU);
-                preparedStatement3.setInt(1,nbGagne+1);
+                preparedStatement3.setInt(1,nbPerdu+1);
                 preparedStatement3.setString(2, nom);
                 preparedStatement3.executeUpdate();
             }
