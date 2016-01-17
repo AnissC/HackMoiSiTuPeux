@@ -1,6 +1,6 @@
 package com.hmstp.beans.Serveur;
 
-import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.Connection;
 import java.sql.*;
 import java.sql.DriverManager;
 

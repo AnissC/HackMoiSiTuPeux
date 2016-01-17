@@ -97,7 +97,6 @@ public class GestionPartie {
     public void reconnexion(String nom, Socket so){
         ArrayList<Utilisateur>listetemp = trouverJoueurListes(nom);
         ArrayList<MessageJoueur> listeJoueur = new ArrayList<>();
-        listetemp = trouverJoueurListes(nom);
         int taille;
         int i = 0;
 
@@ -108,6 +107,24 @@ public class GestionPartie {
                 listeJoueur.add(mj);
             }
             Serveur.message(new Lettre(new MessagePartie(listeJoueur, Serveur.PARTIE_TROUVE), so));
+        }
+    }
+    public void finirPartie(String nom){
+        ArrayList<Utilisateur>listetemp = trouverJoueurListes(nom);
+        ArrayList<MessageJoueur> listeJoueur = new ArrayList<>();
+        int taille;
+        int i = 0;
+
+        if(listetemp != null){
+            taille = listetemp.size();
+            while(i < taille){
+                if(listetemp.get(i).getNom().equals(nom)){
+                    //appelle BDD gagnant
+                }
+                else{
+                    //appelle BDD perdant
+                }
+            }
         }
     }
 }
