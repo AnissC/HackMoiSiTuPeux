@@ -209,7 +209,7 @@ public class Client{
                         if (partieInit) {
                             partieEnAttente++;
                             ClientLancerPartie clp = new ClientLancerPartie(partie, listParticipant);
-                            clp.start();
+                            //clp.start();
                         }
                         else{
                             synchronized (listMessagesRecu) {
@@ -221,7 +221,9 @@ public class Client{
                         MessageJoueur mej = (MessageJoueur) m;
                         if (partieInit) {
                             joueurEnAttente++;
-                            listMessagesNouveauJoueur.add(new NouveauJoueur(partie, listParticipant,mej,nbjoueur,socketclient,this));
+                            synchronized (listMessagesNouveauJoueur) {
+                                listMessagesNouveauJoueur.add(new NouveauJoueur(partie, listParticipant, mej, nbjoueur, socketclient, this));
+                            }
                         }
                         else{
                             synchronized (listMessagesRecu) {
