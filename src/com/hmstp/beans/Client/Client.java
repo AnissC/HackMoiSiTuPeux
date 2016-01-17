@@ -176,6 +176,7 @@ public class Client{
                                         listParticipant.get(o).setRole(mL.getListMessageParticipant().get(o).getRole());
                                         listParticipant.get(o).setScore(mL.getListMessageParticipant().get(o).getScore());
                                     }
+                                    o++;
                                 }
                                 partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                                 partie.perdant = mL.getNombre();
