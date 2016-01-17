@@ -16,7 +16,7 @@ public class Client{
     private  ArrayList<Lettre> listMessagesEnvoyer = new ArrayList<>();
     private  ArrayList<Participant> listParticipant = new ArrayList<>();
     private  IHMClient ihmClient = new IHMClient();
-    private  IHMJeu ihmJeu = new IHMJeu();
+    public  IHMJeu ihmJeu = new IHMJeu();
     private  int nbjoueur = 0;
     private  int joueurEnAttente = 0;
     private  int partieEnAttente = 0;
@@ -26,8 +26,8 @@ public class Client{
     private  Partie partie;
     public  boolean premier = false;
 
-    //public static String adresseIP = "169.254.129.165";
-    public static String adresseIP = "localhost";
+    public static String adresseIP = "192.168.0.14";
+    //public static String adresseIP = "132.227.125.85";
     public static int port = 1180;
     public  Socket serveur;
 

@@ -1,6 +1,7 @@
 package com.hmstp.beans.Jeu;
 
 import com.hmstp.beans.Client.Client;
+import com.hmstp.beans.InterfaceGraphique.IHMJeu;
 import com.hmstp.beans.Message.*;
 
 import java.net.Socket;
@@ -143,6 +144,7 @@ public class Partie extends Thread{
         }
         else{
             System.out.println("Un joueur choisit");
+            client.ihmJeu.setEcranAffichage(IHMJeu.IHM_ENATTENTE);
 
             while (! tousNontChoisit()) {
                 //wait le choix des rôles
