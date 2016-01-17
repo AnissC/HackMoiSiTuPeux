@@ -170,10 +170,10 @@ public class Client{
                                     if (listParticipant.get(o).getNom().equals(moi.getNom())) {
                                         moi.setRole(mL.getListMessageParticipant().get(o).getRole());
                                         moi.setScore(mL.getListMessageParticipant().get(o).getScore());
-                                        moi.setPerdant(mL.getListMessageParticipant().get(o).isPerdant());
+                                        moi.setPerdant(o == mL.getNombre());
                                         listParticipant.set(o, moi);
                                     } else {
-                                        listParticipant.get(o).setPerdant(mL.getListMessageParticipant().get(o).isPerdant());
+                                        listParticipant.get(o).setPerdant(o == mL.getNombre());
                                         listParticipant.get(o).setRole(mL.getListMessageParticipant().get(o).getRole());
                                         listParticipant.get(o).setScore(mL.getListMessageParticipant().get(o).getScore());
                                     }
@@ -189,7 +189,6 @@ public class Client{
                                 }
                                 partie = new Partie(listParticipant, listMessagesEnvoyer, moi, nbjoueur, this);
                                 partie.perdant = mL.getNombre();
-                                System.out.print(partie.perdant);
                             }
                             partie.start();
                             partieInit = true;
