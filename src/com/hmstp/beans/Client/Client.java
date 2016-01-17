@@ -206,25 +206,8 @@ public class Client{
                         MessagePartie mpSyn = (MessagePartie) m;
                         if (partieInit) {
                             partieEnAttente++;
-                            synchronized (listParticipant) {
-                                if (joueurEnAttente > 0) {
-                                    try {
-                                        synchronized (partie) {
-                                            partie.wait();
-                                        }
-                                    } catch (Exception e) {
-                                        System.err.println(e);
-                                    }
-
-                                }
-                            }
-                            synchronized (listParticipant) {
-                                //classement(mpSyn);
-
-                                partieEnAttente--;
-                                listParticipant.notify();
-                            }
-                            partie.setActive(true);
+                            ClientLancerPartie clp = new ClientLancerPartie(partie, listParticipant);
+                            clp.start();
                         }
                         else{
                             synchronized (listMessagesRecu) {
@@ -273,6 +256,7 @@ public class Client{
 
     public  void joueuraccept(){
         joueurEnAttente = 0;
+        partieEnAttente = 0;
     }
 
 

@@ -386,6 +386,7 @@ public class Partie extends Thread{
                 if (client.pasjoueurEnAttente()) {
                     try{
                         listParticipant.wait();
+                        Thread.sleep(100);
                         client.joueuraccept();
                     }
                     catch (Exception e) {
@@ -409,6 +410,8 @@ public class Partie extends Thread{
                 if (client.pasjoueurEnAttente()) {
                     try{
                         listParticipant.wait();
+                        Thread.sleep(100);
+                        client.joueuraccept();
                     }
                     catch (Exception e) {
                         System.err.println(e);
